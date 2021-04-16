@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+
+    <!--
+        Copyright (c) 2020 Sascha Reißner <reiszner@novaplan.at>
+
+        This are to provide airdata for the AP, FD and VNCC.
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+    -->
+
+<!-- air data computer -->
+
+    <filter>
+        <name>air data computer powered</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>systems/electrical/outputs/AC-115V/ac-air-data</property>
+                    <value>105</value>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>autopilot/source/airdata/serviceable</output>
+    </filter>
+
+    <filter>
+        <name>air data computer TAS</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <property>instrumentation/airspeed-indicator[0]/true-speed-kt</property>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/tas-kt</output>
+    </filter>
+
+    <filter>
+        <name>air data computer IAS</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <property>instrumentation/airspeed-indicator[0]/indicated-speed-kt</property>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/ias-kt</output>
+    </filter>
+
+    <filter>
+        <name>air data computer altitude</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <property>instrumentation/altimeter[0]/indicated-altitude-ft</property>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/altitude-ft</output>
+    </filter>
+
+    <filter>
+        <name>air data computer vertical speed</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <gain>1</gain>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <property>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm</property>
+            <!--property>velocities/vertical-speed-fps</property-->
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/vs-fpm</output>
+    </filter>
+
+    <filter>
+        <name>air data computer vertical angle</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <expression>
+            <!-- target-climb-rate = groundspeed * sin (target-pitch-deg)  -->
+            <!-- sin (target-pitch-deg) = target-climb-rate / groundspeed  -->
+            <!-- target-pitch-deg = asin (target-climb-rate / groundspeed) -->
+                <rad2deg>
+                    <asin>
+                        <div>
+                            <property>autopilot/source/airdata/vs-fpm</property>
+                            <product>
+                                <property>autopilot/source/airdata/tas-kt</property>
+                                <value>101.268591426</value> <!-- fpm per knot -->
+                            </product>
+                        </div>
+                    </asin>
+                </rad2deg>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/path-deg</output>
+    </filter>
+
+    <filter>
+        <name>air data computer pitch</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <property>instrumentation/attitude-indicator[0]/indicated-pitch-deg</property>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/pitch-deg</output>
+    </filter>
+
+    <filter>
+        <name>air data computer aoa</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <property>instrumentation/aoa/alpha-deg</property>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/source/airdata/alpha-deg</output>
+    </filter>
+
+<!-- default altitude restriction -->
+
+    <filter>
+        <name>next altitude step</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[0]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/indicated-altitude-ft[0]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[1]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/indicated-altitude-ft[1]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[2]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/indicated-altitude-ft[2]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[3]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/indicated-altitude-ft[3]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[4]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/indicated-altitude-ft[4]</property>
+        </input>
+        <input>60000</input> <!-- above -->
+        <output>autopilot/source/next-altitude-step</output>
+    </filter>
+
+    <filter>
+        <name>current max climb rate</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[0]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[0]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[1]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[1]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[2]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[2]</property>
+        </input>
+       <input>
+          <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[3]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[3]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[4]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[4]</property>
+        </input>
+        <input>autopilot/limits/max-climb-rate-fpm[5]</input> <!-- above -->
+        <output>autopilot/source/current-max-climb-rate-fpm</output>
+    </filter>
+
+    <filter>
+        <name>next max climb rate</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[0]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[1]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[1]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[2]</property>
+        </input>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[2]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[3]</property>
+        </input>
+       <input>
+          <condition>
+                <less-than>
+                    <property>instrumentation/altimeter/indicated-altitude-ft</property>
+                    <property>autopilot/limits/indicated-altitude-ft[3]</property>
+                </less-than>
+            </condition>
+            <property>autopilot/limits/max-climb-rate-fpm[4]</property>
+        </input>
+        <input>autopilot/limits/max-climb-rate-fpm[5]</input> <!-- above -->
+        <output>autopilot/source/next-max-climb-rate-fpm</output>
+    </filter>
+
+    <filter>
+        <name>current max climb angle</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <rad2deg>
+                    <asin>
+                        <div>
+                            <property>autopilot/source/current-max-climb-rate-fpm</property>
+                            <product>
+                                <property>autopilot/source/airdata/tas-kt</property>
+                                <value>101.268591426</value> <!-- fpm per knot -->
+                            </product>
+                        </div>
+                    </asin>
+                </rad2deg>
+            </expression>
+        </input>
+        <output>autopilot/source/max-climb-deg</output>
+    </filter>
+
+    <filter>
+        <name>current max descent angle</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <rad2deg>
+                    <asin>
+                        <div>
+                            <value>-2000.0</value>
+                            <product>
+                                <property>autopilot/source/airdata/tas-kt</property>
+                                <value>101.268591426</value> <!-- fpm per knot -->
+                            </product>
+                        </div>
+                    </asin>
+                </rad2deg>
+            </expression>
+        </input>
+        <output>autopilot/source/max-descent-deg</output>
+    </filter>
+
+<!-- vertical speed -->
+
+    <filter>
+        <name>Vertical Speed Indicator</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <input>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm</input>
+        <output>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm-filtered</output>
+    </filter>
+
+    <filter>
+        <name>Vertical Speed Indicator</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <input>instrumentation/vertical-speed-indicator[1]/indicated-speed-fpm</input>
+        <output>instrumentation/vertical-speed-indicator[1]/indicated-speed-fpm-filtered</output>
+    </filter>
+
+</PropertyList>

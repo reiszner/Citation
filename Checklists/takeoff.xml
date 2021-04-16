@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Before takeoff checklist for the Citation II/Super II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+  <title>III - Takeoff</title>
+  <item>
+    <name>Parking brake</name>
+    <value>RELEASED</value>
+    <condition>
+      <equals>
+        <property>controls/gear/brake-parking</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/gear/brake-parking</property>
+      <value>0</value>
+    </binding>
+  </item>
+  <item>
+    <name>Increase throttle SLOWLY to and maintain n2 =</name>
+    <value>95.9</value>
+    <condition>
+      <greater-than>
+        <property>engines/engine[0]/turbine</property>
+        <value>93</value>
+      </greater-than>
+      <less-than>
+        <property>engines/engine[0]/turbine</property>
+        <value>96</value>
+      </less-than>
+      <greater-than>
+        <property>engines/engine[1]/turbine</property>
+        <value>93</value>
+      </greater-than>
+      <less-than>
+        <property>engines/engine[1]/turbine</property>
+        <value>96</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Rotate at</name>
+    <value>130 KIAS</value>
+    <condition>
+      <greater-than>
+        <property>velocities/airspeed-kt</property>
+        <value>125</value>
+      </greater-than>
+    </condition>
+  </item>
+  <item>
+    <name>Liftoff at</name>
+    <value>140 KIAS</value>
+    <condition>
+      <greater-than>
+        <property>velocities/airspeed-kt</property>
+        <value>135</value>
+      </greater-than>
+    </condition>
+  </item>
+  <item>
+    <name>Gear</name>
+    <value>UP</value>
+    <condition>
+      <equals>
+        <property>controls/gear/gear-down</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/gear/gear-lever-cmd</property>
+      <value>0</value>
+    </binding>
+  </item>
+  <item>
+    <name>Accelerate to</name>
+    <value>180 KIAS</value>
+    <condition>
+      <greater-than>
+        <property>velocities/airspeed-kt</property>
+        <value>175</value>
+      </greater-than>
+    </condition>
+  </item>
+  <item>
+    <name>Flaps</name>
+    <value>UP</value>
+    <condition>
+      <equals>
+        <property>controls/flight/flaps</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/flight/flaps</property>
+      <value>0</value>
+    </binding>
+  </item>
+  <item>
+    <name>Level off at</name>
+    <value>6000 ft AGL</value>
+    <condition>
+      <greater-than>
+        <property>position/altitude-agl-ft</property>
+        <value>5500</value>
+      </greater-than>
+      <less-than>
+        <property>position/altitude-agl-ft</property>
+        <value>6500</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Left landing light</name>
+    <value>OFF</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/landing-light-switch[0]</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/landing-light-switch[0]</property>
+      <value>0</value>
+    </binding>
+  </item>
+  <item>
+    <name>Right landing light</name>
+    <value>OFF</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/landing-light-switch[1]</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/landing-light-switch[1]</property>
+      <value>0</value>
+    </binding>
+  </item>
+  <item>
+    <name>Accelerate to</name>
+    <value>250 KIAS</value>
+    <condition>
+      <greater-than>
+        <property>velocities/airspeed-kt</property>
+        <value>245</value>
+      </greater-than>
+      <less-than>
+        <property>velocities/airspeed-kt</property>
+        <value>255</value>
+      </less-than>
+    </condition>
+  </item>
+  <!-- the angle of attack is indicated on a scale of 0.0 to 1.0
+       corresponding to 0.0 to 14.0 degrees (see aoa.xml). -->
+  <item>
+    <name>Angle of attack</name>
+    <value>&lt; 0.2</value>
+    <condition>
+      <less-than>
+        <property>orientation/alpha-deg</property>
+        <value>2.8</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Autopilot</name>
+    <value>ENGAGED</value>
+    <condition>
+      <equals>
+        <property>autopilot/mode/engaged</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </item>
+  <item>
+    <name>Flight Director</name>
+    <value>ENGAGED</value>
+    <condition>
+      <equals>
+        <property>autopilot/ms-205[0]/mode/state</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </item>
+  <item>
+    <name>ALT mode</name>
+    <value>ENGAGED</value>
+    <condition>
+      <equals>
+        <property>autopilot/ms-205[0]/mode/vertical-mode</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </item>
+</PropertyList>

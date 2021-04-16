@@ -1,0 +1,234 @@
+already installed circuit breakers:
+
+prop: controls/electric/circuit-breakers/bus-[hot|emer|iso-left|iso-right|left|right]/cb-*
+
+bus-emer[1] (without model)
+bus-emer/cb-light-panel-el (instrument-lights)
+bus-emer/cb-light-panel-enginstr (is on JBox inside aft-fuselage -> ignored)
+bus-emer/cb-light-panel-flood
+
+bus-left-[1|2|3]
+bus-left/cb-light-panel-left
+bus-left/cb-light-panel-center
+bus-left/cb-light-panel-right (right panel light + map lights)
+bus-left/cb-light-beacon
+bus-left/cb-light-landing-left
+bus-left/cb-light-strobe
+bus-left/cb-light-recog-left
+bus-left/cb-light-winginsp
+bus-left/cb-light-cabin-ind
+bus-right/cb-light-nav
+
+bus-right-[1|2|3]
+bus-right/cb-light-landing-right
+bus-right/cb-light-recog-right
+bus-right/cb-light-cabin-read
+bus-right/cb-ground-prox
+
+------------------------------------
+--- List of all circuit breakers ---
+------------------------------------
+
+*************************************
+*** Electrical Power Junction Box ***
+*************************************
+
+hot         - cb.light.comp                AFT/FWD COMP LT - Aft/Forward Cargo Compartment Lights
+hot         - cb.light.flood               EMER LT         - Emergency Flood Lights
+hot         - cb.ignition                  IGNITION        - Engine Ignition
+hot         - cb.emer.power                EMERGENCY POWER - Emergency Power
+
+batt        - cb.voltage                   BATT VOLTAGE    - Battery Voltmeter
+
+left-iso    - cb.ammeter                   LH AMMETER      - Left Generator Ammeter
+left-iso    - cb.sense                     LH GEN SENSE    - Left Generator Sense
+left-iso    - cb.light.start               LH START LT     - Left Engine Start Light
+left-iso    - cb.voltmeter                 LH VOLTMETER    - Left Generator Voltmeter
+
+right-iso   - cb.ammeter                   RH AMMETER      - Right Generator Ammeter
+right-iso   - cb.sense                     RH GEN SENSE    - Right Generator Sense
+right-iso   - cb.light.start               RH START LT     - Right Engine Start Light
+right-iso   - cb.voltmeter                 RH VOLTMETER    - Right Generator Voltmeter
+
+left-main   - cb.sense                     LH BUS SENSE    - Left Bus Sense
+left-main   - cb.engine.boost              LH BOOST        - Left Fuel Boost Pump
+left-main   - cb.annun.genoff              LH GEN OFF      - Left Generator Off Light
+left-main   - cb.light.landing             LH LDG LT       - Left Landing Light
+left-main   - cb.light.recog               LH RECOG LT     - Left Recognition Light
+left-main   - cb.light.advisory            OXY/SEAT BELT   - Passenger Advisory Lights
+left-main   - cb.light.indirect            INDIRECT LT     - Indirect Lighting System
+left-main   - cb.entertainment             ENT CTR         - Entertainment Center
+
+right-main  - cb.sense                     RH BUS SENSE    - Right Bus Sense
+right-main  - cb.engine.boost              RH BOOST        - Right Fuel Boost Pump
+right-main  - cb.annun.genoff              RH GEN OFF      - Right Generator Off Light
+right-main  - cb.light.landing             RH LDG LT       - Right Landing Light
+right-main  - cb.light.recog               RH RECOG LT     - Right Recognition Light
+right-main  - cb.light.cabin               CABIN LT        - Cabin Lights
+right-main  - cb.light.toilet              TOILET          - Toilet/Shaver Outlet
+
+**********************************
+*** Left Circuit Breaker Panel ***
+**********************************
+
+left-bus    - cb.engine.FanSpeed.left      LH FAN SPEED    - Left Engine Fan Speed Digital Indicator
+left-bus    - cb.engine.ITT.left           LH ITT          - Left ITT Indicator
+left-bus    - cb.engine.TurbineSpeed.left  LH TURB SPEED   - Left Engine Turbine Speed Digital Indicator
+left-bus    - cb.engine.FuelFlow.left      LH FUEL FLOW    - Left Engine Fuel Flow Indicator
+left-bus    - cb.engine.QTY.left           LH FUEL QTY     - Left Fuel Quantity Indicator
+left-bus    - cb.engine.OilTemp.left       LH OIL TEMP     - Left Engine Oil Temp Indicator
+left-bus    - cb.engine.OilPress.left      LH OIL PRESS    - Left Engine Oil Pressure Indicator
+
+right-bus   - cb.env.EmerPress             EMER PRESS      - Emergency Pressurization System
+left-bus    - cb.env.NormalPress           NORM PRESS      - Normal Pressurization System
+left-bus    - cb.env.CabinFan              CABIN FAN       - Cabin Fan
+left-bus    - cb.env.Temp                  TEMP            - Cabin Temperature Control
+
+right-bus   - cb.engine.ing.left           LH IGN          - Left Engine Ignition
+left-bus    - cb.engine.ing.right          RH IGN          - Right Engine Ignition System
+right-bus   - cb.engine.boost.left         LH BOOST        - Left Fuel Boost Pump
+left-bus    - cb.engine.boost.right        RH BOOST        - Right Fuel Boost Pump
+left-bus    - cb.engine.shutoff.left       LH FW SHUTOFF   - Left Engine Firewall Shutoff
+right-bus   - cb.engine.shutoff.right      RH FW SHUTOFF   - Right Engine Firewall Shutoff
+left-bus    - cb.engine.fire.left          LH FIRE DET     - Left Engine Fire Detection
+right-bus   - cb.engine.fire.right         RH FIRE DET     - Right Engine Fire Detection
+
+left-bus    - cb.rec.flight                FLIGHT RECORDER - Flight Data Recorder
+left-bus    - cb.rec.voice                 VOICE RECORDER  - Cockpit Voice Recorder
+
+left-bus    - cb.inst.gyro.standby         STBY GYRO       - Standby Gyro
+right-bus   - cb.inst.alt.right            RH ALT          - Right Altimeter Vibrator
+left-bus    - cb.inst.oat                  OAT             - Outside Air Temperature
+right-bus   - cb.inst.flt_hr               FLT/HR          - Flight Hour Meter
+left-bus    - cb.inst.clock.left           LH CLOCK        - Left Digital Clock
+right-bus   - cb.inst.clock.right          RH CLOCK        - Right Digital Clock
+
+left-bus    - cb.anti-ice.pitot.left       LH PITOT STATIC    - Left Pitot/Static Heater
+right-bus   - cb.anti-ice.pitot.right      RH PITOT STATIC    - Right Pitot/Static Heater
+left-bus    - cb.anti-ice.aoa              AOA HTR            - AOA System Heater
+left-bus    - cb.anti-ice.engine.left      LH ENG             - Left Engine Control
+right-bus   - cb.anti-ice.engine.right     RH ENG             - Right Engine Control
+right-bus   - cb.anti-ice.surface          SURFACE DEICE      - Surface Deice Boots
+left-bus    - cb.anti-ice.bleedair.ws.temp W/S BLEED AIR TEMP - Windshield Bleed Air Control
+left-bus    - cb.anti-ice.bleedair.ws      W/S BLEED AIR      - Windshield Bleed Air Power
+right-bus   - cb.anti-ice.alcohol          W/S ALCOHOL        - Winshield Alcohol Pump
+
+left-bus    - cb.warn.batt                 BATT TEMP          - Battery Overtemp System
+left-bus    - cb.warn.gear                 LDG GEAR           - Landing Gear Warning
+left-bus    - cb.warn.lts1                 WARN LTS 1         - Warning Lights 1
+right-bus   - cb.warn.lts2                 WARN LTS 2         - Warning Lights 2
+right-bus   - cb.warn.speed                OVERSPEED          - Overspeed Warning
+
+left-bus    - cb.sys.SkidControl           SKID CONTROL       - Power Brakes and Anti-Skid Control
+right-bus   - cb.sys.EquipCool             EQUIP COOL         - Equipment Cool
+left-bus    - cb.sys.ThrustReverser.left   LH THRUST REVERSER - Left Engine Thrust Reverser Control
+right-bus   - cb.sys.ThrustReverser.right  RH THRUST REVERSER - Right Thrust Reverser Control
+left-bus    - cb.sys.FlapMotor             FLAP MOTOR         - Flap Motors
+left-bus    - cb.sys.FlapCtrl              FLAP CONTROL       - Flap Control
+left-bus    - cb.sys.AOA                   ANG OF ATTACK      - AOA System Control
+left-bus    - cb.sys.GearCtrl              GEAR CONTROL       - Landing Gear Control
+left-bus    - cb.sys.EngineSync            ENGINE SYNC        - Engine Synchronization System
+left-bus    - cb.sys.PitchTrim             PITCH TRIM         - Pitch Trim Control
+left-bus    - cb.sys.NoseWheelRPM          NOSE WHL RPM       - Nose Wheel Spinup System
+left-bus    - cb.sys.SpeedBrake            SPEED BRAKE        - Speed Brake Control
+
+left-bus    - cb.light.panel.left          LH PANEL           - Left 5V Panel Lights
+right-bus   - cb.light.panel.center        CENTER PANEL       - Center 5V Panel Lights
+right-bus   - cb.light.panel.right         RH PANEL           - Right 5V Panel Lights
+left-bus    - cb.light.strobe              ANTICOLL           - Anti-Collision Light
+left-bus    - cb.light.panel.el            EL PANEL           - Electroluminescent Panel Lights
+left-bus    - cb.light.winginsp            LH WING INSP       - Left Wing Inspection Light
+left-bus    - cb.light.beacon              ROTATING BEACON    - Rotating Beacon
+left-bus    - cb.light.nav                 NAV                - Wing Navigation Light
+
+left-bus    - cb.bus.left.inverter         AC INVERTER NO 1   - AC Inverter 1
+left-bus    - cb.bus.left.starter          LH START           - Left Engine Start Control
+left-bus    - cb.bus.left.x-over           RH CB PANEL        - Right Circuit Breaker Panel
+
+left-bus    - cb.bus.left.1                LH BUS NO 1        - Left CB Panel Bus
+left-bus    - cb.bus.left.2                LH BUS NO 2        - Left CB Panel Bus
+left-bus    - cb.bus.left.3                LH BUS NO 3        - Left CB Panel Bus
+
+***********************************
+*** Right Circuit Breaker Panel ***
+***********************************
+
+right-bus   - cb.engine.FanSpeed.right     RH FAN SPEED       - Right Engine Fan Speed Digital Indicator
+right-bus   - cb.engine.ITT.right          RH ITT             - Right Engine ITT Indicator
+right-bus   - cb.engine.TurbineSpeed.right RH TURB SPEED      - Right Engine Turbine Speed Digital Indicator
+right-bus   - cb.engine.FuelFlow.right     RH FUEL FLOW       - Right Fuel Flow Indicator
+right-bus   - cb.engine.QTY.right          RH FUEL QTY        - Right Fuel Quantity Indicator
+right-bus   - cb.engine.OilTemp.right      RH OIL TEMP        - Right Oil Temperature Indicator
+right-bus   - cb.engine.OilPress.right     RH OIL PRESS       - Right Engine Oil Pressure Indicator
+
+left-bus    - cb.dc.comm2                  COMM 2             - Communication 2
+emer-bus    - cb.dc.nav2                   NAV 2              - Navigation 2
+right-bus   - cb.dc.dme2                   DME 2              - Distance Measuring Equipment 2
+right-bus   - cb.dc.xpdr2                  XPDR 2             - Transponder 2
+right-bus   - cb.dc.adf2                   ADF 2              - Automatic Direction Finder 2
+right-bus   - cb.dc.audio2                 AUDIO 2            - Audio Control 2
+right-bus   - cb.dc.warn                   WARN               - Autopilot Warning
+emer-bus    - cb.dc.comm1                  COMM 1             - Communication 1
+left-bus    - cb.dc.nav1                   NAV 1              - Navigation 1
+left-bus    - cb.dc.dme1                   DME 1              - Distance Measuring Equipment 1
+left-bus    - cb.dc.xpdr1                  XPDR 1             - Transponder 1
+left-bus    - cb.dc.adf1                   ADF 1              - Automatic Direction Finder 1
+left-bus    - cb.dc.audio1                 AUDIO 1            - Audio Control 1
+left-bus    - cb.dc.phone                  PHONE              - Flitefone
+right-bus   - cb.dc.comm3                  COMM 3             - Communication 3
+right-bus   - cb.dc.nav.area               AREA NAV           - Area Navigation
+right-bus   - cb.dc.GroundProx             GROUND PROX        - Ground Proximity Warning
+right-bus   - cb.dc.TasHtr                 TAS HTR            - True Air Speed Heater
+right-bus   - cb.dc.nav.vlf                VLF NAV            - VLF Navigation
+right-bus   - cb.dc.nav.DataBank           NAV DATA BANK      - Nav Data Bank
+right-bus   - cb.dc.FMS                    FMS                - Flight Management Systems
+
+left-bus    - cb.dc.ap                     AP                 - Autopilot Servo
+right-bus   - cb.dc.radar                  RADAR              - Weather Radar
+left-bus    - cb.dc.efis.disp              DISP               - EFIS Disp
+left-bus    - cb.dc.efis.efis              EFIS               - EFIS
+left-bus    - cb.dc.efis.adi               ADI 1              - Attitude Director Indication 1
+left-bus    - cb.dc.efis.hsi               EHSI 1             - EHSI 1
+left-bus    - cb.dc.VoiceAdv               VOICE ADV          - Cockpit Voice Advisory
+left-bus    - cb.dc.RadAlt                 RAD ALT            - Radio Altimeter
+right-bus   - cb.dc.fd2                    FD 2               - Flight Director 2
+left-bus    - cb.dc.fd1                    FD 1               - Flight Director 1
+right-bus   - cb.dc.rmi2                   RMI 2              - Radio Magnetic Indicator 2
+left-bus    - cb.dc.rmi1                   RMI 1              - Radio Magnetic Indicator 1
+emer-bus    - cb.dc.dg2                    DG 2               - Directional Gyro 2
+left-bus    - cb.dc.dg1                    DG 1               - Directional Gyro 1
+
+emer-bus    - cb.light.flood               FLOOD              - Cockpit Flood Lights
+right-bus   - cb.bus.right.inverter        AC INVERTER NO 2   - AC Inverter 2
+right-bus   - cb.bus.right.starter         RH START           - Right Engine Start Control
+right-bus   - cb.bus.right.x-over          LH CB PANEL        - Left Circuit Breaker Panel
+
+right-bus   - cb.bus.right.1               RH BUS NO 1        - Right CB Panel Bus
+right-bus   - cb.bus.right.2               RH BUS NO 2        - Right CB Panel Bus
+right-bus   - cb.bus.right.3               RH BUS NO 3        - Right CB Panel Bus
+
+* 115 VAC BUS 1 *
+ac-left-bus - cb.ac.ap                     AP                 - Autopilot Control
+ac-left-bus - cb.ac.fd1                    FD 1               - Flight Director 1
+ac-left-bus - cb.ac.AirData                AIR DATA           - Sperry True Airspeed System
+ac-left-bus - cb.ac.VertGyro1              VG 1               - Vertical Gyro 1
+ac-left-bus - cb.ac.radar                  RADAR              - Weather Radar
+
+* 115 VAC BUS 2 *
+ac-right-bus- cb.ac.fd2                    FD 2               - Flight Director 2
+ac-right-bus- cb.ac.VertGyro2              VG 2               - Vertical Gyro 2
+
+* 26 VAC BUS 1 *
+ac-left-bus - cb.ac.nav1                   NAV 1              - Navigation 1
+ac-left-bus - cb.ac.rmi_adf1               RMI/ADF 1          - Radio Magnetic Indicator/Automatic Direction Finder 1
+ac-left-bus - cb.ac.hsi1                   HSI 1              - Horizontal Situation Indicator 1
+ac-left-bus - cb.ac.adi1                   ADI 1              - Attitude Director Indicator 1
+ac-left-bus - cb.ac.GroundProx             GROUND PROX        - Ground Proximity Warning
+
+* 26 VAC BUS 2 *
+ac-right-bus- cb.ac.nav2                   NAV 2              - Navigation 2
+ac-right-bus- cb.ac.rmi_adf2               RMI/ADF 2          - Radio Magnetic Indicator/Automatic Direction Finder 2
+ac-right-bus- cb.ac.hsi2                   HSI 2              - Horizontal Situation Indicator 2
+ac-right-bus- cb.ac.adi2                   ADI 2              - Attitude Director Indicator 2
+ac-right-bus- cb.ac.efis                   EFIS               - EFIS
+

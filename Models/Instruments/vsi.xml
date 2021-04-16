@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PropertyList>
+
+  <path>vsi.ac</path>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>vsi.needle</object-name>
+    <property alias="../../indicated-speed-fpm" />
+    <interpolation>
+      <entry><ind>-6000.0</ind><dep>-170.0</dep></entry>
+      <entry><ind>-2000.0</ind><dep>-90.0</dep></entry>
+      <entry><ind>-1000.0</ind><dep>-55.0</dep></entry>
+      <entry><ind>-500.0</ind><dep>-27.5</dep></entry>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>500.0</ind><dep>27.5</dep></entry>
+      <entry><ind>1000.0</ind><dep>55.0</dep></entry>
+      <entry><ind>2000.0</ind><dep>90.0</dep></entry>
+      <entry><ind>6000.0</ind><dep>170.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>vsi.bezel</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>vsi.face</object-name>
+        <object-name>vsi.needle</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>vsi.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>vsi.bezel</object-name>
+        <object-name>vsi.face</object-name>
+        <object-name>vsi.needle</object-name>
+    </effect-->
+
+</PropertyList>

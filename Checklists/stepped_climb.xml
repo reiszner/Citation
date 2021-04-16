@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Stepped climb checklist for the Citation II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+  <title>V - Stepped Climb (Citation II only)</title>
+  <item>
+    <name>Climb to and hold</name>
+    <value>33000 ft</value>
+    <condition>
+      <greater-than>
+        <property>instrumentation/altimeter/indicated-altitude-ft</property>
+        <value>33000</value>
+      </greater-than>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/vn-212/altitude-select</property>
+      <value>33000</value>
+    </binding>
+  </item>
+
+  <!-- the angle of attack is indicated on a scale of 0.0 to 1.0
+       corresponding to 0.0 to 14.0 degrees (see aoa.xml). -->
+  <item>
+    <name>Accelerate until angle of attack</name>
+    <value>&lt; .3</value>
+    <condition>
+      <less-than>
+        <property>orientation/alpha-deg</property>
+        <value>4.2</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Climb to and hold</name>
+    <value>36000 ft</value>
+    <condition>
+      <greater-than>
+        <property>instrumentation/altimeter/indicated-altitude-ft</property>
+        <value>36000</value>
+      </greater-than>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/vn-212/altitude-select</property>
+      <value>36000</value>
+    </binding>
+  </item>
+  <item>
+    <name>Accelerate until angle of attack</name>
+    <value>&lt; .3</value>
+    <condition>
+      <less-than>
+        <property>orientation/alpha-deg</property>
+        <value>4.2</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Climb to and hold</name>
+    <value>39000 ft</value>
+    <condition>
+      <greater-than>
+        <property>instrumentation/altimeter/indicated-altitude-ft</property>
+        <value>39000</value>
+      </greater-than>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/vn-212/altitude-select</property>
+      <value>39000</value>
+    </binding>
+  </item>
+  <item>
+    <name>Accelerate until angle of attack</name>
+    <value>&lt; .3</value>
+    <condition>
+      <less-than>
+        <property>orientation/alpha-deg</property>
+        <value>4.2</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Climb to and hold</name>
+    <value>42000 ft</value>
+    <condition>
+      <greater-than>
+        <property>instrumentation/altimeter/indicated-altitude-ft</property>
+        <value>42000</value>
+      </greater-than>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/vn-212/altitude-select</property>
+      <value>42000</value>
+    </binding>
+  </item>
+  <item>
+    <name>Accelerate until angle of attack</name>
+    <value>&lt; .3</value>
+    <condition>
+      <less-than>
+        <property>orientation/alpha-deg</property>
+        <value>4.2</value>
+      </less-than>
+    </condition>
+  </item>
+</PropertyList>

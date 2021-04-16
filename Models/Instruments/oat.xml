@@ -1,0 +1,64 @@
+<PropertyList>
+
+  <path>oat.ac</path>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>oat.needle</object-name>
+    <property>environment/temperature-degc</property>
+    <interpolation>
+      <entry><ind>-60</ind><dep>0</dep></entry>
+      <entry><ind>0</ind><dep>130</dep></entry>
+      <entry><ind>60</ind><dep>260</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>oat.bezel</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>oat.face</object-name>
+        <object-name>oat.needle</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>oat.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>oat.bezel</object-name>
+        <object-name>oat.face</object-name>
+        <object-name>oat.needle</object-name>
+    </effect-->
+
+</PropertyList>

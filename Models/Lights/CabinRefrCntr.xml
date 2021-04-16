@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>CabinRefrCntr.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>IntLight.RefrCntr</object-name>
+        <condition>
+            <and>
+                <property>systems/electrical/outputs/main-right/light-cabin</property>
+                <greater-than>
+                    <property>controls/lighting/cabin-lights-norm</property>
+                    <value>0.05</value>
+                </greater-than>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+	<type>light</type>
+	<light-type>point</light-type>
+	<name>CabinIndirect</name>
+	<object-name>IntLight.RefrCntr</object-name>
+	<nopreview/>
+	<position>
+		<x>3.96424</x>
+		<y>-0.49004</y>
+		<z>0.79155</z>
+	</position>
+	<ambient>
+		<r>0.9</r>
+		<g>0.7</g>
+		<b>0.5</b>
+		<a>1</a>
+	</ambient>
+	<diffuse>
+		<r>0.7</r>
+		<g>0.4</g>
+		<b>0.3</b>
+		<a>1</a>
+	</diffuse>
+	<specular>
+		<r>0.7</r>
+		<g>0.4</g>
+		<b>0.3</b>
+		<a>1</a>
+	</specular>
+	<dim-factor>
+		<property>controls/lighting/cabin-lights-norm</property>
+		<factor>3</factor>
+		<min>0</min>
+		<max>1</max>
+	</dim-factor>
+	<attenuation>
+		<c>1.0</c>
+		<l>5</l>
+		<q>90</q>
+	</attenuation>
+	<near-m>0.001</near-m>
+	<far-m>1</far-m>
+    </animation>
+
+</PropertyList>

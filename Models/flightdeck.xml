@@ -1,0 +1,1858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+
+  <path>flightdeck.ac</path>
+
+  <!-- needed for tutorials -->
+  <model>
+    <path>Aircraft/Generic/marker.xml</path>
+  </model>
+
+  <model>
+    <name>panel1</name>
+    <path>Aircraft/Citation/Models/Instruments/panel-layout1.xml</path>
+    <offsets>
+      <x-m>2.490</x-m>
+      <y-m>0.000</y-m>
+      <z-m>0.358</z-m>
+      <pitch-deg>-10.0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>firepanel</name>
+    <path>Aircraft/Citation/Models/firepanel.xml</path>
+    <offsets>
+      <x-m>2.48</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.81</z-m>
+      <pitch-deg>-10.0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>enginepanel</name>
+    <path>Aircraft/Citation/Models/enginepanel.xml</path>
+    <offsets>
+      <x-m>2.441</x-m>
+      <y-m>-0.0035</y-m>
+      <z-m>0.639</z-m>
+      <pitch-deg>-10.0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>gearpanel</name>
+    <path>Aircraft/Citation/Models/gearpanel.xml</path>
+    <offsets>
+      <x-m>2.483</x-m>
+      <y-m>-0.135</y-m>
+      <z-m>0.400</z-m>
+      <pitch-deg>-10.0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>circuit-breakers</name>
+    <path>Aircraft/Citation/Models/circuit-breakers.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>magnetic-compass</name>
+    <path>Aircraft/Citation/Models/Instruments/magcompass.xml</path>
+    <offsets>
+      <x-m>2.460</x-m>
+      <y-m>0</y-m>
+      <z-m>0.885</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CDU</name>
+    <path>Aircraft/Citation/Models/Instruments/cdu/boeing.xml</path>
+    <offsets>
+      <x-m>2.90</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.2773</z-m>
+      <pitch-deg>-90.0</pitch-deg>
+    </offsets>
+    <overlay>
+      <texture>boeing_grey.png</texture>
+    </overlay>
+  </model>
+
+  <model>
+    <name>AP panel</name>
+    <path>Aircraft/Citation/Models/Instruments/APpanel.xml</path>
+    <offsets>
+      <x-m>3.06</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.2773</z-m>
+      <pitch-deg>-90.0</pitch-deg>
+    </offsets>
+  </model>
+
+<!-- select of variant -->
+
+  <animation>
+    <type>select</type>
+    <object-name>thrust.rev.lever.left</object-name>
+    <object-name>thrust.rev.link.left</object-name>
+    <object-name>thrust.rev.lever.right</object-name>
+    <object-name>thrust.rev.link.right</object-name>
+    <condition>
+      <equals>
+        <property>sim/model/variant</property>
+        <value>0</value>
+      </equals>
+    </condition>
+  </animation>
+
+<!-- lights -->
+
+    <light>
+        <name>center-light</name>
+        <type>spot</type>
+        <position>
+            <x-m>2.4377</x-m>
+            <y-m>0.0000</y-m>
+            <z-m>0.7619</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>50.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>1.5</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/center-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>center-light</object-name>
+        <condition>
+            <greater-than>
+                <property>controls/lighting/center-panel-light-emission</property>
+                <value>0.01</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+    <light>
+        <name>left-light-1</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.4700</x-m>
+            <y-m>-0.2140</y-m>
+            <z-m> 0.8035</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>80.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/left-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <light>
+        <name>left-light-2</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.4700</x-m>
+            <y-m>-0.3140</y-m>
+            <z-m> 0.7971</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>80.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/left-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <light>
+        <name>left-light-3</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.4700</x-m>
+            <y-m>-0.4140</y-m>
+            <z-m> 0.7907</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>80.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/left-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>left-light-1</object-name>
+        <object-name>left-light-2</object-name>
+        <object-name>left-light-3</object-name>
+        <condition>
+            <greater-than>
+                <property>controls/lighting/left-panel-light-emission</property>
+                <value>0.01</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+    <light>
+        <name>right-light-1</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.4700</x-m>
+            <y-m> 0.2140</y-m>
+            <z-m> 0.8035</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>80.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/right-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <light>
+        <name>right-light-2</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.4700</x-m>
+            <y-m> 0.3140</y-m>
+            <z-m> 0.7971</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>80.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/right-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <light>
+        <name>right-light-3</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.4700</x-m>
+            <y-m> 0.4140</y-m>
+            <z-m> 0.7907</z-m>
+        </position>
+        <direction>
+            <x> 0.173648177667</x>
+            <y> 0.0</y>
+            <z>-0.984807753012</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.9</g>
+            <b>0.8</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>1.0</l>
+            <q>80.0</q>
+        </attenuation>
+        <spot-cutoff>75</spot-cutoff>
+        <spot-exponent>2</spot-exponent>
+        <range-m>1</range-m>
+        <dim-factor>
+            <property>controls/lighting/right-panel-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>right-light-1</object-name>
+        <object-name>right-light-2</object-name>
+        <object-name>right-light-3</object-name>
+        <condition>
+            <greater-than>
+                <property>controls/lighting/right-panel-light-emission</property>
+                <value>0.01</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+    <light>
+        <name>flood-light</name>
+        <type>spot</type>
+        <position>
+            <x-m> 3.500</x-m>
+            <y-m> 0.000</y-m>
+            <z-m> 1.253</z-m>
+        </position>
+        <direction>
+            <x>-0.707106781187</x>
+            <y> 0.0</y>
+            <z>-0.707106781187</z>
+        </direction>
+        <ambient>
+            <r>0.05</r>
+            <g>0.05</g>
+            <b>0.70</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>0.05</r>
+            <g>0.05</g>
+            <b>0.70</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>0.05</r>
+            <g>0.05</g>
+            <b>0.70</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.1</l>
+            <q>0.05</q>
+        </attenuation>
+        <spot-cutoff>50</spot-cutoff>
+        <spot-exponent>15</spot-exponent>
+        <range-m>0.5</range-m>
+        <dim-factor>
+            <property>controls/lighting/flood-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>flood-light</object-name>
+        <condition>
+            <greater-than>
+                <property>controls/lighting/flood-light-emission</property>
+                <value>0.01</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+    <light>
+        <name>map-light-left</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.9412</x-m>
+            <y-m>-0.3017</y-m>
+            <z-m> 1.1640</z-m>
+        </position>
+        <direction>
+            <x>-0.340719</x>
+            <y> 0.087156</y>
+            <z>-0.936117</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.9</l>
+            <q>0.81</q>
+        </attenuation>
+        <spot-cutoff>50</spot-cutoff>
+        <spot-exponent>15</spot-exponent>
+        <range-m>1.0</range-m>
+        <dim-factor>
+            <property>controls/lighting/map-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <light>
+        <name>map-light-right</name>
+        <type>spot</type>
+        <position>
+            <x-m> 2.9412</x-m>
+            <y-m> 0.3017</y-m>
+            <z-m> 1.1640</z-m>
+        </position>
+        <direction>
+            <x>-0.340719</x>
+            <y>-0.087156</y>
+            <z>-0.936117</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.8</g>
+            <b>0.6</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.9</l>
+            <q>0.81</q>
+        </attenuation>
+        <spot-cutoff>50</spot-cutoff>
+        <spot-exponent>15</spot-exponent>
+        <range-m>1.0</range-m>
+        <dim-factor>
+            <property>controls/lighting/map-light-emission</property>
+            <factor>1</factor>
+            <offset>0</offset>
+            <min>0</min>
+            <max>1</max>
+        </dim-factor>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <object-name>map-light-left</object-name>
+        <object-name>map-light-right</object-name>
+        <condition>
+            <greater-than>
+                <property>controls/lighting/map-light-emission</property>
+                <value>0.01</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+  <!--   Controls   -->
+
+  <animation>
+    <type>select</type>
+    <object-name>Yoke</object-name>
+    <object-name>YokeLH</object-name>
+    <object-name>YokeRH</object-name>
+    <condition>
+      <property>sim/yokes-visible</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>ElevTrim.Indicator</object-name>
+    <property>controls/flight/elevator-trim</property>
+    <factor>-22</factor>
+    <center>
+      <x-m> 2.659</x-m>
+      <y-m>-0.085</y-m>
+      <z-m> 0.257</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>ElevTrim.Wheel</object-name>
+    <property>controls/flight/elevator-trim</property>
+    <factor>-1000</factor>
+    <center>
+      <x-m> 2.68</x-m>
+      <y-m>-0.09</y-m>
+      <z-m> 0.26</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/flight/elevator-trim</property>
+        <factor>-0.001</factor>
+        <min>-1</min>
+        <max>1</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>elevator trim</tooltip-id>
+        <label>Elevator trim: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>controls/flight/elevator-trim</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>thrust.left</object-name>
+    <property>controls/engines/engine[0]/throttle-lever</property>
+    <factor>45</factor>
+    <interpolation>
+      <entry><ind>-0.2</ind><dep>40</dep></entry>
+      <entry><ind> 0.0</ind><dep>50</dep></entry>
+      <entry><ind> 1.0</ind><dep>85</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 2.6590</x-m>
+      <y-m>-0.0451</y-m>
+      <z-m> 0.2570</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>thrust.rev.lever.left</object-name>
+    <object-name>thrust.rev.link.left</object-name>
+    <property>controls/engines/engine[0]/reverser-lever</property>
+    <factor>115</factor>
+    <center>
+      <x-m> 2.8090</x-m>
+      <y-m>-0.0451</y-m>
+      <z-m> 0.2595</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y> 1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>thrust.rev.link.left</object-name>
+    <property>controls/engines/engine[0]/reverser-lever</property>
+    <factor>100</factor>
+    <center>
+      <x-m> 2.8225</x-m>
+      <y-m>-0.0451</y-m>
+      <z-m> 0.2595</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>thrust.cutoff.left</object-name>
+    <property>controls/engines/engine[0]/cutoff-lock</property>
+    <interpolation>
+      <entry><ind>0</ind><dep>0.014</dep></entry>
+      <entry><ind>1</ind><dep>0.000</dep></entry>
+    </interpolation>
+    <axis>
+      <x> 1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>thrust.right</object-name>
+    <property>controls/engines/engine[1]/throttle-lever</property>
+    <interpolation>
+      <entry><ind>-0.2</ind><dep>40</dep></entry>
+      <entry><ind> 0.0</ind><dep>50</dep></entry>
+      <entry><ind> 1.0</ind><dep>85</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 2.6590</x-m>
+      <y-m>-0.0135</y-m>
+      <z-m> 0.2570</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>thrust.rev.lever.right</object-name>
+    <object-name>thrust.rev.link.right</object-name>
+    <property>controls/engines/engine[1]/reverser-lever</property>
+    <factor>115</factor>
+    <center>
+      <x-m> 2.8090</x-m>
+      <y-m>-0.0135</y-m>
+      <z-m> 0.2595</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y> 1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>thrust.rev.link.right</object-name>
+    <property>controls/engines/engine[1]/reverser-lever</property>
+    <factor>100</factor>
+    <center>
+      <x-m> 2.8225</x-m>
+      <y-m>-0.0135</y-m>
+      <z-m> 0.2595</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>thrust.cutoff.right</object-name>
+    <property>controls/engines/engine[1]/cutoff-lock</property>
+    <interpolation>
+      <entry><ind>0</ind><dep>0.014</dep></entry>
+      <entry><ind>1</ind><dep>0.000</dep></entry>
+    </interpolation>
+    <axis>
+      <x> 1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>FlapLever</object-name>
+    <property>controls/flight/flaps</property>
+    <factor>47</factor>
+    <center>
+      <x-m>2.6590</x-m>
+      <y-m>0.0514</y-m>
+      <z-m>0.2570</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>flaps</tooltip-id>
+        <label>Flaps: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>controls/flight/flaps</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>FlapLever</object-name>
+    <drag-direction>vertical</drag-direction>
+    <drag-scale-px>1</drag-scale-px>
+    <action>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/flight/flaps-touch</property>
+        <value>1</value>
+      </binding>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/flight/flaps</property>
+        <factor>-0.01</factor>
+        <min>0</min>
+        <max>1</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <release>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/flight/flaps-touch</property>
+        <value>0</value>
+      </binding>
+    </release>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Flap.indicator</object-name>
+    <property>surface-positions/flap-pos</property>
+    <factor>47</factor>
+    <center>
+      <x-m>2.6590</x-m>
+      <y-m>0.0149</y-m>
+      <z-m>0.2570</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>flaps_indicator</tooltip-id>
+        <label>Flaps: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>surface-positions/flap-pos</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>Pbrake.lever</object-name>
+    <property>controls/gear/brake-parking</property>
+    <factor>0.025</factor>
+    <axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Yoke</object-name>
+    <object-name>YokeLH</object-name>
+    <object-name>YokeRH</object-name>
+    <property>controls/flight/elevator-fdm</property>
+    <factor>10</factor>
+    <center>
+      <x-m>2.897</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.014</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>-1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>YokeLH</object-name>
+    <property>controls/flight/aileron-fdm</property>
+    <factor>60</factor>
+    <center>
+      <x-m>2.85</x-m>
+      <y-m>-0.31</y-m>
+      <z-m>0.58</z-m>
+    </center>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>YokeRH</object-name>
+    <property>controls/flight/aileron-fdm</property>
+    <factor>60</factor>
+    <center>
+      <x-m>2.85</x-m>
+      <y-m>0.31</y-m>
+      <z-m>0.58</z-m>
+    </center>
+    <axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <!-- hotspots-->
+
+  <animation>
+    <type>knob</type>
+    <object-name>thrust.left</object-name>
+    <factor>45</factor>
+    <action>
+      <repeatable>true</repeatable>
+      <interval-sec>0.05</interval-sec>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[0]/throttle</property>
+        <factor>0.01</factor>
+        <min>-0.2</min>
+        <max>1.0</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>throttle0</tooltip-id>
+        <label>Left Throttle: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>controls/engines/engine[0]/throttle-real</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>thrust.rev.lever.left</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <interval-sec>0.05</interval-sec>
+      <binding>
+        <condition>
+          <and>
+            <property>controls/engines/engine[0]/reverser</property>
+            <less-than>
+              <property>controls/engines/engine[0]/throttle</property>
+              <value>1.0</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[0]/throttle</property>
+        <step>0.01</step>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+            <not><property>controls/engines/engine[0]/reverser</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <less-than>
+              <property>controls/engines/engine[0]/throttle-lever</property>
+              <value>0.03</value>
+            </less-than>
+            <greater-than>
+              <property>controls/engines/engine[0]/throttle-lever</property>
+              <value>-0.01</value>
+            </greater-than>
+          </and>
+        </condition>
+        <command>property-assign</command>
+        <property>controls/engines/engine[0]/reverser</property>
+        <value>1</value>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+            <not><property>controls/engines/engine[0]/reverser</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <greater-than>
+              <property>controls/engines/engine[0]/throttle</property>
+              <value>0.02</value>
+            </greater-than>
+          </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[0]/throttle</property>
+        <step>-0.01</step>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <condition>
+          <property>controls/engines/engine[0]/reverser</property>
+        </condition>
+        <command>set-tooltip</command>
+        <tooltip-id>reverser0</tooltip-id>
+        <label>Left Reverse Throttle: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>controls/engines/engine[0]/throttle-real</property>
+      </binding>
+      <binding>
+        <condition>
+          <not><property>controls/engines/engine[0]/reverser</property></not>
+        </condition>
+        <command>set-tooltip</command>
+        <tooltip-id>reverser0</tooltip-id>
+        <label>Left Reverse Throttle: Closed</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>thrust.rev.lever.left</object-name>
+    <action>
+      <button>1</button>
+      <repeatable>true</repeatable>
+      <interval-sec>0.05</interval-sec>
+      <binding>
+        <condition>
+          <property>controls/engines/engine[0]/reverser</property>
+          <less-than>
+            <property>controls/engines/engine[0]/throttle</property>
+            <value>0.005</value>
+          </less-than>
+        </condition>
+        <command>property-assign</command>
+        <property>controls/engines/engine[0]/reverser</property>
+        <value>0</value>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+            <property>controls/engines/engine[0]/reverser</property>
+            <greater-than>
+              <property>controls/engines/engine[0]/throttle</property>
+              <value>0.005</value>
+            </greater-than>
+          </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[0]/throttle</property>
+        <step>-0.01</step>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>thrust.cutoff.left</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/engines/engine[0]/cutoff-lock</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>cutoff0</tooltip-id>
+        <label>Left Cutoff Lock: %s</label>
+        <mapping>nasal</mapping>
+        <script>(arg[0] == 0) ? "Unlocked" : "Locked"</script>
+        <property>controls/engines/engine[0]/cutoff-lock</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>thrust.right</object-name>
+    <factor>45</factor>
+    <action>
+      <repeatable>true</repeatable>
+      <interval-sec>0.05</interval-sec>
+      <binding>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[1]/throttle</property>
+        <factor>0.01</factor>
+        <min>-0.2</min>
+        <max>1.0</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>throttle1</tooltip-id>
+        <label>Right Throttle: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>controls/engines/engine[1]/throttle-real</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>thrust.rev.lever.right</object-name>
+    <action>
+      <button>0</button>
+      <repeatable>true</repeatable>
+      <interval-sec>0.05</interval-sec>
+      <binding>
+        <condition>
+          <and>
+            <property>controls/engines/engine[1]/reverser</property>
+            <less-than>
+              <property>controls/engines/engine[1]/throttle</property>
+              <value>1.0</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[1]/throttle</property>
+        <step>0.01</step>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+            <not><property>controls/engines/engine[1]/reverser</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <less-than>
+              <property>controls/engines/engine[1]/throttle-lever</property>
+              <value>0.03</value>
+            </less-than>
+            <greater-than>
+              <property>controls/engines/engine[1]/throttle-lever</property>
+              <value>-0.01</value>
+            </greater-than>
+          </and>
+        </condition>
+        <command>property-assign</command>
+        <property>controls/engines/engine[1]/reverser</property>
+        <value>1</value>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+            <not><property>controls/engines/engine[1]/reverser</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <greater-than>
+              <property>controls/engines/engine[1]/throttle</property>
+              <value>0.02</value>
+            </greater-than>
+          </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[1]/throttle</property>
+        <step>-0.01</step>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <condition>
+          <property>controls/engines/engine[1]/reverser</property>
+        </condition>
+        <command>set-tooltip</command>
+        <tooltip-id>reverser1</tooltip-id>
+        <label>Right Reverse Throttle: %3d%%</label>
+        <mapping>percent</mapping>
+        <property>controls/engines/engine[1]/throttle-real</property>
+      </binding>
+      <binding>
+        <condition>
+          <not><property>controls/engines/engine[1]/reverser</property></not>
+        </condition>
+        <command>set-tooltip</command>
+        <tooltip-id>reverser1</tooltip-id>
+        <label>Right Reverse Throttle: Closed</label>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>thrust.rev.lever.right</object-name>
+    <action>
+      <button>1</button>
+      <repeatable>true</repeatable>
+      <interval-sec>0.05</interval-sec>
+      <binding>
+        <condition>
+          <property>controls/engines/engine[1]/reverser</property>
+          <less-than>
+            <property>controls/engines/engine[1]/throttle</property>
+            <value>0.005</value>
+          </less-than>
+        </condition>
+        <command>property-assign</command>
+        <property>controls/engines/engine[1]/reverser</property>
+        <value>0</value>
+      </binding>
+      <binding>
+        <condition>
+          <and>
+            <property>controls/engines/engine[1]/reverser</property>
+            <greater-than>
+              <property>controls/engines/engine[1]/throttle</property>
+              <value>0.005</value>
+            </greater-than>
+          </and>
+        </condition>
+        <command>property-adjust</command>
+        <property>controls/engines/engine[1]/throttle</property>
+        <step>-0.01</step>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>thrust.cutoff.right</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/engines/engine[1]/cutoff-lock</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>cutoff1</tooltip-id>
+        <label>Right Cutoff Lock: %s</label>
+        <mapping>nasal</mapping>
+        <script>(arg[0] == 0) ? "Unlocked" : "Locked"</script>
+        <property>controls/engines/engine[1]/cutoff-lock</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>Pbrake.lever</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/gear/brake-parking</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>parking-brake</tooltip-id>
+        <label>Parking brake: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/gear/brake-parking</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>speedBrake.switch</object-name>
+    <property>controls/flight/speedbrake-switch</property>
+    <offset-deg>0</offset-deg>
+    <factor>40</factor>
+    <center>
+      <x-m> 2.74918</x-m>
+      <y-m>-0.07350</y-m>
+      <z-m> 0.29905</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>speedBrake.switch</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/flight/speedbrake-switch</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>speedbrake</tooltip-id>
+        <label>Speed brake: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/flight/speedbrake-switch</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>Seats.pilots.armrests</object-name>
+    <property>controls/seat/armrests-pos</property>
+    <factor>90</factor>
+    <center>
+      <x-m>3.33069</x-m>
+      <y-m>0</y-m>
+      <z-m>0.4197975</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>translate</type>
+    <object-name>Seats.pilots.armrests</object-name>
+    <property>controls/seat/armrests-pos</property>
+    <factor>0.33374</factor>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+  <animation>
+    <type>pick</type>
+    <object-name>Seats.pilots.armrests</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/seat/armrests</property>
+      </binding>
+      <binding>
+        <command>property-interpolate</command>
+        <property>controls/seat/armrests-pos</property>
+        <property>controls/seat/armrests</property>
+        <rate>0.5</rate>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>MapLights</object-name>
+    <object-name>MapLights.inside</object-name>
+    <object-name>MapLights.Bulb</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/lighting/map-light</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>map-light</tooltip-id>
+        <label>Map lights: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/lighting/map-light</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>flightdeck.window.handle</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/cockpit-window/command</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>cockpit-window</tooltip-id>
+        <label>Window: %s</label>
+        <mapping>open-close</mapping>
+        <property>controls/cockpit-window/command</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>auxgear.handle</object-name>
+    <property>controls/gear/emer-gear-pos</property>
+    <factor>45</factor>
+    <center>
+      <x-m> 2.515</x-m>
+      <y-m>-0.142</y-m>
+      <z-m> 0.319</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>auxgear.handle</object-name>
+    <property>controls/gear/emer-gear-pos</property>
+    <factor>0.02</factor>
+    <center>
+      <x-m> 2.515</x-m>
+      <y-m>-0.142</y-m>
+      <z-m> 0.319</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>auxgear.handle</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <condition>
+            <not><property>controls/electric/maingear-switch</property></not>
+        </condition>
+        <command>property-assign</command>
+        <property>controls/gear/emer-gear-cmd</property>
+        <value>1</value>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>auxgear-unlock</tooltip-id>
+        <label>Emergency Gear Unlock: %s</label>
+        <mapping>nasal</mapping>
+        <property>controls/gear/emer-gear-cmd</property>
+        <script>
+          var modes = ['LOCKED', 'UNLOCKED'];
+          return modes[arg[0]];
+        </script>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>auxgear.knob</object-name>
+    <property>controls/gear/blow-down</property>
+    <factor>0.01</factor>
+    <center>
+      <x-m> 2.515</x-m>
+      <y-m>-0.142</y-m>
+      <z-m> 0.319</z-m>
+    </center>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>auxgear.knob</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <condition>
+          <equals>
+            <property>controls/gear/emer-gear-pos</property>
+            <value>1.0</value>
+          </equals>
+        </condition>
+        <command>property-assign</command>
+        <property>controls/gear/blow-down</property>
+        <value>1</value>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>auxgear-blowdown</tooltip-id>
+        <label>Emergency Gear Blow Down: %s</label>
+        <mapping>open-close</mapping>
+        <property>controls/gear/blow-down</property>
+      </binding>
+    </hovered>
+  </animation>
+
+<!-- materials -->
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>controls/lighting/map-light-emission</property>
+                <value>0.04</value>
+            </greater-than>
+        </condition>
+        <object-name>MapLights.Bulb</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor>2</factor>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <not>
+                <greater-than>
+                    <property>controls/lighting/map-light-emission</property>
+                    <value>0.04</value>
+                </greater-than>
+            </not>
+        </condition>
+        <object-name>MapLights.Bulb</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor>0</factor>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>MapLights.inside</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+            <factor-prop>controls/lighting/map-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>Panel</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Simulate ambient light from panel lights (center console) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>Pbrake.lever</object-name>
+        <object-name>Ebrake</object-name>
+        <object-name>auxgear.handle</object-name>
+        <object-name>auxgear.knob</object-name>
+        <object-name>auxgear.panel</object-name>
+        <object-name>Console</object-name>
+        <object-name>thrust.lever.left</object-name>
+        <object-name>thrust.rev.lever.left</object-name>
+        <object-name>thrust.rev.link.left</object-name>
+        <object-name>thrust.cutoff.left</object-name>
+        <object-name>thrust.lever.right</object-name>
+        <object-name>thrust.rev.lever.right</object-name>
+        <object-name>thrust.rev.link.right</object-name>
+        <object-name>thrust.cutoff.right</object-name>
+        <object-name>Flap.indicator</object-name>
+        <object-name>FlapLever</object-name>
+        <object-name>ElevTrim.IndicHousing</object-name>
+        <object-name>ElevTrim.Wheel</object-name>
+        <object-name>ElevTrim.Indicator</object-name>
+        <object-name>speedBrake.switch</object-name>
+        <object-name>speedBrake.socket</object-name>
+        <object-name>speedBrake.safety</object-name>
+        <object-name>cab.altitude</object-name>
+        <object-name>cab.rate-of-change</object-name>
+        <object-name>EmerDump</object-name>
+        <object-name>env.ballance.knob</object-name>
+        <object-name>env.source.knob</object-name>
+        <object-name>env.temp.knob</object-name>
+        <object-name>env.temp.sw</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/flightdeck-average-ambient-light-center-console</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Simulate ambient light from panel lights (environment) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>Yoke</object-name>
+        <object-name>YokeLH</object-name>
+        <object-name>YokeRH</object-name>
+        <object-name>Seats.pilots</object-name>
+        <object-name>Seats.pilots.armrests</object-name>
+        <object-name>Seats.pilots.cover</object-name>
+        <object-name>Seats.pilots.headrest</object-name>
+        <object-name>flightdeck</object-name>
+        <object-name>flightdeck.Floor</object-name>
+        <object-name>glareshield</object-name>
+        <object-name>FD.AirConditioning</object-name>
+        <object-name>FD.AirCond.outlet</object-name>
+        <object-name>plaquette</object-name>
+        <object-name>DirtMats</object-name>
+        <object-name>PedalLH</object-name>
+        <object-name>PedalRH</object-name>
+        <object-name>cbPanel.Left</object-name>
+        <object-name>cbPanel.Right</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/flightdeck-average-ambient-light-environment</factor-prop>
+        </emission>
+    </animation>
+
+<!-- glass effect -->
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>flightdeck.glass</object-name>
+        <object-name>flightdeck.window.glass</object-name>
+    </effect>
+
+<!-- chrome effect -->
+    <effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+        <object-name>Cupholder.left</object-name>
+        <object-name>Cupholder.right</object-name>
+        <object-name>FD.AirCond.outlet</object-name>
+        <object-name>Ashtray</object-name>
+        <object-name>speedBrake.switch</object-name>
+        <object-name>speedBrake.socket</object-name>
+        <object-name>speedBrake.safety</object-name>
+        <object-name>MapLights</object-name>
+        <object-name>MapLights.inside</object-name>
+        <object-name>MapLights.Bulb</object-name>
+        <object-name>thrust.rev.lever.left</object-name>
+        <object-name>thrust.rev.link.left</object-name>
+        <object-name>thrust.cutoff.left</object-name>
+        <object-name>thrust.rev.lever.right</object-name>
+        <object-name>thrust.rev.link.right</object-name>
+        <object-name>thrust.cutoff.right</object-name>
+        <object-name>flightdeck.window.handle</object-name>
+        <object-name>flightdeck.window.lock</object-name>
+        <object-name>flightdeck.window.hinges</object-name>
+        <object-name>flightdeck.window.pivot</object-name>
+        <object-name>env.temp.sw</object-name>
+    </effect>
+
+<!-- no shadow for chrome parts -->
+    <effect>
+        <condition>
+            <property>/sim/rendering/shadows/enabled</property>
+        </condition>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-none</inherits-from>
+        <object-name>Cupholder.left</object-name>
+        <object-name>Cupholder.right</object-name>
+        <object-name>FD.AirCond.outlet</object-name>
+        <object-name>Ashtray</object-name>
+        <object-name>speedBrake.switch</object-name>
+        <object-name>speedBrake.socket</object-name>
+        <object-name>speedBrake.safety</object-name>
+        <object-name>MapLights</object-name>
+        <object-name>MapLights.inside</object-name>
+        <object-name>MapLights.Bulb</object-name>
+        <object-name>thrust.rev.lever.left</object-name>
+        <object-name>thrust.rev.link.left</object-name>
+        <object-name>thrust.cutoff.left</object-name>
+        <object-name>thrust.rev.lever.right</object-name>
+        <object-name>thrust.rev.link.right</object-name>
+        <object-name>thrust.cutoff.right</object-name>
+        <object-name>flightdeck.window.handle</object-name>
+        <object-name>flightdeck.window.lock</object-name>
+        <object-name>flightdeck.window.hinges</object-name>
+        <object-name>flightdeck.window.pivot</object-name>
+        <object-name>env.temp.sw</object-name>
+    </effect>
+
+<!-- cockpit shadows -->
+    <!--effect>
+        <condition>
+            <not><property>/sim/rendering/shadows/enabled</property></not>
+        </condition>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>auxgear.handle</object-name>
+        <object-name>auxgear.knob</object-name>
+        <object-name>auxgear.panel</object-name>
+        <object-name>cab.altitude</object-name>
+        <object-name>cab.rate-of-change</object-name>
+        <object-name>Console</object-name>
+        <object-name>CutOffLock01</object-name>
+        <object-name>CutOffLock02</object-name>
+        <object-name>DirtMats</object-name>
+        <object-name>EBrake</object-name>
+        <object-name>ElevTrim.IndicHousing</object-name>
+        <object-name>ElevTrim.Indicator</object-name>
+        <object-name>ElevTrim.Wheel</object-name>
+        <object-name>EmerDump</object-name>
+        <object-name>env.ballance.knob</object-name>
+        <object-name>env.source.knob</object-name>
+        <object-name>env.temp.knob</object-name>
+        <object-name>FD.AirConditioning</object-name>
+        <object-name>Flap.indicator</object-name>
+        <object-name>FlapLever</object-name>
+        <object-name>flightdeck</object-name>
+        <object-name>flightdeck.new</object-name>
+        <object-name>flightdeck.Floor</object-name>
+        <object-name>flightdeck.feetRoom</object-name>
+        <object-name>glareshield</object-name>
+        <object-name>PedalLH</object-name>
+        <object-name>PedalRH</object-name>
+        <object-name>Panel</object-name>
+        <object-name>Pbrake.lever</object-name>
+        <object-name>plaquette</object-name>
+        <object-name>Seats.pilots</object-name>
+        <object-name>Seats.pilots.armrests</object-name>
+        <object-name>Seats.pilots.base</object-name>
+        <object-name>Seats.pilots.cover</object-name>
+        <object-name>Seats.pilots.headrest</object-name>
+        <object-name>thrust.lever.left</object-name>
+        <object-name>thrust.lever.right</object-name>
+        <object-name>Yoke</object-name>
+        <object-name>YokeLH</object-name>
+        <object-name>YokeRH</object-name>
+        <object-name>pilot</object-name>
+        <object-name>copilot</object-name>
+        <object-name>panel1</object-name>
+    </effect-->
+
+</PropertyList>

@@ -1,0 +1,421 @@
+<PropertyList>
+
+  <path>alt.ac</path>
+
+  <animation>
+    <type>translate</type>
+    <object-name>alt.10000.low</object-name>
+    <property alias="../../altitude-ft"/>
+    <interpolation>
+      <entry><ind>10000.0</ind><dep>-0.012</dep></entry>
+      <entry><ind>9990.0</ind><dep>0.000</dep></entry>
+      <entry><ind>0.0</ind><dep>0.000</dep></entry>
+      <entry><ind>-10.0</ind><dep>0.012</dep></entry>
+    </interpolation>
+    <axis>
+       <x>0</x>
+       <y>0</y>
+       <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>alt.1000.low</object-name>
+    <property alias="../../altitude-ft"/>
+    <interpolation>
+      <entry><ind>1000.0</ind><dep>-0.012</dep></entry>
+      <entry><ind>990.0</ind><dep>0.000</dep></entry>
+      <entry><ind>0.0</ind><dep>0.000</dep></entry>
+      <entry><ind>-10.0</ind><dep>0.012</dep></entry>
+    </interpolation>
+    <axis>
+       <x>0</x>
+       <y>0</y>
+       <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>alt.neg</object-name>
+    <property alias="../../altitude-ft"/>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>-0.012</dep></entry>
+      <entry><ind>-10.0</ind><dep>0.000</dep></entry>
+    </interpolation>
+    <axis>
+       <x>0</x>
+       <y>0</y>
+       <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>alt.needle</object-name>
+    <property alias="../../altitude-ft"/>
+    <factor>0.36</factor>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.10</object-name>
+    <property alias="../../altitude-ft"/>
+    <factor>0.01</factor>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.100</object-name>
+    <property alias="../../altitude-ft"/>
+    <factor>0.001</factor>
+    <step>100</step>
+    <scroll>10</scroll>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.1000</object-name>
+    <property alias="../../altitude-ft"/>
+    <factor>0.0001</factor>
+    <step>1000</step>
+    <scroll>10</scroll>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.10000</object-name>
+    <property alias="../../altitude-ft"/>
+    <factor>0.00001</factor>
+    <step>10000</step>
+    <scroll>10</scroll>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>alt.invalid</object-name>
+    <property alias="../../altitude-ft"/>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0</dep></entry>
+      <entry><ind>-10.0</ind><dep>90</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>0.001300</x-m>
+      <y-m>0.021000</y-m>
+      <z-m>0.010325</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.inhg01</object-name>
+    <property alias="../../display-inhg"/>
+    <factor>0.0001</factor>
+    <step>1000</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.inhg02</object-name>
+    <property alias="../../display-inhg"/>
+    <factor>0.001</factor>
+    <step>100</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.inhg03</object-name>
+    <property alias="../../display-inhg"/>
+    <factor>0.01</factor>
+    <step>10</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.inhg04</object-name>
+    <property alias="../../display-inhg"/>
+    <factor>0.1</factor>
+    <step>1</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.hpa01</object-name>
+    <property alias="../../display-hpa"/>
+    <factor>0.0001</factor>
+    <step>1000</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.hpa02</object-name>
+    <property alias="../../display-hpa"/>
+    <factor>0.001</factor>
+    <step>100</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.hpa03</object-name>
+    <property alias="../../display-hpa"/>
+    <factor>0.01</factor>
+    <step>10</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>textranslate</type>
+    <object-name>alt.hpa04</object-name>
+    <property alias="../../display-hpa"/>
+    <factor>0.1</factor>
+    <step>1</step>
+    <axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>alt.warn</object-name>
+    <condition>
+      <or>
+        <less-than>
+          <expression>
+            <abs>
+              <dif>
+                <property alias="../../../../../../../../altitude-warn"/>
+                <property alias="../../../../../../../../altitude-ft"/>
+              </dif>
+            </abs>
+          </expression>
+          <value>200</value>
+        </less-than>
+        <greater-than>
+          <expression>
+            <abs>
+              <dif>
+                <property alias="../../../../../../../../altitude-warn"/>
+                <property alias="../../../../../../../../altitude-ft"/>
+              </dif>
+            </abs>
+          </expression>
+          <value>1000</value>
+        </greater-than>
+      </or>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>alt.warn.lit</object-name>
+    <condition>
+      <and>
+        <greater-than>
+          <expression>
+            <abs>
+              <dif>
+                <property alias="../../../../../../../../altitude-warn"/>
+                <property alias="../../../../../../../../altitude-ft"/>
+              </dif>
+            </abs>
+          </expression>
+          <value>200</value>
+        </greater-than>
+        <less-than>
+          <expression>
+            <abs>
+              <dif>
+                <property alias="../../../../../../../../altitude-warn"/>
+                <property alias="../../../../../../../../altitude-ft"/>
+              </dif>
+            </abs>
+          </expression>
+          <value>1000</value>
+        </less-than>
+      </and>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>alt.knob</object-name>
+    <center>
+      <x-m>0.000</x-m>
+      <y-m>-0.028</y-m>
+      <z-m>-0.028</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <property alias="../../setting-inhg"/>
+    <factor>500</factor>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="../../../../setting-inhg"/>
+        <factor>0.01</factor>
+        <min>27.0</min>
+        <max>33.0</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>ALT-knob</tooltip-id>
+        <label>Altimeter setting: %.2f InHg</label>
+        <property alias="../../../../setting-inhg"/>
+      </binding>
+    </hovered>
+  </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>alt.bezel</object-name>
+        <object-name>alt.knob</object-name>
+        <object-name>alt.warn</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>alt.face</object-name>
+        <object-name>alt.needle</object-name>
+        <object-name>alt.invalid</object-name>
+        <object-name>alt.10</object-name>
+        <object-name>alt.100</object-name>
+        <object-name>alt.1000</object-name>
+        <object-name>alt.1000.low</object-name>
+        <object-name>alt.10000</object-name>
+        <object-name>alt.10000.low</object-name>
+        <object-name>alt.neg</object-name>
+        <object-name>alt.inhg01</object-name>
+        <object-name>alt.inhg02</object-name>
+        <object-name>alt.inhg03</object-name>
+        <object-name>alt.inhg04</object-name>
+        <object-name>alt.hpa01</object-name>
+        <object-name>alt.hpa02</object-name>
+        <object-name>alt.hpa03</object-name>
+        <object-name>alt.hpa04</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>alt.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>alt.bezel</object-name>
+        <object-name>alt.face</object-name>
+        <object-name>alt.knob</object-name>
+        <object-name>alt.warn</object-name>
+        <object-name>alt.warn.lit</object-name>
+        <object-name>alt.needle</object-name>
+        <object-name>alt.invalid</object-name>
+        <object-name>alt.10</object-name>
+        <object-name>alt.100</object-name>
+        <object-name>alt.1000</object-name>
+        <object-name>alt.1000.low</object-name>
+        <object-name>alt.10000</object-name>
+        <object-name>alt.10000.low</object-name>
+        <object-name>alt.neg</object-name>
+        <object-name>alt.inhg01</object-name>
+        <object-name>alt.inhg02</object-name>
+        <object-name>alt.inhg03</object-name>
+        <object-name>alt.inhg04</object-name>
+        <object-name>alt.hpa01</object-name>
+        <object-name>alt.hpa02</object-name>
+        <object-name>alt.hpa03</object-name>
+        <object-name>alt.hpa04</object-name>
+    </effect-->
+
+</PropertyList>

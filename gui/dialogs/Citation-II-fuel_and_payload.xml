@@ -1,0 +1,638 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <name>Citation-II-fuel_and_payload</name>
+  <layout>vbox</layout>
+  <resizable>false</resizable>
+  <modal>false</modal>
+  <draggable>true</draggable>
+
+  <default-padding>0</default-padding>
+  <padding>6</padding>
+
+  <nasal>
+    <open>
+      setprop("/controls/fuelSet", 0);
+    </open>
+    <close>
+      setprop("/controls/fuelSet", 1);
+    </close>
+  </nasal>
+
+  <group>
+    <layout>hbox</layout>
+
+    <empty><stretch>1</stretch></empty>
+
+    <text>
+      <label>Citation II - Fuel and Payload Settings</label>
+    </text>
+
+    <empty><stretch>1</stretch></empty>
+
+    <group>
+      <layout>vbox</layout>
+      <button>
+        <pref-width>16</pref-width>
+        <pref-height>16</pref-height>
+        <legend></legend>
+        <keynum>27</keynum>
+        <border>2</border>
+        <binding>
+          <command>dialog-close</command>
+        </binding>
+        <binding>
+          <command>dialog-apply</command>
+        </binding>
+      </button>
+    </group>
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+    <padding>10</padding>
+
+    <group>
+      <layout>vbox</layout>
+      <padding>0</padding>
+      <valign>top</valign>
+      <text>
+        <label>Fuel Tanks</label>
+      </text>
+
+      <group>
+        <layout>table</layout>
+
+        <text>
+          <label>Tank</label>
+          <row>0</row>
+          <col>0</col>
+        </text>
+        <text>
+          <label>Pounds</label>
+          <row>0</row>
+          <col>3</col>
+        </text>
+        <text>
+          <label>Gallons</label>
+          <row>0</row>
+          <col>4</col>
+        </text>
+        <text>
+          <label>Fraction</label>
+          <row>0</row>
+          <col>5</col>
+        </text>
+
+        <text>
+          <label>     </label>
+          <property>/consumables/fuel/tank[0]/name</property>
+          <row>1</row>
+          <col>0</col>
+        </text>
+        <!--checkbox>
+          <row>1</row>
+          <col>1</col>
+          <name>tank-0-selected</name>
+          <property>/consumables/fuel/tank[0]/selected</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>tank-0-selected</object-name>
+          </binding>
+        </checkbox-->
+        <slider>
+          <name>fuel-0</name>
+          <row>1</row>
+          <col>2</col>
+          <min>0</min>
+          <max>1</max>
+          <live>true</live>
+          <property>/consumables/fuel/tank[0]/level-norm</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>fuel-0</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>1</row>
+          <col>3</col>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/consumables/fuel/tank[0]/level-lbs</property>
+        </text>
+        <text>
+          <row>1</row>
+          <col>4</col>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/consumables/fuel/tank[0]/level-gal_us</property>
+        </text>
+        <text>
+          <row>1</row>
+          <col>5</col>
+          <label>12345678</label>
+          <format>%.2f</format>
+          <live>true</live>
+          <property>/consumables/fuel/tank[0]/level-norm</property>
+        </text>
+
+        <text>
+          <label>     </label>
+          <property>/consumables/fuel/tank[1]/name</property>
+          <row>2</row>
+          <col>0</col>
+        </text>
+        <!--checkbox>
+          <row>2</row>
+          <col>1</col>
+          <name>tank-1-selected</name>
+          <property>/consumables/fuel/tank[1]/selected</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>tank-1-selected</object-name>
+          </binding>
+        </checkbox-->
+        <slider>
+          <name>fuel-1</name>
+          <row>2</row>
+          <col>2</col>
+          <min>0</min>
+          <max>1</max>
+          <live>true</live>
+          <property>/consumables/fuel/tank[1]/level-norm</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>fuel-1</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>2</row>
+          <col>3</col>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/consumables/fuel/tank[1]/level-lbs</property>
+        </text>
+        <text>
+          <row>2</row>
+          <col>4</col>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/consumables/fuel/tank[1]/level-gal_us</property>
+        </text>
+        <text>
+          <row>2</row>
+          <col>5</col>
+          <label>12345678</label>
+          <format>%.2f</format>
+          <live>true</live>
+          <property>/consumables/fuel/tank[1]/level-norm</property>
+        </text>
+
+        <hrule>
+          <row>3</row>
+          <colspan>6</colspan>
+        </hrule>
+
+        <text>
+          <halign>right</halign>
+          <row>4</row>
+          <col>2</col>
+          <label>Total:</label>
+        </text>
+        <text>
+          <row>4</row>
+          <col>3</col>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/consumables/fuel/total-fuel-lbs</property>
+        </text>
+        <text>
+          <row>4</row>
+          <col>4</col>
+          <label>12345678</label>
+          <format>%.1f</format>
+          <live>true</live>
+          <property>/consumables/fuel/total-fuel-gal_us</property>
+        </text>
+        <text>
+          <row>4</row>
+          <col>5</col>
+          <label>12345678</label>
+          <format>%.2f</format>
+          <live>true</live>
+          <property>/consumables/fuel/total-fuel-norm</property>
+        </text>
+      </group>
+    </group>
+
+    <group>
+      <layout>vbox</layout>
+      <padding>0</padding>
+      <valign>top</valign>
+      <text>
+        <label>Payload</label>
+      </text>
+
+      <group>
+        <layout>table</layout>
+
+        <text>
+          <halign>right</halign>
+          <label>Location</label>
+          <row>0</row>
+          <col>0</col>
+        </text>
+        <text>
+          <label>Pounds</label>
+          <row>0</row>
+          <col>2</col>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[0]/name</property>
+          <row>1</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-0</name>
+          <row>1</row>
+          <col>1</col>
+          <min>0</min>
+          <max>350</max>
+          <live>true</live>
+          <property>sim/weight[0]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-0</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>1</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[0]/weight-lb</property>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[1]/name</property>
+          <row>2</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-1</name>
+          <row>2</row>
+          <col>1</col>
+          <min>100</min>
+          <max>200</max>
+          <live>true</live>
+          <property>/sim/weight[1]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-1</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>2</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[1]/weight-lb</property>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[2]/name</property>
+          <row>3</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-2</name>
+          <row>3</row>
+          <col>1</col>
+          <min>0</min>
+          <max>200</max>
+          <live>true</live>
+          <property>/sim/weight[2]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-2</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>3</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[2]/weight-lb</property>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[3]/name</property>
+          <row>4</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-3</name>
+          <row>4</row>
+          <col>1</col>
+          <min>0</min>
+          <max>1400</max>
+          <live>true</live>
+          <property>/sim/weight[3]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-3</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>4</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[3]/weight-lb</property>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[4]/name</property>
+          <row>5</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-4</name>
+          <row>5</row>
+          <col>1</col>
+          <min>0</min>
+          <max>200</max>
+          <live>true</live>
+          <property>/sim/weight[4]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-4</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>5</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[4]/weight-lb</property>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[5]/name</property>
+          <row>6</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-5</name>
+          <row>6</row>
+          <col>1</col>
+          <min>0</min>
+          <max>200</max>
+          <live>true</live>
+          <property>/sim/weight[5]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-5</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>6</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[5]/weight-lb</property>
+        </text>
+
+        <text>
+          <halign>right</halign>
+          <label>                      </label>
+          <property>/sim/weight[6]/name</property>
+          <row>7</row>
+          <col>0</col>
+        </text>
+        <slider>
+          <name>weight-6</name>
+          <row>7</row>
+          <col>1</col>
+          <min>0</min>
+          <max>200</max>
+          <live>true</live>
+          <property>/sim/weight[6]/weight-lb</property>
+          <binding>
+            <command>dialog-apply</command>
+            <object-name>weight-6</object-name>
+          </binding>
+        </slider>
+        <text>
+          <row>7</row>
+          <col>2</col>
+          <label>12345678</label>
+          <format>%.0f</format>
+          <live>true</live>
+          <property>/sim/weight[6]/weight-lb</property>
+        </text>
+
+      </group>
+    </group>
+  </group>
+
+  <group>
+    <layout>hbox</layout>
+    <padding>10</padding>
+
+    <empty><stretch>1</stretch></empty>
+
+    <group>
+      <layout>table</layout>
+
+      <text>
+        <halign>right</halign>
+        <label>Max Zero Fuel Weight:</label>
+        <row>0</row>
+        <col>0</col>
+      </text>
+      <text>
+        <row>0</row>
+        <col>1</col>
+        <label>9500 lb</label>
+        <format>%.0f lb</format>
+        <property>/limits/mass-and-balance/maximum-zero-fuel-mass-lbs</property>
+      </text>
+      <text>
+        <row>0</row>
+        <col>2</col>
+        <label>(6124 kg)</label>
+        <format>(%.0f kg)</format>
+        <property>/limits/mass-and-balance/maximum-zero-fuel-mass-kg</property>
+      </text>
+
+      <text>
+        <halign>right</halign>
+        <label>Max Ramp Weight:</label>
+        <row>1</row>
+        <col>0</col>
+      </text>
+      <text>
+        <row>1</row>
+        <col>1</col>
+        <label>13500 lb</label>
+        <format>%.0f lb</format>
+        <property>/limits/mass-and-balance/maximum-ramp-mass-lbs</property>
+      </text>
+      <text>
+        <row>1</row>
+        <col>2</col>
+        <label>(6124 kg)</label>
+        <format>(%.0f kg)</format>
+        <property>/limits/mass-and-balance/maximum-ramp-mass-kg</property>
+      </text>
+
+      <text>
+        <halign>right</halign>
+        <label>Max Takeoff Weight:</label>
+        <row>2</row>
+        <col>0</col>
+      </text>
+      <text>
+        <row>2</row>
+        <col>1</col>
+        <label>13300 lb</label>
+        <format>%.0f lb</format>
+        <property>/limits/mass-and-balance/maximum-takeoff-mass-lbs</property>
+      </text>
+      <text>
+        <row>2</row>
+        <col>2</col>
+        <label>(6033 kg)</label>
+        <format>(%.0f kg)</format>
+        <property>/limits/mass-and-balance/maximum-takeoff-mass-kg</property>
+      </text>
+
+      <text>
+        <halign>right</halign>
+        <label>Max Landing Weight:</label>
+        <row>3</row>
+        <col>0</col>
+      </text>
+      <text>
+        <row>3</row>
+        <col>1</col>
+        <label>12700 lb</label>
+        <format>%.0f lb</format>
+        <property>/limits/mass-and-balance/maximum-landing-mass-lbs</property>
+      </text>
+      <text>
+        <row>3</row>
+        <col>2</col>
+        <label>(5761 kg)</label>
+        <format>(%.0f kg)</format>
+        <property>/limits/mass-and-balance/maximum-landing-mass-kg</property>
+      </text>
+
+      <text>
+        <halign>right</halign>
+        <label>Gross Weight:</label>
+        <row>4</row>
+        <col>0</col>
+      </text>
+      <text>
+        <row>4</row>
+        <col>1</col>
+        <label>12345678</label>
+        <format>%.0f lb</format>
+        <live>true</live>
+        <property>/fdm/gross-weight-lbs</property>
+      </text>
+      <text>
+        <row>4</row>
+        <col>2</col>
+        <label>12345678</label>
+        <format>(%.0f kg)</format>
+        <live>true</live>
+        <property>/fdm/gross-weight-kg</property>
+      </text>
+
+      <text>
+        <halign>right</halign>
+        <label>Center of Gravity:</label>
+        <row>5</row>
+        <col>0</col>
+      </text>
+      <text>
+        <row>5</row>
+        <col>1</col>
+        <label>12345678</label>
+        <format>%.2f ft</format>
+        <live>true</live>
+        <property>/fdm/cg-x-ft</property>
+      </text>
+      <text>
+        <row>5</row>
+        <col>2</col>
+        <label>12345678</label>
+        <format>(%.2f m)</format>
+        <live>true</live>
+        <property>/fdm/cg-x-m</property>
+      </text>
+      <text>
+        <row>5</row>
+        <col>3</col>
+        <label>12345678</label>
+        <format>[%.2f %%]</format>
+        <live>true</live>
+        <property>/fdm/mac-percent</property>
+      </text>
+    </group>
+
+    <empty><stretch>1</stretch></empty>
+
+  </group>
+
+  <hrule/>
+
+  <group>
+    <layout>hbox</layout>
+
+    <button>
+      <legend>Close</legend>
+      <default>1</default>
+      <equal>true</equal>
+      <key>Esc</key>
+      <binding>
+        <command>dialog-apply</command>
+      </binding>
+      <binding>
+        <command>dialog-close</command>
+      </binding>
+    </button>
+
+  </group>
+
+</PropertyList>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Before takeoff checklist for the Citation II/Super II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+  <title>II - Before takeoff</title>
+  <item>
+    <name>Altimeter QNH</name>
+    <value>SET</value>
+  </item>
+  <item>
+    <name>Spoilers</name>
+    <value>RETRACTED</value>
+    <condition>
+      <equals>
+        <property>controls/flight/speedbrake-switch</property>
+        <value>0</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/flight/speedbrake-switch</property>
+      <value>0</value>
+    </binding>
+  </item>
+  <item>
+    <name>Beacon light</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/beacon</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/beacon-switch</property>
+      <value>1</value>
+    </binding>
+  </item>
+  <item>
+    <name>Anticollision light</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/strobe-switch</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/strobe-switch</property>
+      <value>1</value>
+    </binding>
+  </item>
+  <item>
+    <name>Nav light</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/nav-lights-switch</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/nav-lights-switch</property>
+      <value>1</value>
+    </binding>
+  </item>
+  <item>
+    <name>Left landing light</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/landing-light-switch[0]</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/landing-light-switch[0]</property>
+      <value>1</value>
+    </binding>
+  </item>
+  <item>
+    <name>Right landing light</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/landing-light-switch[1]</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/landing-light-switch[1]</property>
+      <value>1</value>
+    </binding>
+  </item>
+  <item>
+    <name>Flaps</name>
+    <value>TAKEOFF</value>
+    <condition>
+      <equals>
+        <property>controls/flight/flaps</property>
+        <value>0.375</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/flight/flaps</property>
+      <value>0.375</value>
+    </binding>
+  </item>
+  <item>
+    <name>Initial cruise altitude (Citation II)</name>
+    <value>33000</value>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/vn-212/altitude-select</property>
+      <value>33000</value>
+    </binding>
+  </item>
+  <item>
+    <name>Cruise altitude (Citation II Sierra)</name>
+    <value>43000</value>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/vn-212/altitude-select</property>
+      <value>43000</value>
+    </binding>
+  </item>
+</PropertyList>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<PropertyList>
+
+  <name type="string" n="2">take-off</name>
+
+  <description>
+    You will start the sim in a take-off configuration. Flaps set,
+    engines running. The only thing left to do is get the take-off
+    clearance from ATC, so you can throttle up and go!  Make sure you
+    select a runway instead of a parking spot!
+
+    Start this state with --state=take-off
+  </description>
+
+  <overlay>
+    <autopilot>
+      <settings>
+        <target-altitude-ft type="double">10000</target-altitude-ft>
+        <target-speed-kt type="double">220</target-speed-kt>
+      </settings>
+    </autopilot>
+
+
+    <consumables>
+      <fuel>
+        <fuel_overlay type="bool">true</fuel_overlay>
+        <fuel_overlay_0 type="double">360</fuel_overlay_0>
+        <fuel_overlay_1 type="double">360</fuel_overlay_1>
+      </fuel>
+    </consumables>
+
+
+    <controls>
+      <electric>
+        <avionics-switch type="bool">true</avionics-switch>
+        <battery-bus-switch type="int">1</battery-bus-switch>
+        <voltage-sel type="int">0</voltage-sel>
+        <system-test-sw type="int">0</system-test-sw>
+        <fuel-sel type="int">0</fuel-sel>
+        <engine>
+          <generator-ready type="bool">true</generator-ready>
+          <generator-sw type="int">1</generator-sw>
+          <starter-btn type="bool">false</starter-btn>
+        </engine>
+        <engine n="1">
+          <generator-ready type="bool">true</generator-ready>
+          <generator-sw type="int">1</generator-sw>
+          <starter-btn type="bool">false</starter-btn>
+        </engine>
+      </electric>
+
+      <engines>
+        <engine n="0">
+          <cutoff type="bool">false</cutoff>
+          <fuel-pump type="bool">false</fuel-pump>
+          <feed_tank type="int">-1</feed_tank>
+          <WEP type="bool">false</WEP>
+          <ignition-sw type="bool">1</ignition-sw>
+          <reverser type="bool">false</reverser>
+          <throttle-lever type="double">0.0</throttle-lever>
+        </engine>
+
+        <engine n="1">
+          <cutoff type="bool">false</cutoff>
+          <fuel-pump type="bool">false</fuel-pump>
+          <feed_tank type="int">-1</feed_tank>
+          <WEP type="bool">false</WEP>
+          <ignition-sw type="bool">1</ignition-sw>
+          <reverser type="bool">false</reverser>
+          <throttle-lever type="double">0.0</throttle-lever>
+        </engine>
+      </engines>
+
+      <flight>
+        <flaps type="double">0.375</flaps>
+      </flight>
+
+      <fuel>
+        <tank n="0">
+          <boost-pump-switch type="int">-1</boost-pump-switch>
+        </tank>
+        <tank n="1">
+          <boost-pump-switch type="int">-1</boost-pump-switch>
+        </tank>
+      </fuel>
+
+      <gear>
+        <brake-parking type="double">0</brake-parking>
+        <gear-down type="bool">true</gear-down>
+      </gear>
+
+      <lighting>
+        <beacon-switch type="bool">true</beacon-switch>
+        <landing-light-switch n="0" type="bool">true</landing-light-switch>
+        <landing-light-switch n="1" type="bool">true</landing-light-switch>
+        <nav-lights-switch type="bool">true</nav-lights-switch>
+        <strobe-switch type="bool">true</strobe-switch>
+        <recog-lights-switch type="bool">true</recog-lights-switch>
+
+        <panel-lights-switch type="bool">true</panel-lights-switch>
+        <instrument-light-norm type="double">0.5</instrument-light-norm>
+        <left-panel-norm type="double">0.2</left-panel-norm>
+        <center-panel-norm type="double">0.2</center-panel-norm>
+        <right-panel-norm type="double">0.2</right-panel-norm>
+      </lighting>
+    </controls>
+
+
+    <engines>
+      <engine>
+        <started type="bool">true</started>
+        <running type="bool">true</running>
+      </engine>
+
+      <engine n="1">
+        <started type="bool">true</started>
+        <running type="bool">true</running>
+      </engine>
+    </engines>
+
+    <gear>
+      <gear>
+        <position-norm type="float">1</position-norm>
+      </gear>
+      <gear n="1">
+        <position-norm type="float">1</position-norm>
+      </gear>
+      <gear n="2">
+        <position-norm type="float">1</position-norm>
+      </gear>
+    </gear>
+
+    <environment>
+      <overlay type="bool">true</overlay>
+    </environment>
+
+  </overlay>
+
+</PropertyList>

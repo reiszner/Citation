@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PropertyList>
+  <params>
+    <m-wing-dry-kg type="double">300</m-wing-dry-kg>
+    <K type="double">2000</K>
+    <D type="double">40</D>
+    <fuel-frac type="double">0.375</fuel-frac>
+    <lift-node-lbs alias="/yasim/fbz-aero-lbs"/>
+    <fuel-node-1-kg alias="/consumables/fuel/tank[0]/level-kg"/>
+    <fuel-node-2-kg alias="/consumables/fuel/tank[1]/level-kg"/>
+    <fuel-node-3-kg type="double">0</fuel-node-3-kg>
+    <fuel-node-4-kg type="double">0</fuel-node-4-kg>
+    <z-fac type="double">1</z-fac>
+  </params>
+</PropertyList>

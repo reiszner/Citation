@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Engine startup checklist for the Citation II/Super II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+  <title>I - Engine startup</title>
+
+  <item>
+    <name>Fuel</name>
+    <value>As required</value>
+    <condition>
+      <equals>
+        <property>controls/fuelSet</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>dialog-show</command>
+      <dialog-name>Citation-II-fuel_and_payload</dialog-name>
+    </binding>
+  </item>
+
+  <item>
+    <name>Battery</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/electric/battery-bus-switch</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/electric/battery-bus-switch</property>
+      <value>1</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Beacon light</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/lighting/beacon-switch</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/lighting/beacon-switch</property>
+      <value>1</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Right fuel boost pump</name>
+    <value>NORMAL or ON</value>
+    <condition>
+      <not-equals>
+        <property>controls/fuel/tank[1]/boost-pump-switch</property>
+        <value>0</value>
+      </not-equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/fuel/tank[1]/boost-pump-switch</property>
+      <value>-1</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Right engine starter</name>
+    <value>START</value>
+    <condition>
+        <or>
+            <property>controls/electric/engine[1]/starter-btn</property>
+            <property>engines/engine[1]/started</property>
+        </or>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/electric/engine[1]/starter-btn</property>
+      <property>/sim/time/elapsed-sec</property>
+    </binding>
+  </item>
+
+  <item>
+    <name>Right engine: N2</name>
+    <value>&gt; 8%</value>
+    <condition>
+      <greater-than-equals>
+        <property>engines/engine[1]/turbine</property>
+        <value>8</value>
+      </greater-than-equals>
+    </condition>
+  </item>
+
+  <item>
+    <name>Right throttle lever detent</name>
+    <value>RELEASE</value>
+    <condition>
+      <or>
+        <not><property>controls/engines/engine[1]/cutoff-lock</property></not>
+        <greater-than-equals>
+          <property>controls/engines/engine[1]/throttle-lever</property>
+          <value>0.0</value>
+        </greater-than-equals>
+      </or>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/engines/engine[1]/cutoff-lock</property>
+      <value>0</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Right throttle</name>
+    <value>IDLE</value>
+    <condition>
+      <greater-than-equals>
+        <property>controls/engines/engine[1]/throttle-lever</property>
+        <value>0.0</value>
+      </greater-than-equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/engines/engine[1]/throttle</property>
+      <value>0.015</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Right engine</name>
+    <value>STARTED</value>
+    <condition>
+      <greater-than-equals>
+        <property>engines/engine[1]/started</property>
+        <value>1</value>
+      </greater-than-equals>
+    </condition>
+  </item>
+
+  <item>
+    <name>Right engine generator</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/electric/engine[1]/generator-sw</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/electric/engine[1]/generator-sw</property>
+      <value>1</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Left fuel boost pump</name>
+    <value>NORMAL or ON</value>
+    <condition>
+      <not-equals>
+        <property>controls/fuel/tank[0]/boost-pump-switch</property>
+        <value>0</value>
+      </not-equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/fuel/tank[0]/boost-pump-switch</property>
+      <value>-1</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Left engine starter</name>
+    <value>START</value>
+    <condition>
+        <or>
+            <property>controls/electric/engine[0]/starter-btn</property>
+            <property>engines/engine[0]/started</property>
+        </or>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/electric/engine[0]/starter-btn</property>
+      <property>/sim/time/elapsed-sec</property>
+    </binding>
+  </item>
+
+  <item>
+    <name>Left engine: N2</name>
+    <value>&gt; 8%</value>
+    <condition>
+      <greater-than-equals>
+        <property>engines/engine[0]/turbine</property>
+        <value>8</value>
+      </greater-than-equals>
+    </condition>
+  </item>
+
+  <item>
+    <name>Left throttle lever detent</name>
+    <value>RELEASE</value>
+    <condition>
+      <or>
+        <not><property>controls/engines/engine[0]/cutoff-lock</property></not>
+        <greater-than-equals>
+          <property>controls/engines/engine[0]/throttle-lever</property>
+          <value>0.0</value>
+        </greater-than-equals>
+      </or>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/engines/engine[0]/cutoff-lock</property>
+      <value>0</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Left throttle</name>
+    <value>IDLE</value>
+    <condition>
+      <greater-than-equals>
+        <property>controls/engines/engine[0]/throttle-lever</property>
+        <value>0.0</value>
+      </greater-than-equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/engines/engine[0]/throttle</property>
+      <value>0.015</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Left engine</name>
+    <value>STARTED</value>
+    <condition>
+        <property>engines/engine[0]/started</property>
+    </condition>
+  </item>
+
+  <item>
+    <name>Left engine generator</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/electric/engine[0]/generator-sw</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/electric/engine[0]/generator-sw</property>
+      <value>1</value>
+    </binding>
+  </item>
+
+  <item>
+    <name>Avionics switch</name>
+    <value>ON</value>
+    <condition>
+      <equals>
+        <property>controls/electric/avionics-switch</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/electric/avionics-switch</property>
+      <value>1</value>
+    </binding>
+  </item>
+
+</PropertyList>

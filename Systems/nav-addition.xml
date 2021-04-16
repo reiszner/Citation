@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+
+<!-- navigation hack to give the props time to sattle -->
+
+    <filter>
+        <name>NAV0: watchdog</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <or>
+                    <and>
+                        <property>instrumentation/nav[0]/in-range</property>
+                        <less-than>
+                            <property>instrumentation/nav[0]/watchdog</property>
+                            <value>1.0</value>
+                        </less-than>
+                    </and>
+                    <and>
+                        <not><property>instrumentation/nav[0]/in-range</property></not>
+                        <greater-than>
+                            <property>instrumentation/nav[0]/watchdog</property>
+                            <value>1.0</value>
+                        </greater-than>
+                    </and>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/in-range</property>
+            </condition>
+            <property>sim/time/elapsed-sec</property>
+            <offset>1.0</offset>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/watchdog</output>
+    </filter>
+
+    <filter>
+        <name>NAV0: signal valid</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/nav[0]/in-range</property>
+                    <property>instrumentation/nav[0]/signal-valid</property>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/in-range</property>
+                <greater-than>
+                    <property>instrumentation/nav[0]/watchdog</property>
+                    <value>1.0</value>
+                </greater-than>
+                <greater-than>
+                    <property>sim/time/elapsed-sec</property>
+                    <property>instrumentation/nav[0]/watchdog</property>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/nav[0]/signal-valid</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: watchdog</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <or>
+                    <and>
+                        <property>instrumentation/nav[1]/in-range</property>
+                        <less-than>
+                            <property>instrumentation/nav[1]/watchdog</property>
+                            <value>1.0</value>
+                        </less-than>
+                    </and>
+                    <and>
+                        <not><property>instrumentation/nav[1]/in-range</property></not>
+                        <greater-than>
+                            <property>instrumentation/nav[1]/watchdog</property>
+                            <value>1.0</value>
+                        </greater-than>
+                    </and>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/in-range</property>
+            </condition>
+            <property>sim/time/elapsed-sec</property>
+            <offset>1.0</offset>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/watchdog</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: signal valid</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/nav[1]/in-range</property>
+                    <property>instrumentation/nav[1]/signal-valid</property>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/in-range</property>
+                <greater-than>
+                    <property>instrumentation/nav[1]/watchdog</property>
+                    <value>1.0</value>
+                </greater-than>
+                <greater-than>
+                    <property>sim/time/elapsed-sec</property>
+                    <property>instrumentation/nav[1]/watchdog</property>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/nav[1]/signal-valid</output>
+    </filter>
+
+<!-- approximation cone of confusion  -->
+
+    <filter>
+        <name>NAV0: cone of confusion lateral distance</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <not><property>instrumentation/nav[0]/nav-loc</property></not>
+            </condition>
+            <expression>
+                <product>
+                    <property>position/altitude-ft</property>
+                    <value>0.25</value>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/coc-lateral-ft</output>
+    </filter>
+
+    <filter>
+        <name>NAV0: cone of confusion slant distance</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/nav[0]/coc-lateral-ft</property>
+                    <value>0.0</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <product>
+                    <sqrt>
+                        <sum>
+                            <product>
+                                <property>position/altitude-ft</property>
+                                <property>position/altitude-ft</property>
+                            </product>
+                            <product>
+                                <property>instrumentation/nav[0]/coc-lateral-ft</property>
+                                <property>instrumentation/nav[0]/coc-lateral-ft</property>
+                            </product>
+                        </sum>
+                    </sqrt>
+                    <value>0.3048</value>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/coc-slant-m</output>
+    </filter>
+
+    <filter>
+        <name>NAV0: cone distance delta</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <not><property>instrumentation/nav[0]/nav-loc</property></not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/nav[0]/nav-distance</property>
+                    <property>instrumentation/nav[0]/coc-slant-m</property>
+                </greater-than>
+            </condition>
+            <expression>
+                <dif>
+                    <property>instrumentation/nav[0]/nav-distance</property>
+                    <property>instrumentation/nav[0]/coc-slant-m</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/coc-delta</output>
+    </filter>
+
+    <predict-simple>
+        <name>NAV0: cone distance predict</name>
+        <debug>false</debug>
+        <seconds>1.0</seconds>
+        <filter-gain>1.0</filter-gain>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <not><property>instrumentation/nav[0]/nav-loc</property></not>
+                <greater-than>
+                    <property>instrumentation/nav[0]/coc-delta</property>
+                    <value>0.0</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>instrumentation/nav[0]/coc-delta</input>
+        <output>instrumentation/nav[0]/coc-predict</output>
+    </predict-simple>
+
+    <filter>
+        <name>NAV0: cone intercept</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <not><property>instrumentation/nav[0]/nav-loc</property></not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/nav[0]/coc-delta</property>
+                    <property>instrumentation/nav[0]/coc-predict</property>
+                </greater-than>
+            </condition>
+            <expression>
+                <div>
+                    <property>instrumentation/nav[0]/coc-delta</property>
+                    <dif>
+                        <property>instrumentation/nav[0]/coc-delta</property>
+                        <property>instrumentation/nav[0]/coc-predict</property>
+                    </dif>
+                </div>
+            </expression>
+        </input>
+        <input>9999.9</input>
+        <output>instrumentation/nav[0]/coc-intercept</output>
+    </filter>
+
+    <filter>
+        <name>NAV0: cone signal</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <not><property>instrumentation/nav[0]/nav-loc</property></not>
+            </condition>
+            <expression>
+                <div>
+                    <property>instrumentation/nav[0]/coc-delta</property>
+                    <product>
+                        <property>instrumentation/nav[0]/coc-lateral-ft</property>
+                        <value>3.0</value>
+                    </product>
+                </div>
+            </expression>
+        </input>
+        <input>1.0</input>
+        <output>instrumentation/nav[0]/coc-signal</output>
+        <min>0.0</min>
+        <max>1.0</max>
+    </filter>
+
+    <filter>
+        <name>NAV1: cone of confusion lateral distance</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+            </condition>
+            <expression>
+                <product>
+                    <property>position/altitude-ft</property>
+                    <value>0.25</value>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/coc-lateral-ft</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: cone of confusion slant distance</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/nav[1]/coc-lateral-ft</property>
+                    <value>0.0</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <product>
+                    <sqrt>
+                        <sum>
+                            <product>
+                                <property>position/altitude-ft</property>
+                                <property>position/altitude-ft</property>
+                            </product>
+                            <product>
+                                <property>instrumentation/nav[1]/coc-lateral-ft</property>
+                                <property>instrumentation/nav[1]/coc-lateral-ft</property>
+                            </product>
+                        </sum>
+                    </sqrt>
+                    <value>0.3048</value>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/coc-slant-m</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: cone distance delta</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <not><property>instrumentation/nav[1]/nav-loc</property></not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/nav[1]/nav-distance</property>
+                    <property>instrumentation/nav[1]/coc-slant-m</property>
+                </greater-than>
+            </condition>
+            <expression>
+                <dif>
+                    <property>instrumentation/nav[1]/nav-distance</property>
+                    <property>instrumentation/nav[1]/coc-slant-m</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/coc-delta</output>
+    </filter>
+
+    <predict-simple>
+        <name>NAV1: cone distance predict</name>
+        <debug>false</debug>
+        <seconds>1.0</seconds>
+        <filter-gain>1.0</filter-gain>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <not><property>instrumentation/nav[1]/nav-loc</property></not>
+                <greater-than>
+                    <property>instrumentation/nav[1]/coc-delta</property>
+                    <value>0.0</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>instrumentation/nav[1]/coc-delta</input>
+        <output>instrumentation/nav[1]/coc-predict</output>
+    </predict-simple>
+
+    <filter>
+        <name>NAV1: cone intercept</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <not><property>instrumentation/nav[1]/nav-loc</property></not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/nav[1]/coc-delta</property>
+                    <property>instrumentation/nav[1]/coc-predict</property>
+                </greater-than>
+            </condition>
+            <expression>
+                <div>
+                    <property>instrumentation/nav[1]/coc-delta</property>
+                    <dif>
+                        <property>instrumentation/nav[1]/coc-delta</property>
+                        <property>instrumentation/nav[1]/coc-predict</property>
+                    </dif>
+                </div>
+            </expression>
+        </input>
+        <input>9999.9</input>
+        <output>instrumentation/nav[1]/coc-intercept</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: cone signal</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <not><property>instrumentation/nav[1]/nav-loc</property></not>
+            </condition>
+            <expression>
+                <div>
+                    <property>instrumentation/nav[1]/coc-delta</property>
+                    <product>
+                        <property>instrumentation/nav[1]/coc-lateral-ft</property>
+                        <value>3.0</value>
+                    </product>
+                </div>
+            </expression>
+        </input>
+        <input>1.0</input>
+        <output>instrumentation/nav[1]/coc-signal</output>
+        <min>0.0</min>
+        <max>1.0</max>
+    </filter>
+
+<!-- correct reception of localizer-->
+
+    <filter>
+        <name>NAV0: localizer deviation front</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <property>instrumentation/nav[0]/radials/reciprocal-radial-deg</property>
+                    <property>instrumentation/nav[0]/radials/target-radial-deg</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/loc-deviation-front</output>
+        <period>
+            <min>-180</min>
+            <max> 180</max>
+        </period>
+    </filter>
+
+    <filter>
+        <name>NAV0: localizer deviation back</name>
+        <type>gain</type>
+        <gain>-1.0</gain>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <property>instrumentation/nav[0]/radials/actual-deg</property>
+                    <property>instrumentation/nav[0]/radials/target-radial-deg</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/loc-deviation-back</output>
+        <period>
+            <min>-180</min>
+            <max> 180</max>
+        </period>
+    </filter>
+
+    <filter>
+        <name>NAV0: localizer deviation</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+                <less-than>
+                    <property>instrumentation/nav[0]/loc-deviation-front</property>
+                    <value>90.0</value>
+                </less-than>
+                <greater-than>
+                    <property>instrumentation/nav[0]/loc-deviation-front</property>
+                    <value>-90.0</value>
+                </greater-than>
+            </condition>
+            <property>instrumentation/nav[0]/loc-deviation-front</property>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+                <less-than>
+                    <property>instrumentation/nav[0]/loc-deviation-back</property>
+                    <value>90.0</value>
+                </less-than>
+                <greater-than>
+                    <property>instrumentation/nav[0]/loc-deviation-back</property>
+                    <value>-90.0</value>
+                </greater-than>
+            </condition>
+            <property>instrumentation/nav[0]/loc-deviation-back</property>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/loc-deviation</output>
+        <period>
+            <min>-180</min>
+            <max> 180</max>
+        </period>
+    </filter>
+
+    <filter>
+        <name>NAV0: localizer falloff</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <value>1.0</value>
+                    <div>
+                        <dif>
+                            <abs><property>instrumentation/nav[0]/loc-deviation</property></abs>
+                            <value>4.0</value> <!-- angle with 100% reception -->
+                        </dif>
+                        <value>30.0</value> <!-- falloff deg -->
+                    </div>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/loc-falloff</output>
+        <min>0.0</min>
+        <max>1.0</max>
+    </filter>
+
+    <filter>
+        <name>NAV0: localizer gain</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <value>1.0</value>
+                    <pow>
+                        <dif>
+                            <value>1.0</value>
+                            <property>instrumentation/nav[0]/loc-falloff</property>
+                        </dif>
+                        <value>2.0</value>
+                    </pow>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/loc-gain</output>
+    </filter>
+
+    <filter>
+        <name>NAV0: localizer deflection</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+            </condition>
+            <expression>
+                <product>
+                    <property>instrumentation/nav[0]/loc-deviation</property>
+                    <property>instrumentation/nav[0]/loc-gain</property>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/loc-deflection</output>
+        <min>-4.0</min>
+        <max>4.0</max>
+    </filter>
+
+    <filter>
+        <name>NAV0: localizer valid</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+                <equals>
+                    <property>instrumentation/nav[0]/loc-falloff</property>
+                    <value>1.0</value>
+                </equals>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/nav[0]/loc-valid</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: localizer deviation</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <property>instrumentation/nav[1]/radials/reciprocal-radial-deg</property>
+                    <property>instrumentation/nav[1]/radials/target-radial-deg</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/loc-deviation</output>
+        <period>
+            <min>-180</min>
+            <max> 180</max>
+        </period>
+    </filter>
+
+    <filter>
+        <name>NAV1: localizer falloff</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <value>1.0</value>
+                    <div>
+                        <dif>
+                            <abs><property>instrumentation/nav[1]/loc-deviation</property></abs>
+                            <value>4.0</value> <!-- angle with 100% reception -->
+                        </dif>
+                        <value>30.0</value> <!-- falloff deg -->
+                    </div>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/loc-falloff</output>
+        <min>0.0</min>
+        <max>1.0</max>
+    </filter>
+
+    <filter>
+        <name>NAV1: localizer gain</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/nav-loc</property>
+            </condition>
+            <expression>
+                <dif>
+                    <value>1.0</value>
+                    <pow>
+                        <dif>
+                            <value>1.0</value>
+                            <property>instrumentation/nav[1]/loc-falloff</property>
+                        </dif>
+                        <value>2.0</value>
+                    </pow>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/loc-gain</output>
+    </filter>
+
+    <filter>
+        <name>NAV1: localizer deflection</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/nav-loc</property>
+            </condition>
+            <expression>
+                <product>
+                    <property>instrumentation/nav[1]/loc-deviation</property>
+                    <property>instrumentation/nav[1]/loc-gain</property>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/loc-deflection</output>
+        <min>-4.0</min>
+        <max>4.0</max>
+    </filter>
+
+    <filter>
+        <name>NAV1: localizer valid</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/nav-loc</property>
+                <equals>
+                    <property>instrumentation/nav[1]/loc-falloff</property>
+                    <value>1.0</value>
+                </equals>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/nav[1]/loc-valid</output>
+    </filter>
+
+<!-- correct reception of glide slope -->
+
+    <predict-simple>
+        <name>NAV0: gs predict</name>
+        <debug>false</debug>
+        <seconds>1.0</seconds>
+        <filter-gain>1.0</filter-gain>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/gs-in-range</property>
+                <less-than>
+                    <property>instrumentation/nav[0]/gs-needle-deflection</property>
+                    <value>3.49</value>
+                </less-than>
+                <greater-than>
+                    <property>instrumentation/nav[0]/gs-needle-deflection</property>
+                    <value>-3.49</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <property>instrumentation/nav[0]/gs-needle-deflection</property>
+        </input>
+        <output>instrumentation/nav[0]/gs-predict</output>
+    </predict-simple>
+
+    <filter>
+        <name>NAV0: gs intercept</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/gs-in-range</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <div>
+                    <property>instrumentation/nav[0]/gs-needle-deflection</property>
+                    <dif>
+                        <property>instrumentation/nav[0]/gs-needle-deflection</property>
+                        <property>instrumentation/nav[0]/gs-predict</property>
+                    </dif>
+                </div>
+            </expression>
+        </input>
+        <input>9999.9</input>
+        <output>instrumentation/nav[0]/gs-intercept-sec</output>
+    </filter>
+
+    <predict-simple>
+        <name>NAV1: gs predict</name>
+        <debug>false</debug>
+        <seconds>1.0</seconds>
+        <filter-gain>1.0</filter-gain>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/gs-in-range</property>
+                <less-than>
+                    <property>instrumentation/nav[1]/gs-needle-deflection</property>
+                    <value>3.49</value>
+                </less-than>
+                <greater-than>
+                    <property>instrumentation/nav[1]/gs-needle-deflection</property>
+                    <value>-3.49</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <property>instrumentation/nav[1]/gs-needle-deflection</property>
+        </input>
+        <output>instrumentation/nav[1]/gs-predict</output>
+    </predict-simple>
+
+    <filter>
+        <name>NAV1: gs intercept</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/gs-in-range</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <div>
+                    <property>instrumentation/nav[1]/gs-needle-deflection</property>
+                    <dif>
+                        <property>instrumentation/nav[1]/gs-needle-deflection</property>
+                        <property>instrumentation/nav[1]/gs-predict</property>
+                    </dif>
+                </div>
+            </expression>
+        </input>
+        <input>9999.9</input>
+        <output>instrumentation/nav[1]/gs-intercept-sec</output>
+    </filter>
+
+<!-- outer marker 
+
+    <filter>
+        <name>OM trigger on</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/outer</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>sim/time/elapsed-sec</property>
+                    <value>0.25</value>
+                </sum>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/outer-trigger</output>
+    </filter>
+
+    <filter>
+        <name>OM trigger off</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/outer-trigger</property>
+                <less-than>
+                    <property>instrumentation/marker-beacon/outer-trigger</property>
+                    <property>sim/time/elapsed-sec</property>
+                </less-than>
+            </condition>
+        </enable>
+        <input>0.0</input>
+        <output>instrumentation/marker-beacon/outer-trigger</output>
+    </filter>
+
+    <filter>
+        <name>OM timer on</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>instrumentation/marker-beacon/outer-start</property></not>
+                <property>instrumentation/marker-beacon/outer-trigger</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>instrumentation/marker-beacon/outer-trigger</property>
+                    <value>-0.25</value>
+                </sum>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/outer-start</output>
+    </filter>
+
+    <filter>
+        <name>OM timer off</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/outer-start</property>
+                <not><property>instrumentation/marker-beacon/outer-trigger</property></not>
+            </condition>
+        </enable>
+        <input>0.0</input>
+        <output>instrumentation/marker-beacon/outer-start</output>
+        <output>instrumentation/marker-beacon/outer-timer</output>
+        <output>instrumentation/marker-beacon/outer-marker</output>
+    </filter>
+
+    <filter>
+        <name>OM timer</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/outer-start</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <mod>
+                    <product>
+                        <dif>
+                            <property>sim/time/elapsed-sec</property>
+                            <property>instrumentation/marker-beacon/outer-start</property>
+                        </dif>
+                        <value>1000</value>
+                    </product>
+                    <value>500</value>
+                </mod>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/outer-timer</output>
+    </filter>
+
+    <filter>
+        <name>OM marker</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/outer-start</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/marker-beacon/outer-timer</property>
+                    <value>375</value>
+                </less-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/marker-beacon/outer-marker</output>
+    </filter>
+-->
+<!-- middle marker 
+
+    <filter>
+        <name>MM trigger on</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/middle</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>sim/time/elapsed-sec</property>
+                    <value>0.25</value>
+                </sum>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/middle-trigger</output>
+    </filter>
+
+    <filter>
+        <name>MM trigger off</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/middle-trigger</property>
+                <less-than>
+                    <property>instrumentation/marker-beacon/middle-trigger</property>
+                    <property>sim/time/elapsed-sec</property>
+                </less-than>
+            </condition>
+        </enable>
+        <input>0.0</input>
+        <output>instrumentation/marker-beacon/middle-trigger</output>
+    </filter>
+
+    <filter>
+        <name>MM timer on</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>instrumentation/marker-beacon/middle-start</property></not>
+                <property>instrumentation/marker-beacon/middle-trigger</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>instrumentation/marker-beacon/middle-trigger</property>
+                    <value>-0.25</value>
+                </sum>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/middle-start</output>
+    </filter>
+
+    <filter>
+        <name>MM timer off</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/middle-start</property>
+                <not><property>instrumentation/marker-beacon/middle-trigger</property></not>
+            </condition>
+        </enable>
+        <input>0.0</input>
+        <output>instrumentation/marker-beacon/middle-start</output>
+        <output>instrumentation/marker-beacon/middle-timer</output>
+        <output>instrumentation/marker-beacon/middle-marker</output>
+    </filter>
+
+    <filter>
+        <name>MM timer</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/middle-start</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <mod>
+                    <product>
+                        <dif>
+                            <property>sim/time/elapsed-sec</property>
+                            <property>instrumentation/marker-beacon/middle-start</property>
+                        </dif>
+                        <value>950</value>
+                    </product>
+                    <value>600</value>
+                </mod>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/middle-timer</output>
+    </filter>
+
+    <filter>
+        <name>MM marker</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/middle-start</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <or>
+                    <less-than>
+                        <property>instrumentation/marker-beacon/middle-timer</property>
+                        <value>375</value>
+                    </less-than>
+                    <and>
+                        <greater-than>
+                            <property>instrumentation/marker-beacon/middle-timer</property>
+                            <value>460</value>
+                        </greater-than>
+                        <less-than>
+                            <property>instrumentation/marker-beacon/middle-timer</property>
+                            <value>545</value>
+                        </less-than>
+                    </and>
+                </or>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/marker-beacon/middle-marker</output>
+    </filter>
+-->
+<!-- inner marker 
+
+    <filter>
+        <name>IM trigger on</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/inner</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>sim/time/elapsed-sec</property>
+                    <value>0.25</value>
+                </sum>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/inner-trigger</output>
+    </filter>
+
+    <filter>
+        <name>IM trigger off</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/inner-trigger</property>
+                <less-than>
+                    <property>instrumentation/marker-beacon/inner-trigger</property>
+                    <property>sim/time/elapsed-sec</property>
+                </less-than>
+            </condition>
+        </enable>
+        <input>0.0</input>
+        <output>instrumentation/marker-beacon/inner-trigger</output>
+    </filter>
+
+    <filter>
+        <name>IM timer on</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>instrumentation/marker-beacon/inner-start</property></not>
+                <property>instrumentation/marker-beacon/inner-trigger</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>instrumentation/marker-beacon/inner-trigger</property>
+                    <value>-0.25</value>
+                </sum>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/inner-start</output>
+    </filter>
+
+    <filter>
+        <name>IM timer off</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/inner-start</property>
+                <not><property>instrumentation/marker-beacon/inner-trigger</property></not>
+            </condition>
+        </enable>
+        <input>0.0</input>
+        <output>instrumentation/marker-beacon/inner-start</output>
+        <output>instrumentation/marker-beacon/inner-timer</output>
+        <output>instrumentation/marker-beacon/inner-marker</output>
+    </filter>
+
+    <filter>
+        <name>IM timer</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/inner-start</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <mod>
+                    <product>
+                        <dif>
+                            <property>sim/time/elapsed-sec</property>
+                            <property>instrumentation/marker-beacon/inner-start</property>
+                        </dif>
+                        <value>12</value>
+                    </product>
+                    <value>2</value>
+                </mod>
+            </expression>
+        </input>
+        <output>instrumentation/marker-beacon/inner-timer</output>
+    </filter>
+
+    <filter>
+        <name>IM marker</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/marker-beacon/inner-start</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <less-than>
+                    <property>instrumentation/marker-beacon/inner-timer</property>
+                    <value>1</value>
+                </less-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/marker-beacon/inner-marker</output>
+    </filter>
+-->
+<!-- GPS -->
+
+    <predict-simple>
+        <name>GPS: route intercept predict</name>
+        <debug>false</debug>
+        <seconds>1.0</seconds>
+        <filter-gain>1.0</filter-gain>
+        <enable>
+            <condition>
+                <property>instrumentation/gps[0]/wp/wp[1]/valid</property>
+            </condition>
+        </enable>
+        <input>instrumentation/gps[0]/wp/wp[1]/course-deviation-deg</input>
+        <output>instrumentation/gps[0]/wp/wp[1]/time-to-intercept-predict</output>
+    </predict-simple>
+
+    <filter>
+        <name>GPS: route intercept</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/gps[0]/wp/wp[1]/valid</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <div>
+                    <property>instrumentation/gps[0]/wp/wp[1]/course-deviation-deg</property>
+                    <dif>
+                        <property>instrumentation/gps[0]/wp/wp[1]/course-deviation-deg</property>
+                        <property>instrumentation/gps[0]/wp/wp[1]/time-to-intercept-predict</property>
+                    </dif>
+                </div>
+            </expression>
+        </input>
+        <output>instrumentation/gps[0]/wp/wp[1]/time-to-intercept-sec</output>
+    </filter>
+
+</PropertyList>

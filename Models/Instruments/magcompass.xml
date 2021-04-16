@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<!--
+Author : Syd Adams
+Citation magnetic compass
+-->
+<PropertyList>
+
+    <path>magcompass.ac</path>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>magcompass.rose</object-name>
+        <property>instrumentation/magnetic-compass/indicated-heading-deg</property>
+        <axis>
+            <object-name>magcompass.rose.axis</object-name>
+        </axis>
+    </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>magcompass.housing</object-name>
+        <object-name>magcompass.holding</object-name>
+        <object-name>magcompass.white</object-name>
+        <object-name>magcompass.red1</object-name>
+        <object-name>magcompass.red2</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/flightdeck-average-ambient-light-environment</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>magcompass.rose</object-name>
+        <object-name>magcompass.sight</object-name>
+        <emission>
+            <red>1</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>magcompass.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>magcompass.housing</object-name>
+        <object-name>magcompass.holding</object-name>
+        <object-name>magcompass.rose</object-name>
+        <object-name>magcompass.sight</object-name>
+        <object-name>magcompass.white</object-name>
+        <object-name>magcompass.red1</object-name>
+        <object-name>magcompass.red2</object-name>
+    </effect-->
+
+</PropertyList>

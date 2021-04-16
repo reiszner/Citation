@@ -1,0 +1,1025 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+Filters that compute values for various instruments in the Citation II.
+Copyright (C) 2015 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+
+<PropertyList>
+
+  <filter>
+    <name>Radar altimeter: filter for mechanical needle</name>
+    <debug>false</debug>
+    <type>exponential</type>
+    <filter-time>.2</filter-time>
+
+    <input>
+      <condition>
+        <not><property>systems/electrical/outputs/main-left-xover/dc-radalt</property></not>
+      </condition>
+      <property>instrumentation/radar-altimeter/radar-altitude-ft</property>
+    </input>
+
+    <input>
+      <condition>
+        <less-than>
+          <property>position/altitude-agl-ft</property>
+          <value>-25.0</value>
+        </less-than>
+      </condition>
+      <value>-25.0</value>
+    </input>
+
+    <input>
+      <condition>
+        <greater-than>
+          <property>position/altitude-agl-ft</property>
+          <value>2500.0</value>
+        </greater-than>
+      </condition>
+      <value>3150.0</value>
+    </input>
+
+    <input>
+      <property>position/altitude-agl-ft</property>
+    </input>
+
+    <output>instrumentation/radar-altimeter/radar-altitude-ft</output>
+  </filter>
+
+  <!-- Filter for CDU -->
+
+  <filter>
+    <name>Turn the CDU on and off with the avionics switch</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/dc-fms</property>
+      </condition>
+      <value>1</value>
+    </input>
+    <input>0</input>
+    <output>instrumentation/cdu/serviceable</output>
+  </filter>
+
+  <filter>
+    <name>Turn the GPWS on and off with the circuit breaker (Ground Prox) and power</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/dc-gpws</property>
+      </condition>
+      <value>1</value>
+    </input>
+    <input>0</input>
+    <output>instrumentation/mk-viii/serviceable</output>
+  </filter>
+
+<!-- CDI0: deflection filter for mechanical needles -->
+
+    <filter>
+        <name>NAV0 curse deflection for VOR lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <property>instrumentation/nav[0]/nav-loc</property>
+            </condition>
+            <property>instrumentation/nav[0]/loc-deflection</property>
+            <scale>0.25</scale>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/signal-valid</property>
+                <not><property>instrumentation/nav[0]/nav-loc</property></not>
+            </condition>
+            <property>instrumentation/nav[0]/heading-needle-deflection</property>
+            <scale>0.10</scale>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/cdi-loc-deflection</output>
+    </filter>
+
+    <filter>
+        <name>NAV0 glideslope lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/nav[0]/gs-in-range</property>
+            </condition>
+            <property>instrumentation/nav[0]/gs-needle-deflection</property>
+            <min>-2.0</min>
+            <max> 2.0</max>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[0]/cdi-gs-deflection</output>
+    </filter>
+
+<!-- CDI1: deflection filter for mechanical needles -->
+
+    <filter>
+        <name>NAV1 curse deflection for VOR lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <property>instrumentation/nav[1]/nav-loc</property>
+            </condition>
+            <property>instrumentation/nav[1]/loc-deflection</property>
+            <scale>0.25</scale>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/signal-valid</property>
+                <not><property>instrumentation/nav[1]/nav-loc</property></not>
+            </condition>
+            <property>instrumentation/nav[1]/heading-needle-deflection</property>
+            <scale>0.10</scale>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/cdi-loc-deflection</output>
+    </filter>
+
+    <filter>
+        <name>NAV1 glideslope lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/nav[1]/gs-in-range</property>
+            </condition>
+            <property>instrumentation/nav[1]/gs-needle-deflection</property>
+            <min>-2.0</min>
+            <max> 2.0</max>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/nav[1]/cdi-gs-deflection</output>
+    </filter>
+
+  <!-- Comm-Radios: rebuild the behavior of audio-btn without touching the volume -->
+
+  <filter>
+    <name>COMM0 volume adjusting</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <equals>
+          <property>instrumentation/audiopanel/comm1</property>
+          <value>1</value>
+        </equals>
+      </condition>
+      <value>0.0</value>
+    </input>
+    <input>
+      <property>instrumentation/comm[0]/volume-def</property>
+    </input>
+    <output>instrumentation/comm[0]/volume</output>
+  </filter>
+
+  <filter>
+    <name>COMM1 volume adjusting</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <equals>
+          <property>instrumentation/audiopanel/comm2</property>
+          <value>1</value>
+        </equals>
+      </condition>
+      <value>0.0</value>
+    </input>
+    <input>
+      <property>instrumentation/comm[1]/volume-def</property>
+    </input>
+    <output>instrumentation/comm[1]/volume</output>
+  </filter>
+
+  <!-- DME0: minutes -->
+
+    <filter>
+        <name>dme minutes</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/dme[0]/indicated-time-min</property>
+                    <value>99.9</value>
+                </greater-than>
+            </condition>
+            <value>99</value>
+        </input>
+        <input>
+            <expression>
+                <floor>
+                    <sum>
+                        <property>instrumentation/dme[0]/indicated-time-min</property>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <output>instrumentation/dme[0]/indicated-time-min-display</output>
+    </filter>
+
+  <!-- DME1: minutes -->
+
+    <filter>
+        <name>dme minutes</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>instrumentation/dme[1]/indicated-time-min</property>
+                    <value>99.9</value>
+                </greater-than>
+            </condition>
+            <value>99</value>
+        </input>
+        <input>
+            <expression>
+                <floor>
+                    <sum>
+                        <property>instrumentation/dme[1]/indicated-time-min</property>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <output>instrumentation/dme[1]/indicated-time-min-display</output>
+    </filter>
+
+  <!-- altimeter: correct rounded digits and avoid wrong precision -->
+
+  <filter>
+    <name>alt0: InHg adjusting</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <floor>
+          <sum>
+            <product>
+              <property>instrumentation/altimeter[0]/setting-inhg</property>
+              <value>100.0</value>
+            </product>
+            <value>0.5</value>
+          </sum>
+        </floor>
+      </expression>
+    </input>
+    <output>instrumentation/altimeter[0]/setting-inhg-display</output>
+  </filter>
+
+  <filter>
+    <name>alt0: hPa adjusting</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <floor>
+          <sum>
+            <property>instrumentation/altimeter[0]/setting-hpa</property>
+            <value>0.5</value>
+          </sum>
+        </floor>
+      </expression>
+    </input>
+    <output>instrumentation/altimeter[0]/setting-hpa-display</output>
+  </filter>
+
+  <filter>
+    <name>alt1: InHg adjusting</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <floor>
+          <sum>
+            <product>
+              <property>instrumentation/altimeter[1]/setting-inhg</property>
+              <value>100.0</value>
+            </product>
+            <value>0.5</value>
+          </sum>
+        </floor>
+      </expression>
+    </input>
+    <output>instrumentation/altimeter[1]/setting-inhg-display</output>
+  </filter>
+
+  <filter>
+    <name>alt1: hPa adjusting</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <floor>
+          <sum>
+            <property>instrumentation/altimeter[1]/setting-hpa</property>
+            <value>0.5</value>
+          </sum>
+        </floor>
+      </expression>
+    </input>
+    <output>instrumentation/altimeter[1]/setting-hpa-display</output>
+  </filter>
+
+  <!-- Engine Display -->
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.04</filter-time>
+    <input>
+      <condition>
+        <or>
+          <property>systems/electrical/outputs/main-left/engine-fan-left</property>
+          <greater-than>
+            <property>engines/engine[0]/fan</property>
+            <value>49.999</value>
+          </greater-than>
+        </or>
+      </condition>
+      <expression>
+        <sum>
+          <abs>
+            <property>engines/engine[0]/fan</property>
+          </abs>
+          <value>0.05</value>
+        </sum>
+      </expression>
+    </input>
+    <input>
+      <condition>
+        <and>
+          <less-than>
+            <property>engines/engine[0]/fan</property>
+            <value>50.000</value>
+          </less-than>
+          <greater-than>
+            <property>engines/engine[0]/fan</property>
+            <value>17.999</value>
+          </greater-than>
+        </and>
+      </condition>
+      <expression>
+        <product>
+          <dif>
+            <sum>
+              <abs>
+                <property>engines/engine[0]/fan</property>
+              </abs>
+              <value>0.05</value>
+            </sum>
+            <value>18.0</value>
+          </dif>
+          <value>1.5625</value>
+        </product>
+      </expression>
+    </input>
+    <input>0.0</input>
+    <output>engines/engine[0]/fan-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.04</filter-time>
+    <input>
+      <condition>
+        <or>
+          <property>systems/electrical/outputs/main-right/engine-fan-right</property>
+          <greater-than>
+            <property>engines/engine[1]/fan</property>
+            <value>49.999</value>
+          </greater-than>
+        </or>
+      </condition>
+      <expression>
+        <sum>
+          <abs>
+            <property>engines/engine[1]/fan</property>
+          </abs>
+          <value>0.05</value>
+        </sum>
+      </expression>
+    </input>
+    <input>
+      <condition>
+        <and>
+          <less-than>
+            <property>engines/engine[1]/fan</property>
+            <value>50.000</value>
+          </less-than>
+          <greater-than>
+            <property>engines/engine[1]/fan</property>
+            <value>17.999</value>
+          </greater-than>
+        </and>
+      </condition>
+      <expression>
+        <product>
+          <dif>
+            <sum>
+              <abs>
+                <property>engines/engine[1]/fan</property>
+              </abs>
+              <value>0.05</value>
+            </sum>
+            <value>18.0</value>
+          </dif>
+          <value>1.5625</value>
+        </product>
+      </expression>
+    </input>
+    <input>0.0</input>
+    <output>engines/engine[1]/fan-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.04</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-left/engine-itt-left</property>
+      </condition>
+      <expression>
+        <sum>
+          <product>
+            <property>engines/engine[0]/itt-norm</property>
+            <value>350</value>
+          </product>
+          <value>315</value>
+          <property>environment/temperature-degc</property>
+        </sum>
+      </expression>
+    </input>
+    <input>-60</input>
+    <output>engines/engine[0]/itt-norm-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.04</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/engine-itt-right</property>
+      </condition>
+      <expression>
+        <sum>
+          <product>
+            <property>engines/engine[1]/itt-norm</property>
+            <value>350</value>
+          </product>
+          <value>315</value>
+          <property>environment/temperature-degc</property>
+        </sum>
+      </expression>
+    </input>
+    <input>-60</input>
+    <output>engines/engine[1]/itt-norm-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.02</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-left/engine-fuelflow-left</property>
+      </condition>
+      <property>engines/engine[0]/fuel-flow_pph</property>
+    </input>
+    <input>-600.0</input>
+    <output>engines/engine[0]/fuel-flow_pph-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.02</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/engine-fuelflow-right</property>
+      </condition>
+      <property>engines/engine[1]/fuel-flow_pph</property>
+    </input>
+    <input>-600.0</input>
+    <output>engines/engine[1]/fuel-flow_pph-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.04</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-left/engine-qty-left</property>
+      </condition>
+      <property>consumables/fuel/tank[0]/level-lbs</property>
+    </input>
+    <input>-400.0</input>
+    <output>consumables/fuel/tank[0]/level-lbs-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.04</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/engine-qty-right</property>
+      </condition>
+      <property>consumables/fuel/tank[1]/level-lbs</property>
+    </input>
+    <input>-400.0</input>
+    <output>consumables/fuel/tank[1]/level-lbs-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.02</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-left/engine-oilt-left</property>
+      </condition>
+      <expression>
+        <sum>
+          <product>
+            <property>engines/engine[0]/oilt-norm</property>
+            <value>100</value>
+          </product>
+          <property>environment/temperature-degc</property>
+          </sum>
+      </expression>
+    </input>
+    <input>-1</input>
+    <output>engines/engine[0]/oilt-norm-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.02</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/engine-oilt-right</property>
+      </condition>
+      <expression>
+        <sum>
+          <product>
+            <property>engines/engine[0]/oilt-norm</property>
+            <value>100</value>
+          </product>
+          <property>environment/temperature-degc</property>
+          </sum>
+      </expression>
+    </input>
+    <input>-1</input>
+    <output>engines/engine[1]/oilt-norm-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.02</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-left/engine-oilp-left</property>
+      </condition>
+      <property>engines/engine[0]/oil-pressure-psi</property>
+    </input>
+    <input>-1</input>
+    <output>engines/engine[0]/oilp-norm-display</output>
+  </filter>
+
+  <filter>
+    <type>exponential</type>
+    <filter-time>0.02</filter-time>
+    <input>
+      <condition>
+        <property>systems/electrical/outputs/main-right/engine-oilp-right</property>
+      </condition>
+      <property>engines/engine[1]/oil-pressure-psi</property>
+    </input>
+    <input>-1</input>
+    <output>engines/engine[1]/oilp-norm-display</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <name>left turbine warning</name>
+    <input>
+      <condition>
+        <greater-than>
+          <property>engines/engine[0]/turbine</property>
+          <value>96</value>
+        </greater-than>
+      </condition>
+      <value>1</value>
+    </input>
+    <input>0</input>
+    <output>controls/engines/engine[0]/turbine/warn</output>
+  </filter>
+
+  <filter>
+    <type>gain</type>
+    <name>right turbine warning</name>
+    <input>
+      <condition>
+        <greater-than>
+          <property>engines/engine[1]/turbine</property>
+          <value>96</value>
+        </greater-than>
+      </condition>
+      <value>1</value>
+    </input>
+    <input>0</input>
+    <output>controls/engines/engine[1]/turbine/warn</output>
+  </filter>
+
+<!-- AOA sensor -->
+
+    <filter>
+        <name>aoa</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input>
+            <condition>
+                <less-than-equals>
+                    <property>velocities/airspeed-kt</property>
+                    <value>40</value>
+                </less-than-equals>
+            </condition>
+            <expression>
+                <product>
+                    <div>
+                        <property>velocities/airspeed-kt</property>
+                        <value>40.0</value>
+                    </div>
+                    <property>orientation/alpha-deg</property>
+                </product>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>velocities/airspeed-kt</property>
+                    <value>40</value>
+                </greater-than>
+            </condition>
+            <property>orientation/alpha-deg</property>
+        </input>
+        <output>instrumentation/aoa/alpha-deg</output>
+    </filter>
+
+<!-- DME -->
+
+    <filter>
+        <name>dme0-in-range</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[0]/in-range</property>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[1]/in-range</property>
+        </input>
+        <output>instrumentation/dme-339F-12A[0]/in-range</output>
+    </filter>
+
+    <filter>
+        <name>dme0-distance-nm</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <product>
+                            <property>instrumentation/dme[0]/indicated-distance-nm</property>
+                            <value>10.0</value>
+                        </product>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <product>
+                            <property>instrumentation/dme[1]/indicated-distance-nm</property>
+                            <value>10.0</value>
+                        </product>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <output>instrumentation/dme-339F-12A[0]/distance-nm</output>
+    </filter>
+
+    <filter>
+        <name>dme0-ground-speed-kt</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <property>instrumentation/dme[0]/indicated-ground-speed-kt</property>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <property>instrumentation/dme[1]/indicated-ground-speed-kt</property>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <output>instrumentation/dme-339F-12A[0]/ground-speed-kt</output>
+    </filter>
+
+    <filter>
+        <name>dme0-time-min-display</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[0]/indicated-time-min-display</property>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[0]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[1]/indicated-time-min-display</property>
+        </input>
+        <output>instrumentation/dme-339F-12A[0]/time-min</output>
+    </filter>
+
+    <filter>
+        <name>dme1-in-range</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[0]/in-range</property>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[1]/in-range</property>
+        </input>
+        <output>instrumentation/dme-339F-12A[1]/in-range</output>
+    </filter>
+
+    <filter>
+        <name>dme1-distance-nm</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <product>
+                            <property>instrumentation/dme[0]/indicated-distance-nm</property>
+                            <value>10.0</value>
+                        </product>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <product>
+                            <property>instrumentation/dme[1]/indicated-distance-nm</property>
+                            <value>10.0</value>
+                        </product>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <output>instrumentation/dme-339F-12A[1]/distance-nm</output>
+    </filter>
+
+    <filter>
+        <name>dme1-ground-speed-kt</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <property>instrumentation/dme[0]/indicated-ground-speed-kt</property>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <expression>
+                <floor>
+                    <sum>
+                        <property>instrumentation/dme[1]/indicated-ground-speed-kt</property>
+                        <value>0.5</value>
+                    </sum>
+                </floor>
+            </expression>
+        </input>
+        <output>instrumentation/dme-339F-12A[1]/ground-speed-kt</output>
+    </filter>
+
+    <filter>
+        <name>dme1-time-min-display</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>1</value>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[0]/indicated-time-min-display</property>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>instrumentation/dme-339F-12A[1]/switch-nav</property>
+                    <value>2</value>
+                </equals>
+            </condition>
+            <property>instrumentation/dme[1]/indicated-time-min-display</property>
+        </input>
+        <output>instrumentation/dme-339F-12A[1]/time-min</output>
+    </filter>
+
+</PropertyList>

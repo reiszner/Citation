@@ -1,0 +1,216 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PropertyList>
+
+  <path>rmi.ac</path>
+
+  <animation>
+    <type>select</type>
+    <object-name>RMI.flag</object-name>
+    <condition>
+      <not>
+        <property alias="../../../../power"/>
+      </not>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>RMI.compass</object-name>
+    <property alias="../../heading-deg"/>
+    <axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+<!-- Left button and single-stemmed needle -->
+  <animation>
+    <type>pick</type>
+    <object-name>RMI.left_button</object-name>
+    <action>
+      <button>0</button>
+
+      <binding>
+        <command>property-cycle</command>
+        <property alias="../../../../single-needle-selected-input"/>
+        <value>ADF</value>
+        <value>VOR</value>
+      </binding>
+
+      <binding>
+        <command>property-assign</command>
+        <property alias="../../../../single-needle-receive"/>
+        <value>0.0</value>
+      </binding>
+
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>rmi-left-button</tooltip-id>
+        <label>Radio magnetic indicator 1 source: %s</label>
+        <property alias="../../../../single-needle-selected-input"/>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>RMI.single_needle</object-name>
+    <property alias="../../single-needle-position-deg"/>
+    <axis>
+      <x>-1.0</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>RMI.SingleArrow.SelectionIndicator.ADF</object-name>
+    <condition>
+      <equals>
+        <property alias="../../../../single-needle-selected-input"/>
+        <value>ADF</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>RMI.SingleArrow.SelectionIndicator.VOR</object-name>
+    <condition>
+      <equals>
+        <property alias="../../../../single-needle-selected-input"/>
+        <value>VOR</value>
+      </equals>
+    </condition>
+  </animation>
+
+<!-- Right button and double-stemmed needle -->
+  <animation>
+    <type>pick</type>
+    <object-name>RMI.right_button</object-name>
+    <action>
+      <button>0</button>
+
+      <binding>
+        <command>property-cycle</command>
+        <property alias="../../../../double-needle-selected-input"/>
+        <value>ADF</value>
+        <value>VOR</value>
+      </binding>
+
+      <binding>
+        <command>property-assign</command>
+        <property alias="../../../../double-needle-receive"/>
+        <value>0.0</value>
+      </binding>
+
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>rmi-right-button</tooltip-id>
+        <label>Radio magnetic indicator 2 source: %s</label>
+        <property alias="../../../../double-needle-selected-input"/>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>RMI.double_needle</object-name>
+    <property alias="../../double-needle-position-deg"/>
+    <axis>
+      <x>-1.0</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>RMI.DoubleArrow.SelectionIndicator.ADF</object-name>
+    <condition>
+      <equals>
+        <property alias="../../../../double-needle-selected-input"/>
+        <value>ADF</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>RMI.DoubleArrow.SelectionIndicator.VOR</object-name>
+    <condition>
+      <equals>
+        <property alias="../../../../double-needle-selected-input"/>
+        <value>VOR</value>
+      </equals>
+    </condition>
+  </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>RMI.bezel</object-name>
+        <object-name>RMI.left_button</object-name>
+        <object-name>RMI.right_button</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>RMI.DoubleArrow.SelectionIndicator.ADF</object-name>
+        <object-name>RMI.DoubleArrow.SelectionIndicator.VOR</object-name>
+        <object-name>RMI.SingleArrow.SelectionIndicator.ADF</object-name>
+        <object-name>RMI.SingleArrow.SelectionIndicator.VOR</object-name>
+        <object-name>RMI.compass</object-name>
+        <object-name>RMI.face</object-name>
+        <object-name>RMI.flag</object-name>
+        <object-name>RMI.single_needle</object-name>
+        <object-name>RMI.double_needle</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>RMI.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>RMI.DoubleArrow.SelectionIndicator.ADF</object-name>
+        <object-name>RMI.DoubleArrow.SelectionIndicator.VOR</object-name>
+        <object-name>RMI.SingleArrow.SelectionIndicator.ADF</object-name>
+        <object-name>RMI.SingleArrow.SelectionIndicator.VOR</object-name>
+        <object-name>RMI.bezel</object-name>
+        <object-name>RMI.compass</object-name>
+        <object-name>RMI.face</object-name>
+        <object-name>RMI.flag</object-name>
+        <object-name>RMI.left_button</object-name>
+        <object-name>RMI.right_button</object-name>
+        <object-name>RMI.double_needle</object-name>
+        <object-name>RMI.single_needle</object-name>
+    </effect-->
+
+</PropertyList>

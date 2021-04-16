@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<PropertyList>
+
+  <name type="string" n="0">parking</name>
+
+  <description>
+    You will start the sim on the tarmac cold and dark. You will need
+    to go through all checklists to ensure everything is running fine.
+    Make sure you select a parking spot instead of a runway!
+
+    Start this state with --state=parking
+  </description>
+
+  <overlay>
+
+
+
+  </overlay>
+
+</PropertyList>

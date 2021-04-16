@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>BeaconLight.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>sphereBeaconLight</object-name>
+        <condition>
+            <property>systems/electrical/outputs/beacon</property>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>sphereBeaconLight</object-name>
+        <expression>
+            <product>
+                <property>/sim/time/elapsed-sec</property>
+                <value>180</value>
+            </product>
+        </expression>
+        <center>
+            <x-m>13.85</x-m>
+            <y-m>0.00</y-m>
+            <z-m>3.60</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+	<animation>
+		<type>light</type>
+		<light-type>spot</light-type>
+		<name>BeaconLight.light</name>
+		<object-name>sphereBeaconLight</object-name>
+		<nopreview/>
+		<position>
+			<x>13.85</x>
+			<y>0.00</y>
+			<z>3.60</z>
+		</position>
+		<direction>
+			<x>-1.0</x>
+			<y>0.0</y>
+			<z>0.0</z>
+		</direction>
+		<ambient>
+			<r>0.6</r>
+			<g>0</g>
+			<b>0</b>
+			<a>1</a>
+		</ambient>
+		<diffuse>
+			<r>0.4</r>
+			<g>0</g>
+			<b>0</b>
+			<a>0.6</a>
+		</diffuse>
+		<specular>
+			<r>0.4</r>
+			<g>0</g>
+			<b>0</b>
+			<a>0.6</a>
+		</specular>
+		<dim-factor>
+			<property>systems/electrical/outputs/beacon</property>
+			<factor>0.042</factor>
+			<offset>0</offset>
+			<min>0</min>
+			<max>1</max>
+		</dim-factor>
+		<attenuation>
+			<c>1.0</c>
+			<l>1.0</l>
+			<q>1.0</q>
+		</attenuation>
+		<exponent>1</exponent>
+		<cutoff>120</cutoff>
+		<near-m>0.001</near-m>
+		<far-m>10.000</far-m>
+	</animation>
+
+</PropertyList>

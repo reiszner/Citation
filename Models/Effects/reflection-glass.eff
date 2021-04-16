@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+
+    <name>reflection-glass</name>
+    <inherits-from>Effects/glass</inherits-from>
+
+    <parameters>
+        <texture n="3">
+            <type>cubemap</type>
+            <images>
+                <positive-x>Aircraft/Citation/Models/Effects/reflection-glass/refl_cube_left.png</positive-x>
+                <negative-x>Aircraft/Citation/Models/Effects/reflection-glass/refl_cube_right.png</negative-x>
+                <positive-y>Aircraft/Citation/Models/Effects/reflection-glass/refl_cube_back.png</positive-y>
+                <negative-y>Aircraft/Citation/Models/Effects/reflection-glass/refl_cube_front.png</negative-y>
+                <positive-z>Aircraft/Citation/Models/Effects/reflection-glass/refl_cube_up.png</positive-z>
+                <negative-z>Aircraft/Citation/Models/Effects/reflection-glass/refl_cube_down.png</negative-z>
+            </images>
+        </texture>
+        <use-reflection type="int">1</use-reflection>
+        <reflection-strength type="float">0.8</reflection-strength>
+    </parameters>
+</PropertyList>

@@ -1,0 +1,865 @@
+<?xml version="1.0"?>
+<!--
+Filters that compute the behavior of the systems on the Citation II.
+Copyright (C) 2017 sascha Reißner <reiszner@novaplan.at>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+
+    <filter>
+        <name>ignition-left</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <or>
+                    <and>
+                        <property>controls/engines/engine[0]/ignition-sw</property>
+                        <property>systems/electrical/outputs/main-right-xover/engine-ign-left</property>
+                    </and>
+                    <and>
+                        <property>controls/engines/engine[0]/ignition-auto</property>
+                        <property>systems/electrical/outputs/battery-hot/ignition</property>
+                    </and>
+                </or>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/engines/engine[0]/ignition</output>
+    </filter>
+
+    <filter>
+        <name>ignition-right</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <or>
+                    <and>
+                        <property>controls/engines/engine[1]/ignition-sw</property>
+                        <property>systems/electrical/outputs/main-left/engine-ign-right</property>
+                    </and>
+                    <and>
+                        <property>controls/engines/engine[1]/ignition-auto</property>
+                        <property>systems/electrical/outputs/battery-hot/ignition</property>
+                    </and>
+                </or>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/engines/engine[1]/ignition</output>
+    </filter>
+
+<!-- magnetic flux sensor -->
+
+    <filter>
+        <name>gyro-slaving</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.5</max-rate-of-change>
+        <input>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>systems/electrical/outputs/main-left-xover/dc-dg1</property>
+                        <value>20</value>
+                    </greater-than>
+                    <property>instrumentation/magnetic-flux-sensor/serviceable</property>
+                    <not><property>controls/electric/gyro-mode-sw</property></not>
+                </and>
+            </condition>
+            <expression>
+                <dif>
+                    <property>orientation/heading-magnetic-deg</property>
+                    <property>orientation/heading-deg</property>
+                </dif>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>systems/electrical/outputs/main-left-xover/dc-dg1</property>
+                        <value>20</value>
+                    </greater-than>
+                    <property>controls/electric/gyro-mode-sw</property>
+                    <equals>
+                        <property>controls/electric/gyro-set-sw</property>
+                        <value>1</value>
+                    </equals>
+                </and>
+            </condition>
+            <expression>
+                <sum>
+                    <property>instrumentation/heading-indicator/offset-deg</property>
+                    <value>-1</value>
+                </sum>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>systems/electrical/outputs/main-left-xover/dc-dg1</property>
+                        <value>20</value>
+                    </greater-than>
+                    <property>controls/electric/gyro-mode-sw</property>
+                    <equals>
+                        <property>controls/electric/gyro-set-sw</property>
+                        <value>-1</value>
+                    </equals>
+                </and>
+            </condition>
+            <expression>
+                <sum>
+                    <property>instrumentation/heading-indicator/offset-deg</property>
+                    <value>1</value>
+                </sum>
+            </expression>
+        </input>
+        <input>instrumentation/heading-indicator/offset-deg</input>
+        <period>
+            <min>-180.0</min>
+            <max>180.0</max>
+        </period>
+        <output>instrumentation/heading-indicator[0]/offset-deg</output>
+        <output>instrumentation/heading-indicator[1]/offset-deg</output>
+        <output>instrumentation/heading-indicator-dg/error-deg</output>
+    </filter>
+
+    <filter>
+        <name>dg-correction</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.5</max-rate-of-change>
+        <input>
+            <expression>
+                <product>
+                    <property>instrumentation/heading-indicator-dg/offset-deg</property>
+                    <value>-1.0</value>
+                </product>
+            </expression>
+        </input>
+        <output>instrumentation/heading-indicator-dg/align-deg</output>
+    </filter>
+
+<!-- electric power for turn-indicator -->
+    <filter>
+        <name>turn-indicator-power</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>controls/electric/avionics-switch</property>
+            </condition>
+            <property>systems/electrical/outputs/AC-26V/ac-adi1</property>
+        </input>
+        <input>0.0</input>
+        <output>systems/electrical/outputs/turn-coordinator</output>
+    </filter>
+
+<!-- firewall shutoff -->
+
+    <filter>
+        <name>fire.shutoff.left.cover</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <and>
+                    <property>controls/engines/engine[0]/firecover</property>
+                    <greater-than>
+                        <expression>
+                            <sum>
+                                <property>controls/engines/engine[0]/firecover-act</property>
+                                <value>1</value>
+                            </sum>
+                        </expression>
+                        <property>/sim/time/elapsed-sec</property>
+                    </greater-than>
+                </and>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/engines/engine[0]/firecover</output>
+    </filter>
+
+    <filter>
+        <name>fire.shutoff.right.cover</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <and>
+                    <property>controls/engines/engine[1]/firecover</property>
+                    <greater-than>
+                        <expression>
+                            <sum>
+                                <property>controls/engines/engine[1]/firecover-act</property>
+                                <value>1</value>
+                            </sum>
+                        </expression>
+                        <property>/sim/time/elapsed-sec</property>
+                    </greater-than>
+                </and>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/engines/engine[1]/firecover</output>
+    </filter>
+
+
+<!-- gear warn -->
+
+    <filter>
+        <name>gear.warn.horn</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <and>
+                    <property>systems/electrical/outputs/main-left/warn-gear</property>
+                    <or>
+                        <and>
+                            <greater-than>
+                                <property>surface-positions/flap-pos</property>
+                                <value>0.38</value>
+                            </greater-than>
+                            <or>
+                                <less-than>
+                                    <property>gear/gear[0]/position-norm</property>
+                                    <value>1.00</value>
+                                </less-than>
+                                <less-than>
+                                    <property>gear/gear[1]/position-norm</property>
+                                    <value>1.00</value>
+                                </less-than>
+                                <less-than>
+                                    <property>gear/gear[2]/position-norm</property>
+                                    <value>1.00</value>
+                                </less-than>
+                            </or>
+                        </and>
+                        <equals>
+                            <property>controls/electric/system-test</property>
+                            <value>2</value>
+                        </equals>
+                    </or>
+                </and>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/gear/warn-horn</output>
+    </filter>
+
+    <filter>
+        <name>gear.warn.silence</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <not><property>controls/gear/warn-horn</property></not>
+            </condition>
+            <value>0</value>
+        </input>
+        <input>controls/gear/warn-silence</input>
+        <output>controls/gear/warn-silence</output>
+    </filter>
+
+<!-- speed warn -->
+
+    <filter>
+        <name>speed.warn.horn</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <and>
+                    <property>systems/electrical/outputs/main-right-xover/warn-speed</property>
+                    <or>
+                        <greater-than>
+                            <property>velocities/airspeed-kt</property>
+                            <property>limits/vmo</property>
+                        </greater-than>
+                        <greater-than>
+                            <property>velocities/mach</property>
+                            <property>limits/mmo</property>
+                        </greater-than>
+                        <equals>
+                            <property>controls/electric/system-test</property>
+                            <value>7</value>
+                        </equals>
+                    </or>
+                </and>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/electric/overspeed-horn</output>
+    </filter>
+
+<!-- antiskid -->
+
+    <filter>
+        <name>antiskid-test</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <and>
+                    <property>controls/gear/antiskid-test</property>
+                    <greater-than>
+                        <expression>
+                            <sum>
+                                <property>controls/gear/antiskid-test</property>
+                                <value>4</value>
+                            </sum>
+                        </expression>
+                        <property>/sim/time/elapsed-sec</property>
+                    </greater-than>
+                </and>
+            </condition>
+            <property>controls/gear/antiskid-test</property>
+        </input>
+        <input>0</input>
+        <output>controls/gear/antiskid-test</output>
+    </filter>
+
+    <filter>
+        <name>antiskid</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <and>
+                    <property>systems/electrical/outputs/main-left/sys-skid-ctrl</property>
+                    <property>controls/gear/antiskid-sw</property>
+                    <less-than>
+                        <property>controls/gear/antiskid-test</property>
+                        <value>1</value>
+                    </less-than>
+                </and>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/gear/antiskid</output>
+    </filter>
+
+    <filter>
+        <name>skid-ballance</name>
+        <debug>false</debug>
+        <type>gain</type>
+
+        <input>
+            <condition>
+                <and>
+                    <property>controls/electric/maingear-switch</property>
+                    <property>controls/gear/antiskid</property>
+                    <greater-than>
+                        <property>gear/gear[1]/rollspeed-ms</property>
+                        <property>gear/gear[2]/rollspeed-ms</property>
+                    </greater-than>
+                    <greater-than>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                        <value>6.2</value> <!-- 12 kts -->
+                    </greater-than>
+                </and>
+            </condition>
+            <expression>
+                <dif>
+                    <div>
+                        <property>gear/gear[1]/rollspeed-ms</property>
+                        <div>
+                            <sum>
+                                <property>gear/gear[1]/rollspeed-ms</property>
+                                <property>gear/gear[2]/rollspeed-ms</property>
+                            </sum>
+                            <value>2.0</value>
+                        </div>
+                    </div>
+                    <value>1.0</value>
+                </dif>
+            </expression>
+        </input>
+
+        <input>
+            <condition>
+                <and>
+                    <property>controls/electric/maingear-switch</property>
+                    <property>controls/gear/antiskid</property>
+                    <greater-than>
+                        <property>gear/gear[2]/rollspeed-ms</property>
+                        <property>gear/gear[1]/rollspeed-ms</property>
+                    </greater-than>
+                    <greater-than>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                        <value>6.2</value> <!-- 12 kts -->
+                    </greater-than>
+                </and>
+            </condition>
+            <expression>
+                <dif>
+                    <value>1.0</value>
+                    <div>
+                        <property>gear/gear[2]/rollspeed-ms</property>
+                        <div>
+                            <sum>
+                                <property>gear/gear[1]/rollspeed-ms</property>
+                                <property>gear/gear[2]/rollspeed-ms</property>
+                            </sum>
+                            <value>2.0</value>
+                        </div>
+                    </div>
+                </dif>
+            </expression>
+        </input>
+
+        <input><value>0.0</value></input>
+        <output>controls/gear/skid-ballance</output>
+    </filter>
+
+    <filter>
+        <name>brake-left</name>
+        <debug>false</debug>
+        <type>gain</type>
+
+<!-- Anti-Skid System -->
+        <input>
+            <condition>
+                <less-than>
+                    <property>controls/gear/skid-ballance</property>
+                    <value>0.0</value>
+                </less-than>
+            </condition>
+            <expression>
+                <sum>
+                    <property>controls/gear/brake-left</property>
+                    <product>
+                        <property>controls/gear/skid-ballance</property>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                        <value>0.5</value>
+                    </product>
+                </sum>
+            </expression>
+        </input>
+
+<!-- Locked Wheel Crossover Protection (more than 40 kts) -->
+        <input>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                        <value>20.6</value>
+                    </greater-than>
+                    <less-than>
+                        <property>controls/gear/skid-ballance</property>
+                        <value>-0.5</value>
+                    </less-than>
+                </and>
+            </condition>
+            <expression>
+                <sum>
+                    <property>controls/gear/brake-left</property>
+                    <product>
+                        <property>controls/gear/skid-ballance</property>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                    </product>
+                </sum>
+            </expression>
+        </input>
+
+<!-- normal braking -->
+        <input>
+            <condition>
+                <property>controls/electric/maingear-switch</property>
+            </condition>
+            <property>controls/gear/brake-left</property>
+        </input>
+
+        <input>0.0</input>
+        <min>0.0</min>
+        <max>1.0</max>
+        <output>controls/gear/brake-left-real</output>
+    </filter>
+
+    <filter>
+        <name>brake-right</name>
+        <debug>false</debug>
+        <type>gain</type>
+
+<!-- Anti-Skid System -->
+        <input>
+            <condition>
+                <greater-than>
+                    <property>controls/gear/skid-ballance</property>
+                    <value>0.0</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <dif>
+                    <property>controls/gear/brake-right</property>
+                    <product>
+                        <property>controls/gear/skid-ballance</property>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                        <value>0.5</value>
+                    </product>
+                </dif>
+            </expression>
+        </input>
+
+<!-- Locked Wheel Crossover Protection (more than 40 kts) -->
+        <input>
+            <condition>
+                <and>
+                    <greater-than>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                        <value>20.6</value>
+                    </greater-than>
+                    <greater-than>
+                        <property>controls/gear/skid-ballance</property>
+                        <value>0.5</value>
+                    </greater-than>
+                </and>
+            </condition>
+            <expression>
+                <dif>
+                    <property>controls/gear/brake-right</property>
+                    <product>
+                        <property>controls/gear/skid-ballance</property>
+                        <property>gear/gear[0]/rollspeed-ms</property>
+                    </product>
+                </dif>
+            </expression>
+        </input>
+
+<!-- normal braking -->
+        <input>
+            <condition>
+                <property>controls/electric/maingear-switch</property>
+            </condition>
+            <property>controls/gear/brake-right</property>
+        </input>
+
+        <input>0.0</input>
+        <min>0.0</min>
+        <max>1.0</max>
+        <output>controls/gear/brake-right-real</output>
+    </filter>
+
+<!-- external power cutoff -->
+    <filter>
+        <name>external-power-cutoff</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <or>
+                    <not><property>controls/electric/maingear-switch</property></not>
+                    <not><property>controls/gear/brake-parking</property></not>
+                </or>
+            </condition>
+            <value>false</value>
+        </input>
+        <input>controls/electric/external-power</input>
+        <output>controls/electric/external-power</output>
+    </filter>
+
+<!-- system test -->
+    <filter>
+        <name>system-test</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+<!-- TODO: conditions for every system with power over the correct circuit-breaker -->
+            <condition>
+                <property>systems/electrical/buses/battery</property>
+            </condition>
+            <property>controls/electric/system-test-sw</property>
+        </input>
+        <input>0</input>
+        <output>controls/electric/system-test</output>
+    </filter>
+
+<!-- ALS beacon light -->
+
+    <filter>
+        <name>beacon-timing</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <mod>
+                    <div>
+                        <property>/sim/time/elapsed-sec</property>
+                        <value>2.3</value>
+                    </div>
+                    <value>1</value>
+                </mod>
+            </expression>
+        </input>
+        <output>controls/lighting/beacon-timing</output>
+    </filter>
+
+    <filter>
+        <name>beacon-sin</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <sin>
+                    <product>
+                        <property>controls/lighting/beacon-timing</property>
+                        <value>6.28318530718</value>
+                    </product>
+                </sin>
+            </expression>
+        </input>
+        <output>controls/lighting/beacon-sin</output>
+    </filter>
+
+    <filter>
+        <name>beacon-cos</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <cos>
+                    <product>
+                        <property>controls/lighting/beacon-timing</property>
+                        <value>6.28318530718</value>
+                    </product>
+                </cos>
+            </expression>
+        </input>
+        <output>controls/lighting/beacon-cos</output>
+    </filter>
+
+<!-- doors and windows -->
+
+    <filter>
+        <name>cockpit-window-guard</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>controls/cockpit-window/command</property>
+                <greater-than>
+                    <property>velocities/groundspeed-kt</property>
+                    <value>20.0</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>0</input>
+        <output>controls/cockpit-window/command</output>
+    </filter>
+
+    <filter>
+        <name>cockpit-window</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.75</max-rate-of-change>
+        <input>
+            <property>controls/cockpit-window/command</property>
+        </input>
+        <output>controls/cockpit-window/position-norm</output>
+    </filter>
+
+<!-- flaps -->
+
+    <filter>
+        <name>flaps servicable</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>systems/electrical/outputs/main-left/sys-flap-ctrl</property>
+                <property>systems/electrical/outputs/main-left/sys-flap-motor</property>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/flight/flaps-serviceable</output>
+    </filter>
+
+    <filter>
+        <name>flaps control</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.25</max-rate-of-change>
+        <enable>
+            <condition>
+                    <not><property>controls/flight/flaps-touch</property></not>
+                    <not><property>controls/flaps-stepped</property></not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <less-than>
+                    <property>controls/flight/flaps-cmd</property>
+                    <value>0</value>
+                </less-than>
+            </condition>
+            <value>0</value>
+        </input>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>controls/flight/flaps-cmd</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>controls/flight/flaps</input>
+        <output>controls/flight/flaps</output>
+    </filter>
+
+    <filter>
+        <name>flaps control</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>0.15</max-rate-of-change>
+        <input>
+            <condition>
+                <property>controls/flight/flaps-serviceable</property>
+            </condition>
+            <property>controls/flight/flaps</property>
+        </input>
+        <input>surface-positions/flap-pos</input>
+        <output>surface-positions/flap-pos</output>
+    </filter>
+
+<!-- gear lever -->
+
+    <filter>
+        <name>gear-lever</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>1.25</max-rate-of-change>
+        <input>controls/gear/gear-lever-cmd</input>
+        <output>controls/gear/gear-lever-pos</output>
+    </filter>
+
+    <filter>
+        <name>gear-down</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <less-than>
+                    <property>controls/gear/gear-lever-pos</property>
+                    <value>0.3</value>
+                </less-than>
+            </condition>
+            <value>0</value>
+        </input>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>controls/gear/gear-lever-pos</property>
+                    <value>0.7</value>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <output>controls/gear/gear-down</output>
+    </filter>
+
+    <filter>
+        <name>anti-skid-test</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <equals>
+                    <property>controls/gear/gear-lever-cmd</property>
+                    <value>1</value>
+                </equals>
+                <greater-than>
+                    <property>controls/gear/gear-lever-pos</property>
+                    <value>0.7</value>
+                </greater-than>
+                <less-than>
+                    <property>controls/gear/gear-lever-pos</property>
+                    <value>0.95</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>/sim/time/elapsed-sec</input>
+        <output>controls/gear/antiskid-test</output>
+    </filter>
+
+<!-- emergency gear down -->
+
+    <filter>
+        <name>gear-lever</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>2.0</max-rate-of-change>
+        <input>controls/gear/emer-gear-cmd</input>
+        <output>controls/gear/emer-gear-pos</output>
+    </filter>
+
+<!-- gear compression for JSBsim -->
+
+    <filter>
+        <name>nose-gear</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <equals>
+                <property>sim/flight-model</property>
+                <value>jsb</value>
+            </equals>
+        </enable>
+        <gain>0.3048</gain>
+        <input>gear/gear[0]/compression-ft</input>
+        <output>gear/gear[0]/compression-m</output>
+    </filter>
+
+    <filter>
+        <name>left-main-gear</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <equals>
+                <property>sim/flight-model</property>
+                <value>jsb</value>
+            </equals>
+        </enable>
+        <gain>0.3048</gain>
+        <input>gear/gear[1]/compression-ft</input>
+        <output>gear/gear[1]/compression-m</output>
+    </filter>
+
+    <filter>
+        <name>right-main-gear</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <equals>
+                <property>sim/flight-model</property>
+                <value>jsb</value>
+            </equals>
+        </enable>
+        <gain>0.3048</gain>
+        <input>gear/gear[2]/compression-ft</input>
+        <output>gear/gear[2]/compression-m</output>
+    </filter>
+
+</PropertyList>

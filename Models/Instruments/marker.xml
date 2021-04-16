@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<PropertyList>
+
+  <path>marker.ac</path>
+
+  <animation>
+    <type>select</type>
+    <object-name>marker.outer</object-name>
+    <condition>
+      <property>instrumentation/marker-beacon/outer</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>marker.middle</object-name>
+    <condition>
+      <property>instrumentation/marker-beacon/middle</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>marker.inner</object-name>
+    <condition>
+      <property>instrumentation/marker-beacon/inner</property>
+    </condition>
+  </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>marker.panel</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Lightmap -->
+    <!--effect>
+        <condition>
+            <property>controls/lighting/panel-lights-switch</property>
+        </condition>
+        <inherits-from>Aircraft/Citation/Models/Effects/lm-marker</inherits-from>
+        <object-name>marker.panel</object-name>
+    </effect-->
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>marker.panel</object-name>
+    </effect-->
+
+</PropertyList>
+

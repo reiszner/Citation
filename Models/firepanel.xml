@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+
+    <path>firepanel.ac</path>
+
+<!-- show objects only in model 0 -->
+    <animation>
+        <type>select</type>
+        <object-name>rev.panel</object-name>
+        <object-name>rev.left.emer-sw</object-name>
+        <object-name>rev.right.emer-sw</object-name>
+        <condition>
+            <equals>
+                <property>sim/model/variant</property>
+                <value>0</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>rev.blind</object-name>
+        <condition>
+            <property>sim/model/variant</property>
+        </condition>
+    </animation>
+
+<!-- Lights -->
+    <animation>
+        <type>select</type>
+        <object-name>rev.left.arm</object-name>
+        <condition>
+            <or>
+                <property>systems/hydraulic/valves/reverser-left/state</property>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>5</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>rev.left.unlock</object-name>
+        <condition>
+            <or>
+                <greater-than>
+                    <property>surface-positions/reverser-norm[0]</property>
+                    <value>0.05</value>
+                </greater-than>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>5</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>rev.left.deploy</object-name>
+        <condition>
+            <or>
+                <greater-than>
+                    <property>surface-positions/reverser-norm[0]</property>
+                    <value>0.95</value>
+                </greater-than>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>5</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>rev.right.arm</object-name>
+        <condition>
+            <or>
+                <property>systems/hydraulic/valves/reverser-right/state</property>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>5</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>rev.right.unlock</object-name>
+        <condition>
+            <or>
+                <greater-than>
+                    <property>surface-positions/reverser-norm[1]</property>
+                    <value>0.05</value>
+                </greater-than>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>5</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>rev.right.deploy</object-name>
+        <condition>
+            <or>
+                <greater-than>
+                    <property>surface-positions/reverser-norm[1]</property>
+                    <value>0.95</value>
+                </greater-than>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>5</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>fire.bottle1.lit</object-name>
+        <object-name>fire.bottle2.lit</object-name>
+        <condition>
+            <equals>
+                <property>controls/electric/system-test</property>
+                <value>99</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>fire.shutoff.left.lit</object-name>
+        <condition>
+            <or>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>99</value>
+                </equals>
+                <equals>
+                    <property>controls/engines/engine[0]/fire-switch</property>
+                    <value>1</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>fire.shutoff.right.lit</object-name>
+        <condition>
+            <or>
+                <equals>
+                    <property>controls/electric/system-test</property>
+                    <value>99</value>
+                </equals>
+                <equals>
+                    <property>controls/engines/engine[1]/fire-switch</property>
+                    <value>1</value>
+                </equals>
+            </or>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>fire.shutoff.left.cover</object-name>
+        <property>controls/engines/engine[0]/firecover</property>
+        <factor>125</factor>
+        <center>
+            <x-m>0.0025</x-m>
+            <y-m>-0.0195</y-m>
+            <z-m>-0.0075</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>fire.shutoff.right.cover</object-name>
+        <property>controls/engines/engine[1]/firecover</property>
+        <factor>125</factor>
+        <center>
+            <x-m>0.0025</x-m>
+            <y-m>0.0195</y-m>
+            <z-m>-0.0075</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>rev.left.emer-sw</object-name>
+        <property>controls/engines/engine[0]/reverser-emer-sw</property>
+        <factor>40</factor>
+        <center>
+            <x-m>0.00325</x-m>
+            <y-m>-0.0800</y-m>
+            <z-m>-0.0215</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>rev.right.emer-sw</object-name>
+        <property>controls/engines/engine[1]/reverser-emer-sw</property>
+        <factor>40</factor>
+        <center>
+            <x-m>0.00325</x-m>
+            <y-m>-0.0800</y-m>
+            <z-m>-0.0215</z-m>
+        </center>
+        <axis>
+            <x>0.0</x>
+            <y>-1.0</y>
+            <z>0.0</z>
+        </axis>
+    </animation>
+
+<!-- Hotspots -->
+
+    <animation>
+        <type>pick</type>
+        <object-name>fire.shutoff.left.btn</object-name>
+        <object-name>fire.shutoff.left.lit</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/engines/engine[0]/fire-switch</property>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>fire0</tooltip-id>
+                <label>Left Fire Switch: %s</label>
+                <mapping>on-off</mapping>
+                <property>controls/engines/engine[0]/fire-switch</property>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/engines/engine[0]/firecover-act</property>
+                <property>/sim/time/elapsed-sec</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>fire.shutoff.right.btn</object-name>
+        <object-name>fire.shutoff.right.lit</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/engines/engine[1]/fire-switch</property>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>fire1</tooltip-id>
+                <label>Right Fire Switch: %s</label>
+                <mapping>on-off</mapping>
+                <property>controls/engines/engine[1]/fire-switch</property>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/engines/engine[1]/firecover-act</property>
+                <property>/sim/time/elapsed-sec</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>fire.shutoff.left.cover</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/engines/engine[0]/firecover</property>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/engines/engine[0]/firecover-act</property>
+                <property>/sim/time/elapsed-sec</property>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>cover0</tooltip-id>
+                <label>Left Fire Cover: %s</label>
+                <mapping>nasal</mapping>
+                <script>(arg[0] == 0) ? "Closed" : "Open"</script>
+                <property>controls/engines/engine[0]/firecover</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>fire.shutoff.right.cover</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/engines/engine[1]/firecover</property>
+            </binding>
+            <binding>
+                <command>property-assign</command>
+                <property>controls/engines/engine[1]/firecover-act</property>
+                <property>/sim/time/elapsed-sec</property>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>cover1</tooltip-id>
+                <label>Right Fire Cover: %s</label>
+                <mapping>nasal</mapping>
+                <script>(arg[0] == 0) ? "Closed" : "Open"</script>
+                <property>controls/engines/engine[1]/firecover</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>rev.left.emer-sw</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/engines/engine[0]/reverser-emer-sw</property>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>rev-emer-sw-left</tooltip-id>
+                <label>Left Reverser Switch: %s</label>
+                <mapping>nasal</mapping>
+                <script>(arg[0] == 0) ? "Normal" : "Emergency"</script>
+                <property>controls/engines/engine[0]/reverser-emer-sw</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>rev.right.emer-sw</object-name>
+        <action>
+            <button>0</button>
+            <binding>
+                <command>property-toggle</command>
+                <property>controls/engines/engine[1]/reverser-emer-sw</property>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>rev-emer-sw-right</tooltip-id>
+                <label>Right Reverser Switch: %s</label>
+                <mapping>nasal</mapping>
+                <script>(arg[0] == 0) ? "Normal" : "Emergency"</script>
+                <property>controls/engines/engine[1]/reverser-emer-sw</property>
+            </binding>
+        </hovered>
+    </animation>
+
+<!-- Panel Lights (only for quality=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>fire.panel</object-name>
+        <object-name>rev.panel</object-name>
+        <object-name>rev.blind</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Simulate ambient light from panel lights (center console) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>fire.panel</object-name>
+        <object-name>fire.shutoff.left.btn</object-name>
+        <object-name>fire.shutoff.right.btn</object-name>
+        <object-name>fire.bottle1.btn</object-name>
+        <object-name>fire.bottle2.btn</object-name>
+        <object-name>fire.shutoff.left.cover</object-name>
+        <object-name>fire.shutoff.right.cover</object-name>
+        <object-name>rev.panel</object-name>
+        <object-name>rev.blind</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/flightdeck-average-ambient-light-center-console</factor-prop>
+        </emission>
+    </animation>
+
+<!-- glass effect -->
+    <effect>
+        <!--inherits-from>Effects/model-transparent</inherits-from-->
+        <inherits-from>Aircraft/Citation/Models/Effects/reflection-glass</inherits-from>
+        <object-name>fire.shutoff.left.cover</object-name>
+        <object-name>fire.shutoff.right.cover</object-name>
+    </effect>
+
+<!-- Chrome Effect! -->
+    <effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+        <object-name>rev.left.emer-sw</object-name>
+        <object-name>rev.right.emer-sw</object-name>
+    </effect>
+
+<!-- cockpit shadows -->
+    <!--effect>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>fire.panel</object-name>
+        <object-name>fire.shutoff.left.btn</object-name>
+        <object-name>fire.shutoff.right.btn</object-name>
+        <object-name>fire.bottle1.btn</object-name>
+        <object-name>fire.bottle2.btn</object-name>
+        <object-name>rev.panel</object-name>
+        <object-name>rev.blind</object-name>
+        <object-name>rev.left.arm</object-name>
+        <object-name>rev.left.unlock</object-name>
+        <object-name>rev.left.deploy</object-name>
+    </effect-->
+
+</PropertyList>

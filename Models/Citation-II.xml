@@ -1,0 +1,5538 @@
+<PropertyList>
+
+  <path>Citation-II.ac</path>
+
+  <nasal>
+    <load><![CDATA[
+      var r = cmdarg(); # the remote aircraft
+      print ("Loading Citation-II for remote pilot " ~ r.getNode ("sim/multiplay/callsign").getValue());
+      var livery_update = aircraft.livery_update.new("Aircraft/Citation/Models/Liveries", 10);
+
+      var table = [[ "systems/electrical/outputs/strobe",               "short[0]" ],
+                   [ "systems/electrical/outputs/beacon",               "short[1]" ],
+                   [ "systems/electrical/outputs/nav-lights",           "short[2]" ],
+                   [ "systems/electrical/outputs/landing-light[0]",     "short[3]" ],
+                   [ "systems/electrical/outputs/landing-light[1]",     "short[4]" ],
+                   [ "controls/lighting/recog-light[0]",                "short[5]" ],
+                   [ "controls/lighting/recog-light[1]",                "short[6]" ],
+                   [ "controls/cabin-door/position-norm",               "float[0]" ],
+                   [ "sim/model/registration/red",                      "float[1]" ],
+                   [ "sim/model/registration/green",                    "float[2]" ],
+                   [ "sim/model/registration/blue",                     "float[3]" ],
+                   [ "surface-positions/reverser-norm[0]",              "float[4]" ],
+                   [ "surface-positions/reverser-norm[1]",              "float[5]" ],
+                   [ "controls/baggage-door-front-left/position-norm",  "float[6]" ],
+                   [ "controls/baggage-door-front-right/position-norm", "float[7]" ],
+                   [ "controls/baggage-door-aft/position-norm",         "float[8]" ],
+                   [ "sim/weight[1]/weight-lb",                         "float[9]" ],
+                   [ "sim/weight[2]/weight-lb",                         "float[10]" ],
+                   [ "gear/gear[0]/rollspeed-ms",                       "float[11]" ],
+                   [ "gear/gear[1]/rollspeed-ms",                       "float[12]" ],
+                   [ "gear/gear[2]/rollspeed-ms",                       "float[13]" ],
+      ];
+
+      foreach (var row; table) {
+        r.getNode (row[0], 1).alias (r.getNode ("sim/multiplay/generic/" ~ row[1]));
+      }
+      # Graft the properties for the humans onto the property tree of the remote Citation.
+      io.read_properties ("Aircraft/Citation/Models/Human/humans.xml", r.getNode ("sim/model"));
+      # Bug: sim/multiplay/generic/bool[0] is not transmitted properly, so force it to true.
+      r.getNode ("controls/human-models").setBoolValue (1);
+    ]]></load>
+
+    <unload><![CDATA[
+      print ("Unloading Citation-II for remote pilot " ~ r.getNode ("sim/multiplay/callsign").getValue());
+      livery_update.stop();
+    ]]></unload>
+  </nasal>
+
+  <!-- Do not show the following objects in the 3D preview of fgrun: -->
+  <animation>
+    <object-name>pilot</object-name>
+    <object-name>copilot</object-name>
+    <object-name>Pax0</object-name>
+    <object-name>Pax1</object-name>
+    <object-name>Pax2</object-name>
+    <object-name>Pax3</object-name>
+    <object-name>Pax4</object-name>
+    <object-name>Pax5</object-name>
+    <object-name>Pax6</object-name>
+    <nopreview/>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>engine.left.rev.down.door</object-name>
+    <object-name>engine.left.rev.down.joint</object-name>
+    <object-name>engine.left.rev.link.cover</object-name>
+    <object-name>engine.left.rev.link.down.long</object-name>
+    <object-name>engine.left.rev.link.down.short</object-name>
+    <object-name>engine.left.rev.link.up.long</object-name>
+    <object-name>engine.left.rev.link.up.short</object-name>
+    <object-name>engine.left.rev.up.door</object-name>
+    <object-name>engine.left.rev.up.joint</object-name>
+    <object-name>engine.left.intake.cooling</object-name>
+    <object-name>engine.right.rev.down.door</object-name>
+    <object-name>engine.right.rev.down.joint</object-name>
+    <object-name>engine.right.rev.link.cover</object-name>
+    <object-name>engine.right.rev.link.down.long</object-name>
+    <object-name>engine.right.rev.link.down.short</object-name>
+    <object-name>engine.right.rev.link.up.long</object-name>
+    <object-name>engine.right.rev.link.up.short</object-name>
+    <object-name>engine.right.rev.up.door</object-name>
+    <object-name>engine.right.rev.up.joint</object-name>
+    <object-name>engine.right.intake.cooling</object-name>
+    <condition>
+      <equals>
+        <property>sim/model/variant</property>
+        <value>0</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>engine.left.nozzle.cover</object-name>
+    <object-name>engine.right.nozzle.cover</object-name>
+    <condition>
+      <equals>
+        <property>sim/model/variant</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <property-base>sim/model/livery</property-base>
+    <texture-prop>texture</texture-prop>
+    <texture>Aircraft/Citation/Models/Liveries/Lv2.png</texture>
+
+    <object-name>engine.left.cowling</object-name>
+    <object-name>engine.left.drain.cover</object-name>
+    <object-name>engine.left.drain.pipe</object-name>
+    <object-name>engine.left.fan.fast</object-name>
+    <object-name>engine.left.fan.medium</object-name>
+    <object-name>engine.left.fan.slow</object-name>
+    <object-name>engine.left.intake.cooling</object-name>
+    <object-name>engine.left.nozzle</object-name>
+    <object-name>engine.left.nozzle.cover</object-name>
+    <object-name>engine.left.rev.down.joint</object-name>
+    <object-name>engine.left.rev.link.down.long</object-name>
+    <object-name>engine.left.rev.link.down.short</object-name>
+    <object-name>engine.left.rev.link.up.long</object-name>
+    <object-name>engine.left.rev.link.up.short</object-name>
+    <object-name>engine.left.rev.up.joint</object-name>
+    <object-name>engine.left.turbine</object-name>
+    <object-name>engine.left.turbine.fast</object-name>
+    <object-name>engine.left.turbine.medium</object-name>
+    <object-name>engine.left.turbine.slow</object-name>
+    <object-name>engine.right.cowling</object-name>
+    <object-name>engine.right.drain.cover</object-name>
+    <object-name>engine.right.drain.pipe</object-name>
+    <object-name>engine.right.fan.fast</object-name>
+    <object-name>engine.right.fan.medium</object-name>
+    <object-name>engine.right.fan.slow</object-name>
+    <object-name>engine.right.intake.cooling</object-name>
+    <object-name>engine.right.nozzle</object-name>
+    <object-name>engine.right.nozzle.cover</object-name>
+    <object-name>engine.right.rev.down.joint</object-name>
+    <object-name>engine.right.rev.link.down.long</object-name>
+    <object-name>engine.right.rev.link.down.short</object-name>
+    <object-name>engine.right.rev.link.up.long</object-name>
+    <object-name>engine.right.rev.link.up.short</object-name>
+    <object-name>engine.right.rev.up.joint</object-name>
+    <object-name>engine.right.turbine</object-name>
+    <object-name>engine.right.turbine.fast</object-name>
+    <object-name>engine.right.turbine.medium</object-name>
+    <object-name>engine.right.turbine.slow</object-name>
+
+    <object-name>fuselage</object-name>
+    <object-name>pylons</object-name>
+    <object-name>fin</object-name>
+    <object-name>rudder</object-name>
+    <object-name>rudder.trim</object-name>
+    <object-name>rudder.static.mount1</object-name>
+    <object-name>rudder.static.mount2</object-name>
+    <object-name>hstab</object-name>
+    <object-name>elevator.left</object-name>
+    <object-name>elevator.left.static.mount1</object-name>
+    <object-name>elevator.left.static.mount2</object-name>
+    <object-name>elevator.right</object-name>
+    <object-name>elevator.right.static.mount1</object-name>
+    <object-name>elevator.right.static.mount2</object-name>
+    <object-name>elevator.trim</object-name>
+    <object-name>door</object-name>
+
+    <object-name>wing.left.area1</object-name>
+    <object-name>wing.left.area2</object-name>
+    <object-name>wing.left.area3</object-name>
+    <object-name>wing.left.tip</object-name>
+    <object-name>wing.left.aileron.tab</object-name>
+    <object-name>wing.trim.tab</object-name>
+    <object-name>wing.left.flap.tab</object-name>
+    <object-name>wing.left.spdbrk.up.surf</object-name>
+    <object-name>wing.left.spdbrk.down.surf</object-name>
+    <object-name>wing.left.spdbrk.down.hinges</object-name>
+    <object-name>wing.left.recog.blend</object-name>
+    <object-name>wing.left.static.mount1</object-name>
+    <object-name>wing.left.static.mount2</object-name>
+    <object-name>wing.left.static.mount3</object-name>
+    <object-name>wing.left.static.mount4</object-name>
+
+    <object-name>wing.right.area1</object-name>
+    <object-name>wing.right.area2</object-name>
+    <object-name>wing.right.area3</object-name>
+    <object-name>wing.right.tip</object-name>
+    <object-name>wing.right.aileron.tab</object-name>
+    <object-name>wing.right.flap.tab</object-name>
+    <object-name>wing.right.spdbrk.up.surf</object-name>
+    <object-name>wing.right.spdbrk.down.surf</object-name>
+    <object-name>wing.right.spdbrk.down.hinges</object-name>
+    <object-name>wing.right.recog.blend</object-name>
+    <object-name>wing.right.static.mount1</object-name>
+    <object-name>wing.right.static.mount2</object-name>
+    <object-name>wing.right.static.mount3</object-name>
+    <object-name>wing.right.static.mount4</object-name>
+
+    <object-name>baggage.door.left</object-name>
+    <object-name>baggage.door.right</object-name>
+    <object-name>baggage.door.aft</object-name>
+
+    <object-name>gear.nose.actu</object-name>
+    <object-name>gear.nose.trunnion</object-name>
+    <object-name>gear.nose.door</object-name>
+    <object-name>gear.nose.left.door</object-name>
+    <object-name>gear.nose.right.door</object-name>
+    <object-name>gear.nose.damper</object-name>
+    <object-name>gear.nose.fitting</object-name>
+    <object-name>gear.nose.torquelink.down</object-name>
+    <object-name>gear.nose.torquelink.up</object-name>
+    <object-name>gear.nose.well</object-name>
+    <object-name>gear.nose.rim</object-name>
+
+    <object-name>gear.left.door.blade</object-name>
+    <object-name>gear.right.door.blade</object-name>
+  </animation>
+
+  <animation>
+    <type>noshadow</type>
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <object-name>nav.white.light</object-name>
+    <object-name>nav.white.light.corona</object-name>
+    <object-name>beacon.light</object-name>
+    <object-name>beacon.light.corona</object-name>
+    <object-name>recog.left.corona</object-name>
+    <object-name>recog.left.dazzle</object-name>
+    <object-name>recog.right.corona</object-name>
+    <object-name>recog.right.dazzle</object-name>
+    <object-name>strobe.left.light</object-name>
+    <object-name>strobe.right.light</object-name>
+    <object-name>gear.left.light.corona</object-name>
+    <object-name>gear.left.light.dazzle</object-name>
+    <object-name>gear.right.light.corona</object-name>
+    <object-name>gear.right.light.dazzle</object-name>
+  </animation>
+
+  <!-- Chrome effect -->
+  <effect>
+    <inherits-from>Aircraft/Citation/Models/Effects/chrome-exterior</inherits-from>
+    <object-name>engine.left.intake</object-name>
+    <object-name>engine.left.intake.cone</object-name>
+    <object-name>engine.left.rev.down.door</object-name>
+    <object-name>engine.left.rev.link.cover</object-name>
+    <object-name>engine.left.rev.up.door</object-name>
+    <object-name>engine.left.turbine.cone</object-name>
+    <object-name>engine.right.intake</object-name>
+    <object-name>engine.right.intake.cone</object-name>
+    <object-name>engine.right.rev.down.door</object-name>
+    <object-name>engine.right.rev.link.cover</object-name>
+    <object-name>engine.right.rev.up.door</object-name>
+    <object-name>engine.right.turbine.cone</object-name>
+
+    <object-name>wing.left.heater1</object-name>
+    <object-name>wing.left.heater2</object-name>
+    <object-name>wing.right.heater1</object-name>
+    <object-name>wing.right.heater2</object-name>
+
+    <object-name>wing.left.recog.light</object-name>
+    <object-name>wing.right.recog.light</object-name>
+
+    <object-name>wing.left.light.flasher</object-name>
+    <object-name>wing.right.light.flasher</object-name>
+
+    <object-name>door.handle</object-name>
+    <object-name>pitot.tubes</object-name>
+
+    <object-name>gear.nose.fitting.lock</object-name>
+    <object-name>gear.nose.piston</object-name>
+    <object-name>gear.nose.strut</object-name>
+
+    <object-name>gear.left.light.inside</object-name>
+    <object-name>gear.left.piston</object-name>
+    <object-name>gear.left.strut</object-name>
+    <object-name>gear.left.uplock</object-name>
+
+    <object-name>gear.right.light.inside</object-name>
+    <object-name>gear.right.piston</object-name>
+    <object-name>gear.right.strut</object-name>
+    <object-name>gear.right.uplock</object-name>
+
+    <object-name>wing.left.spdbrk.actu.piston</object-name>
+    <object-name>wing.right.spdbrk.actu.piston</object-name>
+  </effect>
+
+  <!-- REFLECTION, NormalMap -->
+  <effect>
+    <inherits-from>Aircraft/Citation/Models/Effects/reflection-exterior</inherits-from>
+    <object-name>engine.left.cowling</object-name>
+    <object-name>engine.left.drain.cover</object-name>
+    <object-name>engine.left.intake.cooling</object-name>
+    <object-name>engine.left.nozzle.cover</object-name>
+    <object-name>engine.right.cowling</object-name>
+    <object-name>engine.right.drain.cover</object-name>
+    <object-name>engine.right.intake.cooling</object-name>
+    <object-name>engine.right.nozzle.cover</object-name>
+
+    <object-name>fuselage</object-name>
+    <object-name>pylons</object-name>
+    <object-name>fin</object-name>
+    <object-name>fin.static.mount</object-name>
+    <object-name>rudder</object-name>
+    <object-name>rudder.trim</object-name>
+    <object-name>rudder.static.mount1</object-name>
+    <object-name>rudder.static.mount2</object-name>
+    <object-name>hstab</object-name>
+    <object-name>elevator.left</object-name>
+    <object-name>elevator.left.static.mount1</object-name>
+    <object-name>elevator.left.static.mount2</object-name>
+    <object-name>elevator.right</object-name>
+    <object-name>elevator.right.static.mount1</object-name>
+    <object-name>elevator.right.static.mount2</object-name>
+    <object-name>elevator.trim</object-name>
+    <object-name>door</object-name>
+
+    <object-name>wing.left.area1</object-name>
+    <object-name>wing.left.area2</object-name>
+    <object-name>wing.left.area3</object-name>
+    <object-name>wing.left.tip</object-name>
+    <object-name>wing.left.aileron.tab</object-name>
+    <object-name>wing.trim.tab</object-name>
+    <object-name>wing.left.flap.tab</object-name>
+    <object-name>wing.left.spdbrk.up.surf</object-name>
+    <object-name>wing.left.spdbrk.down.surf</object-name>
+    <object-name>wing.left.spdbrk.down.hinges</object-name>
+    <object-name>wing.left.static.mount1</object-name>
+    <object-name>wing.left.static.mount2</object-name>
+    <object-name>wing.left.static.mount3</object-name>
+    <object-name>wing.left.static.mount4</object-name>
+    <!--object-name>wing.left.recog.blend</object-name-->
+
+    <object-name>wing.right.area1</object-name>
+    <object-name>wing.right.area2</object-name>
+    <object-name>wing.right.area3</object-name>
+    <object-name>wing.right.tip</object-name>
+    <object-name>wing.right.aileron.tab</object-name>
+    <object-name>wing.right.flap.tab</object-name>
+    <object-name>wing.right.spdbrk.up.surf</object-name>
+    <object-name>wing.right.spdbrk.down.surf</object-name>
+    <object-name>wing.right.spdbrk.down.hinges</object-name>
+    <object-name>wing.right.static.mount1</object-name>
+    <object-name>wing.right.static.mount2</object-name>
+    <object-name>wing.right.static.mount3</object-name>
+    <object-name>wing.right.static.mount4</object-name>
+    <!--object-name>wing.right.recog.blend</object-name-->
+
+    <object-name>baggage.door.left</object-name>
+    <object-name>baggage.door.right</object-name>
+    <object-name>baggage.door.aft</object-name>
+
+    <object-name>gear.nose.door</object-name>
+    <object-name>gear.nose.left.door</object-name>
+    <object-name>gear.nose.right.door</object-name>
+
+    <object-name>gear.left.door.blade</object-name>
+    <object-name>gear.right.door.blade</object-name>
+  </effect>
+
+  <!-- glass effect -->
+  <effect>
+    <inherits-from>Effects/model-transparent</inherits-from>
+    <object-name>door.glass</object-name>
+    <object-name>cockpit.glass</object-name>
+    <object-name>cockpit.window</object-name>
+    <object-name>window.glass</object-name>
+    <object-name>wing.left.recog.glass</object-name>
+    <object-name>wing.right.recog.glass</object-name>
+    <object-name>wing.left.light.glass</object-name>
+    <object-name>wing.right.light.glass</object-name>
+    <object-name>wing.left.light.nav.on</object-name>
+    <object-name>wing.left.light.nav.off</object-name>
+    <object-name>wing.right.light.nav.on</object-name>
+    <object-name>wing.right.light.nav.off</object-name>
+    <object-name>gear.left.light.glass</object-name>
+    <object-name>gear.right.light.glass</object-name>
+
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <object-name>nav.white.light</object-name>
+    <object-name>nav.white.light.corona</object-name>
+
+    <object-name>beacon.on</object-name>
+    <object-name>beacon.off</object-name>
+    <object-name>beacon.light</object-name>
+    <object-name>beacon.light.corona</object-name>
+
+    <object-name>recog.left.corona</object-name>
+    <object-name>recog.left.dazzle</object-name>
+    <object-name>recog.right.corona</object-name>
+    <object-name>recog.right.dazzle</object-name>
+
+    <object-name>strobe.left.light</object-name>
+    <object-name>strobe.right.light</object-name>
+
+    <object-name>gear.left.light.corona</object-name>
+    <object-name>gear.left.light.dazzle</object-name>
+    <object-name>gear.right.light.corona</object-name>
+    <object-name>gear.right.light.dazzle</object-name>
+  </effect>
+
+
+  <!-- ALS cockpit glass effect (reflection cube, rain, frost, fog) -->
+  <effect>
+    <inherits-from>Aircraft/Citation/Models/Effects/reflection-glass</inherits-from>
+    <!--parameters>
+      <texture n="3">
+        <type>cubemap</type>
+        <images>
+          <positive-x>Effects/glass/refl_cube_back.png</positive-x>
+          <negative-x>Effects/glass/refl_cube_front.png</negative-x>
+          <positive-y>Effects/glass/refl_cube_right.png</positive-y>
+          <negative-y>Effects/glass/refl_cube_left.png</negative-y>
+          <positive-z>Effects/glass/refl_cube_up.png</positive-z>
+          <negative-z>Effects/glass/refl_cube_down.png</negative-z>
+        </images>
+      </texture>
+      <use-reflection type="int">1</use-reflection>
+      <reflection-strength type="float">0.5</reflection-strength>
+    </parameters-->
+    <object-name>door.glass.inside</object-name>
+    <object-name>cockpit.glass.inside</object-name>
+    <object-name>cockpit.window.inside</object-name>
+    <object-name>window.glass.inside</object-name>
+  </effect>
+
+  <model>
+    <name>cabin</name>
+    <usage>interior</usage>
+    <path>Aircraft/Citation/Models/cabin.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>flightdeck</name>
+    <path>Aircraft/Citation/Models/flightdeck.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+
+  <model>
+    <name>Lights</name>
+    <path>Aircraft/Citation/Models/Lights/Lights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+
+  <!-- ALS Lights -->
+  <model>
+    <name>als-nav-red-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/nav_red_light.xml</path>
+    <offsets>
+      <x-m> 6.94</x-m>
+      <y-m>-7.88</y-m>
+      <z-m> 0.38</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>nav-red-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 6.94</x-m>
+      <y-m>-7.88</y-m>
+      <z-m> 0.38</z-m>
+    </position>
+    <direction>
+      <x>-0.573576</x>
+      <y>-0.819152</y>
+      <z> 0.0</z>
+    </direction>
+    <ambient>
+      <r>1.0</r>
+      <g>0.4</g>
+      <b>0.4</b>
+      <a>0.0</a>
+    </ambient>
+    <diffuse>
+      <r>1.0</r>
+      <g>0.4</g>
+      <b>0.4</b>
+      <a>0.0</a>
+    </diffuse>
+    <specular>
+      <r>1.0</r>
+      <g>0.4</g>
+      <b>0.4</b>
+      <a>0.0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.225</l>
+      <q>0.1875</q>
+    </attenuation>
+    <spot-cutoff>75</spot-cutoff>
+    <spot-exponent>3</spot-exponent>
+    <range-m>20</range-m>
+  </light>
+
+  <model>
+    <name>als-nav-green-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/nav_green_light.xml</path>
+    <offsets>
+      <x-m> 6.94</x-m>
+      <y-m> 7.88</y-m>
+      <z-m> 0.38</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>nav-green-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 6.94</x-m>
+      <y-m> 7.88</y-m>
+      <z-m> 0.38</z-m>
+    </position>
+    <direction>
+      <x>-0.573576</x>
+      <y> 0.819152</y>
+      <z> 0.0</z>
+    </direction>
+    <ambient>
+      <r>0.4</r>
+      <g>1.0</g>
+      <b>0.4</b>
+      <a>0.0</a>
+    </ambient>
+    <diffuse>
+      <r>0.4</r>
+      <g>1.0</g>
+      <b>0.4</b>
+      <a>0.0</a>
+    </diffuse>
+    <specular>
+      <r>0.4</r>
+      <g>1.0</g>
+      <b>0.4</b>
+      <a>0.0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.225</l>
+      <q>0.1875</q>
+    </attenuation>
+    <spot-cutoff>75</spot-cutoff>
+    <spot-exponent>3</spot-exponent>
+    <range-m>20</range-m>
+  </light>
+
+  <model>
+    <name>als-nav-white-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/nav_white_light.xml</path>
+    <offsets>
+      <x-m>13.75</x-m>
+      <y-m> 0.00</y-m>
+      <z-m> 0.76</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>nav-white-light</name>
+    <type>spot</type>
+    <position>
+      <x-m>13.75</x-m>
+      <y-m> 0.00</y-m>
+      <z-m> 0.76</z-m>
+    </position>
+    <direction>
+      <x> 1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </direction>
+    <ambient>
+      <r>1.0</r>
+      <g>1.0</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </ambient>
+    <diffuse>
+      <r>1.0</r>
+      <g>1.0</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </diffuse>
+    <specular>
+      <r>1.0</r>
+      <g>1.0</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.225</l>
+      <q>0.1875</q>
+    </attenuation>
+    <spot-cutoff>89</spot-cutoff>
+    <spot-exponent>3</spot-exponent>
+    <range-m>20</range-m>
+  </light>
+
+  <model>
+    <name>als-beacon-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/beacon_light.xml</path>
+    <offsets>
+      <x-m>13.78</x-m>
+      <y-m> 0.00</y-m>
+      <z-m> 3.63</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>beacon-light</name>
+    <type>spot</type>
+    <position>
+      <x-m>13.78</x-m>
+      <y-m> 0.00</y-m>
+      <z-m> 3.63</z-m>
+    </position>
+    <direction>
+      <x>-1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </direction>
+    <ambient>
+      <r>1.0</r>
+      <g>0.3</g>
+      <b>0.2</b>
+      <a>0.0</a>
+    </ambient>
+    <diffuse>
+      <r>1.0</r>
+      <g>0.3</g>
+      <b>0.2</b>
+      <a>0.0</a>
+    </diffuse>
+    <specular>
+      <r>1.0</r>
+      <g>0.3</g>
+      <b>0.2</b>
+      <a>0.0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.45</l>
+      <q>0.75</q>
+    </attenuation>
+    <spot-cutoff>70</spot-cutoff>
+    <spot-exponent>5</spot-exponent>
+    <range-m>10</range-m>
+  </light>
+
+  <model>
+    <name>als-strobe-left-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/strobe_left_light.xml</path>
+    <offsets>
+      <x-m> 7.025</x-m>
+      <y-m>-7.88</y-m>
+      <z-m> 0.38</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>strobe-left-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 7.025</x-m>
+      <y-m>-7.88</y-m>
+      <z-m> 0.38</z-m>
+    </position>
+    <direction>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </direction>
+    <ambient>
+      <r>0.9</r>
+      <g>0.9</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </ambient>
+    <diffuse>
+      <r>0.9</r>
+      <g>0.9</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </diffuse>
+    <specular>
+      <r>0.9</r>
+      <g>0.9</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.3</l>
+      <q>0.09</q>
+    </attenuation>
+    <spot-cutoff>85</spot-cutoff>
+    <spot-exponent>1</spot-exponent>
+    <range-m>50</range-m>
+  </light>
+
+  <model>
+    <name>als-strobe-right-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/strobe_right_light.xml</path>
+    <offsets>
+      <x-m> 7.025</x-m>
+      <y-m> 7.88</y-m>
+      <z-m> 0.38</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>strobe-right-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 7.025</x-m>
+      <y-m> 7.88</y-m>
+      <z-m> 0.38</z-m>
+    </position>
+    <direction>
+      <x> 0.0</x>
+      <y> 1.0</y>
+      <z> 0.0</z>
+    </direction>
+    <ambient>
+      <r>0.9</r>
+      <g>0.9</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </ambient>
+    <diffuse>
+      <r>0.9</r>
+      <g>0.9</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </diffuse>
+    <specular>
+      <r>0.9</r>
+      <g>0.9</g>
+      <b>1.0</b>
+      <a>0.0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.3</l>
+      <q>0.09</q>
+    </attenuation>
+    <spot-cutoff>85</spot-cutoff>
+    <spot-exponent>1</spot-exponent>
+    <range-m>50</range-m>
+  </light>
+
+
+  <model>
+    <name>als-recog-left-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/recog_left_light.xml</path>
+    <offsets>
+      <x-m> 6.670</x-m>
+      <y-m>-7.536</y-m>
+      <z-m> 0.358</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>recog-left-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 6.670</x-m>
+      <y-m>-7.536</y-m>
+      <z-m> 0.358</z-m>
+    </position>
+    <direction>
+      <x>-0.965925826289</x>
+      <y> 0.0</y>
+      <z>-0.2588190451</z>
+    </direction>
+    <ambient>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </ambient>
+    <diffuse>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </diffuse>
+    <specular>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.1</l>
+      <q>0.000037</q>
+    </attenuation>
+    <spot-cutoff>65</spot-cutoff>
+    <spot-exponent>7.5</spot-exponent>
+    <range-m>450</range-m>
+  </light>
+
+
+  <model>
+    <name>als-recog-right-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/recog_right_light.xml</path>
+    <offsets>
+      <x-m> 6.670</x-m>
+      <y-m> 7.536</y-m>
+      <z-m> 0.358</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>recog-right-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 6.670</x-m>
+      <y-m> 7.536</y-m>
+      <z-m> 0.358</z-m>
+    </position>
+    <direction>
+      <x>-0.965925826289</x>
+      <y> 0.0</y>
+      <z>-0.2588190451</z>
+    </direction>
+    <ambient>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </ambient>
+    <diffuse>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </diffuse>
+    <specular>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.1</l>
+      <q>0.000037</q>
+    </attenuation>
+    <spot-cutoff>65</spot-cutoff>
+    <spot-exponent>7.5</spot-exponent>
+    <range-m>450</range-m>
+  </light>
+
+
+  <model>
+    <name>als-landing-left-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/landing_left_light.xml</path>
+    <offsets>
+      <x-m> 7.135000</x-m>
+      <y-m>-2.466740</y-m>
+      <z-m>-0.038423</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>landing-left-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 7.135000</x-m>
+      <y-m>-2.466740</y-m>
+      <z-m>-0.038423</z-m>
+    </position>
+    <direction>
+      <x>-0.98</x>
+      <y> 0.10</y>
+      <z> 0.05</z>
+    </direction>
+    <ambient>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </ambient>
+    <diffuse>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </diffuse>
+    <specular>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.0225</l>
+      <q>0.000001875</q>
+    </attenuation>
+    <spot-cutoff>15</spot-cutoff>
+    <spot-exponent>140</spot-exponent>
+    <range-m>1000</range-m>
+  </light>
+
+
+  <model>
+    <name>als-landing-right-light</name>
+    <path>Aircraft/Citation/Models/Effects/lights/landing_right_light.xml</path>
+    <offsets>
+      <x-m> 7.135000</x-m>
+      <y-m> 2.466740</y-m>
+      <z-m>-0.038423</z-m>
+    </offsets>
+  </model>
+
+  <light>
+    <name>landing-right-light</name>
+    <type>spot</type>
+    <position>
+      <x-m> 7.135000</x-m>
+      <y-m> 2.466740</y-m>
+      <z-m>-0.038423</z-m>
+    </position>
+    <direction>
+      <x>-0.98</x>
+      <y>-0.10</y>
+      <z> 0.05</z>
+    </direction>
+    <ambient>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </ambient>
+    <diffuse>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </diffuse>
+    <specular>
+      <r>1.00</r>
+      <g>0.95</g>
+      <b>0.95</b>
+      <a>0</a>
+    </specular>
+    <attenuation>
+      <c>1.0</c>
+      <l>0.0225</l>
+      <q>0.000001875</q>
+    </attenuation>
+    <spot-cutoff>15</spot-cutoff>
+    <spot-exponent>140</spot-exponent>
+    <range-m>1000</range-m>
+  </light>
+
+  <!-- Pushback -->
+  <model>
+    <path>Aircraft/Citation/Models/Pushback/pushback.xml</path>
+    <offsets>
+      <x-m>1.76</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+  <!-- Towbar -->
+  <model>
+    <path>Aircraft/Citation/Models/Pushback/towbar.xml</path>
+    <offsets>
+      <x-m>1.76</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+  <!-- ALS Thrust/Flame Effect - in this case more like exhaust effect :o) -->
+  <model>
+    <name>flamer</name>
+    <path>Aircraft/Citation/Models/Effects/flamel.xml</path>
+    <offsets>
+      <x-m>10.2</x-m>
+      <y-m>-1.3</y-m>
+      <z-m>0.8</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+  <model>
+    <name>flamel</name>
+    <path>Aircraft/Citation/Models/Effects/flamer.xml</path>
+    <offsets>
+      <x-m>10.2</x-m>
+      <y-m>1.3</y-m>
+      <z-m>0.8</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model>
+
+  <!-- contrails copied from the Citation Bravo -->
+  <model>
+    <path>Aircraft/Citation/Models/Effects/contrail1.xml</path>
+    <offsets>
+      <x-m>20.0</x-m>
+      <y-m>-1.337</y-m>
+      <z-m>0.867</z-m>
+      <roll-deg>0</roll-deg>
+      <pitch-deg>0</pitch-deg>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+  <model>
+    <path>Aircraft/Citation/Models/Effects/contrail2.xml</path>
+    <offsets>
+      <x-m>20.0</x-m>
+      <y-m>1.337</y-m>
+      <z-m>0.867</z-m>
+      <roll-deg>0</roll-deg>
+      <pitch-deg>0</pitch-deg>
+      <heading-deg>0</heading-deg>
+    </offsets>
+  </model>
+
+  <animation>
+    <type>select</type>
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <object-name>nav.white.light</object-name>
+    <object-name>nav.white.light.corona</object-name>
+    <object-name>strobe.left.light</object-name>
+    <object-name>strobe.right.light</object-name>
+    <object-name>recog.left.corona</object-name>
+    <object-name>recog.left.dazzle</object-name>
+    <object-name>recog.right.corona</object-name>
+    <object-name>recog.right.dazzle</object-name>
+    <object-name>gear.left.light.corona</object-name>
+    <object-name>gear.left.light.dazzle</object-name>
+    <object-name>gear.right.light.corona</object-name>
+    <object-name>gear.right.light.dazzle</object-name>
+    <object-name>beacon.light</object-name>
+    <object-name>beacon.light.corona</object-name>
+    <condition>
+      <equals>
+        <property>/sim/rendering/shaders/skydome</property>
+        <value>0</value>
+      </equals>
+    </condition>
+  </animation>
+
+  <!-- Wing Flex Right Wing -->
+  <animation>
+    <type>rotate</type>
+    <property>sim/systems/wingflexer/z-m</property>
+    <factor>-1</factor>
+    <object-name>wing.right.section2</object-name>
+
+    <object-name>als-landing-right-light</object-name>
+    <object-name>landing-right-light</object-name>
+    <object-name>gear.right</object-name>
+    <object-name>gear.right.door</object-name>
+    <object-name>gear.right.actu</object-name>
+
+    <object-name>als-recog-right-light</object-name>
+    <object-name>recog-right-light</object-name>
+    <object-name>recog.right.corona</object-name>
+    <object-name>recog.right.dazzle</object-name>
+
+    <object-name>als-strobe-right-light</object-name>
+    <object-name>strobe-right-light</object-name>
+    <object-name>strobe.right.light</object-name>
+
+    <object-name>als-nav-green-light</object-name>
+    <object-name>nav-green-light</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <axis>
+      <x1-m> 6.092700</x1-m>
+      <y1-m> 1.521580</y1-m>
+      <z1-m>-0.024243</z1-m>
+      <x2-m> 8.650110</x2-m>
+      <y2-m> 1.528980</y2-m>
+      <z2-m>-0.130128</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <property>sim/systems/wingflexer/z-m</property>
+    <factor>-1</factor>
+    <object-name>wing.right.section3</object-name>
+
+    <object-name>als-recog-right-light</object-name>
+    <object-name>recog-right-light</object-name>
+    <object-name>recog.right.corona</object-name>
+    <object-name>recog.right.dazzle</object-name>
+
+    <object-name>als-strobe-right-light</object-name>
+    <object-name>strobe-right-light</object-name>
+    <object-name>strobe.right.light</object-name>
+    <object-name>als-nav-green-light</object-name>
+    <object-name>nav-green-light</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <axis>
+      <x1-m> 6.359460</x1-m>
+      <y1-m> 4.435820</y1-m>
+      <z1-m> 0.152790</z1-m>
+      <x2-m> 8.181540</x2-m>
+      <y2-m> 4.439500</y2-m>
+      <z2-m> 0.100145</z2-m>
+    </axis>
+  </animation>
+
+  <!-- Wing Flex Left Wing -->
+  <animation>
+    <type>rotate</type>
+    <property>sim/systems/wingflexer/z-m</property>
+    <factor>1</factor>
+    <object-name>wing.left.section2</object-name>
+
+    <object-name>als-landing-left-light</object-name>
+    <object-name>landing-left-light</object-name>
+    <object-name>gear.left</object-name>
+    <object-name>gear.left.door</object-name>
+    <object-name>gear.left.actu</object-name>
+
+    <object-name>als-recog-left-light</object-name>
+    <object-name>recog-left-light</object-name>
+    <object-name>recog.left.corona</object-name>
+    <object-name>recog.left.dazzle</object-name>
+
+    <object-name>als-strobe-left-light</object-name>
+    <object-name>strobe-left-light</object-name>
+    <object-name>strobe.left.light</object-name>
+
+    <object-name>als-nav-red-light</object-name>
+    <object-name>nav-red-light</object-name>
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <axis>
+      <x1-m> 6.092700</x1-m>
+      <y1-m>-1.521580</y1-m>
+      <z1-m>-0.024243</z1-m>
+      <x2-m> 8.650110</x2-m>
+      <y2-m>-1.528980</y2-m>
+      <z2-m>-0.130128</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <property>sim/systems/wingflexer/z-m</property>
+    <factor>1</factor>
+    <object-name>wing.left.section3</object-name>
+
+    <object-name>als-recog-left-light</object-name>
+    <object-name>recog-left-light</object-name>
+    <object-name>recog.left.corona</object-name>
+    <object-name>recog.left.dazzle</object-name>
+
+    <object-name>als-strobe-left-light</object-name>
+    <object-name>strobe-left-light</object-name>
+    <object-name>strobe.left.light</object-name>
+
+    <object-name>als-nav-red-light</object-name>
+    <object-name>nav-red-light</object-name>
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <axis>
+      <x1-m> 6.359460</x1-m>
+      <y1-m>-4.435820</y1-m>
+      <z1-m> 0.152790</z1-m>
+      <x2-m> 8.181540</x2-m>
+      <y2-m>-4.439500</y2-m>
+      <z2-m> 0.100145</z2-m>
+    </axis>
+  </animation>
+
+  <model>
+    <name>pilot</name>
+    <path>Aircraft/Generic/Human/Models/pilot.xml</path>
+    <offsets>
+      <x-m>3.21</x-m>
+      <y-m>-0.31</y-m>
+      <z-m>-0.70</z-m>
+    </offsets>
+    <nopreview/>
+  </model>
+  <!-- Hide pilot in pilots view and both pilots in Center Console View -->
+  <animation>
+    <type>select</type>
+    <object-name>pilot</object-name>
+    <condition>
+      <and>
+        <property>controls/human-models</property>
+        <not-equals>
+          <property>/sim/current-view/name</property>
+	  <value>Captain</value>
+        </not-equals>
+        <not-equals>
+          <property>/sim/current-view/name</property>
+	  <value>Center Console</value>
+        </not-equals>
+        <not>
+	  <property>sim/walker/outside</property>
+        </not>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>copilot</name>
+    <path>Aircraft/Generic/Human/Models/copilot.xml</path>
+    <offsets>
+      <x-m>3.21</x-m>
+      <y-m>0.31</y-m>
+      <z-m>-0.60</z-m>
+    </offsets>
+    <nopreview/>
+  </model>
+
+  <!-- Hide copilot in copilots view and both pilots in Center Console View OR hide copilot if copilot-weight is 0lbs -->
+  <animation>
+    <type>select</type>
+    <object-name>copilot</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <not-equals>
+          <property>/sim/current-view/name</property>
+          <value>Copilot</value>
+        </not-equals>
+        <not-equals>
+          <property>/sim/current-view/name</property>
+          <value>Center Console</value>
+        </not-equals>
+        <greater-than>
+          <property>sim/weight[2]/weight-lb</property>
+          <value>0</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax0</name>
+    <path>Aircraft/Citation/Models/Human/pax0.xml</path>
+    <offsets>
+      <x-m>7.22</x-m>
+      <y-m>0.3</y-m>
+      <z-m>-0.65</z-m>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax0</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>170</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax1</name>
+    <path>Aircraft/Citation/Models/Human/pax1.xml</path>
+    <offsets>
+      <x-m>5.85</x-m>
+      <y-m>0.3</y-m>
+      <z-m>-0.65</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax1</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>850</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax2</name>
+    <path>Aircraft/Citation/Models/Human/pax2.xml</path>
+    <offsets>
+      <x-m>5.33</x-m>
+      <y-m>0.3</y-m>
+      <z-m>-0.65</z-m>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax2</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>510</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax3</name>
+    <path>Aircraft/Citation/Models/Human/pax3.xml</path>
+    <offsets>
+      <x-m>3.97</x-m>
+      <y-m>0.3</y-m>
+      <z-m>-0.65</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax3</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>1190</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax4</name>
+    <path>Aircraft/Citation/Models/Human/pax4.xml</path>
+    <offsets>
+      <x-m>7.22</x-m>
+      <y-m>-0.3</y-m>
+      <z-m>-0.65</z-m>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax4</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>340</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax5</name>
+    <path>Aircraft/Citation/Models/Human/pax5.xml</path>
+    <offsets>
+      <x-m>5.85</x-m>
+      <y-m>-0.3</y-m>
+      <z-m>-0.65</z-m>
+      <heading-deg>180</heading-deg>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax5</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>1020</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+  <model>
+    <name>Pax6</name>
+    <path>Aircraft/Citation/Models/Human/pax6.xml</path>
+    <offsets>
+      <x-m>5.33</x-m>
+      <y-m>-0.3</y-m>
+      <z-m>-0.65</z-m>
+    </offsets>
+    <nopreview/>
+  </model>
+  <animation>
+    <type>select</type>
+    <object-name>Pax6</object-name>
+    <condition>
+      <and>
+	<property>controls/human-models</property>
+        <greater-than>
+	  <property>sim/weight[3]/weight-lb</property>
+          <value>680</value>
+        </greater-than>
+      </and>
+    </condition>
+  </animation>
+
+<!-- rudder -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>rudder</object-name>
+    <object-name>rudder.trim</object-name>
+    <object-name>rudder.static.mount1</object-name>
+    <object-name>rudder.static.wick1</object-name>
+    <object-name>rudder.static.mount2</object-name>
+    <object-name>rudder.static.wick2</object-name>
+    <object-name>beacon.on</object-name>
+    <object-name>beacon.off</object-name>
+    <object-name>beacon.light</object-name>
+    <object-name>beacon.light.corona</object-name>
+    <object-name>als-beacon-light</object-name>
+    <object-name>beacon-light</object-name>
+    <property>surface-positions/rudder-pos-norm</property>
+    <factor>22</factor>
+    <axis>
+      <x1-m>14.05830</x1-m>
+      <y1-m>0</y1-m>
+      <z1-m>3.35947</z1-m>
+      <x2-m>12.96710</x2-m>
+      <y2-m>0</y2-m>
+      <z2-m>0.94412</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>rudder.trim</object-name>
+    <property>surface-positions/rudder-trim-pos-norm</property>
+    <factor>10</factor>
+<!-- TODO: trim moves in opposite direction of rudder -->
+<!--
+    <factor>
+    <expression>
+      <div>
+        <product>
+            <property>surface-positions/rudder-trim-pos-norm</property>
+            <value>10</value>
+        </product>
+        <product>
+            <property>surface-positions/rudder-pos-norm</property>
+            <value>22</value>
+        </product>
+      </div>
+    </expression>
+    </factor>
+-->
+    <axis>
+      <x1-m>13.90133</x1-m>
+      <y1-m>0</y1-m>
+      <z1-m>2.07</z1-m>
+      <x2-m>13.65340</x2-m>
+      <y2-m>0</y2-m>
+      <z2-m>1.47</z2-m>
+    </axis>
+  </animation>
+
+<!-- elevators -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>elevator.left</object-name>
+    <object-name>elevator.left.static.mount1</object-name>
+    <object-name>elevator.left.static.wick1</object-name>
+    <object-name>elevator.left.static.mount2</object-name>
+    <object-name>elevator.left.static.wick2</object-name>
+    <property>surface-positions/elevator-pos-norm</property>
+    <interpolation>
+      <entry><ind>1.0</ind><dep>15.0</dep></entry>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>-1.0</ind><dep>-20.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x1-m>13.040</x1-m>
+      <y1-m>-2.553</y1-m>
+      <z1-m>1.783</z1-m>
+      <x2-m>12.933</x2-m>
+      <y2-m>-0.046</y2-m>
+      <z2-m>1.345</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>elevator.right</object-name>
+    <object-name>elevator.right.static.mount1</object-name>
+    <object-name>elevator.right.static.wick1</object-name>
+    <object-name>elevator.right.static.mount2</object-name>
+    <object-name>elevator.right.static.wick2</object-name>
+    <object-name>elevator.trim</object-name>
+    <property>surface-positions/elevator-pos-norm</property>
+    <interpolation>
+      <entry><ind>1.0</ind><dep>15.0</dep></entry>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>-1.0</ind><dep>-20.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x1-m>12.933</x1-m>
+      <y1-m>0.046</y1-m>
+      <z1-m>1.345</z1-m>
+      <x2-m>13.040</x2-m>
+      <y2-m>2.553</y2-m>
+      <z2-m>1.783</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>elevator.trim</object-name>
+    <property>surface-positions/elevator-trim-pos-norm</property>
+    <interpolation>
+      <entry><ind>1.0</ind><dep>17.0</dep></entry>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>-1.0</ind><dep>-15.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x1-m>13.35008</x1-m>
+      <y1-m>0.19428</y1-m>
+      <z1-m>1.36768</z1-m>
+      <x2-m>13.34300</x2-m>
+      <y2-m>1.60000</y2-m>
+      <z2-m>1.61341</z2-m>
+    </axis>
+  </animation>
+
+<!-- flap left -->
+
+  <animation>
+    <type>translate</type>
+    <object-name>wing.left.flap</object-name>
+    <property>surface-positions/flap-pos</property>
+    <factor>-1</factor>
+    <axis>
+        <object-name>wing.left.flap.track.axis</object-name>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.left.flap</object-name>
+    <property>surface-positions/flap-pos</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>-0.00</dep></entry>
+      <entry><ind>0.1</ind><dep>-2.26</dep></entry>
+      <entry><ind>0.2</ind><dep>-4.66</dep></entry>
+      <entry><ind>0.3</ind><dep>-7.24</dep></entry>
+      <entry><ind>0.4</ind><dep>-10.02</dep></entry>
+      <entry><ind>0.5</ind><dep>-13.05</dep></entry>
+      <entry><ind>0.6</ind><dep>-16.40</dep></entry>
+      <entry><ind>0.7</ind><dep>-20.18</dep></entry>
+      <entry><ind>0.8</ind><dep>-24.63</dep></entry>
+      <entry><ind>0.9</ind><dep>-30.31</dep></entry>
+      <entry><ind>1.0</ind><dep>-40.00</dep></entry>
+    </interpolation>
+    <axis>
+        <object-name>wing.left.flap.axis</object-name>
+    </axis>
+  </animation>
+
+<!-- left actu1 -->
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.rod1</object-name>
+    <center>
+      <x-m> 8.065870</x-m>
+      <y-m>-1.722580</y-m>
+      <z-m>-0.020965</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.000730</x>
+      <y>-0.019940</y>
+      <z> 0.001213</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.164830</x>
+      <y> 0.006290</y>
+      <z> 0.003981</z>
+    </track-axis>
+    <target-name>wing.left.flap.actu1</target-name>
+    <target-center>
+      <x-m> 7.901040</x-m>
+      <y-m>-1.716290</y-m>
+      <z-m>-0.016984</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.rod1</object-name>
+    <center>
+      <x-m> 8.065870</x-m>
+      <y-m>-1.722580</y-m>
+      <z-m>-0.020965</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.000420</x>
+      <y>-0.000950</y>
+      <z>-0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.110160</x>
+      <y>-0.111530</y>
+      <z> 0.009588</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.901040</x-m>
+      <y-m>-1.716290</y-m>
+      <z-m>-0.016984</z-m>
+    </slave-center>
+    <target-name>wing.left.flap.actu1</target-name>
+    <target-center>
+      <x-m> 7.955710</x-m>
+      <y-m>-1.834110</y-m>
+      <z-m>-0.011377</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.actu1</object-name>
+    <center>
+      <x-m> 7.955710</x-m>
+      <y-m>-1.834110</y-m>
+      <z-m>-0.011377</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.000420</x>
+      <y> 0.000950</y>
+      <z> 0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.110160</x>
+      <y> 0.111530</y>
+      <z>-0.009588</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.901040</x-m>
+      <y-m>-1.716290</y-m>
+      <z-m>-0.016984</z-m>
+    </slave-center>
+    <target-name>wing.left.flap.rod1</target-name>
+    <target-center>
+      <x-m> 8.065870</x-m>
+      <y-m>-1.722580</y-m>
+      <z-m>-0.020965</z-m>
+    </target-center>
+  </animation>
+
+<!-- left actu2 -->
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.rod2</object-name>
+    <center>
+      <x-m> 7.952530</x-m>
+      <y-m>-2.985140</y-m>
+      <z-m> 0.057606</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.002830</x>
+      <y>-0.019760</y>
+      <z> 0.001257</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.163280</x>
+      <y> 0.023590</y>
+      <z> 0.002903</z>
+    </track-axis>
+    <target-name>wing.left.flap.actu2</target-name>
+    <target-center>
+      <x-m> 7.789250</x-m>
+      <y-m>-2.961550</y-m>
+      <z-m> 0.060509</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.rod2</object-name>
+    <center>
+      <x-m> 7.952530</x-m>
+      <y-m>-2.985140</y-m>
+      <z-m> 0.057606</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.000420</x>
+      <y> 0.000950</y>
+      <z> 0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.088510</x>
+      <y> 0.129620</y>
+      <z>-0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.789250</x-m>
+      <y-m>-2.961550</y-m>
+      <z-m> 0.060509</z-m>
+    </slave-center>
+    <target-name>wing.left.flap.actu2</target-name>
+    <target-center>
+      <x-m> 7.864020</x-m>
+      <y-m>-2.855520</y-m>
+      <z-m> 0.052186</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.actu2</object-name>
+    <center>
+      <x-m> 7.864020</x-m>
+      <y-m>-2.855520</y-m>
+      <z-m> 0.052186</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.000420</x>
+      <y>-0.000950</y>
+      <z>-0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.088510</x>
+      <y>-0.129620</y>
+      <z> 0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.789250</x-m>
+      <y-m>-2.961550</y-m>
+      <z-m> 0.060509</z-m>
+    </slave-center>
+    <target-name>wing.left.flap.rod2</target-name>
+    <target-center>
+      <x-m> 7.952530</x-m>
+      <y-m>-2.985140</y-m>
+      <z-m> 0.057606</z-m>
+    </target-center>
+  </animation>
+
+<!-- left actu3 -->
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.rod3</object-name>
+    <center>
+      <x-m> 7.836510</x-m>
+      <y-m>-4.277520</y-m>
+      <z-m> 0.138032</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.002830</x>
+      <y>-0.019760</y>
+      <z> 0.001257</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.163280</x>
+      <y> 0.023590</y>
+      <z> 0.002903</z>
+    </track-axis>
+    <target-name>wing.left.flap.actu3</target-name>
+    <target-center>
+      <x-m> 7.673230</x-m>
+      <y-m>-4.253920</y-m>
+      <z-m> 0.140936</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.rod3</object-name>
+    <center>
+      <x-m> 7.836510</x-m>
+      <y-m>-4.277520</y-m>
+      <z-m> 0.138032</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.001060</x>
+      <y> 0.002390</y>
+      <z> 0.039915</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.088510</x>
+      <y> 0.129620</y>
+      <z>-0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.673230</x-m>
+      <y-m>-4.253920</y-m>
+      <z-m> 0.140936</z-m>
+    </slave-center>
+    <target-name>wing.left.flap.actu3</target-name>
+    <target-center>
+      <x-m> 7.748000</x-m>
+      <y-m>-4.147900</y-m>
+      <z-m> 0.132612</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.flap.actu3</object-name>
+    <center>
+      <x-m> 7.748000</x-m>
+      <y-m>-4.147900</y-m>
+      <z-m> 0.132612</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.001060</x>
+      <y>-0.002390</y>
+      <z>-0.039915</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.088510</x>
+      <y>-0.129620</y>
+      <z> 0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.673230</x-m>
+      <y-m>-4.253920</y-m>
+      <z-m> 0.140936</z-m>
+    </slave-center>
+    <target-name>wing.left.flap.rod3</target-name>
+    <target-center>
+      <x-m> 7.836510</x-m>
+      <y-m>-4.277520</y-m>
+      <z-m> 0.138032</z-m>
+    </target-center>
+  </animation>
+
+<!-- flap right -->
+
+  <animation>
+    <type>translate</type>
+    <object-name>wing.right.flap</object-name>
+    <property>surface-positions/flap-pos</property>
+    <factor>-1</factor>
+    <axis>
+        <object-name>wing.right.flap.track.axis</object-name>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.right.flap</object-name>
+    <property>surface-positions/flap-pos</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.00</dep></entry>
+      <entry><ind>0.1</ind><dep>2.26</dep></entry>
+      <entry><ind>0.2</ind><dep>4.66</dep></entry>
+      <entry><ind>0.3</ind><dep>7.24</dep></entry>
+      <entry><ind>0.4</ind><dep>10.02</dep></entry>
+      <entry><ind>0.5</ind><dep>13.05</dep></entry>
+      <entry><ind>0.6</ind><dep>16.40</dep></entry>
+      <entry><ind>0.7</ind><dep>20.18</dep></entry>
+      <entry><ind>0.8</ind><dep>24.63</dep></entry>
+      <entry><ind>0.9</ind><dep>30.31</dep></entry>
+      <entry><ind>1.0</ind><dep>40.00</dep></entry>
+    </interpolation>
+    <axis>
+        <object-name>wing.right.flap.axis</object-name>
+    </axis>
+  </animation>
+
+<!-- right actu1 -->
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.rod1</object-name>
+    <center>
+      <x-m> 8.065870</x-m>
+      <y-m> 1.722580</y-m>
+      <z-m>-0.020965</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.000730</x>
+      <y> 0.019940</y>
+      <z> 0.001213</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.164830</x>
+      <y>-0.006290</y>
+      <z> 0.003981</z>
+    </track-axis>
+    <target-name>wing.right.flap.actu1</target-name>
+    <target-center>
+      <x-m> 7.901040</x-m>
+      <y-m> 1.716290</y-m>
+      <z-m>-0.016984</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.rod1</object-name>
+    <center>
+      <x-m> 8.065870</x-m>
+      <y-m> 1.722580</y-m>
+      <z-m>-0.020965</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.000420</x>
+      <y>-0.000950</y>
+      <z> 0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.110160</x>
+      <y> 0.111530</y>
+      <z> 0.009588</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.901040</x-m>
+      <y-m> 1.716290</y-m>
+      <z-m>-0.016984</z-m>
+    </slave-center>
+    <target-name>wing.right.flap.actu1</target-name>
+    <target-center>
+      <x-m> 7.955710</x-m>
+      <y-m> 1.834110</y-m>
+      <z-m>-0.011377</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.actu1</object-name>
+    <center>
+      <x-m> 7.955710</x-m>
+      <y-m> 1.834110</y-m>
+      <z-m>-0.011377</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.000420</x>
+      <y> 0.000950</y>
+      <z>-0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.110160</x>
+      <y>-0.111530</y>
+      <z>-0.009588</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.901040</x-m>
+      <y-m> 1.716290</y-m>
+      <z-m>-0.016984</z-m>
+    </slave-center>
+    <target-name>wing.right.flap.rod1</target-name>
+    <target-center>
+      <x-m> 8.065870</x-m>
+      <y-m> 1.722580</y-m>
+      <z-m>-0.020965</z-m>
+    </target-center>
+  </animation>
+
+<!-- right actu2 -->
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.rod2</object-name>
+    <center>
+      <x-m> 7.952530</x-m>
+      <y-m> 2.985140</y-m>
+      <z-m> 0.057606</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.002830</x>
+      <y> 0.019760</y>
+      <z> 0.001257</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.163280</x>
+      <y>-0.023590</y>
+      <z> 0.002903</z>
+    </track-axis>
+    <target-name>wing.right.flap.actu2</target-name>
+    <target-center>
+      <x-m> 7.789250</x-m>
+      <y-m> 2.961550</y-m>
+      <z-m> 0.060509</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.rod2</object-name>
+    <center>
+      <x-m> 7.952530</x-m>
+      <y-m> 2.985140</y-m>
+      <z-m> 0.057606</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.000420</x>
+      <y> 0.000950</y>
+      <z>-0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.088510</x>
+      <y>-0.129620</y>
+      <z>-0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.789250</x-m>
+      <y-m> 2.961550</y-m>
+      <z-m> 0.060509</z-m>
+    </slave-center>
+    <target-name>wing.right.flap.actu2</target-name>
+    <target-center>
+      <x-m> 7.864020</x-m>
+      <y-m> 2.855520</y-m>
+      <z-m> 0.052186</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.actu2</object-name>
+    <center>
+      <x-m> 7.864020</x-m>
+      <y-m> 2.855520</y-m>
+      <z-m> 0.052186</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.000420</x>
+      <y>-0.000950</y>
+      <z> 0.015966</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.088510</x>
+      <y> 0.129620</y>
+      <z> 0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.789250</x-m>
+      <y-m> 2.961550</y-m>
+      <z-m> 0.060509</z-m>
+    </slave-center>
+    <target-name>wing.right.flap.rod2</target-name>
+    <target-center>
+      <x-m> 7.952530</x-m>
+      <y-m> 2.985140</y-m>
+      <z-m> 0.057606</z-m>
+    </target-center>
+  </animation>
+
+<!-- right actu3 -->
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.rod3</object-name>
+    <center>
+      <x-m> 7.836510</x-m>
+      <y-m> 4.277520</y-m>
+      <z-m> 0.138032</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.002830</x>
+      <y> 0.019760</y>
+      <z> 0.001257</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.163280</x>
+      <y>-0.023590</y>
+      <z> 0.002903</z>
+    </track-axis>
+    <target-name>wing.right.flap.actu3</target-name>
+    <target-center>
+      <x-m> 7.673230</x-m>
+      <y-m> 4.253920</y-m>
+      <z-m> 0.140936</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.rod3</object-name>
+    <center>
+      <x-m> 7.836510</x-m>
+      <y-m> 4.277520</y-m>
+      <z-m> 0.138032</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.001060</x>
+      <y> 0.002390</y>
+      <z>-0.039915</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.088510</x>
+      <y>-0.129620</y>
+      <z>-0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.673230</x-m>
+      <y-m> 4.253920</y-m>
+      <z-m> 0.140936</z-m>
+    </slave-center>
+    <target-name>wing.right.flap.actu3</target-name>
+    <target-center>
+      <x-m> 7.748000</x-m>
+      <y-m> 4.147900</y-m>
+      <z-m> 0.132612</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.flap.actu3</object-name>
+    <center>
+      <x-m> 7.748000</x-m>
+      <y-m> 4.147900</y-m>
+      <z-m> 0.132612</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.001060</x>
+      <y>-0.002390</y>
+      <z> 0.039915</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.088510</x>
+      <y> 0.129620</y>
+      <z> 0.005420</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.673230</x-m>
+      <y-m> 4.253920</y-m>
+      <z-m> 0.140936</z-m>
+    </slave-center>
+    <target-name>wing.right.flap.rod3</target-name>
+    <target-center>
+      <x-m> 7.836510</x-m>
+      <y-m> 4.277520</y-m>
+      <z-m> 0.138032</z-m>
+    </target-center>
+  </animation>
+
+<!-- ailerons -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.left.aileron</object-name>
+    <property>surface-positions/left-aileron-pos-norm</property>
+    <interpolation>
+      <entry><ind> 1.0</ind><dep>-19.0</dep></entry>
+      <entry><ind> 0.0</ind><dep>  0.0</dep></entry>
+      <entry><ind>-1.0</ind><dep> 15.0</dep></entry>
+    </interpolation>
+    <axis>
+      <object-name>wing.left.aileron.axis</object-name>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.trim.tab</object-name>
+    <object-name>wing.trim.push-pull</object-name>
+    <property>surface-positions/aileron-trim-pos-norm</property>
+    <factor>20</factor>
+    <axis>
+      <object-name>wing.trim.axis</object-name>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>wing.trim.actu</object-name>
+    <object-name>wing.trim.actu.axis</object-name>
+    <object-name>wing.trim.push-pull.axis</object-name>
+    <property>surface-positions/aileron-trim-pos-norm</property>
+    <factor>-0.078</factor>
+    <axis>
+      <object-name>wing.trim.actu.axis</object-name>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.trim.push-pull</object-name>
+    <center>
+      <x-m> 7.978010</x-m>
+      <y-m>-4.981990</y-m>
+      <z-m> 0.132448</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.003560</x>
+      <y>-0.039730</y>
+      <z> 0.002876</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.352690</x>
+      <y> 0.034520</y>
+      <z> 0.040636</z>
+    </track-axis>
+    <target-name>wing.trim.actu</target-name>
+    <target-center>
+      <x-m> 7.625320</x-m>
+      <y-m>-4.947470</y-m>
+      <z-m> 0.173084</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.right.aileron</object-name>
+    <property>surface-positions/right-aileron-pos-norm</property>
+    <interpolation>
+      <entry><ind> 1.0</ind><dep> 19.0</dep></entry>
+      <entry><ind> 0.0</ind><dep>  0.0</dep></entry>
+      <entry><ind>-1.0</ind><dep>-15.0</dep></entry>
+    </interpolation>
+    <axis>
+      <object-name>wing.right.aileron.axis</object-name>
+    </axis>
+  </animation>
+
+<!-- cabin door -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>door</object-name>
+    <object-name>door.handle</object-name>
+    <object-name>door.glass</object-name>
+    <object-name>door.glass.inside</object-name>
+    <property>controls/cabin-door/position-norm</property>
+    <factor>120</factor>
+    <axis>
+      <x1-m>4.100</x1-m>
+      <y1-m>-0.755</y1-m>
+      <z1-m>0.600</z1-m>
+      <x2-m>4.100</x2-m>
+      <y2-m>-0.755</y2-m>
+      <z2-m>0.400</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>door</object-name>
+    <object-name>door.handle</object-name>
+    <object-name>door.glass</object-name>
+    <object-name>door.glass.inside</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <condition>
+          <and>
+            <property>controls/electric/maingear-switch</property>
+            <less-than>
+              <property>velocities/groundspeed-kt</property>
+              <value>10</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>nasal</command>
+        <script>citation.cabin_door.toggle();</script>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>engine.left.fan.slow</object-name>
+    <object-name>engine.left.turbine.slow</object-name>
+    <condition>
+      <less-than>
+        <property>engines/engine/fan</property>
+        <value>20</value>
+      </less-than>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>engine.left.fan.medium</object-name>
+    <object-name>engine.left.turbine.medium</object-name>
+    <condition>
+      <and>
+        <greater-than>
+          <property>engines/engine/fan</property>
+          <value>20</value>
+        </greater-than>
+        <less-than>
+          <property>engines/engine/fan</property>
+          <value>40</value>
+        </less-than>
+      </and>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>engine.left.fan.fast</object-name>
+    <object-name>engine.left.turbine.fast</object-name>
+    <condition>
+      <greater-than>
+        <property>engines/engine/fan</property>
+        <value>40</value>
+      </greater-than>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>engine.right.fan.slow</object-name>
+    <object-name>engine.right.turbine.slow</object-name>
+    <condition>
+      <less-than>
+        <property>engines/engine[1]/fan</property>
+        <value>20</value>
+      </less-than>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>engine.right.fan.medium</object-name>
+    <object-name>engine.right.turbine.medium</object-name>
+    <condition>
+      <and>
+        <greater-than>
+          <property>engines/engine[1]/fan</property>
+          <value>20</value>
+        </greater-than>
+        <less-than>
+          <property>engines/engine[1]/fan</property>
+          <value>40</value>
+        </less-than>
+      </and>
+    </condition>
+  </animation>
+  <animation>
+    <type>select</type>
+    <object-name>engine.right.fan.fast</object-name>
+    <object-name>engine.right.turbine.fast</object-name>
+    <condition>
+      <greater-than>
+        <property>engines/engine[1]/fan</property>
+        <value>40</value>
+      </greater-than>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>spin</type>
+    <object-name>engine.left.fan.slow</object-name>
+    <object-name>engine.left.fan.medium</object-name>
+    <object-name>engine.left.fan.fast</object-name>
+    <object-name>engine.left.turbine.slow</object-name>
+    <object-name>engine.left.turbine.medium</object-name>
+    <object-name>engine.left.turbine.fast</object-name>
+    <property>engines/engine/fan</property>
+    <factor>159</factor>
+    <center>
+      <x-m>8.32034</x-m>
+      <y-m>-1.28875</y-m>
+      <z-m>0.84913</z-m>
+    </center>
+    <axis>
+      <x1-m>8.32034</x1-m>
+      <y1-m>-1.28875</y1-m>
+      <z1-m>0.84913</z1-m>
+      <x2-m>10.04429</x2-m>
+      <y2-m>-1.28875</y2-m>
+      <z2-m>0.78893</z2-m>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>spin</type>
+    <object-name>engine.right.fan.slow</object-name>
+    <object-name>engine.right.fan.medium</object-name>
+    <object-name>engine.right.fan.fast</object-name>
+    <object-name>engine.right.turbine.slow</object-name>
+    <object-name>engine.right.turbine.medium</object-name>
+    <object-name>engine.right.turbine.fast</object-name>
+    <property>engines/engine[1]/fan</property>
+    <factor>159</factor>
+    <center>
+      <x-m>8.32034</x-m>
+      <y-m>1.28875</y-m>
+      <z-m>0.84913</z-m>
+    </center>
+    <axis>
+      <x1-m>8.32034</x1-m>
+      <y1-m>1.28875</y1-m>
+      <z1-m>0.84913</z1-m>
+      <x2-m>10.04429</x2-m>
+      <y2-m>1.28875</y2-m>
+      <z2-m>0.78893</z2-m>
+    </axis>
+  </animation>
+
+<!-- left reverser up -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>engine.left.rev.link.up.long</object-name>
+    <object-name>engine.left.rev.up.door</object-name>
+    <object-name>engine.left.rev.up.joint</object-name>
+    <property>surface-positions/reverser-norm[0]</property>
+    <factor>128.25</factor>
+    <center>
+      <x-m>10.30053</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.82001</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.left.rev.up.door</object-name>
+    <object-name>engine.left.rev.up.joint</object-name>
+    <center>
+      <x-m>9.85498</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.87558</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.57547</x>
+      <y>0.0</y>
+      <z>-0.06011</z>
+    </track-axis>
+    <target-name>engine.left.rev.link.up.short</target-name>
+    <target-center>
+      <x-m>10.43045</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.81547</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.132025</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.865895</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.left.rev.link.up.short</object-name>
+    <center>
+      <x-m>10.43045</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.81547</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.57547</x>
+      <y>0.0</y>
+      <z>0.06011</z>
+    </track-axis>
+    <target-name>engine.left.rev.up.door</target-name>
+    <target-center>
+      <x-m>9.85498</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.87558</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.132025</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.865895</z-m>
+    </slave-center>
+  </animation>
+
+<!-- left reverser down -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>engine.left.rev.link.down.long</object-name>
+    <object-name>engine.left.rev.down.door</object-name>
+    <object-name>engine.left.rev.down.joint</object-name>
+    <property>surface-positions/reverser-norm[0]</property>
+    <factor>128.25</factor>
+    <center>
+      <x-m>10.29774</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.74006</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>-1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.left.rev.down.door</object-name>
+    <object-name>engine.left.rev.down.joint</object-name>
+    <center>
+      <x-m>9.84940</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.715695</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.57826</x>
+      <y>0.0</y>
+      <z>0.019825</z>
+    </track-axis>
+    <target-name>engine.left.rev.link.down.short</target-name>
+    <target-center>
+      <x-m>10.42766</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.73552</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.12664</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.70604</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.left.rev.link.down.short</object-name>
+    <center>
+      <x-m>10.42766</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.73552</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.57826</x>
+      <y>0.0</y>
+      <z>-0.019825</z>
+    </track-axis>
+    <target-name>engine.left.rev.down.door</target-name>
+    <target-center>
+      <x-m>9.84940</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.715695</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.12664</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.70604</z-m>
+    </slave-center>
+  </animation>
+
+<!-- right reverser up -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>engine.right.rev.link.up.long</object-name>
+    <object-name>engine.right.rev.up.door</object-name>
+    <object-name>engine.right.rev.up.joint</object-name>
+    <property>surface-positions/reverser-norm[1]</property>
+    <factor>128.25</factor>
+    <center>
+      <x-m>10.30053</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.82001</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.right.rev.up.door</object-name>
+    <object-name>engine.right.rev.up.joint</object-name>
+    <center>
+      <x-m>9.85498</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.87558</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.57547</x>
+      <y>0.0</y>
+      <z>-0.06011</z>
+    </track-axis>
+    <target-name>engine.right.rev.link.up.short</target-name>
+    <target-center>
+      <x-m>10.43045</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.81547</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.13202</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.86589</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.right.rev.link.up.short</object-name>
+    <center>
+      <x-m>10.43045</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.81547</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.57547</x>
+      <y>0.0</y>
+      <z>0.06011</z>
+    </track-axis>
+    <target-name>engine.right.rev.up.door</target-name>
+    <target-center>
+      <x-m>9.85498</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.87558</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.13202</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.86589</z-m>
+    </slave-center>
+  </animation>
+
+<!-- right reverser down -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>engine.right.rev.link.down.long</object-name>
+    <object-name>engine.right.rev.down.door</object-name>
+    <object-name>engine.right.rev.down.joint</object-name>
+    <property>surface-positions/reverser-norm[1]</property>
+    <factor>128.25</factor>
+    <center>
+      <x-m>10.29774</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.74006</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>-1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.right.rev.down.door</object-name>
+    <object-name>engine.right.rev.down.joint</object-name>
+    <center>
+      <x-m>9.84940</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.715695</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.57826</x>
+      <y>0.0</y>
+      <z>0.019825</z>
+    </track-axis>
+    <target-name>engine.right.rev.link.down.short</target-name>
+    <target-center>
+      <x-m>10.42766</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.73552</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.12664</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.70604</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>engine.right.rev.link.down.short</object-name>
+    <center>
+      <x-m>10.42766</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.73552</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.57826</x>
+      <y>0.0</y>
+      <z>-0.019825</z>
+    </track-axis>
+    <target-name>engine.right.rev.down.door</target-name>
+    <target-center>
+      <x-m>9.84940</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.715695</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>10.12664</x-m>
+      <y-m>0.0</y-m>
+      <z-m>0.70604</z-m>
+    </slave-center>
+  </animation>
+
+<!-- speedbrakes -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.left.spdbrk.crank</object-name>
+    <object-name>wing.left.spdbrk.actu.piston</object-name>
+    <property>surface-positions/speedbrake-pos</property>
+    <factor>70</factor>
+    <center>
+      <x-m> 7.720600</x-m>
+      <y-m>-3.696310</y-m>
+      <z-m> 0.085848</z-m>
+    </center>
+    <axis>
+      <x>-0.015940</x>
+      <y> 0.001250</y>
+      <z> 0.000349</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.spdbrk.actu</object-name>
+    <center>
+      <x-m> 7.738390</x-m>
+      <y-m>-3.293660</y-m>
+      <z-m> 0.059318</z-m>
+    </center>
+    <lock-axis> <!-- copied from 'rotate' -->
+      <x> 0.015940</x>
+      <y>-0.001250</y>
+      <z>-0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.024780</x>
+      <y>-0.314210</y>
+      <z>-0.012390</z>
+    </track-axis>
+    <target-name>wing.left.spdbrk.crank</target-name>
+    <target-center>
+      <x-m> 7.713610</x-m>
+      <y-m>-3.607870</y-m>
+      <z-m> 0.046928</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.spdbrk.actu.piston</object-name>
+    <center>
+      <x-m> 7.713610</x-m>
+      <y-m>-3.607870</y-m>
+      <z-m> 0.046928</z-m>
+    </center>
+    <lock-axis> <!-- copied from 'rotate' -->
+      <x> 0.015940</x>
+      <y>-0.001250</y>
+      <z>-0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.024780</x>
+      <y> 0.314210</y>
+      <z> 0.012390</z>
+    </track-axis>
+    <target-name>wing.left.spdbrk.actu</target-name>
+    <target-center>
+      <x-m> 7.738390</x-m>
+      <y-m>-3.293660</y-m>
+      <z-m> 0.059318</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.left.spdbrk.up.surf</object-name>
+    <object-name>wing.left.spdbrk.up.ball</object-name>
+    <object-name>wing.left.spdbrk.up.rod</object-name>
+    <property>surface-positions/speedbrake-pos</property>
+    <factor>75.5</factor>
+    <center>
+      <!-- center of surface axis -->
+      <x-m> 7.639610</x-m>
+      <y-m>-3.684520</y-m>
+      <z-m> 0.164050</z-m>
+    </center>
+    <axis>
+      <x>-0.038890</x>
+      <y>-0.497600</y>
+      <z> 0.029687</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.spdbrk.up.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.729310</x-m>
+      <y-m>-3.693800</y-m>
+      <z-m> 0.127610</z-m>
+    </center>
+    <lock-axis>
+      <!-- surface axis -->
+      <x> 0.038890</x>
+      <y> 0.497600</y>
+      <z>-0.029687</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.007010</x>
+      <y>-0.081750</y>
+      <z>-0.024233</z>
+    </track-axis>
+    <target-name>wing.left.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.722300</x-m>
+      <y-m>-3.775550</y-m>
+      <z-m> 0.103377</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.spdbrk.up.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.729310</x-m>
+      <y-m>-3.693800</y-m>
+      <z-m> 0.127610</z-m>
+    </center>
+    <lock-axis>
+      <!-- crank axis -->
+      <x>-0.015940</x>
+      <y> 0.001250</y>
+      <z> 0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.007010</x>
+      <y>-0.081750</y>
+      <z>-0.024233</z>
+    </track-axis>
+    <target-name>wing.left.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.722300</x-m>
+      <y-m>-3.775550</y-m>
+      <z-m> 0.103377</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.left.spdbrk.down.surf</object-name>
+    <object-name>wing.left.spdbrk.down.ball</object-name>
+    <object-name>wing.left.spdbrk.down.rod</object-name>
+    <property>surface-positions/speedbrake-pos</property>
+    <factor>85.5</factor>
+    <center>
+      <!-- center of surface axis -->
+      <x-m> 7.633730</x-m>
+      <y-m>-3.696860</y-m>
+      <z-m>-0.013448</z-m>
+    </center>
+    <axis>
+      <x> 0.038100</x>
+      <y> 0.496810</y>
+      <z>-0.041589</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.spdbrk.down.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.731590</x-m>
+      <y-m>-3.700600</y-m>
+      <z-m> 0.031547</z-m>
+    </center>
+    <lock-axis>
+      <!-- surface axis -->
+      <x> 0.038100</x>
+      <y> 0.496810</y>
+      <z>-0.041589</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.008770</x>
+      <y> 0.101870</y>
+      <z> 0.034903</z>
+    </track-axis>
+    <target-name>wing.left.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.740360</x-m>
+      <y-m>-3.598730</y-m>
+      <z-m> 0.066450</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.left.spdbrk.down.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.731590</x-m>
+      <y-m>-3.700600</y-m>
+      <z-m> 0.031547</z-m>
+    </center>
+    <lock-axis>
+      <!-- crank axis -->
+      <x>-0.015940</x>
+      <y> 0.001250</y>
+      <z> 0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.008770</x>
+      <y> 0.101870</y>
+      <z> 0.034903</z>
+    </track-axis>
+    <target-name>wing.left.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.740360</x-m>
+      <y-m>-3.598730</y-m>
+      <z-m> 0.066450</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.right.spdbrk.crank</object-name>
+    <object-name>wing.right.spdbrk.actu.piston</object-name>
+    <property>surface-positions/speedbrake-pos</property>
+    <factor>70</factor>
+    <center>
+      <x-m> 7.720600</x-m>
+      <y-m> 3.696310</y-m>
+      <z-m> 0.085848</z-m>
+    </center>
+    <axis>
+      <x> 0.015940</x>
+      <y> 0.001250</y>
+      <z>-0.000349</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.spdbrk.actu</object-name>
+    <center>
+      <x-m> 7.738390</x-m>
+      <y-m> 3.293660</y-m>
+      <z-m> 0.059318</z-m>
+    </center>
+    <lock-axis> <!-- copied from 'rotate' -->
+      <x> 0.015940</x>
+      <y> 0.001250</y>
+      <z>-0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.024780</x>
+      <y> 0.314210</y>
+      <z>-0.012390</z>
+    </track-axis>
+    <target-name>wing.right.spdbrk.crank</target-name>
+    <target-center>
+      <x-m> 7.713610</x-m>
+      <y-m> 3.607870</y-m>
+      <z-m> 0.046928</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.spdbrk.actu.piston</object-name>
+    <center>
+      <x-m> 7.713610</x-m>
+      <y-m> 3.607870</y-m>
+      <z-m> 0.046928</z-m>
+    </center>
+    <lock-axis> <!-- copied from 'rotate' -->
+      <x> 0.015940</x>
+      <y> 0.001250</y>
+      <z>-0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.024780</x>
+      <y>-0.314210</y>
+      <z> 0.012390</z>
+    </track-axis>
+    <target-name>wing.right.spdbrk.actu</target-name>
+    <target-center>
+      <x-m> 7.738390</x-m>
+      <y-m> 3.293660</y-m>
+      <z-m> 0.059318</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.right.spdbrk.up.surf</object-name>
+    <object-name>wing.right.spdbrk.up.ball</object-name>
+    <object-name>wing.right.spdbrk.up.rod</object-name>
+    <property>surface-positions/speedbrake-pos</property>
+    <factor>75.5</factor>
+    <center>
+      <!-- center of surface axis -->
+      <x-m> 7.639610</x-m>
+      <y-m> 3.684520</y-m>
+      <z-m> 0.164050</z-m>
+    </center>
+    <axis>
+      <x> 0.038890</x>
+      <y>-0.497600</y>
+      <z>-0.029687</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.spdbrk.up.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.729310</x-m>
+      <y-m> 3.693800</y-m>
+      <z-m> 0.127610</z-m>
+    </center>
+    <lock-axis>
+      <!-- surface axis -->
+      <x> 0.038890</x>
+      <y>-0.497600</y>
+      <z>-0.029687</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.007010</x>
+      <y> 0.081750</y>
+      <z>-0.024233</z>
+    </track-axis>
+    <target-name>wing.right.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.722300</x-m>
+      <y-m> 3.775550</y-m>
+      <z-m> 0.103377</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.spdbrk.up.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.729310</x-m>
+      <y-m> 3.693800</y-m>
+      <z-m> 0.127610</z-m>
+    </center>
+    <lock-axis>
+      <!-- crank axis -->
+      <x>-0.015940</x>
+      <y>-0.001250</y>
+      <z> 0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.007010</x>
+      <y> 0.081750</y>
+      <z>-0.024233</z>
+    </track-axis>
+    <target-name>wing.right.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.722300</x-m>
+      <y-m> 3.775550</y-m>
+      <z-m> 0.103377</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>wing.right.spdbrk.down.surf</object-name>
+    <object-name>wing.right.spdbrk.down.ball</object-name>
+    <object-name>wing.right.spdbrk.down.rod</object-name>
+    <property>surface-positions/speedbrake-pos</property>
+    <factor>85.5</factor>
+    <center>
+      <!-- center of surface axis -->
+      <x-m> 7.633730</x-m>
+      <y-m> 3.696860</y-m>
+      <z-m>-0.013448</z-m>
+    </center>
+    <axis>
+      <x>-0.038100</x>
+      <y> 0.496810</y>
+      <z> 0.041589</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.spdbrk.down.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.731590</x-m>
+      <y-m> 3.700600</y-m>
+      <z-m> 0.031547</z-m>
+    </center>
+    <lock-axis>
+      <!-- surface axis -->
+      <x> 0.038100</x>
+      <y>-0.496810</y>
+      <z>-0.041589</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.008770</x>
+      <y>-0.101870</y>
+      <z> 0.034903</z>
+    </track-axis>
+    <target-name>wing.right.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.740360</x-m>
+      <y-m> 3.598730</y-m>
+      <z-m> 0.066450</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>wing.right.spdbrk.down.rod</object-name>
+    <center>
+      <!-- center of surface ball -->
+      <x-m> 7.731590</x-m>
+      <y-m> 3.700600</y-m>
+      <z-m> 0.031547</z-m>
+    </center>
+    <lock-axis>
+      <!-- crank axis -->
+      <x>-0.015940</x>
+      <y>-0.001250</y>
+      <z> 0.000349</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.008770</x>
+      <y>-0.101870</y>
+      <z> 0.034903</z>
+    </track-axis>
+    <target-name>wing.right.spdbrk.crank</target-name>
+    <target-center>
+      <!-- center of rod ball -->
+      <x-m> 7.740360</x-m>
+      <y-m> 3.598730</y-m>
+      <z-m> 0.066450</z-m>
+    </target-center>
+  </animation>
+
+<!-- baggage doors -->
+
+  <animation>
+    <type>pick</type>
+    <object-name>baggage.door.left</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <condition>
+          <and>
+            <not><property>/sim/current-view/internal</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <less-than>
+              <property>velocities/groundspeed-kt</property>
+              <value>10</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>nasal</command>
+        <script>citation.baggage_door_front_left.toggle();</script>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>baggage.door.left</object-name>
+    <property>controls/baggage-door-front-left/position-norm</property>
+    <factor>-90</factor>
+    <center>
+      <x-m>1.50592</x-m>
+      <y-m>-0.17988</y-m>
+      <z-m>0.60530</z-m>
+    </center>
+    <axis>
+      <x>0.41791</x>
+      <y>0.0</y>
+      <z>0.08151</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>baggage.door.right</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <condition>
+          <and>
+            <not><property>/sim/current-view/internal</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <less-than>
+              <property>velocities/groundspeed-kt</property>
+              <value>10</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>nasal</command>
+        <script>citation.baggage_door_front_right.toggle();</script>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>baggage.door.right</object-name>
+    <property>controls/baggage-door-front-right/position-norm</property>
+    <factor>90</factor>
+    <center>
+      <x-m>1.50592</x-m>
+      <y-m>0.17988</y-m>
+      <z-m>0.60530</z-m>
+    </center>
+    <axis>
+      <x>0.41791</x>
+      <y>0.0</y>
+      <z>0.08151</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>baggage.door.aft</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <condition>
+          <and>
+            <not><property>/sim/current-view/internal</property></not>
+            <property>controls/electric/maingear-switch</property>
+            <less-than>
+              <property>velocities/groundspeed-kt</property>
+              <value>10</value>
+            </less-than>
+          </and>
+        </condition>
+        <command>nasal</command>
+        <script>citation.baggage_door_aft.toggle();</script>
+      </binding>
+    </action>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>baggage.door.aft</object-name>
+    <property>controls/baggage-door-aft/position-norm</property>
+    <factor>100</factor>
+    <center>
+      <x-m>9.91858</x-m>
+      <y-m>-0.60130</y-m>
+      <z-m>0.54612</z-m>
+    </center>
+    <axis>
+      <x>-0.62969</x>
+      <y>-0.08081</y>
+      <z>-0.04237</z>
+    </axis>
+  </animation>
+
+  <!--    Nose Gear  -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>gear.nose.damper</object-name>
+    <object-name>gear.nose.strut</object-name>
+    <object-name>gear.nose.fitting</object-name>
+    <object-name>gear.nose.fitting.lock</object-name>
+    <object-name>gear.nose.torquelink.down</object-name>
+    <object-name>gear.nose.torquelink.up</object-name>
+    <object-name>gear.nose.rim</object-name>
+    <object-name>gear.nose.tire</object-name>
+    <property>gear/gear[0]/caster-angle-deg-filtered</property>
+    <center>
+      <x-m>1.76</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.00</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>-1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>gear.nose.trunnion</object-name>
+    <object-name>gear.nose.damper</object-name>
+    <object-name>gear.nose.piston</object-name>
+    <object-name>gear.nose.door.link</object-name>
+    <object-name>gear.nose.door.rod</object-name>
+    <object-name>gear.nose.strut</object-name>
+    <object-name>gear.nose.fitting</object-name>
+    <object-name>gear.nose.fitting.lock</object-name>
+    <object-name>gear.nose.torquelink.down</object-name>
+    <object-name>gear.nose.torquelink.up</object-name>
+    <object-name>gear.nose.rim</object-name>
+    <object-name>gear.nose.tire</object-name>
+    <property>gear/gear[0]/position-norm-filtered</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>1.0</ind><dep>90.0</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>1.76</x-m>
+      <y-m>0.0</y-m>
+      <z-m>-0.01</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>gear.nose.strut</object-name>
+    <object-name>gear.nose.fitting</object-name>
+    <object-name>gear.nose.fitting.lock</object-name>
+    <object-name>gear.nose.torquelink.down</object-name>
+    <object-name>gear.nose.rim</object-name>
+    <object-name>gear.nose.tire</object-name>
+    <property>gear/gear[0]/compression-m-filtered</property>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.actu</object-name>
+    <center>
+      <x-m>2.52</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.19</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </track-axis>
+    <target-name>gear.nose.piston</target-name>
+    <target-center>
+      <x-m>1.58</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.19</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.piston</object-name>
+    <center>
+      <x-m>1.58</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.19</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+    </track-axis>
+    <target-name>gear.nose.actu</target-name>
+    <target-center>
+      <x-m>2.52</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.19</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.torquelink.up</object-name>
+    <center>
+      <x-m>1.515</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.06</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </track-axis>
+    <target-name>gear.nose.fitting</target-name>
+    <target-center>
+      <x-m>1.265</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.06</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>1.37575</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.12880725</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.torquelink.down</object-name>
+    <center>
+      <x-m>1.265</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.06</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </track-axis>
+    <target-name>gear.nose.trunnion</target-name>
+    <target-center>
+      <x-m>1.515</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.06</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>1.37575</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.12880725</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.door.rod</object-name>
+    <center>
+      <x-m>1.55</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.065</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.45</x>
+      <y>0.0</y>
+      <z>-0.20</z>
+    </track-axis>
+    <target-name>gear.nose.door</target-name>
+    <target-center>
+      <x-m>2.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.265</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>1.80815</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.27850</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.door</object-name>
+    <object-name>gear.nose.door.hook</object-name>
+    <center>
+      <x-m>2.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.265</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.45</x>
+      <y>0.0</y>
+      <z>0.20</z>
+    </track-axis>
+    <target-name>gear.nose.door.rod</target-name>
+    <target-center>
+      <x-m>1.55</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.065</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>1.80815</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.27850</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.door.link</object-name>
+    <center>
+      <x-m>1.76</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.05</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.17</x>
+      <y>0.0</y>
+      <z>-0.11</z>
+    </track-axis>
+    <target-name>gear.nose.door.crank</target-name>
+    <target-center>
+      <x-m>1.55</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.16</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>1.59</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.16</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.door.crank</object-name>
+    <object-name>gear.nose.left.door.rod</object-name>
+    <object-name>gear.nose.right.door.rod</object-name>
+    <center>
+      <x-m>1.55</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.16</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.17</x>
+      <y>0.0</y>
+      <z>0.11</z>
+    </track-axis>
+    <target-name>gear.nose.door.link</target-name>
+    <target-center>
+      <x-m>1.76</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.05</z-m>
+    </target-center>
+    <slave-center>
+      <x-m>1.59</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.16</z-m>
+    </slave-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.left.door.rod</object-name>
+    <center>
+      <x-m>1.39</x-m>
+      <y-m>-0.135</y-m>
+      <z-m>0.16</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>-0.367</z>
+    </track-axis>
+    <target-name>gear.nose.left.door</target-name>
+    <target-center>
+      <x-m>1.39</x-m>
+      <y-m>-0.135</y-m>
+      <z-m>-0.197</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.left.door.rod</object-name>
+    <center>
+      <x-m>1.39</x-m>
+      <y-m>-0.135</y-m>
+      <z-m>0.16</z-m>
+    </center>
+    <lock-axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>-0.367</z>
+    </track-axis>
+    <target-name>gear.nose.left.door</target-name>
+    <target-center>
+      <x-m>1.39</x-m>
+      <y-m>-0.135</y-m>
+      <z-m>-0.197</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.left.door</object-name>
+    <object-name>gear.nose.left.door.hook</object-name>
+    <center>
+      <x-m>1.39</x-m>
+      <y-m>-0.18</y-m>
+      <z-m>-0.247</z-m>
+    </center>
+    <lock-axis>
+      <x>-0.44</x>
+      <y>0.0</y>
+      <z>0.047</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.0</x>
+      <y>0.045</y>
+      <z>0.050</z>
+    </track-axis>
+    <target-name>gear.nose.left.door.rod</target-name>
+    <target-center>
+      <x-m>1.39</x-m>
+      <y-m>-0.135</y-m>
+      <z-m>-0.197</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.right.door</object-name>
+    <object-name>gear.nose.right.door.hook</object-name>
+    <center>
+      <x-m>1.39</x-m>
+      <y-m>0.18</y-m>
+      <z-m>-0.247</z-m>
+    </center>
+    <lock-axis>
+      <x>0.44</x>
+      <y>0.0</y>
+      <z>-0.047</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.0</x>
+      <y>-0.045</y>
+      <z>0.050</z>
+    </track-axis>
+    <target-name>gear.nose.right.door.rod</target-name>
+    <target-center>
+      <x-m>1.39</x-m>
+      <y-m>0.135</y-m>
+      <z-m>-0.197</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.right.door.rod</object-name>
+    <center>
+      <x-m>1.39</x-m>
+      <y-m>0.135</y-m>
+      <z-m>0.16</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>-0.367</z>
+    </track-axis>
+    <target-name>gear.nose.right.door</target-name>
+    <target-center>
+      <x-m>1.39</x-m>
+      <y-m>0.135</y-m>
+      <z-m>-0.197</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.nose.right.door.rod</object-name>
+    <center>
+      <x-m>1.39</x-m>
+      <y-m>0.135</y-m>
+      <z-m>0.16</z-m>
+    </center>
+    <lock-axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>0.0</x>
+      <y>0.0</y>
+      <z>-0.367</z>
+    </track-axis>
+    <target-name>gear.nose.right.door</target-name>
+    <target-center>
+      <x-m>1.39</x-m>
+      <y-m>0.135</y-m>
+      <z-m>-0.197</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>spin</type>
+    <object-name>gear.nose.rim</object-name>
+    <object-name>gear.nose.tire</object-name>
+    <expression>
+        <product>
+            <property>gear/gear[0]/rollspeed-ms-filtered</property>
+            <value>77.22065</value>
+        </product>
+    </expression>
+    <center>
+      <x-m>1.02</x-m>
+      <y-m>0.00</y-m>
+      <z-m>-0.01</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <!-- Left Main-->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>gear.left</object-name>
+    <property>gear/gear[1]/position-norm</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>-2.0</dep></entry>
+      <entry><ind>1.0</ind><dep>85.0</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 7.35</x-m>
+      <y-m>-2.58</y-m>
+      <z-m> 0.05</z-m>
+    </center>
+    <axis>
+      <x>-1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>gear.left.strut</object-name>
+    <object-name>gear.left.fitting</object-name>
+    <object-name>gear.left.brakes</object-name>
+    <object-name>gear.left.rim</object-name>
+    <object-name>gear.left.tire</object-name>
+    <object-name>gear.left.torquelink.down</object-name>
+    <property>gear/gear[1]/compression-m</property>
+    <axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.door</object-name>
+    <object-name>als-landing-left-light</object-name>
+    <object-name>landing-left-light</object-name>
+    <center>
+      <x-m> 7.3825</x-m>
+      <y-m>-2.6600</y-m>
+      <z-m>-0.1000</z-m>
+    </center>
+    <lock-axis>
+      <x>-1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.0000</x>
+      <y>-0.3200</y>
+      <z>-0.1000</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.382500</x-m>
+      <y-m>-2.470760</y-m>
+      <z-m>-0.120124</z-m>
+    </slave-center>
+    <target-name>gear.left.damper</target-name>
+    <target-center>
+      <x-m> 7.3825</x-m>
+      <y-m>-2.3400</y-m>
+      <z-m> 0.0000</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.door.rod</object-name>
+    <center>
+      <x-m> 7.3825</x-m>
+      <y-m>-2.3400</y-m>
+      <z-m> 0.0000</z-m>
+    </center>
+    <lock-axis>
+      <x> 1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.000000</x>
+      <y>-0.130760</y>
+      <z>-0.120124</z>
+    </track-axis>
+    <target-name>gear.left.door.blade</target-name>
+    <target-center>
+      <x-m> 7.382500</x-m>
+      <y-m>-2.470760</y-m>
+      <z-m>-0.120124</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.torquelink.up</object-name>
+    <center>
+      <x-m> 7.30</x-m>
+      <y-m>-2.23</y-m>
+      <z-m> 0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.0</x>
+      <y> 0.0</y>
+      <z> 1.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.0</x>
+      <y> 1.0</y>
+      <z> 0.0</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.24614835</x-m>
+      <y-m>-2.09</y-m>
+      <z-m> 0.05</z-m>
+    </slave-center>
+    <target-name>gear.left.fitting</target-name>
+    <target-center>
+      <x-m> 7.30</x-m>
+      <y-m>-1.95</y-m>
+      <z-m> 0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.torquelink.down</object-name>
+    <center>
+      <x-m> 7.30</x-m>
+      <y-m>-1.95</y-m>
+      <z-m> 0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.0</x>
+      <y> 0.0</y>
+      <z>-1.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.24614835</x-m>
+      <y-m>-2.09</y-m>
+      <z-m> 0.05</z-m>
+    </slave-center>
+    <target-name>gear.left.damper</target-name>
+    <target-center>
+      <x-m> 7.30</x-m>
+      <y-m>-2.23</y-m>
+      <z-m> 0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>spin</type>
+    <object-name>gear.left.rim</object-name>
+    <object-name>gear.left.tire</object-name>
+    <expression>
+        <product>
+            <property>gear/gear[1]/rollspeed-ms</property>
+            <value>63.21378</value>
+        </product>
+    </expression>
+    <center>
+      <x-m> 7.35</x-m>
+      <y-m>-1.83091</y-m>
+      <z-m>-0.107888</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y>-0.0871557427477</y>
+      <z>-0.996194698092</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.actu</object-name>
+    <center>
+      <x-m> 7.03</x-m>
+      <y-m>-1.72</y-m>
+      <z-m> 0.08</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.807318</x>
+      <y> 0.111891</y>
+      <z> 0.579412</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.26</x>
+      <y>-0.60</y>
+      <z>-0.13</z>
+    </track-axis>
+    <target-name>gear.left.trunnion</target-name>
+    <target-center>
+      <x-m> 7.29</x-m>
+      <y-m>-2.32</y-m>
+      <z-m>-0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.actu</object-name>
+    <center>
+      <x-m> 7.03</x-m>
+      <y-m>-1.72</y-m>
+      <z-m> 0.08</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.502198</x>
+      <y> 0.385348</y>
+      <z>-0.774147</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.26</x>
+      <y>-0.60</y>
+      <z>-0.13</z>
+    </track-axis>
+    <target-name>gear.left.trunnion</target-name>
+    <target-center>
+      <x-m> 7.29</x-m>
+      <y-m>-2.32</y-m>
+      <z-m>-0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.piston</object-name>
+    <object-name>gear.left.piston.head</object-name>
+    <center>
+      <x-m> 7.29</x-m>
+      <y-m>-2.32</y-m>
+      <z-m>-0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.807318</x>
+      <y> 0.111891</y>
+      <z> 0.579412</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.26</x>
+      <y> 0.60</y>
+      <z> 0.13</z>
+    </track-axis>
+    <target-name>gear.left.actu</target-name>
+    <target-center>
+      <x-m> 7.03</x-m>
+      <y-m>-1.72</y-m>
+      <z-m> 0.08</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.left.piston</object-name>
+    <object-name>gear.left.piston.head</object-name>
+    <center>
+      <x-m> 7.29</x-m>
+      <y-m>-2.32</y-m>
+      <z-m>-0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.502198</x>
+      <y> 0.385348</y>
+      <z>-0.774147</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.26</x>
+      <y> 0.60</y>
+      <z> 0.13</z>
+    </track-axis>
+    <target-name>gear.left.actu</target-name>
+    <target-center>
+      <x-m> 7.03</x-m>
+      <y-m>-1.72</y-m>
+      <z-m> 0.08</z-m>
+    </target-center>
+  </animation>
+
+  <!-- Right Main -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>gear.right</object-name>
+    <property>gear/gear[2]/position-norm</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>-2.0</dep></entry>
+      <entry><ind>1.0</ind><dep>85.0</dep></entry>
+    </interpolation>
+    <center>
+      <x-m> 7.35</x-m>
+      <y-m> 2.58</y-m>
+      <z-m> 0.05</z-m>
+    </center>
+    <axis>
+      <x> 1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>gear.right.strut</object-name>
+    <object-name>gear.right.fitting</object-name>
+    <object-name>gear.right.brakes</object-name>
+    <object-name>gear.right.rim</object-name>
+    <object-name>gear.right.tire</object-name>
+    <object-name>gear.right.torquelink.down</object-name>
+    <property>gear/gear[2]/compression-m</property>
+    <axis>
+      <x> 0.0</x>
+      <y> 1.0</y>
+      <z> 0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.door</object-name>
+    <object-name>als-landing-right-light</object-name>
+    <object-name>landing-right-light</object-name>
+    <center>
+      <x-m> 7.3825</x-m>
+      <y-m> 2.6600</y-m>
+      <z-m>-0.1000</z-m>
+    </center>
+    <lock-axis>
+      <x> 1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.0000</x>
+      <y> 0.3200</y>
+      <z>-0.1000</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.382500</x-m>
+      <y-m> 2.470760</y-m>
+      <z-m>-0.120124</z-m>
+    </slave-center>
+    <target-name>gear.right.damper</target-name>
+    <target-center>
+      <x-m> 7.3825</x-m>
+      <y-m> 2.3400</y-m>
+      <z-m> 0.0000</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.door.rod</object-name>
+    <center>
+      <x-m> 7.3825</x-m>
+      <y-m> 2.3400</y-m>
+      <z-m> 0.0000</z-m>
+    </center>
+    <lock-axis>
+      <x>-1.0</x>
+      <y> 0.0</y>
+      <z> 0.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.000000</x>
+      <y> 0.130760</y>
+      <z>-0.120124</z>
+    </track-axis>
+    <target-name>gear.right.door.blade</target-name>
+    <target-center>
+      <x-m> 7.382500</x-m>
+      <y-m> 2.470760</y-m>
+      <z-m>-0.120124</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.torquelink.up</object-name>
+    <center>
+      <x-m> 7.30</x-m>
+      <y-m> 2.23</y-m>
+      <z-m> 0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.0</x>
+      <y> 0.0</y>
+      <z>-1.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.0</x>
+      <y>-1.0</y>
+      <z> 0.0</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.24614835</x-m>
+      <y-m> 2.09</y-m>
+      <z-m> 0.05</z-m>
+    </slave-center>
+    <target-name>gear.right.fitting</target-name>
+    <target-center>
+      <x-m> 7.30</x-m>
+      <y-m> 1.95</y-m>
+      <z-m> 0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.torquelink.down</object-name>
+    <center>
+      <x-m> 7.30</x-m>
+      <y-m> 1.95</y-m>
+      <z-m> 0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.0</x>
+      <y> 0.0</y>
+      <z> 1.0</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.0</x>
+      <y> 1.0</y>
+      <z> 0.0</z>
+    </track-axis>
+    <slave-center>
+      <x-m> 7.24614835</x-m>
+      <y-m> 2.09</y-m>
+      <z-m> 0.05</z-m>
+    </slave-center>
+    <target-name>gear.right.damper</target-name>
+    <target-center>
+      <x-m> 7.30</x-m>
+      <y-m> 2.23</y-m>
+      <z-m> 0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>spin</type>
+    <object-name>gear.right.rim</object-name>
+    <object-name>gear.right.tire</object-name>
+    <expression>
+        <product>
+            <property>gear/gear[2]/rollspeed-ms</property>
+            <value>63.21378</value>
+        </product>
+    </expression>
+    <center>
+      <x-m> 7.35</x-m>
+      <y-m> 1.83091</y-m>
+      <z-m>-0.107888</z-m>
+    </center>
+    <axis>
+      <x> 0.0</x>
+      <y>-0.0871557427477</y>
+      <z> 0.996194698092</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.actu</object-name>
+    <center>
+      <x-m> 7.03</x-m>
+      <y-m> 1.72</y-m>
+      <z-m> 0.08</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.807318</x>
+      <y>-0.111891</y>
+      <z> 0.579412</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.26</x>
+      <y> 0.60</y>
+      <z>-0.13</z>
+    </track-axis>
+    <target-name>gear.right.trunnion</target-name>
+    <target-center>
+      <x-m> 7.29</x-m>
+      <y-m> 2.32</y-m>
+      <z-m>-0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.actu</object-name>
+    <center>
+      <x-m> 7.03</x-m>
+      <y-m> 1.72</y-m>
+      <z-m> 0.08</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.502198</x>
+      <y>-0.385348</y>
+      <z>-0.774147</z>
+    </lock-axis>
+    <track-axis>
+      <x> 0.26</x>
+      <y> 0.60</y>
+      <z>-0.13</z>
+    </track-axis>
+    <target-name>gear.right.trunnion</target-name>
+    <target-center>
+      <x-m> 7.29</x-m>
+      <y-m> 2.32</y-m>
+      <z-m>-0.05</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.piston</object-name>
+    <object-name>gear.right.piston.head</object-name>
+    <center>
+      <x-m> 7.29</x-m>
+      <y-m> 2.32</y-m>
+      <z-m>-0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.807318</x>
+      <y>-0.111891</y>
+      <z> 0.579412</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.26</x>
+      <y>-0.60</y>
+      <z> 0.13</z>
+    </track-axis>
+    <target-name>gear.right.actu</target-name>
+    <target-center>
+      <x-m> 7.03</x-m>
+      <y-m> 1.72</y-m>
+      <z-m> 0.08</z-m>
+    </target-center>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <object-name>gear.right.piston</object-name>
+    <object-name>gear.right.piston.head</object-name>
+    <center>
+      <x-m> 7.29</x-m>
+      <y-m> 2.32</y-m>
+      <z-m>-0.05</z-m>
+    </center>
+    <lock-axis>
+      <x> 0.502198</x>
+      <y>-0.385348</y>
+      <z>-0.774147</z>
+    </lock-axis>
+    <track-axis>
+      <x>-0.26</x>
+      <y>-0.60</y>
+      <z> 0.13</z>
+    </track-axis>
+    <target-name>gear.right.actu</target-name>
+    <target-center>
+      <x-m> 7.03</x-m>
+      <y-m> 1.72</y-m>
+      <z-m> 0.08</z-m>
+    </target-center>
+  </animation>
+
+<!-- nav lights -->
+
+  <animation>
+    <type>select</type>
+    <object-name>wing.left.light.nav.on</object-name>
+    <object-name>wing.right.light.nav.on</object-name>
+    <object-name>nav.white.on</object-name>
+
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <object-name>nav.white.light</object-name>
+    <object-name>nav.white.light.corona</object-name>
+
+    <object-name>als-nav-red-light</object-name>
+    <object-name>nav-red-light</object-name>
+    <object-name>als-nav-green-light</object-name>
+    <object-name>nav-green-light</object-name>
+    <object-name>als-nav-white-light</object-name>
+    <object-name>nav-white-light</object-name>
+    <condition>
+      <greater-than>
+        <property>systems/electrical/outputs/nav-lights</property>
+        <value>1.0</value>
+      </greater-than>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>wing.left.light.nav.off</object-name>
+    <object-name>wing.right.light.nav.off</object-name>
+    <object-name>nav.white.off</object-name>
+    <condition>
+      <less-than>
+        <property>systems/electrical/outputs/nav-lights</property>
+        <value>1.0</value>
+      </less-than>
+    </condition>
+  </animation>
+
+<!-- nav red light -->
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-nav-red-light</object-name>
+        <factor>0.005</factor>
+        <min>1.0</min>
+        <max>10.0</max>
+        <center>
+            <x-m> 6.94</x-m>
+            <y-m>-7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>nav.red.light</object-name>
+        <offset-m>10.507255</offset-m>
+        <axis>
+            <x> 6.94</x>
+            <y>-7.88</y>
+            <z> 0.38</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>billboard</type>
+        <object-name>nav.red.light</object-name>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>nav.red.light</object-name>
+        <factor>0.005</factor>
+        <min>1</min>
+        <max>10.0</max>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>nav.red.light.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+        <center>
+            <x-m> 6.94</x-m>
+            <y-m>-7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>nav.red.light.corona</object-name>
+        <offset>0</offset>
+        <factor>5.5</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.3</min>
+        <max>1.0</max>
+        <center>
+            <x-m> 6.94</x-m>
+            <y-m>-7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+        <axis>
+            <x>-0.573576</x>
+            <y>-0.819152</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- nav green light -->
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-nav-green-light</object-name>
+        <factor>0.005</factor>
+        <min>1.0</min>
+        <max>10.0</max>
+        <center>
+            <x-m> 6.94</x-m>
+            <y-m> 7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>nav.green.light</object-name>
+        <offset-m>10.507255</offset-m>
+        <axis>
+            <x> 6.94</x>
+            <y> 7.88</y>
+            <z> 0.38</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>billboard</type>
+        <object-name>nav.green.light</object-name>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>nav.green.light</object-name>
+        <factor>0.005</factor>
+        <min>1</min>
+        <max>10</max>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>nav.green.light.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+        <center>
+            <x-m> 6.94</x-m>
+            <y-m> 7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>nav.green.light.corona</object-name>
+        <offset>0</offset>
+        <factor>5.5</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.3</min>
+        <max>1.0</max>
+        <center>
+            <x-m> 6.94</x-m>
+            <y-m> 7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+        <axis>
+            <x>-0.573576</x>
+            <y> 0.819152</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- nav white light -->
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-nav-white-light</object-name>
+        <factor>0.005</factor>
+        <min>1.0</min>
+        <max>10.0</max>
+        <center>
+            <x-m> 13.72</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 0.76</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>nav.white.light</object-name>
+        <offset-m>13.741</offset-m>
+        <axis>
+          <x> 0.998469</x>
+          <y> 0.0</y>
+          <z> 0.055309</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>billboard</type>
+        <object-name>nav.white.light</object-name>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>nav.white.light</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>nav.white.light.corona</object-name>
+        <factor>0.01</factor>
+        <min>1.0</min>
+        <max>10.0</max>
+        <center>
+            <x-m> 13.72</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 0.76</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>nav.white.light.corona</object-name>
+        <offset>0</offset>
+        <factor>6</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.3</min>
+        <max>1.0</max>
+        <center>
+            <x-m>13.72</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 0.76</z-m>
+        </center>
+        <axis>
+            <x> 1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- beacon light -->
+
+    <animation>
+        <type>select</type>
+        <object-name>beacon.light</object-name>
+        <object-name>beacon.light.corona</object-name>
+        <object-name>beacon.on</object-name>
+        <object-name>als-beacon-light</object-name>
+        <object-name>beacon-light</object-name>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/beacon</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>beacon.off</object-name>
+        <condition>
+            <less-than>
+                <property>systems/electrical/outputs/beacon</property>
+                <value>1.0</value>
+            </less-than>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-beacon-light</object-name>
+        <factor>0.005</factor>
+        <min>1.0</min>
+        <max>10.0</max>
+        <center>
+            <x-m>13.78</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 3.63</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>beacon.light</object-name>
+        <offset-m>14.25</offset-m>
+        <axis>
+            <x> 13.78</x>
+            <y> 0.0</y>
+            <z> 3.63</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>billboard</type>
+        <object-name>beacon.light</object-name>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>beacon.light</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>beacon.light.corona</object-name>
+        <object-name>als-beacon-light</object-name>
+        <object-name>beacon-light</object-name>
+        <expression>
+            <product>
+                <property>/sim/time/elapsed-sec</property>
+                <value>180</value>
+            </product>
+        </expression>
+        <center>
+            <x-m> 13.78</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 3.63</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>-1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>beacon.light.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10.0</max>
+        <center>
+            <x-m> 13.78</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 3.63</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>beacon.light.corona</object-name>
+        <offset>0</offset>
+        <factor>1</factor>
+        <power>3</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.1</min>
+        <max>4.0</max>
+        <center>
+            <x-m> 13.78</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 3.63</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- strobe lights -->
+
+  <animation>
+    <type>select</type>
+    <object-name>strobe.left.light</object-name>
+    <object-name>strobe.right.light</object-name>
+    <object-name>als-strobe-left-light</object-name>
+    <object-name>strobe-left-light</object-name>
+    <object-name>als-strobe-right-light</object-name>
+    <object-name>strobe-right-light</object-name>
+    <condition>
+      <greater-than>
+        <property>systems/electrical/outputs/strobe</property>
+        <value>1.0</value>
+      </greater-than>
+    </condition>
+  </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/strobe</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>wing.left.light.flasher</object-name>
+        <object-name>wing.right.light.flasher</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </emission>
+    </animation>
+
+<!-- strobe left light -->
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-strobe-left-light</object-name>
+        <factor>0.005</factor>
+        <min>1.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 7.025</x-m>
+            <y-m>-7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+    </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>strobe.left.light</object-name>
+    <offset-m> 10.563616</offset-m>
+    <axis>
+      <x> 7.025</x>
+      <y>-7.88</y>
+      <z> 0.38</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>billboard</type>
+    <object-name>strobe.left.light</object-name>
+  </animation>
+
+  <animation>
+    <type>dist-scale</type>
+    <object-name>strobe.left.light</object-name>
+    <factor>0.01</factor>
+    <min>1.5</min>
+    <max>500.0</max>
+  </animation>
+
+<!-- strobe right light -->
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-strobe-right-light</object-name>
+        <factor>0.005</factor>
+        <min>1.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 7.025</x-m>
+            <y-m> 7.88</y-m>
+            <z-m> 0.38</z-m>
+        </center>
+    </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>strobe.right.light</object-name>
+    <offset-m> 10.563616</offset-m>
+    <axis>
+      <x> 7.025</x>
+      <y> 7.88</y>
+      <z> 0.38</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>billboard</type>
+    <object-name>strobe.right.light</object-name>
+  </animation>
+
+  <animation>
+    <type>dist-scale</type>
+    <object-name>strobe.right.light</object-name>
+    <factor>0.01</factor>
+    <min>1.5</min>
+    <max>500.0</max>
+  </animation>
+
+<!-- recog left light -->
+
+    <animation>
+        <type>select</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/recog-light[0]</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>als-recog-left-light</object-name>
+        <object-name>recog-left-light</object-name>
+        <object-name>recog.left.corona</object-name>
+        <object-name>recog.left.dazzle</object-name>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/recog-light[0]</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>wing.left.recog.light</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-recog-left-light</object-name>
+        <factor>0.005</factor>
+        <min>1.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 6.670</x-m>
+            <y-m>-7.536</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>recog.left.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m>-7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>recog.left.corona</object-name>
+        <offset>0</offset>
+        <factor>1.5</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>1</min>
+        <max>5</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m>-7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+        <axis>
+            <x>-0.997465679479</x>
+            <y>-0.0711492674688</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>recog.left.dazzle</object-name>
+        <expression>
+            <sum>
+                <property>/sim/current-view/heading-offset-deg</property>
+                <property>/sim/current-view/pitch-offset-deg</property>
+            </sum>
+        </expression>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m>-7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+        <axis>
+            <x>-0.997465679479</x>
+            <y>-0.0711492674688</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>recog.left.dazzle</object-name>
+        <factor>0.001</factor>
+        <min>0.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m>-7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>recog.left.dazzle</object-name>
+        <offset>0.5</offset>
+        <factor>1.0</factor>
+        <power>8</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.5</min>
+        <max>5.0</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m>-7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+        <axis>
+            <x>-0.997465679479</x>
+            <y>-0.0711492674688</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- recog right light -->
+
+    <animation>
+        <type>select</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/recog-light[1]</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>als-recog-right-light</object-name>
+        <object-name>recog-right-light</object-name>
+        <object-name>recog.right.corona</object-name>
+        <object-name>recog.right.dazzle</object-name>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/recog-light[1]</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>wing.right.recog.light</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-recog-right-light</object-name>
+        <factor>0.005</factor>
+        <min>1.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 6.670</x-m>
+            <y-m> 7.536</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>recog.right.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m> 7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>recog.right.corona</object-name>
+        <offset>0</offset>
+        <factor>1.5</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>1</min>
+        <max>5</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m> 7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+        <axis>
+            <x>-0.997465679479</x>
+            <y> 0.0711492674688</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>recog.right.dazzle</object-name>
+        <expression>
+            <sum>
+                <property>/sim/current-view/heading-offset-deg</property>
+                <property>/sim/current-view/pitch-offset-deg</property>
+            </sum>
+        </expression>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m> 7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+        <axis>
+            <x>-0.997465679479</x>
+            <y> 0.0711492674688</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>recog.right.dazzle</object-name>
+        <factor>0.001</factor>
+        <min>0.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m> 7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>recog.right.dazzle</object-name>
+        <offset>0.5</offset>
+        <factor>1.0</factor>
+        <power>8</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.5</min>
+        <max>5.0</max>
+        <center>
+            <x-m> 6.700</x-m>
+            <y-m> 7.534</y-m>
+            <z-m> 0.358</z-m>
+        </center>
+        <axis>
+            <x>-0.997465679479</x>
+            <y> 0.0711492674688</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- landing left light -->
+
+    <animation>
+        <type>select</type>
+        <object-name>als-landing-left-light</object-name>
+        <object-name>landing-left-light</object-name>
+        <object-name>gear.left.light.corona</object-name>
+        <object-name>gear.left.light.dazzle</object-name>
+        <condition>
+            <and>
+                <greater-than>
+                    <property>systems/electrical/outputs/landing-light[0]</property>
+                    <value>1.0</value>
+                </greater-than>
+                <greater-than>
+                    <property>gear/gear[1]/position-norm</property>
+                    <value>0.97</value>
+                </greater-than>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/landing-light[0]</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>gear.left.light.inside</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-landing-left-light</object-name>
+        <factor>0.005</factor>
+        <min>2.0</min>
+        <max>20.0</max>
+        <center>
+            <x-m> 7.135000</x-m>
+            <y-m>-2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>gear.left.light.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m>-2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>gear.left.light.corona</object-name>
+        <offset>0</offset>
+        <factor>1.5</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>1</min>
+        <max>2</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m>-2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>gear.left.light.dazzle</object-name>
+        <expression>
+            <sum>
+                <property>/sim/current-view/heading-offset-deg</property>
+                <property>/sim/current-view/pitch-offset-deg</property>
+            </sum>
+        </expression>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m>-2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>gear.left.light.dazzle</object-name>
+        <factor>0.001</factor>
+        <min>0.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m>-2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>gear.left.light.dazzle</object-name>
+        <offset>0.5</offset>
+        <factor>1.2</factor>
+        <power>12</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.5</min>
+        <max>2.0</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m>-2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- landing right light -->
+
+    <animation>
+        <type>select</type>
+        <object-name>als-landing-right-light</object-name>
+        <object-name>landing-right-light</object-name>
+        <object-name>gear.right.light.corona</object-name>
+        <object-name>gear.right.light.dazzle</object-name>
+        <condition>
+            <and>
+                <greater-than>
+                    <property>systems/electrical/outputs/landing-light[1]</property>
+                    <value>1.0</value>
+                </greater-than>
+                <greater-than>
+                    <property>gear/gear[2]/position-norm</property>
+                    <value>0.97</value>
+                </greater-than>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>systems/electrical/outputs/landing-light[1]</property>
+                <value>1.0</value>
+            </greater-than>
+        </condition>
+        <object-name>gear.right.light.inside</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>als-landing-right-light</object-name>
+        <factor>0.005</factor>
+        <min>2.0</min>
+        <max>20.0</max>
+        <center>
+            <x-m> 7.135000</x-m>
+            <y-m> 2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>gear.right.light.corona</object-name>
+        <factor>0.01</factor>
+        <min>1</min>
+        <max>10</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m> 2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>gear.right.light.corona</object-name>
+        <offset>0</offset>
+        <factor>1.5</factor>
+        <power>2</power>
+        <two-sides type="bool">false</two-sides>
+        <min>1</min>
+        <max>2</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m> 2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>gear.right.light.dazzle</object-name>
+        <expression>
+            <sum>
+                <property>/sim/current-view/heading-offset-deg</property>
+                <property>/sim/current-view/pitch-offset-deg</property>
+            </sum>
+        </expression>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m> 2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>dist-scale</type>
+        <object-name>gear.right.light.dazzle</object-name>
+        <factor>0.001</factor>
+        <min>0.5</min>
+        <max>15.0</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m> 2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+    </animation>
+
+    <animation>
+        <type>flash</type>
+        <object-name>gear.right.light.dazzle</object-name>
+        <offset>0.5</offset>
+        <factor>1.2</factor>
+        <power>12</power>
+        <two-sides type="bool">false</two-sides>
+        <min>0.5</min>
+        <max>2.0</max>
+        <center>
+            <x-m> 7.155000</x-m>
+            <y-m> 2.466740</y-m>
+            <z-m>-0.038423</z-m>
+        </center>
+        <axis>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </axis>
+    </animation>
+
+<!-- tyre smoke -->
+
+  <model>
+    <path>Aircraft/Generic/Effects/tyre-smoke-nose.xml</path>
+    <name>tyre-smoke-n</name>
+    <offsets>
+      <x-m> 1.760</x-m>
+      <y-m> 0.000</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/Generic/Effects/tyre-smoke-port.xml</path>
+    <name>tyre-smoke-p</name>
+    <offsets>
+      <x-m> 7.350</x-m>
+      <y-m>-2.672</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/Generic/Effects/tyre-smoke-stbd.xml</path>
+    <name>tyre-smoke-s</name>
+    <offsets>
+      <x-m> 7.350</x-m>
+      <y-m> 2.672</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+<!-- rain spray 
+
+  <model>
+    <path>Aircraft/Generic/Effects/rain-nose.xml</path>
+    <name>rain-splash-n</name>
+    <offsets>
+      <x-m> 1.760</x-m>
+      <y-m> 0.000</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/Generic/Effects/rain-port.xml</path>
+    <name>rain-splash-p</name>
+    <offsets>
+      <x-m> 7.350</x-m>
+      <y-m>-2.672</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <path>Aircraft/Generic/Effects/rain-stbd.xml</path>
+    <name>rain-splash-s</name>
+    <offsets>
+      <x-m> 7.350</x-m>
+      <y-m> 2.672</y-m>
+      <z-m>-0.925</z-m>
+    </offsets>
+  </model>
+-->
+<!-- cockpit window -->
+
+  <animation>
+    <type>rotate</type>
+    <object-name>flightdeck.window.handle</object-name>
+    <property>controls/cockpit-window/position-norm</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>0.2</ind><dep>60.0</dep></entry>
+      <entry><ind>1.0</ind><dep>60.0</dep></entry>
+    </interpolation>
+    <axis>
+      <object-name>flightdeck.window.handle.axis</object-name>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>flightdeck.window</object-name>
+    <object-name>cockpit.window</object-name>
+    <object-name>cockpit.window.inside</object-name>
+    <property>controls/cockpit-window/position-norm</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>0.2</ind><dep>0.0</dep></entry>
+      <entry><ind>1.0</ind><dep>90.0</dep></entry>
+    </interpolation>
+    <axis>
+      <object-name>flightdeck.window.pivot.axis</object-name>
+    </axis>
+  </animation>
+
+</PropertyList>

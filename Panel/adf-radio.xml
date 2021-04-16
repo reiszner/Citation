@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+
+<!--
+ADF radio
+-->
+
+<PropertyList>
+
+  <params>
+    <adf-selected>/instrumentation/adf/frequencies/selected-khz</adf-selected>
+  </params>
+
+  <name>ADF Radio</name>
+  <w-base>38</w-base>
+  <h-base>48</h-base>
+  <w>38</w>
+  <h>48</h>
+
+ <layers>
+  <layer>
+    <name>ADF frequencies</name>
+    <type>text</type>
+    <font>led</font>
+    <point-size>4</point-size>
+    <color>
+      <red>0.8</red>
+      <green>0.8</green>
+      <blue>0.8</blue>
+    </color>
+    <chunks>
+      <chunk>
+        <type>number-value</type>
+        <property alias="../../../../../params/adf-selected"/>
+        <format>%3.0f</format>
+      </chunk>
+    </chunks>
+    <transformations>
+      <transformation>
+        <type>x-shift</type>
+        <offset>-10</offset>
+      </transformation>
+      <transformation>
+        <type>y-shift</type>
+        <offset>8</offset>
+      </transformation>
+    </transformations>
+  </layer>
+</layers>
+
+<actions>
+  <action>
+    <name>small decrease</name>
+    <button>0</button>
+    <x>-2</x>
+    <y>-14</y>
+    <w>8</w>
+    <h>12</h>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/adf-selected"/>
+      <step>-1</step>
+      <min>100</min>
+      <max>1300</max>
+      <resolution>1</resolution>
+      <wrap>1</wrap>
+    </binding>
+  </action>
+  
+  <action>
+    <name>large decrease</name>
+    <button>1</button>
+    <x>-2</x>
+    <y>-14</y>
+    <w>8</w>
+    <h>12</h>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/adf-selected"/>
+      <step>-100</step>
+      <min>100</min>
+      <max>1300</max>
+      <resolution>1</resolution>
+      <wrap>1</wrap>
+    </binding>
+  </action>
+  
+  <action>
+    <name>small increase</name>
+    <button>0</button>
+    <x>6</x>
+    <y>-14</y>
+    <w>8</w>
+    <h>12</h>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/adf-selected"/>
+      <step>1</step>
+      <min>100</min>
+      <max>1300</max>
+      <resolution>1</resolution>
+      <wrap>1</wrap>
+    </binding>
+  </action>
+  
+  <action>
+    <name>large increase</name>
+    <button>1</button>
+    <x>6</x>
+    <y>-14</y>
+    <w>8</w>
+    <h>12</h>
+    <binding>
+      <command>property-adjust</command>
+      <property alias="../../../../params/adf-selected"/>
+      <step>100</step>
+      <min>100</min>
+      <max>1300</max>
+      <resolution>1</resolution>
+      <wrap>1</wrap>
+    </binding>
+  </action>
+
+ </actions>
+
+</PropertyList>

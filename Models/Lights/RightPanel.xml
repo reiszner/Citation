@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+    <path>RightPanel.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>IntLight.RightPanel.Cone</object-name>
+        <condition>
+            <and>
+                <property>systems/electrical/outputs/main-right-xover/light-panel-right</property>
+                <property>controls/lighting/panel-lights-switch</property>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+	<type>light</type>
+	<light-type>spot</light-type>
+	<name>RightPanelLight</name>
+	<object-name>IntLight.RightPanel.Cone</object-name>
+	<nopreview/>
+	<position>
+		<x>2.54185</x>
+		<y>0.68223</y>
+		<z>0.55175</z>
+	</position>
+	<direction>
+		<x>-0.2</x>
+		<y>-2</y>
+		<z>0</z>
+	</direction>
+	<ambient>
+		<r>0.9</r>
+		<g>0.7</g>
+		<b>0.5</b>
+		<a>1</a>
+	</ambient>
+	<diffuse>
+		<r>0.7</r>
+		<g>0.4</g>
+		<b>0.3</b>
+		<a>1</a>
+	</diffuse>
+	<specular>
+		<r>0.7</r>
+		<g>0.4</g>
+		<b>0.3</b>
+		<a>1</a>
+	</specular>
+	<dim-factor>
+		<property>controls/lighting/right-panel-light-emission</property>
+		<factor>1</factor>
+		<offset>0</offset>
+		<min>0</min>
+		<max>1</max>
+	</dim-factor>
+	<attenuation>
+		<c>0.0</c>
+		<l>3</l>
+		<q>50</q>
+	</attenuation>
+	<cutoff>80</cutoff>
+	<near-m>0.001</near-m>
+	<far-m>2</far-m>
+    </animation>
+
+</PropertyList>

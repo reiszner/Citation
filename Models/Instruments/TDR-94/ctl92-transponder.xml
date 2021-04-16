@@ -1,0 +1,1108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- Collins CTL-92 Control for Collins TDR-94 transponder
+2.375"W x 2.625"H
+Syd Adams
+
+Update:
+model updated with complete display (used in all Collins devices)
+add facility for single and dual transponder
+
+Sascha Reißner
+-->
+
+<PropertyList>
+
+    <path>ctl92.ac</path>
+
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.display</object-name>
+        <object-name>ctl92.freq.002</object-name>
+        <object-name>ctl92.freq.003</object-name>
+        <object-name>ctl92.freq.004</object-name>
+        <object-name>ctl92.freq.005</object-name>
+        <object-name>ctl92.stby.002</object-name>
+        <object-name>ctl92.stby.003</object-name>
+        <object-name>ctl92.stby.004</object-name>
+        <object-name>ctl92.stby.005</object-name>
+        <object-name>ctl92.code.001</object-name>
+        <object-name>ctl92.code.002</object-name>
+        <object-name>ctl92.dash</object-name>
+        <object-name>ctl92.diag</object-name>
+        <object-name>ctl92.mem</object-name>
+        <object-name>ctl92.mem.ch</object-name>
+        <object-name>ctl92.annun.act</object-name>
+        <object-name>ctl92.annun.mem</object-name>
+        <object-name>ctl92.annun.rmt</object-name>
+        <object-name>ctl92.annun.tx</object-name>
+        <object-name>ctl92.annun.hold</object-name>
+        <object-name>ctl92.toggle.lit</object-name>
+        <condition>
+            <and>
+                <or>
+                    <property>instrumentation/transponder[0]/operable</property>
+                    <property>instrumentation/transponder[1]/operable</property>
+                </or>
+                <property>instrumentation/ctl92/power-knob</property>
+            </and>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.cap</object-name>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/units</property>
+                <value>1</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.toggle</object-name>
+        <object-name>ctl92.toggle.lit</object-name>
+        <object-name>ctl92.stby.002</object-name>
+        <object-name>ctl92.stby.003</object-name>
+        <object-name>ctl92.stby.004</object-name>
+        <object-name>ctl92.stby.005</object-name>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/units</property>
+                <value>2</value>
+            </equals>
+        </condition>
+    </animation>
+
+<!--   Test   -->
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.diag</object-name>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/power-knob</property>
+                <value>6</value>
+            </equals>
+            </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.code.001</object-name>
+        <object-name>ctl92.code.002</object-name>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/power-knob</property>
+                <value>6</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.annun.act</object-name>
+        <condition>
+            <or>
+                <and>
+                    <not><property>instrumentation/ctl92[0]/active</property></not>
+                    <property>instrumentation/transponder[0]/ident</property>
+                </and>
+                <and>
+                    <greater-than>
+                        <property>instrumentation/ctl92/units</property>
+                        <value>1</value>
+                    </greater-than>
+                    <property>instrumentation/ctl92[0]/active</property>
+                    <property>instrumentation/transponder[1]/ident</property>
+                </and>
+            </or>
+        </condition>
+    </animation>
+
+<!--   unused parts   -->
+    <animation>
+        <type>select</type>
+        <object-name>ctl92.freq.001</object-name>
+        <object-name>ctl92.stby.001</object-name>
+        <object-name>ctl92.freq.dec1</object-name>
+        <object-name>ctl92.stby.dec1</object-name>
+        <object-name>ctl92.freq.dec2</object-name>
+        <object-name>ctl92.stby.dec2</object-name>
+        <object-name>ctl92.dash</object-name>
+        <object-name>ctl92.mem</object-name>
+        <object-name>ctl92.mem.ch</object-name>
+        <object-name>ctl92.annun.mem</object-name>
+        <object-name>ctl92.annun.rmt</object-name>
+        <object-name>ctl92.annun.hold</object-name>
+        <object-name>ctl92.annun.tx</object-name>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/power-knob</property>
+                <value>6</value>
+            </equals>
+        </condition>
+    </animation>
+
+    <animation>
+        <type>knob</type>
+        <object-name>ctl92.pwr</object-name>
+        <property>instrumentation/ctl92/power-knob</property>
+        <factor>30.5</factor>
+        <center>
+            <x-m>0.002</x-m>
+            <y-m>-0.01375</y-m>
+            <z-m>-0.01835</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+
+        <action>
+            <binding>
+                <command>property-adjust</command>
+                <property>instrumentation/ctl92/power-knob</property>
+                <factor>1</factor>
+                <min>0</min>
+                <max>3</max>
+            </binding>
+
+            <binding>
+                <condition>
+                    <not><property>instrumentation/ctl92/power-knob</property></not>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>0</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/power-knob</property></not>
+                        <greater-than>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>1</value>
+                        </greater-than>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>0</value>
+            </binding>
+
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>1</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>2</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>4</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>3</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>5</value>
+            </binding>
+
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/active</property>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>1</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/active</property>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>2</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>4</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/active</property>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>3</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>5</value>
+            </binding>
+        </action>
+
+        <hovered>
+            <binding>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-mode</tooltip-id>
+                <label>Transponder mode: %s</label>
+                <property>instrumentation/ctl92/power-knob</property>
+                <mapping>nasal</mapping>
+                <script>
+                    var modes = ['Off', 'Stand by', 'On', 'Alt'];
+                    return modes[arg[0]];
+                </script>
+            </binding>
+        </hovered>
+    </animation>
+
+<!--
+if anyone want animate the tune knobs,
+the centers are:
+
+        <axis>
+            <object-name>ctl92.tune-axis</object-name>
+        </axis>
+-->
+
+<!--   First Squak   -->
+    <animation>
+        <type>textranslate</type>
+        <object-name>ctl92.freq.002</object-name>
+        <property>instrumentation/transponder[0]/inputs/digit[3]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>ctl92.freq.003</object-name>
+        <property>instrumentation/transponder[0]/inputs/digit[2]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>ctl92.freq.004</object-name>
+        <property>instrumentation/transponder[0]/inputs/digit[1]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>textranslate</type>
+        <object-name>ctl92.freq.005</object-name>
+        <property>instrumentation/transponder[0]/inputs/digit[0]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<!--   Second Squak   -->
+    <animation>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/units</property>
+                <value>2</value>
+            </equals>
+        </condition>
+        <type>textranslate</type>
+        <object-name>ctl92.stby.002</object-name>
+        <property>instrumentation/transponder[1]/inputs/digit[3]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/units</property>
+                <value>2</value>
+            </equals>
+        </condition>
+        <type>textranslate</type>
+        <object-name>ctl92.stby.003</object-name>
+        <property>instrumentation/transponder[1]/inputs/digit[2]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/units</property>
+                <value>2</value>
+            </equals>
+        </condition>
+        <type>textranslate</type>
+        <object-name>ctl92.stby.004</object-name>
+        <property>instrumentation/transponder[1]/inputs/digit[1]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <condition>
+            <equals>
+                <property>instrumentation/ctl92[0]/units</property>
+                <value>2</value>
+            </equals>
+        </condition>
+        <type>textranslate</type>
+        <object-name>ctl92.stby.005</object-name>
+        <property>instrumentation/transponder[1]/inputs/digit[0]</property>
+        <factor>0.1</factor>
+        <step>1</step>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+<!--   OSG hotspots   -->
+    <animation>
+        <type>knob</type>
+        <object-name>ctl92.toggle</object-name>
+        <property>instrumentation/ctl92[0]/active</property>
+        <factor>40</factor>
+        <offset>-20</offset>
+        <axis>
+            <object-name>ctl92.toggle-axis</object-name>
+        </axis>
+
+        <action>
+            <repeatable>false</repeatable>
+            <binding>
+                <command>property-toggle</command>
+                <property>instrumentation/ctl92[0]/active</property>
+            </binding>
+
+            <binding>
+                <condition>
+                    <not><property>instrumentation/ctl92/power-knob</property></not>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>0</value>
+            </binding>
+            <binding>
+                <condition>
+                    <not><property>instrumentation/ctl92/power-knob</property></not>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>0</value>
+            </binding>
+
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <property>instrumentation/ctl92/active</property>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>1</value>
+            </binding>
+
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>1</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>2</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>4</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>3</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                <value>5</value>
+            </binding>
+
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/active</property>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>1</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/active</property>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>2</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>4</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/active</property>
+                        <equals>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>3</value>
+                        </equals>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                <value>5</value>
+            </binding>
+        </action>
+
+        <hovered>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                        </or>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-num</tooltip-id>
+                <label>Active Transponder: %d</label>
+                <property>instrumentation/ctl92/active</property>
+                <mapping>nasal</mapping>
+                <script>
+                    var modes = [1, 2];
+                    return modes[arg[0]];
+                </script>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>knob</type>
+        <object-name>ctl92.tune.inner</object-name>
+        <action>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>1</value>
+                                </equals>
+                                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            </and>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>2</value>
+                                </equals>
+                                <property>instrumentation/ctl92/active</property>
+                                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                            </and>
+                        </or>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script><![CDATA[
+                    var loDigit = getprop('instrumentation/transponder[0]/inputs/digit[0]') or 0;
+                    var hiDigit = getprop('instrumentation/transponder[0]/inputs/digit[1]') or 0;
+                    var offset = int(cmdarg().getNode('offset').getValue());
+                    var decr = (offset < 0);
+                    if ((decr and loDigit == 0) or (!decr and loDigit == 7)) {
+                        hiDigit = math.mod(hiDigit + offset, 8);
+                    }
+                    loDigit = math.mod(loDigit + offset, 8);
+                    setprop('instrumentation/transponder[0]/inputs/digit[0]', loDigit);
+                    setprop('instrumentation/transponder[0]/inputs/digit[1]', hiDigit);
+                ]]></script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <equals>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>2</value>
+                        </equals>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script><![CDATA[
+                    var loDigit = getprop('instrumentation/transponder[1]/inputs/digit[0]') or 0;
+                    var hiDigit = getprop('instrumentation/transponder[1]/inputs/digit[1]') or 0;
+                    var offset = int(cmdarg().getNode('offset').getValue());
+                    var decr = (offset < 0);
+                    if ((decr and loDigit == 0) or (!decr and loDigit == 7)) {
+                        hiDigit = math.mod(hiDigit + offset, 8);
+                    }
+                    loDigit = math.mod(loDigit + offset, 8);
+                    setprop('instrumentation/transponder[1]/inputs/digit[0]', loDigit);
+                    setprop('instrumentation/transponder[1]/inputs/digit[1]', hiDigit);
+                ]]></script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>1</value>
+                                </equals>
+                                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            </and>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>2</value>
+                                </equals>
+                                <property>instrumentation/ctl92/active</property>
+                                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                            </and>
+                        </or>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-squawk</tooltip-id>
+                <label>Transponder 1 Squawk: %04d</label>
+                <property>instrumentation/transponder[0]/id-code</property>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <equals>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>2</value>
+                        </equals>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-squawk</tooltip-id>
+                <label>Transponder 2 Squawk: %04d</label>
+                <property>instrumentation/transponder[1]/id-code</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>knob</type>
+        <object-name>ctl92.tune.outer</object-name>
+        <action>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>1</value>
+                                </equals>
+                                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            </and>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>2</value>
+                                </equals>
+                                <property>instrumentation/ctl92/active</property>
+                                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                            </and>
+                        </or>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script><![CDATA[
+                    var loDigit = getprop('instrumentation/transponder[0]/inputs/digit[2]') or 0;
+                    var hiDigit = getprop('instrumentation/transponder[0]/inputs/digit[3]') or 0;
+                    var offset = int(cmdarg().getNode('offset').getValue());
+                    var decr = (offset < 0);
+                    if ((decr and loDigit == 0) or (!decr and loDigit == 7)) {
+                        hiDigit = math.mod(hiDigit + offset, 8);
+                    }
+                    loDigit = math.mod(loDigit + offset, 8);
+                    setprop('instrumentation/transponder[0]/inputs/digit[2]', loDigit);
+                    setprop('instrumentation/transponder[0]/inputs/digit[3]', hiDigit);
+                ]]></script>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <equals>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>2</value>
+                        </equals>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                    </and>
+                </condition>
+                <command>nasal</command>
+                <script><![CDATA[
+                    var loDigit = getprop('instrumentation/transponder[1]/inputs/digit[2]') or 0;
+                    var hiDigit = getprop('instrumentation/transponder[1]/inputs/digit[3]') or 0;
+                    var offset = int(cmdarg().getNode('offset').getValue());
+                    var decr = (offset < 0);
+                    if ((decr and loDigit == 0) or (!decr and loDigit == 7)) {
+                        hiDigit = math.mod(hiDigit + offset, 8);
+                    }
+                    loDigit = math.mod(loDigit + offset, 8);
+                    setprop('instrumentation/transponder[1]/inputs/digit[2]', loDigit);
+                    setprop('instrumentation/transponder[1]/inputs/digit[3]', hiDigit);
+                ]]></script>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>1</value>
+                                </equals>
+                                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            </and>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>2</value>
+                                </equals>
+                                <property>instrumentation/ctl92/active</property>
+                                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                            </and>
+                        </or>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-squawk</tooltip-id>
+                <label>Transponder 1 Squawk: %04d</label>
+                <property>instrumentation/transponder[0]/id-code</property>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <equals>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>2</value>
+                        </equals>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-squawk</tooltip-id>
+                <label>Transponder 2 Squawk: %04d</label>
+                <property>instrumentation/transponder[1]/id-code</property>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>ctl92.btn.pre</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>1</value>
+                                </equals>
+                                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            </and>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>2</value>
+                                </equals>
+                                <property>instrumentation/ctl92/active</property>
+                                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                            </and>
+                        </or>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/id-code</property>
+                <value>1200</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <equals>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>2</value>
+                        </equals>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/id-code</property>
+                <value>1200</value>
+            </binding>
+        </action>
+        <action>
+            <button>1</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <or>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>1</value>
+                                </equals>
+                                <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                            </and>
+                            <and>
+                                <equals>
+                                    <property>instrumentation/ctl92/units</property>
+                                    <value>2</value>
+                                </equals>
+                                <property>instrumentation/ctl92/active</property>
+                                <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                            </and>
+                        </or>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/id-code</property>
+                <value>7000</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <equals>
+                            <property>instrumentation/ctl92/units</property>
+                            <value>2</value>
+                        </equals>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/id-code</property>
+                <value>7000</value>
+            </binding>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <property>instrumentation/ctl92/power-knob</property>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-pre</tooltip-id>
+                <label>Preset 1200 or 7000</label>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>pick</type>
+        <object-name>ctl92.btn.ident</object-name>
+        <action>
+            <button>0</button>
+            <repeatable>false</repeatable>
+            <binding>
+                <condition>
+                    <and>
+                        <greater-than>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>1</value>
+                        </greater-than>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[0]/operable</property>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[0]/inputs/ident-btn</property>
+                <value>1</value>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <greater-than>
+                            <property>instrumentation/ctl92/power-knob</property>
+                            <value>1</value>
+                        </greater-than>
+                        <property>instrumentation/ctl92/active</property>
+                        <property>instrumentation/transponder[1]/operable</property>
+                    </and>
+                </condition>
+                <command>property-assign</command>
+                <property>instrumentation/transponder[1]/inputs/ident-btn</property>
+                <value>1</value>
+            </binding>
+            <mod-up>
+                <binding>
+                    <condition>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                    </condition>
+                    <command>property-assign</command>
+                    <property>instrumentation/transponder[0]/inputs/ident-btn</property>
+                    <value>0</value>
+                </binding>
+                <binding>
+                    <condition>
+                        <property>instrumentation/ctl92/active</property>
+                    </condition>
+                    <command>property-assign</command>
+                    <property>instrumentation/transponder[1]/inputs/ident-btn</property>
+                    <value>0</value>
+                </binding>
+            </mod-up>
+        </action>
+        <hovered>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <not><property>instrumentation/ctl92/active</property></not>
+                        <property>instrumentation/transponder[0]/operable</property>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-ident</tooltip-id>
+                <label>Ident: %s</label>
+                <property>instrumentation/transponder[0]/ident</property>
+                <mapping>on-off</mapping>
+            </binding>
+            <binding>
+                <condition>
+                    <and>
+                        <property>instrumentation/ctl92/power-knob</property>
+                        <property>instrumentation/ctl92/active</property>
+                        <property>instrumentation/transponder[1]/operable</property>
+                    </and>
+                </condition>
+                <command>set-tooltip</command>
+                <tooltip-id>transponder-ident</tooltip-id>
+                <label>Ident: %s</label>
+                <property>instrumentation/transponder[1]/ident</property>
+                <mapping>on-off</mapping>
+            </binding>
+        </hovered>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <texture alias="../../texture" />
+        <object-name>ctl92.bezel</object-name>
+    </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>ctl92.bezel</object-name>
+        <object-name>ctl92.metal</object-name>
+        <object-name>ctl92.toggle</object-name>
+        <object-name>ctl92.cap</object-name>
+        <emission>
+            <red>0.9</red>
+            <green>0.6</green>
+            <blue>0.4</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <condition>
+            <and>
+                <property>instrumentation/ctl92/power-knob</property>
+                <or>
+                    <property>instrumentation/transponder[0]/inputs/knob-mode</property>
+                    <property>instrumentation/transponder[1]/inputs/knob-mode</property>
+                </or>
+            </and>
+        </condition>
+        <type>material</type>
+        <object-name>ctl92.pwr</object-name>
+        <object-name>ctl92.tune.outer</object-name>
+        <object-name>ctl92.tune.inner</object-name>
+        <object-name>ctl92.toggle.lit</object-name>
+        <object-name>ctl92.btn.ident</object-name>
+        <object-name>ctl92.btn.pre</object-name>
+        <object-name>ctl92.btn.test</object-name>
+        <emission>
+            <red>0.8</red>
+            <green>0.8</green>
+            <blue>0.7</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>ctl92.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>ctl92.bezel</object-name>
+        <object-name>ctl92.metal</object-name>
+        <object-name>ctl92.pwr</object-name>
+        <object-name>ctl92.tune.outer</object-name>
+        <object-name>ctl92.tune.inner</object-name>
+        <object-name>ctl92.toggle</object-name>
+        <object-name>ctl92.cap</object-name>
+        <object-name>ctl92.btn.pre</object-name>
+        <object-name>ctl92.btn.ident</object-name>
+        <object-name>ctl92.btn.test</object-name>
+    </effect-->
+
+</PropertyList>

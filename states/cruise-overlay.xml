@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<PropertyList>
+
+  <name type="string" n="3">cruise</name>
+
+  <description>
+    You will start the sim on cruise level, FL 360 with autopilot
+    engaged, set to
+    "autothrottle"
+    "true heading"
+    "altitude hold"
+
+    Start this state with --state=cruise
+
+    If you're starting via the QTlauncher, you won't need extra
+    options.
+    Options needed for other launchers:
+    --in-air
+  </description>
+
+  <overlay>
+
+    <autopilot>
+      <heading_overlay type="bool">true</heading_overlay>
+      <overlay-name type="string">cruise</overlay-name>
+
+      <settings>
+        <target-altitude-ft type="double">36000</target-altitude-ft>
+        <target-speed-kt type="double">220</target-speed-kt>
+      </settings>
+
+      <mode>
+        <engaged type="bool">true</engaged>
+        <yaw-damper type="bool">true</yaw-damper>
+        <low-bank type="bool">true</low-bank>
+      </mode>
+    </autopilot>
+
+
+    <consumables>
+      <fuel>
+        <fuel_overlay type="bool">true</fuel_overlay>
+        <fuel_overlay_0 type="double">320</fuel_overlay_0>
+        <fuel_overlay_1 type="double">320</fuel_overlay_1>
+      </fuel>
+    </consumables>
+
+
+    <controls>
+      <electric>
+        <avionics-switch type="bool">true</avionics-switch>
+        <battery-bus-switch type="int">1</battery-bus-switch>
+        <voltage-sel type="int">0</voltage-sel>
+        <system-test-sw type="int">0</system-test-sw>
+        <fuel-sel type="int">0</fuel-sel>
+        <engine>
+          <generator-ready type="bool">true</generator-ready>
+          <generator-sw type="int">1</generator-sw>
+        </engine>
+        <engine n="1">
+          <generator-ready type="bool">true</generator-ready>
+          <generator-sw type="int">1</generator-sw>
+        </engine>
+      </electric>
+
+      <engines>
+        <engine n="0">
+          <ignition-sw type="bool">false</ignition-sw>
+          <throttle-lever type="double">1.0</throttle-lever>
+        </engine>
+
+        <engine n="1">
+          <ignition-sw type="bool">false</ignition-sw>
+          <throttle-lever type="double">1.0</throttle-lever>
+        </engine>
+      </engines>
+
+      <fuel>
+        <tank n="0">
+          <boost-pump-switch type="int">-1</boost-pump-switch>
+        </tank>
+        <tank n="1">
+          <boost-pump-switch type="int">-1</boost-pump-switch>
+        </tank>
+      </fuel>
+
+      <gear>
+        <brake-parking type="double">0</brake-parking>
+        <gear-down type="bool">false</gear-down>
+      </gear>
+
+      <lighting>
+        <beacon-switch type="bool">true</beacon-switch>
+        <nav-lights-switch type="bool">true</nav-lights-switch>
+        <strobe-switch type="bool">false</strobe-switch>
+        <recog-lights-switch type="bool">false</recog-lights-switch>
+
+        <panel-lights-switch type="bool">true</panel-lights-switch>
+        <instrument-light-norm type="double">0.5</instrument-light-norm>
+        <left-panel-norm type="double">0.2</left-panel-norm>
+        <center-panel-norm type="double">0.2</center-panel-norm>
+        <right-panel-norm type="double">0.2</right-panel-norm>
+      </lighting>
+    </controls>
+
+
+    <engines>
+      <engine>
+        <started type="bool">true</started>
+        <running type="bool">true</running>
+      </engine>
+
+      <engine n="1">
+        <started type="bool">true</started>
+        <running type="bool">true</running>
+      </engine>
+    </engines>
+
+    <gear>
+      <gear>
+        <position-norm type="float">0</position-norm>
+      </gear>
+      <gear n="1">
+        <position-norm type="float">0</position-norm>
+      </gear>
+      <gear n="2">
+        <position-norm type="float">0</position-norm>
+      </gear>
+    </gear>
+
+    <sim>
+      <presets>
+        <airspeed-kt type="double">190</airspeed-kt>
+        <altitude-ft type="double">36000</altitude-ft>
+      </presets>
+    </sim>
+
+  </overlay>
+
+</PropertyList>

@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+Filters that compute values for the HSIs in the Citation II.
+Copyright (c) 2020 Sascha Reißner <reiszner@novaplan.at>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+
+<PropertyList>
+
+<!-- HSI0: filter for mechanical needles and electrical supported parts -->
+
+    <filter>
+        <name>HSI0 powered</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>systems/electrical/outputs/AC-26V/ac-hsi1</property>
+                    <value>20.0</value>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/hsi[0]/hsi-powered</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 heading powered</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>instrumentation/heading-indicator[0]/serviceable</property>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/hsi[0]/hdg-powered</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 heading</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>90</max-rate-of-change>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+            </condition>
+            <property>instrumentation/heading-indicator[0]/indicated-heading-deg</property>
+        </input>
+        <input>instrumentation/hsi[0]/heading-deg</input>
+        <output>instrumentation/hsi[0]/heading-deg</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 bearing</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>90</max-rate-of-change>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+                <property>instrumentation/nav-selector[0]/signal-valid</property>
+                <not><property>instrumentation/nav-selector[0]/nav-loc</property></not>
+            </condition>
+            <expression>
+                <sum>
+                    <dif>
+                        <value>360.0</value>
+                        <property>instrumentation/heading-indicator[0]/indicated-heading-deg</property>
+                    </dif>
+                    <floor>
+                        <sum>
+                            <property>instrumentation/nav-selector[0]/reciprocal-radial-deg</property>
+                            <value>0.5</value>
+                        </sum>
+                    </floor>
+                </sum>
+            </expression>
+        </input>
+        <input>90.0</input>
+        <output>instrumentation/hsi[0]/bearing-deg</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 radial</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>instrumentation/nav-selector[0]/selected-radial-deg</input>
+        <output>instrumentation/hsi[0]/selected-radial-display</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 radial needle</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>90</max-rate-of-change>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+            </condition>
+            <property>instrumentation/nav-selector[0]/selected-radial-deg</property>
+        </input>
+        <input>instrumentation/hsi[0]/selected-radial-deg</input>
+        <output>instrumentation/hsi[0]/selected-radial-deg</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 course deflection lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+                <property>instrumentation/nav-selector[0]/signal-valid</property>
+                <property>instrumentation/nav-selector[0]/nav-loc</property>
+            </condition>
+            <property>instrumentation/nav-selector[0]/loc-deflection</property>
+            <scale>0.25</scale>
+            <min>-0.4</min>
+            <max> 0.4</max>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+                <property>instrumentation/nav-selector[0]/signal-valid</property>
+            </condition>
+            <property>instrumentation/nav-selector[0]/vor-deflection</property>
+            <scale>0.10</scale>
+            <min>-0.4</min>
+            <max> 0.4</max>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/hsi[0]/course-deflection</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 glideslope lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+                <property>instrumentation/nav-selector[0]/signal-valid</property>
+            </condition>
+            <property>instrumentation/nav-selector[0]/gs-deflection</property>
+            <min>-0.8</min>
+            <max> 0.8</max>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/hsi[0]/gs-deflection</output>
+    </filter>
+
+    <filter>
+        <name>HSI0 distance display</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[0]/hsi-powered</property>
+            </condition>
+            <property>instrumentation/nav-selector[0]/dme-distance-display</property>
+        </input>
+        <output>instrumentation/hsi[0]/dme-distance-display</output>
+    </filter>
+
+<!-- HSI1: filter for mechanical needles and electrical supported parts -->
+
+    <filter>
+        <name>HSI1 powered</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>systems/electrical/outputs/AC-26V/ac-hsi2</property>
+                    <value>20.0</value>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/hsi[1]/hsi-powered</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 heading powered</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>instrumentation/heading-indicator[1]/serviceable</property>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/hsi[1]/hdg-powered</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 heading</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>90</max-rate-of-change>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+            </condition>
+            <property>instrumentation/heading-indicator[1]/indicated-heading-deg</property>
+        </input>
+        <input>instrumentation/hsi[1]/heading-deg</input>
+        <output>instrumentation/hsi[1]/heading-deg</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 bearing</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>90</max-rate-of-change>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+                <property>instrumentation/nav-selector[1]/signal-valid</property>
+                <not><property>instrumentation/nav-selector[1]/nav-loc</property></not>
+            </condition>
+            <expression>
+                <sum>
+                    <dif>
+                        <value>360.0</value>
+                        <property>instrumentation/heading-indicator[1]/indicated-heading-deg</property>
+                    </dif>
+                    <floor>
+                        <sum>
+                            <property>instrumentation/nav-selector[1]/reciprocal-radial-deg</property>
+                            <value>0.5</value>
+                        </sum>
+                    </floor>
+                </sum>
+            </expression>
+        </input>
+        <input>90.0</input>
+        <output>instrumentation/hsi[1]/bearing-deg</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 radial</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>instrumentation/nav-selector[1]/selected-radial-deg</input>
+        <output>instrumentation/hsi[1]/selected-radial-display</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 radial needle</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>90</max-rate-of-change>
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+            </condition>
+            <property>instrumentation/nav-selector[1]/selected-radial-deg</property>
+        </input>
+        <input>instrumentation/hsi[1]/selected-radial-deg</input>
+        <output>instrumentation/hsi[1]/selected-radial-deg</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 course deflection lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+                <property>instrumentation/nav-selector[1]/signal-valid</property>
+                <property>instrumentation/nav-selector[1]/nav-loc</property>
+            </condition>
+            <property>instrumentation/nav-selector[1]/loc-deflection</property>
+            <scale>0.25</scale>
+            <min>-0.4</min>
+            <max> 0.4</max>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+                <property>instrumentation/nav-selector[1]/signal-valid</property>
+            </condition>
+            <property>instrumentation/nav-selector[1]/vor-deflection</property>
+            <scale>0.10</scale>
+            <min>-0.4</min>
+            <max> 0.4</max>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/hsi[1]/course-deflection</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 glideslope lowpass</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.2</filter-time>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+                <property>instrumentation/nav-selector[1]/signal-valid</property>
+            </condition>
+            <property>instrumentation/nav-selector[1]/gs-deflection</property>
+            <min>-0.8</min>
+            <max> 0.8</max>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/hsi[1]/gs-deflection</output>
+    </filter>
+
+    <filter>
+        <name>HSI1 distance display</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>instrumentation/hsi[1]/hsi-powered</property>
+            </condition>
+            <property>instrumentation/nav-selector[1]/dme-distance-display</property>
+        </input>
+        <output>instrumentation/hsi[1]/dme-distance-display</output>
+    </filter>
+
+</PropertyList>

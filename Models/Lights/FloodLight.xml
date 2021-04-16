@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+ <path>FloodLight.ac</path>
+
+     <animation>
+        <type>select</type>
+        <object-name>IntLight.FloodLight.cone</object-name>
+        <condition>
+            <property>systems/electrical/outputs/emer/light-flood</property>
+        </condition>
+    </animation>
+
+    <animation>
+	<type>light</type>
+	<light-type>spot</light-type>
+	<name>FloodLight</name>
+	<object-name>IntLight.FloodLight.cone</object-name>
+	<nopreview/>
+	<position>
+		<x>3.63167</x>
+		<y>0.0</y>
+		<z>1.18</z>
+	</position>
+	<direction>
+		<x>-1.4735</x>
+		<y>0.0</y>
+		<z>-.90</z>
+	</direction>
+	<ambient>
+		<r>0.1</r>
+		<g>0.1</g>
+		<b>0.9</b>
+		<a>1</a>
+	</ambient>
+	<diffuse>
+		<r>0.0</r>
+		<g>0.0</g>
+		<b>0.4</b>
+		<a>1</a>
+	</diffuse>
+	<specular>
+		<r>0.4</r>
+		<g>0.4</g>
+		<b>0.7</b>
+		<a>1</a>
+	</specular>
+	<dim-factor>
+		<property>controls/lighting/flood-light-emission</property>
+		<factor>1</factor>
+		<offset>0</offset>
+		<min>0</min>
+		<max>1</max>
+	</dim-factor>
+	<attenuation>
+		<c>-0.4</c>
+		<l>0.002</l>
+		<q>0.8</q>
+	</attenuation>
+	<exponent>18</exponent>
+	<cutoff>26</cutoff>
+	<near-m>0.1</near-m>
+	<far-m>2</far-m>
+    </animation>
+
+</PropertyList>

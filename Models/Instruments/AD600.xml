@@ -1,0 +1,368 @@
+<PropertyList>
+
+    <path>AD600.ac</path>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.flag.att</object-name>
+        <property alias="../../spin" />
+        <interpolation>
+            <entry><ind>0.78</ind><dep>0</dep></entry>
+            <entry><ind>0.80</ind><dep>-60</dep></entry>
+        </interpolation>
+        <center>
+            <x-m>0.004</x-m>
+            <y-m>-0.039</y-m>
+            <z-m>0.053</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.flag.fd</object-name>
+        <property alias="../../fd-on" />
+        <factor>60</factor>
+        <center>
+            <x-m>0.009</x-m>
+            <y-m>0.039</y-m>
+            <z-m>0.053</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.flag.loc</object-name>
+        <property alias="../../loc-valid" />
+        <factor>30</factor>
+        <center>
+            <x-m>0.010</x-m>
+            <y-m>0.039</y-m>
+            <z-m>-0.043</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.flag.gs</object-name>
+        <property alias="../../gs-valid" />
+        <factor>15</factor>
+        <center>
+            <x-m>0.007</x-m>
+            <y-m>0.045</y-m>
+            <z-m>0.050</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.flag.spd</object-name>
+        <property alias="../../alpha-valid" />
+        <interpolation>
+            <entry><ind>0</ind><dep>0</dep></entry>
+            <entry><ind>1</ind><dep>20</dep></entry>
+        </interpolation>
+        <center>
+            <x-m>0.010</x-m>
+            <y-m>-0.057</y-m>
+            <z-m>-0.033</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.flag.rt</object-name>
+        <property alias="../../turn-spin" />
+        <interpolation>
+            <entry><ind>0.77</ind><dep>0</dep></entry>
+            <entry><ind>0.80</ind><dep>-20</dep></entry>
+        </interpolation>
+        <center>
+            <x-m>0.010</x-m>
+            <y-m>-0.040</y-m>
+            <z-m>-0.043</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.ball</object-name>
+        <object-name>AD600.ring</object-name>
+        <property alias="../../roll-deg" />
+        <period>
+            <min>-180</min>
+            <max>180</max>
+        </period>
+        <center>
+            <x-m>-0.048</x-m>
+            <y-m>0.000</y-m>
+            <z-m>0.005</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.ball</object-name>
+        <property alias="../../pitch-deg" />
+        <center>
+            <x-m>-0.048</x-m>
+            <y-m>0.000</y-m>
+            <z-m>0.005</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.fd.cues</object-name>
+        <property alias="../../fd-pitch-deg" />
+        <center>
+            <x-m>-0.048</x-m>
+            <y-m>0.000</y-m>
+            <z-m>0.005</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>-1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.fd.cues</object-name>
+        <property alias="../../fd-roll-deg" />
+        <center>
+            <x-m>-0.048</x-m>
+            <y-m>0.000</y-m>
+            <z-m>0.005</z-m>
+        </center>
+        <axis>
+            <x>-1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>AD600.slipball</object-name>
+        <property alias="../../slip-skid" />
+        <interpolation>
+            <entry><ind>-1</ind><dep>10</dep></entry>
+            <entry><ind>0</ind><dep>0</dep></entry>
+            <entry><ind>1</ind><dep>-10</dep></entry>
+        </interpolation>
+        <center>
+            <x-m>0.017</x-m>
+            <y-m>0.000</y-m>
+            <z-m>0.010</z-m>
+        </center>
+        <axis>
+            <x>1</x>
+            <y>0</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>AD600.needle.loc</object-name>
+        <property alias="../../loc-deflection" />
+        <interpolation>
+            <entry><ind>-0.8</ind><dep>-0.012</dep></entry>
+            <entry><ind>0.0</ind><dep>0.000</dep></entry>
+            <entry><ind>0.8</ind><dep>0.012</dep></entry>
+        </interpolation>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>AD600.needle.gs</object-name>
+        <property alias="../../gs-deflection" />
+        <interpolation>
+            <entry><ind>-0.8</ind><dep>-0.016</dep></entry>
+            <entry><ind>0.0</ind><dep>0.000</dep></entry>
+            <entry><ind>0.8</ind><dep>0.016</dep></entry>
+        </interpolation>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>AD600.needle.spd</object-name>
+        <property alias="../../alpha-deg" />
+        <interpolation> <!-- scaled to 12 deg -->
+            <entry><ind>0.0</ind> <dep>0.036</dep></entry> <!-- 0.0 -->
+            <entry><ind>2.4</ind> <dep>0.024</dep></entry> <!-- 0.2 -->
+            <entry><ind>4.8</ind> <dep>0.012</dep></entry> <!-- 0.4 -->
+            <entry><ind>7.2</ind> <dep>0.000</dep></entry>  <!-- 0.6 - optimal appr-->
+            <entry><ind>9.6</ind> <dep>-0.012</dep></entry>  <!-- 0.8-->
+            <entry><ind>12.0</ind><dep>-0.024</dep></entry>  <!-- 1.0-->
+        </interpolation>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>AD600.needle.rt</object-name>
+        <property alias="../../turn-rate" />
+        <interpolation>
+            <entry><ind>-2.0</ind><dep>-0.012</dep></entry>
+            <entry><ind>0.0</ind><dep>0.000</dep></entry>
+            <entry><ind>2.0</ind><dep>0.012</dep></entry>
+        </interpolation>
+        <axis>
+            <x>0</x>
+            <y>1</y>
+            <z>0</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>translate</type>
+        <object-name>AD600.runway</object-name>
+        <property alias="../../altitude-agl" />
+        <interpolation>
+            <entry><ind>0.0</ind><dep>0.030</dep></entry>
+            <entry><ind>200.0</ind><dep>0.010</dep></entry>
+            <entry><ind>210.0</ind><dep>0.000</dep></entry>
+        </interpolation>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>AD600.housing</object-name>
+        <object-name>AD600.testknob</object-name>
+        <object-name>AD600.slipball</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>AD600.ball</object-name>
+        <object-name>AD600.ring</object-name>
+        <object-name>AD600.face</object-name>
+        <object-name>AD600.cover</object-name>
+        <object-name>AD600.aircraft</object-name>
+        <object-name>AD600.fd.cues</object-name>
+        <object-name>AD600.flag.att</object-name>
+        <object-name>AD600.flag.fd</object-name>
+        <object-name>AD600.flag.loc</object-name>
+        <object-name>AD600.flag.gs</object-name>
+        <object-name>AD600.flag.spd</object-name>
+        <object-name>AD600.flag.rt</object-name>
+        <object-name>AD600.needle.loc</object-name>
+        <object-name>AD600.needle.gs</object-name>
+        <object-name>AD600.needle.spd</object-name>
+        <object-name>AD600.needle.rt</object-name>
+        <object-name>AD600.runway</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <!--inherits-from>Effects/model-transparent</inherits-from-->
+        <inherits-from>Aircraft/Citation/Models/Effects/reflection-glass</inherits-from>
+        <object-name>AD600.glass</object-name>
+        <object-name>AD600.pipe</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>AD600.housing</object-name>
+        <object-name>AD600.testknob</object-name>
+        <object-name>AD600.ball</object-name>
+        <object-name>AD600.ring</object-name>
+        <object-name>AD600.face</object-name>
+        <object-name>AD600.cover</object-name>
+        <object-name>AD600.aircraft</object-name>
+        <object-name>AD600.fd.cues</object-name>
+        <object-name>AD600.flag.att</object-name>
+        <object-name>AD600.flag.fd</object-name>
+        <object-name>AD600.flag.loc</object-name>
+        <object-name>AD600.flag.gs</object-name>
+        <object-name>AD600.flag.spd</object-name>
+        <object-name>AD600.flag.rt</object-name>
+        <object-name>AD600.needle.loc</object-name>
+        <object-name>AD600.needle.gs</object-name>
+        <object-name>AD600.needle.spd</object-name>
+        <object-name>AD600.needle.rt</object-name>
+        <object-name>AD600.runway</object-name>
+        <object-name>AD600.slipball</object-name>
+    </effect-->
+
+</PropertyList>

@@ -1,0 +1,140 @@
+<PropertyList>
+
+  <path>asi.ac</path>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>asi.needle</object-name>
+    <object-name>asi.mach</object-name>
+    <property alias="../../speed-kt"/>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>40.0</ind><dep>15.0</dep></entry>
+      <entry><ind>320.0</ind><dep>330.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>asi.mach</object-name>
+    <property alias="../../speed-mach"/>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>0.4</ind><dep>264</dep></entry>
+      <entry><ind>0.75</ind><dep>474</dep></entry>
+    </interpolation>
+    <axis>
+      <x>1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>asi.marker</object-name>
+    <property alias="../../index-marker"/>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.0</dep></entry>
+      <entry><ind>40.0</ind><dep>15.0</dep></entry>
+      <entry><ind>320.0</ind><dep>330.0</dep></entry>
+    </interpolation>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>knob</type>
+    <object-name>asi.knob</object-name>
+    <property alias="../../index-marker"/>
+    <factor>5</factor>
+    <center>
+      <x-m>0.000</x-m>
+      <y-m>-0.030</y-m>
+      <z-m>-0.030</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+    <action>
+      <binding>
+        <command>property-adjust</command>
+        <property alias="../../../../index-marker"/>
+        <factor>1</factor>
+        <min>0</min>
+        <max>320</max>
+        <wrap>false</wrap>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>target-airspeed</tooltip-id>
+        <label>A/P: Target Airspeed: %d kts</label>
+        <property alias="../../../../index-marker"/>
+      </binding>
+    </hovered>
+  </animation>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>asi.bezel</object-name>
+        <object-name>asi.knob</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Instrument Lights -->
+    <animation>
+        <type>material</type>
+        <object-name>asi.face</object-name>
+        <object-name>asi.needle</object-name>
+        <object-name>asi.mach</object-name>
+        <object-name>asi.marker</object-name>
+        <object-name>asi.ovrspeed</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/instrument-light-emission</factor-prop>
+        </emission>
+    </animation>
+
+    <effect>
+        <inherits-from>Effects/model-transparent</inherits-from>
+        <object-name>asi.glass</object-name>
+    </effect>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>asi.bezel</object-name>
+        <object-name>asi.face</object-name>
+        <object-name>asi.mach</object-name>
+        <object-name>asi.knob</object-name>
+        <object-name>asi.needle</object-name>
+        <object-name>asi.marker</object-name>
+        <object-name>asi.ovrspeed</object-name>
+    </effect-->
+
+</PropertyList>

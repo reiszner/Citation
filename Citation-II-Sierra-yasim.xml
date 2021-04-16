@@ -1,0 +1,199 @@
+<!-- http://www.sijet.com/page727822 -->
+<!-- http://www.sijet.com/performance-chart -->
+<!-- http://www.sijet.com/download/Sijet_2012_RE-Engining.pdf?inline -->
+<!-- https://en.wikipedia.org/wiki/Williams_FJ44 -->
+<!-- http://www.williams-int.com/products/fj44-3 -->
+
+<airplane version="2018.1" mass="8060" mtow-lbs="14100">
+
+  <approach speed="92" aoa="7.2" fuel="0.2">
+    <control-setting axis="/controls/engines/engine[0]/throttle-real" value="0.2"/>
+    <control-setting axis="/controls/engines/engine[1]/throttle-real" value="0.2"/>
+    <control-setting axis="/controls/engines/engine[0]/condition" value="1.0"/>
+    <control-setting axis="/controls/engines/engine[1]/condition" value="1.0"/>
+    <control-setting axis="/surface-positions/flap-pos" value="1.0"/>
+    <control-setting axis="/controls/gear/gear-down" value="1.0"/>
+    <control-setting axis="/controls/flight/elevator-fdm" value="0.0"/>
+    <solve-weight idx="0" weight="120"/>
+    <solve-weight idx="1" weight="160"/>
+    <solve-weight idx="2" weight="160"/>
+    <solve-weight idx="3" weight="450"/>
+    <solve-weight idx="4" weight="70"/>
+    <solve-weight idx="5" weight="70"/>
+    <solve-weight idx="6" weight="70"/>
+  </approach>
+
+  <cruise speed="370" alt="43000" fuel="0.8">
+    <control-setting axis="/controls/engines/engine[0]/throttle-real" value="0.95"/>
+    <control-setting axis="/controls/engines/engine[1]/throttle-real" value="0.95"/>
+    <control-setting axis="/controls/engines/engine[0]/condition" value="1.0"/>
+    <control-setting axis="/controls/engines/engine[1]/condition" value="1.0"/>
+    <control-setting axis="/surface-positions/flap-pos" value="0.0"/>
+    <control-setting axis="/controls/gear/gear-down" value="0.0"/>
+    <control-setting axis="/controls/flight/elevator-fdm" value="0.0"/>
+    <solve-weight idx="0" weight="120"/>
+    <solve-weight idx="1" weight="160"/>
+    <solve-weight idx="2" weight="160"/>
+    <solve-weight idx="3" weight="450"/>
+    <solve-weight idx="4" weight="70"/>
+    <solve-weight idx="5" weight="70"/>
+    <solve-weight idx="6" weight="70"/>
+  </cruise>
+
+  <!-- The <ballast> tag doesn't add weight, but instead specifies the -->
+  <!-- distribution of the overall weight. -->
+  <!-- target CG is about -6.76 -->
+  <ballast x="-0.5" y="0.0" z="0.1" mass="1500"/>
+
+  <!-- 15.9m (1674 pixels) wingspan, 105.28 pixels/meter -->
+  <!-- 0,0,0 ref point is at the nose -->
+  <!-- -X is towards the rear, +Y is left, +Z is up -->
+  <cockpit x="-3.17" y="0.31" z="0.95"/>
+
+  <!-- FUSELAGE -->
+  <fuselage ax="0" ay="0" az="0.02" bx="-2.838" by="0" bz="0.514"
+            width="1.60" taper="0.2" midpoint="1.0"/>
+
+  <fuselage ax="-2.838" ay="0" az="0.514" bx="-8.667" by="0" bz="0.514"
+            width="1.60" taper="1" midpoint="0.4"/>
+
+  <fuselage ax="-8.667" ay="0" az="0.514" bx="-13.710" by="0" bz="0.760"
+            width="1.60" taper="0.1" midpoint="0.0"/>
+
+  <!-- Engines  -->
+  <fuselage ax="-8.01" ay="1.29" az="0.86" bx="-10.34" by="1.29" bz="0.78" cx="0.2"
+            width="0.92" taper="0.5" midpoint="0.25"/>
+
+  <fuselage ax="-8.01" ay="-1.29" az="0.86" bx="-10.34" by="-1.29" bz="0.78" cx="0.2"
+            width="0.92" taper="0.5" midpoint="0.25"/>
+
+  <wing x="-7.39757" y="0.77" z="-0.13" length ="7.10" chord ="2.77" sweep="-2.0"
+        dihedral="4.0" taper="0.34" camber="0.0" incidence="2.5" twist="-3.0" effectiveness="1.2" idrag="1.2">
+    <stall aoa="12" width="4.0" peak="1.15"/>
+    <flap0 start="0.00" end="0.53" lift="1.3" drag="1.7"/>
+    <flap1 start="0.53" end="0.88" lift="1.35" drag="1.25"/>
+    <spoiler start="0.37" end="0.48" lift="0.7" drag="15.0"/>
+
+    <control-input  control="FLAP0" axis="/surface-positions/flap-pos"/>
+
+    <control-input  control="FLAP1" axis="/controls/flight/aileron-fdm" split="true"/>
+    <control-input  control="FLAP1" axis="/controls/flight/aileron-trim" split="true"/>
+    <control-output control="FLAP1" prop="/surface-positions/left-aileron-pos-norm"  side="left"/>
+    <control-output control="FLAP1" prop="/surface-positions/right-aileron-pos-norm" side="right"/>
+
+    <control-input  control="SPOILER" axis="/surface-positions/speedbrake-pos" />
+  </wing>
+
+  <hstab x="-12.79" y="0.05" z="1.38" length="2.82" chord="1.52"
+         sweep="3.5" dihedral="9.0" taper="0.50" camber="0.0" effectiveness="2.0" idrag="1.2">
+    <stall aoa="20.0" width="8.0" peak="1.05"/>
+    <flap0 start="0.0" end="0.1" lift="1.05" drag="1.03"/>
+    <flap1 start="0.1" end="1.0" lift="1.35" drag="1.25"/>
+
+    <control-input  control="FLAP0" axis="/controls/flight/elevator-trim"/>
+    <control-output control="FLAP0" prop="/surface-positions/elevator-trim-pos-norm"/>
+
+    <control-input  control="FLAP1" axis="/controls/flight/elevator-fdm"/>
+    <control-input  control="FLAP1" axis="/controls/flight/elevator-trim"/>
+    <control-output control="FLAP1" prop="/surface-positions/elevator-pos-norm"/>
+
+  </hstab>
+
+  <vstab x="-12.43" y="0.00" z="1.03" length="2.90" chord="2.48"
+         sweep="30.0" taper="0.46" effectiveness="2.0" idrag="1.2">
+    <stall aoa="20.0" width="8.0" peak="1.05"/>
+    <flap0 start="0" end="1" lift="1.25" drag="1.15"/>
+    <flap1 start="0.20" end="0.43" lift="1.1" drag="1.1"/>
+    <control-input  control="FLAP0" axis="/controls/flight/rudder-fdm" invert="true"/>
+    <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
+    <control-input  control="FLAP1" axis="/controls/flight/rudder-trim" invert="true"/>
+    <control-output control="FLAP1" prop="/surface-positions/rudder-trim-pos-norm"/>
+  </vstab>
+
+  <!-- 2 wet wing tanks 371 US gallons, ~366 US gallons usable each.
+       If using Jet A (6.84 lbs/gal)    2537.64lbs, 2504lbs usable
+       If using Jet A-1 (6.72 lbs/gal), 2493.12lbs, 2460lbs usable
+       Here we must specify the full weight, not the usable weight.
+       See Citation-II-set.xml for the unusable capacity.
+  -->
+  <tank x="-7.10" y="2.95" z="0.08" capacity="2493.12" jet="true"/>
+  <tank x="-7.10" y="-2.95" z="0.08" capacity="2493.12" jet="true"/>
+  <tank x="-8.15" y="0.0" z="0.42" capacity="1.0" jet="true"/>
+
+  <gear x="-1.760" y="0.000" z="-0.925" compression="0.2" retract-time="0"
+        sfric="0.9" dfric="0.7" damp="0.55" spring="0.25" stiction="0">
+    <control-input axis="/controls/flight/rudder" control="STEER" src0="-1" src1="1" dst0="-0.349" dst1="0.349"/>
+    <control-input axis="/gear/gear[0]/position-norm" control="EXTEND"/>
+  </gear>
+
+  <gear x="-7.350" y="2.672" z="-0.925" upx="0.0" upy="0.0871557427477" upz="0.996194698092"
+        compression="0.2" retract-time="0" sfric="0.9" dfric="0.7" damp="0.55" spring="0.35" stiction="0">
+    <control-input axis="/controls/gear/brake-left-real" control="BRAKE"/>
+    <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
+    <control-input axis="/gear/gear[1]/position-norm" control="EXTEND"/>
+  </gear>
+
+  <gear x="-7.350" y="-2.672" z="-0.925" upx="0.0" upy="-0.0871557427477" upz="0.996194698092"
+        compression="0.2" retract-time="0" sfric="0.9" dfric="0.7" damp="0.55" spring="0.35" stiction="0">
+    <control-input axis="/controls/gear/brake-right-real" control="BRAKE"/>
+    <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
+    <control-input axis="/gear/gear[2]/position-norm" control="EXTEND"/>
+  </gear>
+
+  <!-- special nose-gear for pushback -->
+  <gear x="-1.760" y="0.000" z="-0.925" compression="0.2" retract-time="0"
+        sfric="1.0" dfric="1.0" damp="0.55" spring="0.25" ignored-by-solver="1" stiction="0">
+    <control-input axis="/sim/model/pushback/steering" control="STEER" src0="-1" src1="1" dst0="-1.0" dst1="1.0"/>
+    <control-input axis="/gear/gear[3]/position-norm" control="EXTEND"/>
+  </gear>
+
+  <!-- Williams International FJ44-3 jet engines; NO REVERSERS INSTALLED OR NEEDED -->
+  <!-- The n1, n2, thrust, epr numbers are tweaked to achieve the following:
+       * at sea level, 0 knots, n1=104%, n2=96%: thrust=2820 lbf
+  -->
+  <jet x="-9.19" y="1.29"  z="0.76" mass="535" thrust="2963.39" tsfc="0.470" egt="973.15"
+       n1-idle="45" n1-max="107" n2-idle="49.0" n2-max="99.8" spool-time="2.5" epr="2.7">
+    <control-input axis="/controls/engines/engine[0]/throttle-real" control="THROTTLE"/>
+    <actionpt x="-10.35" y="1.29" z="0.76"/>
+    <dir x="0.999390827019" y="0.0" z="-0.0348994967025"/>
+  </jet>
+
+  <jet x="-9.19" y="-1.29"  z="0.76" mass="535" thrust="2963.39" tsfc="0.470" egt="973.15"
+       n1-idle="45" n1-max="107" n2-idle="49.0" n2-max="99.8" spool-time="2.5" epr="2.7">
+    <control-input axis="/controls/engines/engine[1]/throttle-real" control="THROTTLE"/>
+    <actionpt x="-10.35" y="-1.29" z="0.76"/>
+    <dir x="0.999390827019" y="0.0" z="-0.0348994967025"/>
+  </jet>
+
+  <!-- Pushback -->
+  <thruster x="-1.76" y="0.00" z="-0.74" vx="1" vy="0" vz="0" thrust="1000">
+    <control-input axis="/sim/model/pushback/force-x" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+  </thruster>
+
+  <thruster x="-1.76" y="0.00" z="-0.74" vx="0" vy="-1" vz="0" thrust="1000">
+    <control-input axis="/sim/model/pushback/force-y" control="THROTTLE" src0="-1" src1="1" dst0="-1" dst1="1"/>
+  </thruster>
+
+  <!-- The <weight> tags add weight over and above the aircraft empty -->
+  <!-- weight and fuel weight.  The sum of these values can be anything -->
+  <!-- in the range of 0 to 10400 (max weight) minus 5722 (empty weight) -->
+  <!-- minus fuel load.  I.e. the remaining available load for safe -->
+  <!-- flying.  So if fuel fraction is 0.8, this sum can be in the range -->
+  <!-- of 0 to (10400 - 5722 - 1920 = 2758.)  0 of course would mean -->
+  <!-- ghost pilots, so it should be a bit more than that.  -->
+
+  <!-- You can double check total gross weight at flight time by looking -->
+  <!-- at /yasim/gross-weight-lbs in the property tree. -->
+  <!-- It should not ever exceed 10400 lbs. -->
+
+  <!-- the /sim/weight[n]/weight-lb properties are initialized in the -->
+  <!-- Citation-II-common.xml file and can be adjusted at run time. -->
+  <weight x="-1.55"  y="0.00"  z="0.30" mass-prop="/sim/weight[0]/weight-lb"/>
+  <weight x="-3.10"  y="0.35"  z="0.30" mass-prop="/sim/weight[1]/weight-lb"/>
+  <weight x="-3.10"  y="-0.35" z="0.30" mass-prop="/sim/weight[2]/weight-lb"/>
+  <weight x="-6.80"  y="0.00"  z="0.30" mass-prop="/sim/weight[3]/weight-lb"/>
+  <weight x="-7.69"  y="0.00"  z="0.30" mass-prop="/sim/weight[4]/weight-lb"/>
+  <weight x="-8.13"  y="0.00"  z="0.30" mass-prop="/sim/weight[5]/weight-lb"/>
+  <weight x="-10.76" y="0.00"  z="0.61" mass-prop="/sim/weight[6]/weight-lb"/>
+
+</airplane>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+************************************************************************
+Cessna Citation II Sierra (550) simulation config. This files ties together
+all the components used by FGFS to represent the 550. Components
+include the flight data model, instrument panel, and external 3D model.
+
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+************************************************************************
+-->
+<PropertyList include="Citation-II-common.xml">
+  <sim>
+    <variant-of>Citation-II</variant-of>
+    <flight-model>yasim</flight-model>
+    <aero>Citation-II-Sierra-yasim</aero>
+    <description>Cessna 550 Citation II Sierra / 551 Citation II/SP Sierra [YaSim]</description>
+    <long-description>
+      The Cessna 550 Citation II Sierra is an aftermarket modification of
+      the Cessna 550 which replaces the engines with Williams International
+      FJ44-3A turbofans introduced in 2004. They provide more thrust
+      and less fuel consumption. Climb performance is dramatically
+      improved. At full takeoff weight, typical cruise speed is 370
+      KTAS at FL430; range is 2500 nmi.
+
+      The new engines lack thrust reversers; they are not needed
+      because their idle thrust is only 40 lbf, as opposed to 400 lbf
+      on the old engines.
+    </long-description>
+    <localized>
+    <fr>
+      <long-description>
+        Le Cessna 550 Citation II Sierra est une modification du Cessna 550
+        pratiquée sur des avions existants.  Elle remplace les
+        réacteurs par des Williams FJ44-3A introduits en 2004.  Ces
+        nouveaux réacteurs fournissent davantage de poussée et
+        consomment moins.  Les performances en montée sont améliorées
+        de façon spectaculaire.  Après un décollage à la masse
+        maximale autorisée, la vitesse de croisière habituelle est de
+        370 noeuds au FL430 et le rayon d'action est de 2500
+        nautiques.
+
+        Les nouveaux réacteurs ne disposent pas d'inverseurs de
+        poussée; ils sont inutiles car la poussée des réacteurs au
+        ralenti n'est que de 178N au lieu de 1780N pour les anciens.
+      </long-description>
+    </fr>
+    <de>
+      <long-description>
+        Die Cessna 550 Citation II Sierra ist ein nachgerüsteter Umbau
+        der Cessna 550 bei welcher die Triebwerke mit Williams International
+        FJ44-3A Mantelstrom-Triebwerken ausgestauscht wurden, die 2004
+        vorgestellt wurden. Diese liefern mehr Schub und verbrauchen
+        weniger Treibstoff. Die Steigrate wird dadurch erheblich
+        gesteigert. Bei vollem Startgewicht beträgt die Reise-
+        geschwindigkeit 370 KTAS bei FL430; die Reichweite beträgt
+        2500 nautische Meilen.
+
+        Die neuen Triebwerke haben keine Schubumkehr; diese wird auch
+        nicht gebraucht, da der Leerlaufschub nur bei 178 N liegt, im
+        Gegensatz zu 1780 N bei den alten Triebwerken.
+      </long-description>
+    </de>
+  </localized>
+
+    <model>
+      <variant type="int">1</variant> <!-- transmitted over multiplayer -->
+    </model>
+  </sim>
+  <autopilot>
+    <limits>      <!-- the number and ordering of these properties is important for the autopilot;
+           see Citation-autopilot.xml, AP vertical stage 1. -->
+      <max-climb-rate-fpm type="double">4000</max-climb-rate-fpm>
+      <indicated-altitude-ft type="double">17000</indicated-altitude-ft>
+      <max-climb-rate-fpm type="double">3250</max-climb-rate-fpm>
+      <indicated-altitude-ft type="double">20000</indicated-altitude-ft>
+      <max-climb-rate-fpm type="double">2500</max-climb-rate-fpm>
+      <indicated-altitude-ft type="double">23000</indicated-altitude-ft>
+      <max-climb-rate-fpm type="double">1750</max-climb-rate-fpm>
+      <indicated-altitude-ft type="double">26000</indicated-altitude-ft>
+      <max-climb-rate-fpm type="double">1000</max-climb-rate-fpm>
+      <indicated-altitude-ft type="double">29000</indicated-altitude-ft>
+
+      <max-climb-rate-fpm type="double">750</max-climb-rate-fpm>
+    </limits>
+  </autopilot>
+  <instrumentation>
+    <cdu>
+      <display>IDENT</display>
+      <ident>
+        <model>Citation II Sierra</model>
+        <engines>Williams FJ44-3A</engines>
+      </ident>
+    </cdu>
+  </instrumentation>
+</PropertyList>

@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Before takeoff checklist for the Citation II/Super II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+Copyright (c) 2017 chris_blues <chris@musicchris.de>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+
+  <name>Citation II - Takeoff tutorial</name>
+  <description>Work through the "take-off" checklist.</description>
+
+  <init>
+    <set>
+      <property>/controls/flight/flaps</property>
+      <value>0.375</value>
+    </set>
+    <set>
+      <property>/autopilot/vn-212/altitude-select</property>
+      <value>33000</value>
+    </set>
+    <set>
+      <property>/instrumentation/altimeter/setting-inhg</property>
+      <value>29.92</value>
+    </set>
+    <set>
+      <property>/sim/current-view/view-number</property>
+      <property>/controls/gear/brake-parking</property>
+      <value>0</value>
+    </set>
+    <set>
+      <property>/controls/engines/engine[0]/ignition</property>
+      <property>/controls/electric/engine[0]/generator-sw</property>
+      <property>/controls/electric/engine[0]/generator-ready</property>
+      <property>/controls/engines/engine[1]/ignition</property>
+      <property>/controls/electric/engine[1]/generator-sw</property>
+      <property>/controls/electric/engine[1]/generator-ready</property>
+      <property>/controls/electric/avionics-switch</property>
+      <property>/controls/lighting/beacon</property>
+      <property>/controls/lighting/strobe</property>
+      <property>/controls/lighting/nav-lights</property>
+      <property>/controls/lighting/landing-light[0]</property>
+      <property>/controls/lighting/landing-light[1]</property>
+      <value>1</value>
+    </set>
+    <set>
+      <property>/controls/fuel/tank[0]/boost-pump-switch</property>
+      <property>/controls/fuel/tank[1]/boost-pump-switch</property>
+      <value>-1</value>
+    </set>
+  </init>
+
+  <step>
+    <message>
+      Increase throttle SLOWLY to N2 = 95.9%
+      Press PgUp to increase throttle, PgDn to decrease throttle.
+    </message>
+
+    <view>
+      <heading-offset-deg>349.8</heading-offset-deg>
+      <pitch-offset-deg>-25.8</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>29.7</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4347</x-m>
+      <y-m>-0.1446</y-m>
+      <z-m>0.6405</z-m>
+      <scale>1.9835</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <and>
+          <greater-than>
+            <property>engines/engine[0]/turbine</property>
+            <value>93</value>
+          </greater-than>
+          <less-than>
+            <property>engines/engine[0]/turbine</property>
+            <value>96</value>
+          </less-than>
+          <greater-than>
+            <property>engines/engine[1]/turbine</property>
+            <value>93</value>
+          </greater-than>
+          <less-than>
+            <property>engines/engine[1]/turbine</property>
+            <value>96</value>
+          </less-than>
+        </and>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Release parking brake</message>
+
+    <view>
+      <heading-offset-deg>10.5</heading-offset-deg>
+      <pitch-offset-deg>-40.5</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>29.7</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.5000</x-m>
+      <y-m>-0.4810</y-m>
+      <z-m>0.3281</z-m>
+      <scale>2.6198</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/gear/brake-parking</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Rotate at 130 KIAS</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4289</x-m>
+      <y-m>-0.4121</y-m>
+      <z-m>0.6737</z-m>
+      <scale>3.9504</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>velocities/airspeed-kt</property>
+          <value>80</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Liftoff at 140 KIAS</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4289</x-m>
+      <y-m>-0.4121</y-m>
+      <z-m>0.6737</z-m>
+      <scale>3.9504</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>velocities/airspeed-kt</property>
+          <value>135</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Switch off the landing lights! ( press Ctrl + l )</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4867</x-m>
+      <y-m>-0.2141</y-m>
+      <z-m>0.3599</z-m>
+      <scale>1.5041</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <and>
+          <equals>
+            <property>controls/lighting/landing-light[0]</property>
+            <value>0</value>
+          </equals>
+          <equals>
+            <property>controls/lighting/landing-light[1]</property>
+            <value>0</value>
+          </equals>
+        </and>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Gear up! (press key: g or middle mouse button! Key G or left mouse button brings the gear down again)</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.5223</x-m>
+      <y-m>-0.1575</y-m>
+      <z-m>0.3952</z-m>
+      <scale>3.5041</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/gear/gear-down</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Accelerate to 180 KIAS! (Don't let the nose raise too much!)</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4289</x-m>
+      <y-m>-0.4121</y-m>
+      <z-m>0.6737</z-m>
+      <scale>3.9504</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>velocities/airspeed-kt</property>
+          <value>175</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Flaps up! (Press "[" )</message>
+
+    <view>
+      <heading-offset-deg>354.4</heading-offset-deg>
+      <pitch-offset-deg>-23.7</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.6620</x-m>
+      <y-m>0.0400</y-m>
+      <z-m>0.3638</z-m>
+      <scale>3.5041</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/flight/flaps</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Climb to 6000 ft AGL</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4284</x-m>
+      <y-m>-0.2126</y-m>
+      <z-m>0.6713</z-m>
+      <scale>3.5041</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>position/altitude-agl-ft</property>
+          <value>5900</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Accelerate to 250 KIAS</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4305</x-m>
+      <y-m>-0.2112</y-m>
+      <z-m>0.6723</z-m>
+      <scale>4.0826</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>velocities/airspeed-kt</property>
+          <value>245</value>
+        </greater-than>
+        <less-than>
+          <property>velocities/airspeed-kt</property>
+          <value>255</value>
+        </less-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Before you can engage the autopilot you need an angle of attack of less than 0.2!</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4264</x-m>
+      <y-m>-0.4914</y-m>
+      <z-m>0.6773</z-m>
+      <scale>3.4545</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <less-than>
+          <property>orientation/alpha-deg</property>
+          <value>2.2</value>
+        </less-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Engage autopilot!</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4652</x-m>
+      <y-m>-0.3550</y-m>
+      <z-m>0.4682</z-m>
+      <scale>1.7686</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>autopilot/mode/engaged</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Engage flight director!</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4652</x-m>
+      <y-m>-0.3550</y-m>
+      <z-m>0.4682</z-m>
+      <scale>1.7686</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>autopilot/ms-205[0]/mode/state</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Indicated airspeed &lt; 250 kts</message>
+
+    <view>
+      <heading-offset-deg>7.4</heading-offset-deg>
+      <pitch-offset-deg>-23.9</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>22.8</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4273</x-m>
+      <y-m>-0.4165</y-m>
+      <z-m>0.6636</z-m>
+      <scale>4.9174</scale>
+    </marker>
+
+    <condition>
+      <less-than>
+        <property>velocities/airspeed-kts</property>
+        <value>250</value>
+      </less-than>
+    </condition>
+  </step>
+
+  <step>
+    <message>Indicated altitude &lt; 10000 ft</message>
+
+    <view>
+      <heading-offset-deg>356.1</heading-offset-deg>
+      <pitch-offset-deg>-24.1</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>22.8</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4273</x-m>
+      <y-m>-0.2091</y-m>
+      <z-m>0.6636</z-m>
+      <scale>4.9174</scale>
+    </marker>
+
+    <condition>
+      <less-than>
+        <property>position/altitude-ft</property>
+        <value>10000</value>
+      </less-than>
+    </condition>
+  </step>
+
+  <step>
+    <message>Autopilot bank angle to LOW</message>
+
+    <view>
+      <heading-offset-deg>312.5</heading-offset-deg>
+      <pitch-offset-deg>-62.8</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>22.8</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>3.0364</x-m>
+      <y-m>-0.0091</y-m>
+      <z-m>0.2860</z-m>
+      <scale>1.9256</scale>
+    </marker>
+
+    <condition>
+      <equals>
+        <property>autopilot/mode/low-bank</property>
+        <value>1</value>
+      </equals>
+    </condition>
+  </step>
+
+  <step>
+    <message>set indicated airspeed marker to 200</message>
+
+    <view>
+      <heading-offset-deg>5.3</heading-offset-deg>
+      <pitch-offset-deg>-23.2</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>22.8</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4273</x-m>
+      <y-m>-0.4149</y-m>
+      <z-m>0.6661</z-m>
+      <scale>5.1157</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>instrumentation/airspeed-indicator[0]/index-marker</property>
+          <value>200</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>arm ALTSEL mode</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4693</x-m>
+      <y-m>-0.3389</y-m>
+      <z-m>0.4525</z-m>
+      <scale>1.3554</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>autopilot/ms-205[0]/mode/vertical-arm</property>
+          <value>2</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>engage IAS mode</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4693</x-m>
+      <y-m>-0.3389</y-m>
+      <z-m>0.4525</z-m>
+      <scale>1.3554</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>autopilot/ms-205[0]/mode/vertical-mode</property>
+          <value>5</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Throttle to FULL</message>
+
+    <view>
+      <heading-offset-deg>332.9</heading-offset-deg>
+      <pitch-offset-deg>-44.3</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>22.8</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.6521</x-m>
+      <y-m>-0.0149</y-m>
+      <z-m>0.3802</z-m>
+      <scale>5.1157</scale>
+    </marker>
+
+    <condition>
+      <and>
+        <greater-than>
+          <property>controls/engines/engine[0]/throttle-lever</property>
+          <value>0.99</value>
+        </greater-than>
+        <greater-than>
+          <property>controls/engines/engine[1]/throttle-lever</property>
+          <value>0.99</value>
+        </greater-than>
+      </and>
+    </condition>
+  </step>
+
+  <step>
+    <message>Now wait until you reach 18.500 ft</message>
+
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4273</x-m>
+      <y-m>-0.2149</y-m>
+      <z-m>0.6719</z-m>
+      <scale>4.2562</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>instrumentation/altimeter/indicated-altitude-ft</property>
+          <value>18500</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Altimeter to 29.92 inHg</message>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>instrumentation/altimeter/setting-inhg</property>
+          <value>29.91</value>
+        </greater-than>
+        <less-than>
+          <property>instrumentation/altimeter/setting-inhg</property>
+          <value>29.93</value>
+        </less-than>
+      </condition>
+    </exit>
+  </step>
+
+  <end>
+    <message>Congratulations! You're on your way to FL330. Keep watching your AOA (angle of attack) and airspeed!</message>
+    <view>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <field-of-view>75.0</field-of-view>
+    </view>
+  </end>
+</PropertyList>

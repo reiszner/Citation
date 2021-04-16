@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PropertyList>
+
+  <path>gearpanel.ac</path>
+
+<!-- Controls -->
+  <animation>
+    <type>select</type>
+    <object-name>panel.gear.unlocked</object-name>
+    <object-name>panel.gear.green.nose</object-name>
+    <object-name>panel.gear.green.left</object-name>
+    <object-name>panel.gear.green.right</object-name>
+    <condition>
+      <property>systems/electrical/outputs/main-left/sys-gear-ctrl</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>panel.gear.green.nose</object-name>
+    <condition>
+      <or>
+        <equals>
+          <property>gear/gear[0]/position-norm</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>gear/gear[3]/position-norm</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>controls/electric/system-test</property>
+          <value>2</value>
+        </equals>
+      </or>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>panel.gear.green.left</object-name>
+    <condition>
+      <or>
+        <equals>
+          <property>gear/gear[1]/position-norm</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>controls/electric/system-test</property>
+          <value>2</value>
+        </equals>
+      </or>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>panel.gear.green.right</object-name>
+    <condition>
+      <or>
+        <equals>
+          <property>gear/gear[2]/position-norm</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>controls/electric/system-test</property>
+          <value>2</value>
+        </equals>
+      </or>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>panel.gear.unlocked</object-name>
+    <condition>
+      <or>
+        <and>
+          <less-than>
+            <property>gear/gear[0]/position-norm</property>
+            <value>1</value>
+          </less-than>
+          <greater-than>
+            <property>gear/gear[0]/position-norm</property>
+            <value>0</value>
+          </greater-than>
+        </and>
+        <and>
+          <less-than>
+            <property>gear/gear[1]/position-norm</property>
+            <value>1</value>
+          </less-than>
+          <greater-than>
+            <property>gear/gear[1]/position-norm</property>
+            <value>0</value>
+          </greater-than>
+        </and>
+        <and>
+          <less-than>
+            <property>gear/gear[2]/position-norm</property>
+            <value>1</value>
+          </less-than>
+          <greater-than>
+            <property>gear/gear[2]/position-norm</property>
+            <value>0</value>
+          </greater-than>
+        </and>
+        <equals>
+          <property>controls/electric/system-test</property>
+          <value>2</value>
+        </equals>
+      </or>
+    </condition>
+  </animation>
+
+<!--hack to show the color -->
+  <animation>
+    <type>select</type>
+    <object-name>panel.gear.silence</object-name>
+    <condition>
+      <property>/sim/time/elapsed-sec</property>
+    </condition>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>panel.gear.lever</object-name>
+    <property>controls/gear/gear-lever-pos</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0</dep></entry>
+      <entry><ind>0.2</ind><dep>0</dep></entry>
+      <entry><ind>0.8</ind><dep>25</dep></entry>
+      <entry><ind>1.0</ind><dep>25</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>-0.080</x-m>
+      <y-m>-0.028</y-m>
+      <z-m> 0.000</z-m>
+    </center>
+    <axis>
+      <x>0.0</x>
+      <y>1.0</y>
+      <z>0.0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>translate</type>
+    <object-name>panel.gear.lever</object-name>
+    <property>controls/gear/gear-lever-pos</property>
+    <interpolation>
+      <entry><ind>0.0</ind><dep>0.00</dep></entry>
+      <entry><ind>0.2</ind><dep>0.01</dep></entry>
+      <entry><ind>0.8</ind><dep>0.01</dep></entry>
+      <entry><ind>1.0</ind><dep>0.00</dep></entry>
+    </interpolation>
+    <center>
+      <x-m>-0.080</x-m>
+      <y-m>-0.028</y-m>
+      <z-m> 0.000</z-m>
+    </center>
+    <axis>
+      <x>0.984808</x>
+      <y>0.000000</y>
+      <z>0.173648</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>rotate</type>
+    <object-name>panel.gear.antiskid.sw</object-name>
+    <property>controls/gear/antiskid-sw</property>
+    <offset-deg>0</offset-deg>
+    <factor>40</factor>
+    <center>
+      <x-m>0.0010</x-m>
+      <y-m>0.0110</y-m>
+      <z-m>-0.0088</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+<!-- Hotspots -->
+  <animation>
+    <type>pick</type>
+    <object-name>panel.gear.lever</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>nasal</command>
+        <script>controls.gearDown(1)</script>
+      </binding>
+    </action>
+    <action>
+      <button>1</button>
+      <binding>
+        <command>nasal</command>
+        <script>controls.gearDown(-1)</script>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>gear</tooltip-id>
+        <label>Gear: %s</label>
+        <mapping>down-up</mapping>
+        <property>controls/gear/gear-lever-cmd</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>panel.gear.antiskid.sw</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-toggle</command>
+        <property>controls/gear/antiskid-sw</property>
+      </binding>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/gear/antiskid-test</property>
+        <property>/sim/time/elapsed-sec</property>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>antiskid</tooltip-id>
+        <label>Antiskid: %s</label>
+        <mapping>on-off</mapping>
+        <property>controls/gear/antiskid-sw</property>
+      </binding>
+    </hovered>
+  </animation>
+
+  <animation>
+    <type>pick</type>
+    <object-name>panel.gear.silence</object-name>
+    <action>
+      <button>0</button>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/gear/warn-silence</property>
+        <value>true</value>
+      </binding>
+    </action>
+    <hovered>
+      <binding>
+        <command>set-tooltip</command>
+        <tooltip-id>silence</tooltip-id>
+        <label>Horn silence</label>
+      </binding>
+    </hovered>
+  </animation>
+
+
+<!-- Panel Lights (only with quality=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>panel.gear</object-name>
+        <object-name>panel.gear.lever</object-name>
+        <object-name>panel.gear.silence</object-name>
+        <object-name>panel.gear.antiskid.sw</object-name>
+        <object-name>panel.gear.antiskid.sw.socket</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+<!-- Chrome Effect! -->
+    <effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+        <object-name>panel.gear.antiskid.sw.pivot</object-name>
+    </effect>
+
+<!-- cockpit shadows -->
+    <!--effect>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>panel.gear</object-name>
+        <object-name>panel.gear.lever</object-name>
+        <object-name>panel.gear.silence</object-name>
+        <object-name>panel.gear.antiskid.sw</object-name>
+    </effect-->
+
+</PropertyList>

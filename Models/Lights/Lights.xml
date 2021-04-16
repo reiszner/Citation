@@ -1,0 +1,159 @@
+<PropertyList>
+  <!--
+      Exterior Lights
+
+  <model>
+    <name>LandingLights</name>
+    <path>Aircraft/Citation/Models/Lights/LandingLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>StrobeLights</name>
+    <path>Aircraft/Citation/Models/Lights/StrobeLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>NavLights</name>
+    <path>Aircraft/Citation/Models/Lights/NavLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>RecogLights</name>
+    <path>Aircraft/Citation/Models/Lights/RecogLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>BeaconLight</name>
+    <path>Aircraft/Citation/Models/Lights/BeaconLight.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+  -->
+
+  <model>
+    <name>WingInspLights</name>
+    <path>Aircraft/Citation/Models/Lights/WingInspLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <!--
+      Interior Lights
+  -->
+  <model>
+    <name>EngInstrLight</name>
+    <path>Aircraft/Citation/Models/Lights/EngInstrLight.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>FloodLight</name>
+    <path>Aircraft/Citation/Models/Lights/FloodLight.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>CenterPanelLightLeft</name>
+    <path>Aircraft/Citation/Models/Lights/CenterPanel.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>LeftPanelLight</name>
+    <path>Aircraft/Citation/Models/Lights/LeftPanel.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>RightPanelLight</name>
+    <path>Aircraft/Citation/Models/Lights/RightPanel.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>MapLight</name>
+    <path>Aircraft/Citation/Models/Lights/MapLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>cabinIndirectLights</name>
+    <path>Aircraft/Citation/Models/Lights/CabinIndirect.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>cabinRefrCntrLight</name>
+    <path>Aircraft/Citation/Models/Lights/CabinRefrCntr.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+  <model>
+    <name>cabinMapLights</name>
+    <path>Aircraft/Citation/Models/Lights/CabinMapLights.xml</path>
+    <offsets>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </offsets>
+  </model>
+
+</PropertyList>

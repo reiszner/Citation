@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+  <path>Aircraft/Generic/Effects/Thruster/thrust_flame.ac</path>
+  <nopreview/>
+
+    <animation>
+      <type>scale</type>
+      <x-offset>6.0</x-offset>
+      <y-offset>1.0</y-offset>
+      <z-offset>1.0</z-offset>
+    </animation>
+
+    <effect>
+      <inherits-from>Aircraft/Citation/Models/Effects/thrust-flamel</inherits-from>
+      <object-name>Bounding_box</object-name>
+    </effect>
+
+</PropertyList>

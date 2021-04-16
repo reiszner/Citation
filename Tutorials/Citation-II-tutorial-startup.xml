@@ -1,0 +1,965 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Engine startup tutorial for the Citation II/Super II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+Copyright (c) 2017 chris_blues <chris@musicchris.de>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+
+  <name>Citation II - startup tutorial</name>
+  <description>Learn how to start the engines and how to setup the systems for take off.</description>
+
+  <init>
+    <set>
+      <property>/sim/current-view/view-number</property>
+      <property>/controls/flight/flaps</property>
+      <property>/controls/engines/engine[0]/ignition</property>
+      <property>/controls/engines/engine[1]/ignition</property>
+      <property>/controls/electric/engine[0]/starter</property>
+      <property>/controls/electric/engine[1]/starter</property>
+      <property>/controls/electric/engine[0]/generator-sw</property>
+      <property>/controls/electric/engine[1]/generator-sw</property>
+      <property>/controls/electric/avionics-switch</property>
+      <property>/controls/fuel/tank[0]/boost-pump-switch</property>
+      <property>/controls/fuel/tank[1]/boost-pump-switch</property>
+      <property>/controls/fuelSet</property>
+      <property>/controls/lighting/beacon</property>
+      <property>/controls/lighting/strobe</property>
+      <property>/controls/lighting/nav-lights</property>
+      <property>/controls/lighting/landing-light[0]</property>
+      <property>/controls/lighting/landing-light[1]</property>
+      <value>0</value>
+    </set>
+    <set>
+      <property>/consumables/fuel/tank[0]/level-gal_us</property>
+      <value>20</value>
+    </set>
+    <set>
+      <property>/consumables/fuel/tank[1]/level-gal_us</property>
+      <value>20</value>
+    </set>
+    <set>
+      <property>/controls/gear/brake-parking</property>
+      <value>1</value>
+    </set>
+    <set>
+      <property>/autopilot/settings/target-altitude-ft</property>
+      <value>10000</value>
+    </set>
+    <set>
+      <property>/instrumentation/altimeter/setting-inhg</property>
+      <value>29.92</value>
+    </set>
+  </init>
+
+  <step>
+    <message>switch battery master bus ON</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.47547</x-m>
+      <y-m>-0.55873</y-m>
+      <z-m>0.47433</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <error>
+      <message>Put the battery bus switch in the up position</message>
+      <condition>
+        <less-than>
+          <property>controls/electric/battery-bus-switch</property>
+          <value>1</value>
+        </less-than>
+      </condition>
+    </error>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/battery-bus-switch</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>
+      First, you need to check if you have enough fuel.
+      Open the menu, choose Citation-II, then &quot;Fuel and Payload&quot; - and set your desired fuel and weights.
+    </message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>340.0</heading-offset-deg>
+      <pitch-offset-deg>-20.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4350</x-m>
+      <y-m>0.0250</y-m>
+      <z-m>0.6300</z-m>
+      <scale>1.8</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/fuelSet</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Switch on the beacon light (the beacon should always be active if there is a running engine)</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>355.0</heading-offset-deg>
+      <pitch-offset-deg>-43.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>25.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4893</x-m>
+      <y-m>-0.2340</y-m>
+      <z-m>0.3609</z-m>
+      <scale>1.15</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/lighting/beacon</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Set the right engine fuel boost pump to NORM</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4731</x-m>
+      <y-m>-0.62</y-m>
+      <z-m>0.4344</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <not-equals>
+          <property>controls/fuel/tank[1]/boost-pump-switch</property>
+          <value>0</value>
+        </not-equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Press right engine starter</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4731</x-m>
+      <y-m>-0.5252</y-m>
+      <z-m>0.4344</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/engine[1]/starter</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Pull the cutoff-lock handle on right throttle lever</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>330.0</heading-offset-deg>
+      <pitch-offset-deg>-50.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.75571</x-m>
+      <y-m>0.01800</y-m>
+      <z-m>0.35521</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/engines/engine[1]/cutoff-lock</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Push the right throttle forward to idle position</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>330.0</heading-offset-deg>
+      <pitch-offset-deg>-50.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.7963</x-m>
+      <y-m>0.0130</y-m>
+      <z-m>0.3795</z-m>
+      <scale>2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <and>
+          <less-than>
+            <property>controls/engines/engine[1]/throttle-lever</property>
+            <value>0.05</value>
+          </less-than>
+          <greater-than-equals>
+            <property>controls/engines/engine[1]/throttle-lever</property>
+            <value>0</value>
+          </greater-than-equals>
+        </and>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Monitor the right engine starting.</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>340.0</heading-offset-deg>
+      <pitch-offset-deg>-20.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <exit>
+      <condition>
+          <property>engines/engine[1]/started</property>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>After right starter extinguished, set the voltage selector to RH GEN (use mouse-wheel)</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4603</x-m>
+      <y-m>-0.6017</y-m>
+      <z-m>0.5132</z-m>
+      <scale>2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/voltage-sel</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>If the voltmeter shows about 28V, the generator produce power.</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4570</x-m>
+      <y-m>-0.5612</y-m>
+      <z-m>0.5132</z-m>
+      <scale>2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>controls/electric/voltage-display</property>
+          <value>25</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Now activate the right engine generator</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4660</x-m>
+      <y-m>-0.5304</y-m>
+      <z-m>0.4734</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/engine[1]/generator-sw</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+
+
+
+
+
+
+
+  <step>
+    <message>Now the left engine. Set the left engine fuel boost pump to NORM</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4731</x-m>
+      <y-m>-0.64</y-m>
+      <z-m>0.4344</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <not-equals>
+          <property>controls/fuel/tank[0]/boost-pump-switch</property>
+          <value>0</value>
+        </not-equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Press left engine starter</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4745</x-m>
+      <y-m>-0.5921</y-m>
+      <z-m>0.4355</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/engine[0]/starter</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Pull the cutoff-lock handle on left throttle lever</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>330.0</heading-offset-deg>
+      <pitch-offset-deg>-50.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.75571</x-m>
+      <y-m>-0.07732</y-m>
+      <z-m>0.35521</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/engines/engine[0]/cutoff-lock</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Push the left throttle forward to idle position</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>330.0</heading-offset-deg>
+      <pitch-offset-deg>-50.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.7963</x-m>
+      <y-m>-0.0572</y-m>
+      <z-m>0.3795</z-m>
+      <scale>2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <and>
+          <less-than>
+            <property>controls/engines/engine[0]/throttle-lever</property>
+            <value>0.05</value>
+          </less-than>
+          <greater-than-equals>
+            <property>controls/engines/engine[0]/throttle-lever</property>
+            <value>0</value>
+          </greater-than-equals>
+        </and>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Monitor the left engine starting.</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>340.0</heading-offset-deg>
+      <pitch-offset-deg>-20.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <exit>
+      <condition>
+          <property>engines/engine[0]/started</property>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Set the voltage selector to LH GEN (use mouse-wheel)</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4603</x-m>
+      <y-m>-0.6017</y-m>
+      <z-m>0.5132</z-m>
+      <scale>2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/voltage-sel</property>
+          <value>-1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>If the voltmeter shows about 28V, you can go on with the checklist.</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4570</x-m>
+      <y-m>-0.5612</y-m>
+      <z-m>0.5132</z-m>
+      <scale>2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>controls/electric/voltage-display</property>
+          <value>25</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Now activate the left engine generator</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4679</x-m>
+      <y-m>-0.5862</y-m>
+      <z-m>0.4742</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/engine[0]/generator-sw</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Well done! Both engines are running.</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>340.0</heading-offset-deg>
+      <pitch-offset-deg>-20.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+  </step>
+
+  <step>
+    <message>Now let&apos;s activate the avionics</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4660</x-m>
+      <y-m>-0.4749</y-m>
+      <z-m>0.4734</z-m>
+      <scale>1.5</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/electric/avionics-switch</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <nasal>
+      <script>
+        var pressure = getprop("environment/pressure-sea-level-inhg");
+        var tmp = pressure * 100;
+        var tmp_tmp = math.round(tmp);
+        var tmp = tmp_tmp / 100;
+        var pressureHumanReadable = tmp_tmp / 100;
+        var pressure_max = pressureHumanReadable + 0.01;
+        var pressure_min = pressureHumanReadable - 0.01;
+        setprop("controls/pressMax", pressure_max);
+        setprop("controls/pressMin", pressure_min);
+      </script>
+    </nasal>
+
+    <message>Set altimeter QNH from latest METAR. (%.2f)</message>
+    <message-param><property>environment/pressure-sea-level-inhg</property></message-param>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>355</heading-offset-deg>
+      <pitch-offset-deg>-25</pitch-offset-deg>
+      <roll-offset-deg>0</roll-offset-deg>
+      <field-of-view>25</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4430</x-m>
+      <y-m>-0.2377</y-m>
+      <z-m>0.6402</z-m>
+      <scale>1</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <and>
+          <greater-than>
+            <property>instrumentation/altimeter/setting-inhg</property>
+            <property>controls/pressMin</property>
+          </greater-than>
+          <less-than>
+            <property>instrumentation/altimeter/setting-inhg</property>
+            <property>controls/pressMax</property>
+          </less-than>
+        </and>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Check speedbrakes retracted</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>330.0</heading-offset-deg>
+      <pitch-offset-deg>-50.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.7413</x-m>
+      <y-m>-0.0658</y-m>
+      <z-m>0.2998</z-m>
+      <scale>1</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/flight/speedbrake-switch</property>
+          <value>0</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Switch on the anticollision light</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4893</x-m>
+      <y-m>-0.5182</y-m>
+      <z-m>0.3647</z-m>
+      <scale>1.15</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/lighting/strobe</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Switch on the nav lights</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>20.0</heading-offset-deg>
+      <pitch-offset-deg>-36.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>30.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4893</x-m>
+      <y-m>-0.4992</y-m>
+      <z-m>0.3647</z-m>
+      <scale>1.15</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/lighting/nav-lights</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Switch on the left landing light</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>355.0</heading-offset-deg>
+      <pitch-offset-deg>-43.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>25.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4893</x-m>
+      <y-m>-0.2144</y-m>
+      <z-m>0.3635</z-m>
+      <scale>1.15</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/lighting/landing-light[0]</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Switch on the right landing light</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>355.0</heading-offset-deg>
+      <pitch-offset-deg>-43.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>25.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4893</x-m>
+      <y-m>-0.1950</y-m>
+      <z-m>0.3635</z-m>
+      <scale>1.15</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/lighting/landing-light[1]</property>
+          <value>1</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Set flaps to TO &amp; APP. Use 3 times the ] key. (3 times [ to set flaps up again.)</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>330.0</heading-offset-deg>
+      <pitch-offset-deg>-50.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>35.0</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.6835</x-m>
+      <y-m>0.0389</y-m>
+      <z-m>0.3635</z-m>
+      <scale>3.2</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <equals>
+          <property>controls/flight/flaps</property>
+          <value>0.375</value>
+        </equals>
+      </condition>
+    </exit>
+  </step>
+
+  <step>
+    <message>Set initial cruise altitude to 33000. (43000 on Cittion II Sierra)</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>337</heading-offset-deg>
+      <pitch-offset-deg>-27</pitch-offset-deg>
+      <roll-offset-deg>0</roll-offset-deg>
+      <field-of-view>25</field-of-view>
+    </view>
+
+    <marker>
+      <x-m>2.4512</x-m>
+      <y-m>0.0651</y-m>
+      <z-m>0.5832</z-m>
+      <scale>1.4</scale>
+    </marker>
+
+    <exit>
+      <condition>
+        <greater-than>
+          <property>autopilot/vn-212/altitude-select</property>
+          <value>32000</value>
+        </greater-than>
+      </condition>
+    </exit>
+  </step>
+
+  <end>
+    <message>Both engines are running and you&apos;ve configured the aircraft for takeoff.</message>
+
+    <view>
+      <x-offset-m>-0.305</x-offset-m>
+      <y-offset-m>0.990</y-offset-m>
+      <z-offset-m>3.170</z-offset-m>
+      <heading-offset-deg>0.0</heading-offset-deg>
+      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <roll-offset-deg>0.0</roll-offset-deg>
+      <field-of-view>75.0</field-of-view>
+    </view>
+  </end>
+</PropertyList>

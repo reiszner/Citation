@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Initial climb checklist for the Citation II and Super II in Flightgear
+Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+  <title>IV - Initial Climb</title>
+  <item>
+    <name>Indicated airspeed</name>
+    <value>&lt; 250 kts</value>
+    <condition>
+      <less-than>
+        <property>velocities/airspeed-kts</property>
+        <value>250</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Indicated altitude</name>
+    <value>&lt; 10000 ft</value>
+    <condition>
+      <less-than>
+        <property>position/altitude-ft</property>
+        <value>10000</value>
+      </less-than>
+    </condition>
+  </item>
+  <item>
+    <name>Autopilot bank angle</name>
+    <value>LOW</value>
+    <condition>
+      <equals>
+        <property>autopilot/mode/low-bank</property>
+        <value>1</value>
+      </equals>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>autopilot/mode/low-bank</property>
+      <value>1</value>
+    </binding>
+  </item>
+  <item>
+    <name>Throttle</name>
+    <value>FULL</value>
+    <condition>
+      <and>
+        <greater-than>
+          <property>controls/engines/engine[0]/throttle</property>
+          <value>0.99</value>
+        </greater-than>
+        <greater-than>
+          <property>controls/engines/engine[1]/throttle</property>
+          <value>0.99</value>
+        </greater-than>
+      </and>
+    </condition>
+  </item>
+  <item>
+    <name>Indicated airspeed</name>
+    <value>unlimited</value>
+  </item>
+  <item>
+    <name>Indicated altitude</name>
+    <value>18500 ft</value>
+    <condition>
+      <greater-than>
+        <property>instrumentation/altimeter/indicated-altitude-ft</property>
+        <value>18500</value>
+      </greater-than>
+    </condition>
+  </item>
+  <item>
+    <name>Altimeter</name>
+    <value>1013.25 hPa</value>
+    <condition>
+      <greater-than>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <value>1012</value>
+      </greater-than>
+      <less-than>
+        <property>instrumentation/altimeter/setting-hpa</property>
+        <value>1014</value>
+      </less-than>
+    </condition>
+    <binding>
+      <command>property-assign</command>
+      <property>instrumentation/altimeter/setting-inhg</property>
+      <value>29.92</value>
+    </binding>
+  </item>
+</PropertyList>

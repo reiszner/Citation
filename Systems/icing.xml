@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<PropertyList>
+
+  <!--
+      Citation II icing version 1.0
+      Copyright (c) 2019 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+      This program is free software; you can redistribute it and/or
+      modify it under the terms of the GNU General Public License
+      as published by the Free Software Foundation; either version 2
+      of the License, or (at your option) any later version.
+
+      This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+  -->
+
+  <filter>
+    <name>target windshield temperature</name>
+    <type>gain</type>
+    <!-- Cessna Citation II Technical Manual, page 520:
+         HI regulates bleed air temp to 138°C
+         LOW regulates bleed air temp to 127°C
+         but this is not the same as windshield temp as this bleed air
+         mixes with cold outside air before touching the windshield.
+         HI should be selected when IOAT is less than -18°C
+         LOW should be selected when IOAT is greater than -18°C
+         (obviously, OFF should be selected when IOAT is greater than 0°C).
+         So we model this as: LOW increases windshield temp by 18K,
+         HIGH increases windshield temp by 60K (as the minimum outside
+         temp is -56.5°C i.e. temp of the stratosphere)
+    -->
+    <input>
+      <condition>
+        <and>
+          <equals>
+            <property>controls/anti-ice/window-heat-sw</property>
+            <value>1</value> <!-- high -->
+          </equals>
+          <greater-than>
+            <property>systems/electrical/outputs/main-left/anti-ice-bleedair-ws</property>
+            <value>27.5</value>
+          </greater-than>
+          <or>
+            <greater-than>
+              <property>engines/engine[0]/egt-degf</property>
+              <value>280</value>
+            </greater-than>
+            <greater-than>
+              <property>engines/engine[1]/egt-degf</property>
+              <value>280</value>
+            </greater-than>
+          </or>
+        </and>
+      </condition>
+      <expression>
+        <sum>
+          <property>environment/temperature-degc</property>
+          <value>60.0</value>
+        </sum>
+      </expression>
+    </input>
+    <input>
+      <condition>
+        <and>
+          <equals>
+            <property>controls/anti-ice/window-heat-sw</property>
+            <value>-1</value> <!-- low -->
+          </equals>
+          <greater-than>
+            <property>systems/electrical/outputs/main-left/anti-ice-bleedair-ws</property>
+            <value>27.5</value>
+          </greater-than>
+          <or>
+            <greater-than>
+              <property>engines/engine[0]/egt-degf</property>
+              <value>280</value>
+            </greater-than>
+            <greater-than>
+              <property>engines/engine[1]/egt-degf</property>
+              <value>280</value>
+            </greater-than>
+          </or>
+        </and>
+      </condition>
+      <expression>
+        <sum>
+          <property>environment/temperature-degc</property>
+          <value>18.0</value>
+        </sum>
+      </expression>
+    </input>
+    <input>
+      <!-- no heating -->
+      <property>environment/temperature-degc</property>
+    </input>
+    <gain>1.0</gain>
+    <output>environment/aircraft-effects/target-windshield-temperature-degC</output>
+  </filter>
+
+  <filter>
+    <name>windshield temperature</name>
+    <type>noise-spike</type>
+    <max-rate-of-change>1.0</max-rate-of-change> <!-- K/s -->
+    <input>environment/aircraft-effects/target-windshield-temperature-degC</input>
+    <output>environment/aircraft-effects/windshield-temperature-degC</output>
+  </filter>
+
+  <filter>
+    <name>target-frost-effect</name>
+    <type>gain</type>
+    <input>
+      <expression>
+        <product>
+          <property>environment/relative-humidity</property>
+          <property>environment/aircraft-effects/windshield-temperature-degC</property>
+        </product>
+      </expression>
+    </input>
+    <gain>-0.01</gain>
+    <!-- because relative-humidity is a percentage and negative temp gives positive icing -->
+    <output>environment/aircraft-effects/target-frost-level</output>
+    <min>0.0</min>
+    <max>1.0</max>
+  </filter>
+
+  <filter>
+    <type>noise-spike</type>
+    <max-rate-of-change>0.01</max-rate-of-change>
+    <!-- 100 seconds to go from one extreme to the other -->
+    <input>environment/aircraft-effects/target-frost-level</input>
+    <output>environment/aircraft-effects/frost-level</output>
+  </filter>
+  
+</PropertyList>

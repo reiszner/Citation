@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+  <name>ssme-flamer</name>
+  <inherits-from>Effects/thrust-flame</inherits-from>
+
+  <!--
+    thrust_density should correspond to prop /engines/engine[0|1]/itt-norm divided by 10
+    thrust_collimation should decrease with /engines/engine[0|1]/fan (0.5 = slow, 0.25 = fast)
+    noise_scale should correspond to /velocities/airspeed-kt (0.05 = slow, 0.25 = fast)
+    noise_strength should correspond to /engines/engine[0|1]/fan (1.0 = slow, 0.4 = fast)
+  -->
+
+  <parameters>
+    <flame_color_low_r>0</flame_color_low_r>
+    <flame_color_low_g>0</flame_color_low_g>
+    <flame_color_low_b>0</flame_color_low_b>
+    <flame_color_high_r>0</flame_color_high_r>
+    <flame_color_high_g>0</flame_color_high_g>
+    <flame_color_high_b>0</flame_color_high_b>
+    <use_shocks type="int">0</use_shocks>
+    <use_noise type="int">1</use_noise>
+    <thrust_collimation><use>engines/engine[1]/heatblur/thrust_collimation</use></thrust_collimation>
+    <thrust_density><use>engines/engine[1]/heatblur/thrust_density</use></thrust_density>
+    <shock_frequency>0</shock_frequency>
+    <noise_strength><use>engines/engine[1]/heatblur/noise_strength</use></noise_strength>
+    <noise_scale><use>engines/engine[1]/heatblur/noise_scale</use></noise_scale>
+  </parameters>
+
+</PropertyList>

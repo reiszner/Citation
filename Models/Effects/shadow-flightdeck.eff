@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PropertyList>
+    <name>shadow-flightdeck</name>
+    <inherits-from>Effects/model-interior</inherits-from>
+    <parameters>
+        <texture n="4">
+            <type>cubemap</type>
+            <images>
+                <positive-x>Aircraft/Citation/Models/Effects/shadow-flightdeck/back.png</positive-x>
+                <negative-x>Aircraft/Citation/Models/Effects/shadow-flightdeck/front.png</negative-x>
+                <positive-y>Aircraft/Citation/Models/Effects/shadow-flightdeck/right.png</positive-y>
+                <negative-y>Aircraft/Citation/Models/Effects/shadow-flightdeck/left.png</negative-y>
+                <positive-z>Aircraft/Citation/Models/Effects/shadow-flightdeck/up.png</positive-z>
+                <negative-z>Aircraft/Citation/Models/Effects/shadow-flightdeck/down.png</negative-z>
+            </images>
+        </texture>
+        <opacity-cube-center type="vec3d" n="0">2.923 0.0 0.6</opacity-cube-center>
+        <opacity-cube-scale type="vec3d" n="0">0.735 0.717 0.5516</opacity-cube-scale>
+        <opacity-cube-angle type="float">0.0</opacity-cube-angle>
+<!-- Irradiance Map -->
+        <irradiance-map-type type="int">2</irradiance-map-type>
+        <irradiance-map-strength type="float">0.5</irradiance-map-strength>
+    </parameters>
+</PropertyList>

@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+
+    <!--
+        Manufacturer: Sperry/Honeywell / Model: PC-500
+        Device: AP (autopilot)
+        Copyright (c) 2020 Sascha Reißner <reiszner@novaplan.at>
+
+        This version seperates the filter for FD (flight director) and AP (autopilot)
+        This makes it possible to activate the AP without FD or
+        activate the FD without AP so that the pilot can be guided by the FD.
+
+        formally known as:
+        Citation II autopilot version 5.0
+        Copyright (c) 2014 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+    -->
+
+<!-- helper -->
+<!--
+        The two following computers are not part of the autopilot but I
+        don't know where else to place them.  My intention is to
+        explore the flight envelope (altitude and %rpm settings) to
+        find out the best range cruise. I'll "cheat" by peeking at the
+        property browser.
+-->
+
+    <filter>
+        <name>Remaining Range computer</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <product>
+                    <div>
+                        <property>consumables/fuel/total-fuel-lbs</property>
+                        <sum>
+                            <property>engines/engine[0]/fuel-flow_pph</property>
+                            <property>engines/engine[1]/fuel-flow_pph</property>
+                        </sum>
+                    </div>
+                    <property>velocities/groundspeed-kt</property>
+                </product>
+            </expression>
+        </input>
+        <gain>1.0</gain>
+        <output>autopilot/settings/range-remaining-nmi</output>
+    </filter>
+
+    <filter>
+        <name>Total Range computer</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <div>
+                    <property>autopilot/settings/range-remaining-nmi</property>
+                    <property>consumables/fuel/total-fuel-norm</property>
+                </div>
+            </expression>
+        </input>
+        <gain>1.0</gain>
+        <output>autopilot/settings/range-total-nmi</output>
+    </filter>
+
+<!-- power / on / engage / disengage -->
+
+    <filter>
+        <name>AP power lost</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/mode/serviceable</property>
+                <less-than>
+                    <property>systems/electrical/outputs/main-left-xover/dc-ap</property>
+                    <value>18</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>0</input>
+        <output>autopilot/mode/serviceable</output>
+        <output>autopilot/mode/engaged</output>
+        <output>autopilot/mode/low-bank</output>
+        <output>autopilot/mode/yaw-damper</output>
+        <output>autopilot/mode/soft-ride</output>
+    </filter>
+
+    <filter>
+        <name>AP power back</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>autopilot/mode/serviceable</property></not>
+                <greater-than>
+                    <property>systems/electrical/outputs/main-left-xover/dc-ap</property>
+                    <value>18</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>1</input>
+        <output>autopilot/mode/serviceable</output>
+    </filter>
+
+    <filter>
+        <name>AP disengage</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <less-than>
+                    <property>position/altitude-agl-ft</property>
+                    <property>instrumentation/altimeter/decision-height</property>
+                </less-than>
+            </condition>
+        </enable>
+        <input>0</input>
+        <output>autopilot/mode/engaged</output>
+    </filter>
+
+    <filter>
+        <name>AP source select</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/mode/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/ms-205[0]/mode/state</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <value>0</value>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/ms-205[1]/mode/state</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>-1</input>
+        <output>autopilot/mode/selected-source</output>
+    </filter>
+
+<!-- receiving commands -->
+
+    <filter>
+        <name>set roll-deg</name>
+        <type>gain</type>
+        <debug>false</debug>
+
+        <enable>
+            <condition>
+                <property>autopilot/mode/serviceable</property>
+            </condition>
+        </enable>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <equals>
+                    <property>autopilot/mode/selected-source</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <property>autopilot/ms-205[0]/command/roll-deg</property>
+        </input>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <equals>
+                    <property>autopilot/mode/selected-source</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <property>autopilot/ms-205[1]/command/roll-deg</property>
+        </input>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+                <property>autopilot/mode/low-bank</property>
+            </condition>
+            <expression>
+                <div>
+                    <property>autopilot/mode/turn-knob</property>
+                    <value>240</value>
+                </div>
+            </expression>
+        </input>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <expression>
+                <div>
+                    <property>autopilot/mode/turn-knob</property>
+                    <value>120</value>
+                </div>
+            </expression>
+        </input>
+
+        <input>autopilot/input/roll-deg</input>
+        <output>autopilot/input/roll-deg</output>
+    </filter>
+
+    <filter>
+        <name>set pitch-deg</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/mode/serviceable</property>
+            </condition>
+        </enable>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <equals>
+                    <property>autopilot/mode/selected-source</property>
+                    <value>0</value>
+                </equals>
+            </condition>
+            <property>autopilot/ms-205[0]/command/pitch-rate-degps</property>
+        </input>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <equals>
+                    <property>autopilot/mode/selected-source</property>
+                    <value>1</value>
+                </equals>
+            </condition>
+            <property>autopilot/ms-205[1]/command/pitch-rate-degps</property>
+        </input>
+
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <expression>
+                <dif>
+                    <property>autopilot/input/pitch-deg</property>
+                    <property>autopilot/source/airdata/pitch-deg</property>
+                </dif>
+            </expression>
+        </input>
+
+        <input>orientation/pitch-rate-degps</input>
+        <output>autopilot/input/pitch-rate-degps</output>
+    </filter>
+
+    <filter>
+        <name>reset pitch-deg</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <or>
+                    <not><property>autopilot/mode/engaged</property></not>
+                    <property>autopilot/mode/cws</property>
+                    <greater-than>
+                        <property>autopilot/mode/selected-source</property>
+                        <value>-1</value>
+                    </greater-than>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <product>
+                    <floor>
+                        <sum>
+                            <product>
+                                <property>autopilot/source/airdata/pitch-deg</property>
+                                <value>10.0</value>
+                            </product>
+                            <value>0.5</value>
+                        </sum>
+                    </floor>
+                    <value>0.1</value>
+                </product>
+            </expression>
+        </input>
+        <output>autopilot/input/pitch-deg</output>
+    </filter>
+
+<!-- calculate rates -->
+
+    <filter>
+        <name>roll-rate-limit</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>autopilot/mode/soft-ride</property>
+            </condition>
+            <value>4.0</value>
+        </input>
+        <input>8.0</input>
+        <output>autopilot/input/roll-rate-limit</output>
+    </filter>
+
+    <filter>
+        <name>roll-rate-degps</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <expression>
+                <product>
+                    <dif>
+                        <property>autopilot/input/roll-deg</property>
+                        <property>instrumentation/turn-indicator[0]/indicated-turn-rate</property>
+                    </dif>
+                    <property>autopilot/input/roll-rate-limit</property>
+                    <value>2.0</value>
+                </product>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/output/roll-rate-degps</output>
+        <min>
+            <property>autopilot/input/roll-rate-limit</property>
+            <scale>-1.0</scale>
+        </min>
+        <max>
+            <property>autopilot/input/roll-rate-limit</property>
+        </max>
+    </filter>
+
+    <filter>
+        <name>pitch-rate-limit</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>autopilot/mode/soft-ride</property>
+            </condition>
+            <value>1.0</value>
+        </input>
+        <input>2.0</input>
+        <output>autopilot/input/pitch-rate-limit</output>
+    </filter>
+
+    <filter>
+        <name>pitch-rate-degps</name>
+        <type>gain</type>
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <property>autopilot/input/pitch-rate-degps</property>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/output/pitch-rate-degps</output>
+        <min>
+            <property>autopilot/input/pitch-rate-limit</property>
+            <scale>-1.0</scale>
+        </min>
+        <max>
+            <property>autopilot/input/pitch-rate-limit</property>
+        </max>
+    </filter>
+
+<!-- controlling -->
+
+    <filter>
+        <name>roll-rate-diff</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <dif>
+                    <property>orientation/roll-rate-degps</property>
+                    <property>autopilot/output/roll-rate-degps</property>
+                </dif>
+            </expression>
+        </input>
+        <output>autopilot/output/roll-rate-diff</output>
+    </filter>
+
+    <filter>
+        <name>aileron-diff</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <sum>
+                    <product>
+                        <property>autopilot/output/roll-rate-diff</property>
+                        <value>0.1</value>
+                    </product>
+                    <property>controls/flight/aileron-fdm</property>
+                </sum>
+            </expression>
+        </input>
+        <output>autopilot/servo/aileron-diff</output>
+    </filter>
+
+    <pid-controller>
+        <name>aileron control</name>
+        <debug>false</debug>
+        <input>controls/flight/aileron-fdm</input>
+        <reference>autopilot/servo/aileron-diff</reference>
+        <output>autopilot/servo/aileron-command</output>
+        <config>
+            <Kp>-0.05</Kp>
+            <alpha>0.1</alpha>
+            <beta>1.0</beta>
+            <gamma>2.0</gamma>
+            <Ti>0.1</Ti>
+            <Td>0.5</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
+        </config>
+    </pid-controller>
+
+<!--
+    <pid-controller>
+        <name>aileron control command</name>
+        <debug>false</debug>
+        <input>orientation/roll-rate-degps</input>
+        <reference>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <property>autopilot/output/roll-rate-degps</property>
+        </reference>
+        <reference>orientation/roll-rate-degps</reference>
+        <output>autopilot/servo/aileron-command</output>
+        <config>
+            <Kp>0.010</Kp>
+            <alpha>0.1</alpha>
+            <beta>1.0</beta>
+            <gamma>0.0</gamma>
+            <Ti>0.5</Ti>
+            <Td>1.0</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
+        </config>
+    </pid-controller>
+-->
+
+    <filter>
+        <name>rudder control</name>
+        <type>gain</type>
+        <gain>0.25</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/mode/yaw-damper</property>
+            </condition>
+        </enable>
+        <input>autopilot/servo/aileron-command</input>
+        <output>autopilot/servo/rudder-command</output>
+    </filter>
+
+
+
+    <filter>
+        <name>pitch-rate-diff</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <dif>
+                    <property>orientation/pitch-rate-degps</property>
+                    <property>autopilot/output/pitch-rate-degps</property>
+                </dif>
+            </expression>
+        </input>
+        <output>autopilot/output/pitch-rate-diff</output>
+    </filter>
+
+    <filter>
+        <name>elevator-diff</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <sum>
+                    <product>
+                        <property>autopilot/output/pitch-rate-diff</property>
+                        <value>0.1</value>
+                    </product>
+                    <property>controls/flight/elevator-fdm</property>
+                </sum>
+            </expression>
+        </input>
+        <output>autopilot/servo/elevator-diff</output>
+    </filter>
+
+    <pid-controller>
+        <name>elevator control</name>
+        <debug>false</debug>
+        <input>controls/flight/elevator-fdm</input>
+        <reference>autopilot/servo/elevator-diff</reference>
+        <output>autopilot/servo/elevator-command</output>
+        <config>
+            <Kp>0.2</Kp>
+            <alpha>0.1</alpha>
+            <beta>1.0</beta>
+            <gamma>0.5</gamma>
+            <Ti>0.1</Ti>
+            <Td>0.5</Td>
+            <u_min>-1.0</u_min>
+            <u_max>1.0</u_max>
+        </config>
+    </pid-controller>
+
+<!-- servos -->
+
+    <filter>
+        <name>aileron feedback</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+        </enable>
+        <input>controls/flight/aileron-fdm</input>
+        <output>controls/flight/aileron</output>
+    </filter>
+
+    <filter>
+        <name>aileron servo</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <value>0.5</value>
+        </max-rate-of-change>
+        <max-rate-of-change>100.0</max-rate-of-change>
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <property>autopilot/servo/aileron-command</property>
+        </input>
+        <input>controls/flight/aileron</input>
+        <output>controls/flight/aileron-fdm</output>
+    </filter>
+
+    <filter>
+        <name>elevator feedback</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+        </enable>
+        <input>controls/flight/elevator-fdm</input>
+        <output>controls/flight/elevator</output>
+    </filter>
+
+    <filter>
+        <name>elevator servo</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <value>0.5</value>
+        </max-rate-of-change>
+        <max-rate-of-change>100.0</max-rate-of-change>
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <property>autopilot/servo/elevator-command</property>
+        </input>
+        <input>controls/flight/elevator</input>
+        <output>controls/flight/elevator-fdm</output>
+    </filter>
+
+    <filter>
+        <name>rudder feedback</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+        </enable>
+        <input>controls/flight/rudder-fdm</input>
+        <output>controls/flight/rudder</output>
+    </filter>
+
+    <filter>
+        <name>rudder servo</name>
+        <debug>false</debug>
+        <type>noise-spike</type>
+        <max-rate-of-change>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <value>0.5</value>
+        </max-rate-of-change>
+        <max-rate-of-change>100.0</max-rate-of-change>
+        <input>
+            <condition>
+                <property>autopilot/mode/engaged</property>
+                <not><property>autopilot/mode/cws</property></not>
+            </condition>
+            <property>autopilot/servo/rudder-command</property>
+        </input>
+        <input>controls/flight/rudder</input>
+        <output>controls/flight/rudder-fdm</output>
+    </filter>
+
+</PropertyList>

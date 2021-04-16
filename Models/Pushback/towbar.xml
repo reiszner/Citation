@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+  <path>towbar.ac</path>
+
+<!-- show towbar if pushback is active -->
+  <animation>
+    <type>select</type>
+    <condition>
+      <property>sim/model/pushback/visible</property>
+    </condition>
+  </animation>
+
+<!-- rotate towbar with nosewheel -->
+  <animation>
+    <type>rotate</type>
+    <condition>
+      <property>sim/model/pushback/linked</property>
+    </condition>
+    <property>gear/gear[0]/caster-angle-deg-filtered</property>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>-1</z>
+    </axis>
+  </animation>
+
+<!-- compensate for pitch of aircraft, keep towbar level -->
+  <animation>
+    <type>rotate</type>
+    <property>orientation/pitch-deg</property>
+    <center>
+      <x-m>0.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.00</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+<!-- compensate gear compression -->
+  <animation>
+    <type>translate</type>
+    <property>gear/gear[0]/compression-m-filtered</property>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+<!-- set hitch to tug -->
+  <animation>
+    <type>translate</type>
+    <object-name>hitch</object-name>
+    <property>sim/model/pushback/geometry/hitch/high-tug</property>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+<!-- connect towbar with nosewheel and tug -->
+  <animation>
+    <type>translate</type>
+    <condition>
+      <property>sim/model/pushback/linked</property>
+    </condition>
+    <object-name>towbar</object-name>
+    <object-name>towbar.wheel</object-name>
+    <property>sim/model/pushback/geometry/hitch/high-link</property>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>locked-track</type>
+    <condition>
+      <property>sim/model/pushback/linked</property>
+    </condition>
+    <object-name>towbar</object-name>
+    <object-name>towbar.wheel</object-name>
+    <center>
+      <x-m>0.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.00</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </track-axis>
+    <target-name>hitch</target-name>
+    <target-center>
+      <x-m>-3.778</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.00</z-m>
+    </target-center>
+  </animation>
+
+<!-- set towbar on ground if not linked-->
+  <!--animation>
+    <type>translate</type>
+    <condition>
+      <not><property>sim/model/pushback/linked</property></not>
+    </condition>
+    <object-name>towbar</object-name>
+    <object-name>towbar.wheel</object-name>
+    <property>sim/model/pushback/geometry/hitch/wheel-y</property>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation-->
+
+  <animation>
+    <type>locked-track</type>
+    <condition>
+      <not><property>sim/model/pushback/linked</property></not>
+    </condition>
+    <object-name>towbar</object-name>
+    <object-name>towbar.wheel</object-name>
+    <center>
+      <x-m>-1.00</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.00</z-m>
+    </center>
+    <lock-axis>
+      <x>0</x>
+      <y>-1</y>
+      <z>0</z>
+    </lock-axis>
+    <track-axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </track-axis>
+    <target-name>hitch</target-name>
+    <target-center>
+      <x-m>-3.778</x-m>
+      <y-m>0.00</y-m>
+      <z-m>0.00</z-m>
+    </target-center>
+  </animation>
+
+<!-- change heading of the pushback when driving the arc -->
+  <animation>
+    <type>rotate</type>
+    <property>sim/model/pushback/position-norm</property>
+    <factor>-90</factor>
+    <offset-deg>90</offset-deg>
+    <center>
+      <x-m>-3</x-m>
+      <y-m>-10</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>0</x>
+      <y>0</y>
+      <z>1</z>
+    </axis>
+  </animation>
+
+<!-- switch to night/day textures -->
+  <animation>
+    <type>textranslate</type>
+    <property>/sim/time/sun-angle-rad</property>
+    <step>1.60</step>
+    <factor>0.3125</factor>
+    <center>
+      <x-m>0</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+    </center>
+    <axis>
+      <x>-1</x>
+      <y>0</y>
+      <z>0</z>
+    </axis>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <condition>
+      <greater-than>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.60</value>
+      </greater-than>
+    </condition>
+    <emission>
+      <red>1</red>
+      <green>1</green>
+      <blue>1</blue>
+    </emission>
+  </animation>
+
+  <animation>
+    <type>material</type>
+    <condition>
+      <less-than-equals>
+        <property>/sim/time/sun-angle-rad</property>
+        <value>1.60</value>
+      </less-than-equals>
+    </condition>
+    <emission>
+      <red>0</red>
+      <green>0</green>
+      <blue>0</blue>
+    </emission>
+  </animation>
+
+</PropertyList>

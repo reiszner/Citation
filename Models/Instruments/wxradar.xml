@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<PropertyList>
+
+    <path>wxradar.ac</path>
+
+<!-- Panel Lights (only for quality-level=0) -->
+    <animation>
+        <type>material</type>
+        <condition>
+            <equals>
+                <property>/sim/rendering/shaders/quality-level</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <object-name>ColoRadar</object-name>
+        <object-name>Btn1.1</object-name>
+        <object-name>Btn1.2</object-name>
+        <object-name>Btn1.3</object-name>
+        <object-name>Btn1.4</object-name>
+        <object-name>Btn2.1</object-name>
+        <object-name>Btn2.2</object-name>
+        <object-name>Btn2.3</object-name>
+        <object-name>Btn2.4</object-name>
+        <object-name>Btn2.5</object-name>
+        <object-name>Btn3.1</object-name>
+        <object-name>Btn3.2</object-name>
+        <object-name>Btn3.3</object-name>
+        <object-name>Knob.1</object-name>
+        <object-name>Knob.2</object-name>
+        <emission>
+            <red>1.0</red>
+            <green>0.8</green>
+            <blue>0.6</blue>
+            <factor-prop>controls/lighting/panel-average-lighting</factor-prop>
+        </emission>
+    </animation>
+
+    <!--effect>
+        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <object-name>ColoRadar</object-name>
+        <object-name>ColoRadar.screen</object-name>
+        <object-name>Btn1.1</object-name>
+        <object-name>Btn1.2</object-name>
+        <object-name>Btn1.3</object-name>
+        <object-name>Btn1.4</object-name>
+        <object-name>Btn2.1</object-name>
+        <object-name>Btn2.2</object-name>
+        <object-name>Btn2.3</object-name>
+        <object-name>Btn2.4</object-name>
+        <object-name>Btn2.5</object-name>
+        <object-name>Btn3.1</object-name>
+        <object-name>Btn3.2</object-name>
+        <object-name>Btn3.3</object-name>
+        <object-name>Knob.1</object-name>
+        <object-name>Knob.2</object-name>
+    </effect-->
+
+</PropertyList>

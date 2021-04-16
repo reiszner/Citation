@@ -1,0 +1,794 @@
+AC3Db
+MATERIAL "lights" rgb 1.000 1.000 1.000  amb 1.000 1.000 1.000  emis 1.000 1.000 1.000  spec 0.300 0.300 0.300  shi 32 trans 0.000
+MATERIAL "interior" rgb 1.000 1.000 1.000  amb 1.000 1.000 1.000  emis 0.000 0.000 0.000  spec 0.300 0.300 0.300  shi 32 trans 0.000
+OBJECT world
+name "annonpanel.ac"
+kids 36
+OBJECT poly
+name "ACFail"
+data 9
+Plane.103
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 0.06125
+0.0026 0.0225 0.06125
+0.0026 0.0135 0.08575
+0.0026 0.0225 0.08575
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.021484 0.400781
+0 0.158203 0.400781
+1 0.158203 0.5
+3 0.021484 0.5
+kids 0
+OBJECT poly
+name "ACMEjectorOn"
+data 9
+Plane.015
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 0.01225
+0.0026 -0.0045 0.01225
+0.0026 -0.0135 0.03675
+0.0026 -0.0045 0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.294922 0.103125
+0 0.431641 0.103125
+1 0.431641 0.202344
+3 0.294922 0.202344
+kids 0
+OBJECT poly
+name "AirDuctOverHeat"
+data 9
+Plane.009
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 0.03675
+0.0026 0.0045 0.03675
+0.0026 -0.0045 0.06125
+0.0026 0.0045 0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.158203 0.202344
+0 0.294922 0.202344
+1 0.294922 0.301562
+3 0.158203 0.301562
+kids 0
+OBJECT poly
+name "AntiSkidInop"
+data 9
+Plane.003
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 0.06125
+0.0026 0.0135 0.06125
+0.0026 0.0045 0.08575
+0.0026 0.0135 0.08575
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.021484 0.301562
+0 0.158203 0.301562
+1 0.158203 0.400781
+3 0.021484 0.400781
+kids 0
+OBJECT poly
+name "BattOverHeat"
+data 9
+Plane.011
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 0.03675
+0.0026 0.0225 0.03675
+0.0026 0.0135 0.06125
+0.0026 0.0225 0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.158203 0.400781
+0 0.294922 0.400781
+1 0.294922 0.5
+3 0.158203 0.5
+kids 0
+OBJECT poly
+name "BleedAirGndHi"
+data 9
+Plane.013
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 0.01225
+0.0026 0.0135 0.01225
+0.0026 0.0045 0.03675
+0.0026 0.0135 0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.294922 0.301562
+0 0.431641 0.301562
+1 0.431641 0.400781
+3 0.294922 0.400781
+kids 0
+OBJECT poly
+name "CabAlt10000Ft"
+data 9
+Plane.012
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 0.01225
+0.0026 0.0225 0.01225
+0.0026 0.0135 0.03675
+0.0026 0.0225 0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.294922 0.400781
+0 0.431641 0.400781
+1 0.431641 0.5
+3 0.294922 0.5
+kids 0
+OBJECT poly
+name "Ctn.panel"
+data 9
+Plane.022
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 8
+0.0025 0.0225 -0.08575
+0.0025 -0.0225 -0.08575
+0.0025 -0.0225 0.08575
+0.0025 0.0225 0.08575
+0 -0.0225 -0.08575
+0 -0.0225 0.08575
+0 0.0225 -0.08575
+0 0.0225 0.08575
+numsurf 5
+SURF 0X0
+mat 1
+refs 4
+0 0.978516 0.996094
+3 0.021484 0.996094
+2 0.021484 0.5
+1 0.978516 0.5
+SURF 0X0
+mat 1
+refs 4
+1 0.979466 0.50457
+2 0.020534 0.50457
+5 0.020534 0.50457
+4 0.979466 0.50457
+SURF 0X0
+mat 1
+refs 4
+0 0.979466 1.001489
+1 0.979466 0.50457
+4 0.979466 0.50457
+6 0.979466 1.001489
+SURF 0X0
+mat 1
+refs 4
+3 0.020534 1.00149
+0 0.979466 1.001489
+6 0.979466 1.001489
+7 0.020534 1.00149
+SURF 0X0
+mat 1
+refs 4
+2 0.020534 0.50457
+3 0.020534 1.00149
+7 0.020534 1.00149
+5 0.020534 0.50457
+kids 0
+OBJECT poly
+name "DoorNotLocked"
+data 9
+Plane.008
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 0.03675
+0.0026 -0.0045 0.03675
+0.0026 -0.0135 0.06125
+0.0026 -0.0045 0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.158203 0.103125
+0 0.294922 0.103125
+1 0.294922 0.202344
+3 0.158203 0.202344
+kids 0
+OBJECT poly
+name "EmerPressOn"
+data 9
+Plane.014
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 0.01225
+0.0026 0.0045 0.01225
+0.0026 -0.0045 0.03675
+0.0026 0.0045 0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.294922 0.202344
+0 0.431641 0.202344
+1 0.431641 0.301562
+3 0.294922 0.301562
+kids 0
+OBJECT poly
+name "EngIceFailL"
+data 9
+Plane.020
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 -0.01225
+0.0026 0.0135 -0.01225
+0.0026 0.0045 0.01225
+0.0026 0.0135 0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.431641 0.301562
+0 0.568359 0.301562
+1 0.568359 0.400781
+3 0.431641 0.400781
+kids 0
+OBJECT poly
+name "EngIceFailR"
+data 9
+Plane.024
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 -0.03675
+0.0026 0.0135 -0.03675
+0.0026 0.0045 -0.01225
+0.0026 0.0135 -0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.568359 0.301562
+0 0.705078 0.301562
+1 0.705078 0.400781
+3 0.568359 0.400781
+kids 0
+OBJECT poly
+name "FuelBoostOnL"
+data 9
+Plane.030
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 -0.06125
+0.0026 -0.0045 -0.06125
+0.0026 -0.0135 -0.03675
+0.0026 -0.0045 -0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.705078 0.103125
+0 0.841797 0.103125
+1 0.841797 0.202344
+3 0.705078 0.202344
+kids 0
+OBJECT poly
+name "FuelBoostOnR"
+data 9
+Plane.037
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 -0.08575
+0.0026 -0.0045 -0.08575
+0.0026 -0.0135 -0.06125
+0.0026 -0.0045 -0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.841797 0.103125
+0 0.978516 0.103125
+1 0.978516 0.202344
+3 0.841797 0.202344
+kids 0
+OBJECT poly
+name "FuelFilterBypass"
+data 9
+Plane.028
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 -0.03675
+0.0026 -0.0135 -0.03675
+0.0026 -0.0225 -0.01225
+0.0026 -0.0135 -0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.568359 0.003906
+0 0.705078 0.003906
+1 0.705078 0.103125
+3 0.568359 0.103125
+kids 0
+OBJECT poly
+name "FuelLevelLoL"
+data 9
+Plane.029
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 -0.06125
+0.0026 -0.0135 -0.06125
+0.0026 -0.0225 -0.03675
+0.0026 -0.0135 -0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.705078 0.003906
+0 0.841797 0.003906
+1 0.841797 0.103125
+3 0.705078 0.103125
+kids 0
+OBJECT poly
+name "FuelLevelLoR"
+data 9
+Plane.038
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 -0.08575
+0.0026 -0.0135 -0.08575
+0.0026 -0.0225 -0.06125
+0.0026 -0.0135 -0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.841797 0.003906
+0 0.978516 0.003906
+1 0.978516 0.103125
+3 0.841797 0.103125
+kids 0
+OBJECT poly
+name "FuelPressLoL"
+data 9
+Plane.031
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 -0.06125
+0.0026 0.0045 -0.06125
+0.0026 -0.0045 -0.03675
+0.0026 0.0045 -0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.705078 0.202344
+0 0.841797 0.202344
+1 0.841797 0.301562
+3 0.705078 0.301562
+kids 0
+OBJECT poly
+name "FuelPressLoR"
+data 9
+Plane.036
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 -0.08575
+0.0026 0.0045 -0.08575
+0.0026 -0.0045 -0.06125
+0.0026 0.0045 -0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.841797 0.202344
+0 0.978516 0.202344
+1 0.978516 0.301562
+3 0.841797 0.301562
+kids 0
+OBJECT poly
+name "FWShutoffL"
+data 9
+Plane.019
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 -0.01225
+0.0026 0.0045 -0.01225
+0.0026 -0.0045 0.01225
+0.0026 0.0045 0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.431641 0.202344
+0 0.568359 0.202344
+1 0.568359 0.301562
+3 0.431641 0.301562
+kids 0
+OBJECT poly
+name "FWShutoffR"
+data 9
+Plane.025
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 -0.03675
+0.0026 0.0045 -0.03675
+0.0026 -0.0045 -0.01225
+0.0026 0.0045 -0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.568359 0.202344
+0 0.705078 0.202344
+1 0.705078 0.301562
+3 0.568359 0.301562
+kids 0
+OBJECT poly
+name "GenOffL"
+data 9
+Plane.032
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 -0.06125
+0.0026 0.0135 -0.06125
+0.0026 0.0045 -0.03675
+0.0026 0.0135 -0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.705078 0.301562
+0 0.841797 0.301562
+1 0.841797 0.400781
+3 0.705078 0.400781
+kids 0
+OBJECT poly
+name "GenOffR"
+data 9
+Plane.035
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 -0.08575
+0.0026 0.0135 -0.08575
+0.0026 0.0045 -0.06125
+0.0026 0.0135 -0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.841797 0.301562
+0 0.978516 0.301562
+1 0.978516 0.400781
+3 0.841797 0.400781
+kids 0
+OBJECT poly
+name "HydLevelLo"
+data 9
+Plane.006
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 0.06125
+0.0026 -0.0135 0.06125
+0.0026 -0.0225 0.08575
+0.0026 -0.0135 0.08575
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.021484 0.003906
+0 0.158203 0.003906
+1 0.158203 0.103125
+3 0.021484 0.103125
+kids 0
+OBJECT poly
+name "HydPressLoL"
+data 9
+Plane.021
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 -0.01225
+0.0026 0.0225 -0.01225
+0.0026 0.0135 0.01225
+0.0026 0.0225 0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.431641 0.400781
+0 0.568359 0.400781
+1 0.568359 0.5
+3 0.431641 0.5
+kids 0
+OBJECT poly
+name "HydPressLoR"
+data 9
+Plane.023
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 -0.03675
+0.0026 0.0225 -0.03675
+0.0026 0.0135 -0.01225
+0.0026 0.0225 -0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.568359 0.400781
+0 0.705078 0.400781
+1 0.705078 0.5
+3 0.568359 0.5
+kids 0
+OBJECT poly
+name "HydPressOn"
+data 9
+Plane.005
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 0.06125
+0.0026 -0.0045 0.06125
+0.0026 -0.0135 0.08575
+0.0026 -0.0045 0.08575
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.021484 0.103125
+0 0.158203 0.103125
+1 0.158203 0.202344
+3 0.021484 0.202344
+kids 0
+OBJECT poly
+name "OilPressLoL"
+data 9
+Plane.033
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 -0.06125
+0.0026 0.0225 -0.06125
+0.0026 0.0135 -0.03675
+0.0026 0.0225 -0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.705078 0.400781
+0 0.841797 0.400781
+1 0.841797 0.5
+3 0.705078 0.5
+kids 0
+OBJECT poly
+name "OilPressLoR"
+data 9
+Plane.034
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0135 -0.08575
+0.0026 0.0225 -0.08575
+0.0026 0.0135 -0.06125
+0.0026 0.0225 -0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.841797 0.400781
+0 0.978516 0.400781
+1 0.978516 0.5
+3 0.841797 0.5
+kids 0
+OBJECT poly
+name "PrecoolFailL"
+data 9
+Plane.018
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 -0.01225
+0.0026 -0.0045 -0.01225
+0.0026 -0.0135 0.01225
+0.0026 -0.0045 0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.431641 0.103125
+0 0.568359 0.103125
+1 0.568359 0.202344
+3 0.431641 0.202344
+kids 0
+OBJECT poly
+name "PrecoolFailR"
+data 9
+Plane.027
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0135 -0.03675
+0.0026 -0.0045 -0.03675
+0.0026 -0.0135 -0.01225
+0.0026 -0.0045 -0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.568359 0.103125
+0 0.705078 0.103125
+1 0.705078 0.202344
+3 0.568359 0.202344
+kids 0
+OBJECT poly
+name "PSHtrOff"
+data 9
+Plane.007
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 0.03675
+0.0026 -0.0135 0.03675
+0.0026 -0.0225 0.06125
+0.0026 -0.0135 0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.158203 0.003906
+0 0.294922 0.003906
+1 0.294922 0.103125
+3 0.158203 0.103125
+kids 0
+OBJECT poly
+name "PwrBrkPressLo"
+data 9
+Plane.004
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0045 0.06125
+0.0026 0.0045 0.06125
+0.0026 -0.0045 0.08575
+0.0026 0.0045 0.08575
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.021484 0.202344
+0 0.158203 0.202344
+1 0.158203 0.301562
+3 0.021484 0.301562
+kids 0
+OBJECT poly
+name "SpeedBreakExtended"
+data 9
+Plane.017
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 -0.01225
+0.0026 -0.0135 -0.01225
+0.0026 -0.0225 0.01225
+0.0026 -0.0135 0.01225
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.431641 0.003906
+0 0.568359 0.003906
+1 0.568359 0.103125
+3 0.431641 0.103125
+kids 0
+OBJECT poly
+name "SurfDeice"
+data 9
+Plane.016
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 -0.0225 0.01225
+0.0026 -0.0135 0.01225
+0.0026 -0.0225 0.03675
+0.0026 -0.0135 0.03675
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.294922 0.003906
+0 0.431641 0.003906
+1 0.431641 0.103125
+3 0.294922 0.103125
+kids 0
+OBJECT poly
+name "WSAirOverHeat"
+data 9
+Plane.010
+crease 30.0
+texture "annunpanel.png"
+texrep 1 1
+numvert 4
+0.0026 0.0045 0.03675
+0.0026 0.0135 0.03675
+0.0026 0.0045 0.06125
+0.0026 0.0135 0.06125
+numsurf 1
+SURF 0X0
+mat 0
+refs 4
+2 0.158203 0.301562
+0 0.294922 0.301562
+1 0.294922 0.400781
+3 0.158203 0.400781
+kids 0

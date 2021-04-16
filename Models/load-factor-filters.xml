@@ -1,0 +1,376 @@
+<?xml version="1.0"?>
+<!--
+Filters that compute the maximum load factors for the Citation II.
+Copyright (C) 2015 Ludovic Brenta <ludovic@ludovic-brenta.org>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+-->
+<PropertyList>
+
+  <filter>
+    <name>weight-0</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[0]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[0]</output>
+  </filter>
+
+  <filter>
+    <name>weight-1</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[1]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[1]</output>
+  </filter>
+
+  <filter>
+    <name>weight-2</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[2]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[2]</output>
+  </filter>
+
+  <filter>
+    <name>weight-3</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[3]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[3]</output>
+  </filter>
+
+  <filter>
+    <name>weight-4</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[4]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[4]</output>
+  </filter>
+
+  <filter>
+    <name>weight-5</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[5]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[5]</output>
+  </filter>
+
+  <filter>
+    <name>weight-6</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+    </enable>
+    <input>sim/weight[6]/weight-lb</input>
+    <output>fdm/jsbsim/inertia/pointmass-weight-lbs[6]</output>
+  </filter>
+
+  <filter>
+    <name>gross-weight-lbs</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+      <property>fdm/jsbsim/inertia/weight-lbs</property>
+    </input>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>yasim</value>
+        </equals>
+      </condition>
+      <property>fdm/yasim/gross-weight-lbs</property>
+    </input>
+    <output>fdm/gross-weight-lbs</output>
+  </filter>
+
+  <filter>
+    <name>gross-weight-kg</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <product>
+          <property>fdm/gross-weight-lbs</property>
+          <value>0.45359237</value>
+        </product>
+      </expression>
+    </input>
+    <output>fdm/gross-weight-kg</output>
+  </filter>
+
+  <filter>
+    <name>cg-x-ft</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+      <expression>
+        <div>
+          <property>fdm/jsbsim/inertia/cg-x-in</property>
+          <value>12.0</value>
+        </div>
+      </expression>
+    </input>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>yasim</value>
+        </equals>
+      </condition>
+      <expression>
+        <div>
+          <abs>
+            <property>fdm/yasim/cg-x-m</property>
+          </abs>
+          <value>0.3048</value>
+        </div>
+      </expression>
+    </input>
+    <output>fdm/cg-x-ft</output>
+  </filter>
+
+  <filter>
+    <name>cg-x-m</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+      <expression>
+        <product>
+          <property>fdm/jsbsim/inertia/cg-x-in</property>
+          <value>0.0254</value>
+        </product>
+      </expression>
+    </input>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>yasim</value>
+        </equals>
+      </condition>
+      <expression>
+        <abs>
+          <property>fdm/yasim/cg-x-m</property>
+        </abs>
+      </expression>
+    </input>
+    <output>fdm/cg-x-m</output>
+  </filter>
+
+  <filter>
+    <name>mac-percent</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>jsb</value>
+        </equals>
+      </condition>
+      <value>6.29128</value>
+    </input>
+    <input>
+      <condition>
+        <equals>
+          <property>sim/flight-model</property>
+          <value>yasim</value>
+        </equals>
+      </condition>
+      <expression>
+        <product>
+          <property>fdm/yasim/cg-x-mac</property>
+          <value>100</value>
+        </product>
+      </expression>
+    </input>
+    <output>fdm/mac-percent</output>
+  </filter>
+
+  <filter n="10000">
+    <name>Maximum positive load factor depending on flap position</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <greater-than>
+          <property>controls/flight/flaps</property>
+          <value>0</value>
+        </greater-than>
+      </condition>
+      <value>2.0</value>
+    </input>
+    <input>3.8</input>
+    <output>/limits/max-positive-g</output>
+  </filter>
+
+  <filter n="10001">
+    <name>Maximum negative load factor depending on flap position</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <condition>
+        <greater-than>
+          <property>controls/flight/flaps</property>
+          <value>0</value>
+        </greater-than>
+      </condition>
+      <value>0.0</value>
+    </input>
+    <input>-1.52</input>
+    <output>/limits/max-negative-g</output>
+  </filter>
+
+
+
+<!--
+
+  Instead of calculating the initial weight to gear compression ratio
+  I've calculated them once using this formula:
+
+    weight-on-wheels = 0.5 * compression_norm(t) * (w_0 / c_0)
+
+  where compression_norm(t) is derived from /gear/gear[1]/compression-norm
+  and w_0 = initialWeight          = 13909.19628906249 lbs
+  and c_0 = initialGearCompression = 0.2607718557119369
+
+  Now w_0 / c_0 = 53307.28336965086
+
+-->
+
+  <filter n="10100">
+    <name>calculate weight on wheels</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <product>
+          <div>
+            <sum>
+              <property>gear/gear[1]/compression-norm</property>
+              <property>gear/gear[2]/compression-norm</property>
+            </sum>
+            <value>2</value>
+          </div>
+          <value>53307.28336965086</value>
+        </product>
+      </expression>
+    </input>
+    <output>/sim/systems/wingflexer/weight-on-wheels</output>
+  </filter>
+
+  <filter n="10101">
+    <name>Lift force on the wings for wingflexer</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <difference>
+	  <product>
+	    <property>yasim/gross-weight-lbs</property>
+	    <property>accelerations/pilot-g</property>
+	  </product>
+          <property>sim/systems/wingflexer/weight-on-wheels</property>
+        </difference>
+      </expression>
+    </input>
+    <output>/yasim/fbz-aero-lbs</output>
+  </filter>
+
+  <filter n="10102">
+    <name>convert Newton to pound</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+      <expression>
+        <product>
+          <property>/fdm/yasim/forces/f0-aero-z-lift</property>
+          <value>0.273205311997</value>
+        </product>
+      </expression>
+    </input>
+    <output>/yasim/lift-lbs</output>
+  </filter>
+
+</PropertyList>

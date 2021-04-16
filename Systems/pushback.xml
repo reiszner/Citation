@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Pushback with 2 thrusters for YaSim and JSBsim -->
+<!-- Sascha Reißner 2020 -->
+
+<PropertyList>
+
+	<logic>
+		<name>Pushback engage logic</name>
+		<input>
+			<and>
+				<greater-than>
+					<property>sim/model/pushback/position-norm</property>
+					<value>0.99</value>
+				</greater-than>
+				<greater-than>
+					<property>gear/gear[0]/rollspeed-ms</property>
+					<value>-80.0</value>
+				</greater-than>
+				<less-than>
+					<property>gear/gear[0]/rollspeed-ms</property>
+					<value>80.0</value>
+				</less-than>
+			</and>
+		</input>
+		<output>sim/model/pushback/linked</output>
+	</logic>
+
+	<filter>
+		<name>Pushback cancel force logic</name>
+		<type>gain</type>
+		<gain>1</gain>
+		<debug type="bool">false</debug>
+		<enable>
+			<not><property>sim/model/pushback/linked</property></not>
+		</enable>
+		<input>0</input>
+		<output>sim/model/pushback/force</output>
+		<output>sim/model/pushback/force-x</output>
+		<output>sim/model/pushback/force-y</output>
+	</filter>
+
+	<pid-controller>
+		<name>Pushback force</name>
+		<debug type="bool">false</debug>
+		<enable>
+			<property>sim/model/pushback/linked</property>
+		</enable>
+		<input>
+			<property>sim/model/pushback/target-speed-kts</property>
+		</input>
+		<reference>
+			<property>gear/gear[0]/rollspeed-ms-filtered</property>
+			<scale>1.94384449244</scale>
+		</reference>
+		<output>
+			<property>sim/model/pushback/force</property>
+		</output>
+		<config>
+			<Kp>
+				<property>sim/model/pushback/kp</property>
+			</Kp>
+			<beta>1</beta>
+			<alpha>0.1</alpha>
+			<gamma>0</gamma>
+			<Ti>
+				<property>sim/model/pushback/ti</property>
+			</Ti>
+			<Td>
+				<property>sim/model/pushback/td</property>
+			</Td>
+			<u_min>-1</u_min>
+			<u_max>1</u_max>
+		</config>
+	</pid-controller>
+
+	<filter>
+		<name>Pushback force-x</name>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<enable>
+			<property>sim/model/pushback/linked</property>
+		</enable>
+		<input>
+			<expression>
+				<product>
+					<cos>
+						<deg2rad>
+							<property>gear/gear[0]/caster-angle-deg-filtered</property>
+						</deg2rad>
+					</cos>
+					<property>sim/model/pushback/force</property>
+				</product>
+			</expression>
+		</input>
+		<output>sim/model/pushback/force-x</output>
+	</filter>
+
+	<filter>
+		<name>Pushback force-y</name>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<enable>
+			<property>sim/model/pushback/linked</property>
+		</enable>
+		<input>
+			<expression>
+				<product>
+					<sin>
+						<deg2rad>
+							<property>gear/gear[0]/caster-angle-deg-filtered</property>
+						</deg2rad>
+					</sin>
+					<property>sim/model/pushback/force</property>
+				</product>
+			</expression>
+		</input>
+		<output>sim/model/pushback/force-y</output>
+	</filter>
+
+<!-- jsbsim -->
+
+	<filter>
+		<name>jsbsim Pushback force</name>
+		<type>gain</type>
+		<gain>1000</gain>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/flight-model</property>
+					<value>jsb</value>
+				</equals>
+			</condition>
+		</enable>
+		<input>
+			<property>sim/model/pushback/force</property>
+<!--
+			<expression>
+				<abs><property>sim/model/pushback/force</property></abs>
+			</expression>
+-->
+		</input>
+		<output>fdm/jsbsim/external_reactions/pushback/magnitude</output>
+	</filter>
+
+	<filter>
+		<name>jsbsim Pushback force-x</name>
+		<type>gain</type>
+		<gain>1</gain>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/flight-model</property>
+					<value>jsb</value>
+				</equals>
+				<property>sim/model/pushback/linked</property>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<cos>
+					<deg2rad>
+						<property>gear/gear[0]/caster-angle-deg-filtered</property>
+					</deg2rad>
+				</cos>
+			</expression>
+		</input>
+		<output>fdm/jsbsim/external_reactions/pushback/x</output>
+	</filter>
+
+	<filter>
+		<name>jsbsim Pushback force-y</name>
+		<type>gain</type>
+		<gain>1</gain>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/flight-model</property>
+					<value>jsb</value>
+				</equals>
+				<property>sim/model/pushback/linked</property>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<sin>
+					<deg2rad>
+						<property>gear/gear[0]/caster-angle-deg-filtered</property>
+					</deg2rad>
+				</sin>
+			</expression>
+		</input>
+		<output>fdm/jsbsim/external_reactions/pushback/y</output>
+	</filter>
+
+<!-- reset gear[3] on start-up -->
+
+	<filter>
+		<name>reset fake-gear</name>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/flight-model</property>
+					<value>yasim</value>
+				</equals>
+				<not><property>sim/model/pushback/enabled</property></not>
+				<greater-than>
+					<property>gear/gear[3]/position-norm</property>
+					<value>0.0</value>
+				</greater-than>
+			</condition>
+		</enable>
+		<input>0.0</input>
+		<output>gear/gear[3]/position-norm</output>
+	</filter>
+
+</PropertyList>

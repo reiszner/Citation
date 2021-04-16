@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+
+<!--
+**********************************************************************
+This file selects the instrumentation modules that should be available.
+**********************************************************************
+-->
+
+<PropertyList>
+
+    <inst-vertical-speed-indicator>
+        <name>inst-vertical-speed-indicator</name>
+        <number>0</number>
+    </inst-vertical-speed-indicator>
+
+    <inst-vertical-speed-indicator>
+        <name>inst-vertical-speed-indicator</name>
+        <number>1</number>
+    </inst-vertical-speed-indicator>
+
+    <vertical-speed-indicator>
+        <name>vertical-speed-indicator</name>
+        <number>0</number>
+        <static-pressure>systems/static[0]/pressure-inhg</static-pressure>
+        <static-temperature>environment/temperature-degc</static-temperature>
+    </vertical-speed-indicator>
+
+    <vertical-speed-indicator>
+        <name>vertical-speed-indicator</name>
+        <number>1</number>
+        <static-pressure>systems/static[1]/pressure-inhg</static-pressure>
+        <static-temperature>environment/temperature-degc</static-temperature>
+    </vertical-speed-indicator>
+
+    <airspeed-indicator>
+        <name>airspeed-indicator</name>
+        <number>0</number>
+        <total-pressure>/systems/pitot[0]/total-pressure-inhg</total-pressure>
+        <static-pressure>/systems/static[0]/pressure-inhg</static-pressure>
+    </airspeed-indicator>
+
+    <airspeed-indicator>
+        <name>airspeed-indicator</name>
+        <number>1</number>
+        <total-pressure>/systems/pitot[1]/total-pressure-inhg</total-pressure>
+        <static-pressure>/systems/static[1]/pressure-inhg</static-pressure>
+    </airspeed-indicator>
+
+    <altimeter>
+        <name>altimeter</name>
+        <number>0</number>
+        <static-pressure>/systems/static[0]/pressure-inhg</static-pressure>
+        <encode-mode-c>false</encode-mode-c>
+        <encode-mode-s>true</encode-mode-s>
+    </altimeter>
+
+    <altimeter>
+        <name>altimeter</name>
+        <number>1</number>
+        <static-pressure>/systems/static[1]/pressure-inhg</static-pressure>
+        <encode-mode-c>false</encode-mode-c>
+        <encode-mode-s>true</encode-mode-s>
+    </altimeter>
+
+    <attitude-indicator>
+        <name>attitude-indicator</name>
+        <number>0</number>
+        <suction>/systems/electrical/outputs/AC-26V/ac-adi1</suction>
+    </attitude-indicator>
+
+    <attitude-indicator>
+        <name>attitude-indicator</name>
+        <number>1</number>
+        <suction>/systems/electrical/outputs/AC-26V/ac-adi2</suction>
+    </attitude-indicator>
+
+<!-- we use here suction-gyro because we can't set power source for electric-gyro -->
+    <heading-indicator>
+        <name>heading-indicator</name>
+        <number>0</number>
+        <suction>systems/electrical/outputs/main-left-xover/dc-dg1</suction>
+    </heading-indicator>
+
+    <heading-indicator>
+        <name>heading-indicator</name>
+        <number>1</number>
+        <suction>systems/electrical/outputs/emer/dc-dg2</suction>
+    </heading-indicator>
+
+    <heading-indicator-dg>
+        <name>heading-indicator-dg</name>
+        <number>0</number>
+        <power-supply>systems/electrical/outputs/main-left-xover/dc-dg1</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </heading-indicator-dg>
+
+    <heading-indicator-dg>
+        <name>heading-indicator-dg</name>
+        <number>1</number>
+        <power-supply>systems/electrical/outputs/emer/dc-dg2</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </heading-indicator-dg>
+
+    <magnetic-compass>
+        <name>magnetic-compass</name>
+        <number>0</number>
+    </magnetic-compass>
+
+    <marker-beacon>
+        <name>marker-beacon</name>
+        <number>0</number>
+    </marker-beacon>
+
+    <clock>
+        <name>clock</name>
+        <number>0</number>
+    </clock>
+
+    <adf>
+        <name>adf</name>
+        <number>0</number>
+        <power-supply>systems/electrical/outputs/main-left-xover/dc-adf1</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </adf>
+
+    <comm-radio>
+        <name>comm</name>
+        <number>0</number>
+        <eight-point-three>1</eight-point-three>
+        <power-supply>systems/electrical/outputs/emer/dc-comm1</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </comm-radio>
+
+    <comm-radio>
+        <name>comm</name>
+        <number>1</number>
+        <eight-point-three>1</eight-point-three>
+        <power-supply>systems/electrical/outputs/main-left-xover/dc-comm2</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </comm-radio>
+
+    <nav-radio>
+        <name>nav</name>
+        <number>0</number>
+        <power-supply>systems/electrical/outputs/main-left-xover/dc-nav1</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </nav-radio>
+
+    <nav-radio>
+        <name>nav</name>
+        <number>1</number>
+        <power-supply>systems/electrical/outputs/emer/dc-nav2</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </nav-radio>
+
+    <dme>
+        <name>dme</name>
+        <number>0</number>
+        <power-supply>systems/electrical/outputs/main-left-xover/dc-dme1</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </dme>
+
+    <dme>
+        <name>dme</name>
+        <number>1</number>
+        <power-supply>systems/electrical/outputs/main-right/dc-dme2</power-supply>
+        <minimum-supply-volts>18.0</minimum-supply-volts>
+    </dme>
+
+    <slip-skid-ball>
+        <name>slip-skid-ball</name>
+        <number>0</number>
+    </slip-skid-ball>
+
+    <turn-indicator>
+        <name>turn-indicator</name>
+        <number>0</number>
+    </turn-indicator>
+
+    <radar>
+        <name>radar</name>
+        <number>0</number>
+    </radar>
+
+    <transponder>
+      <name type="string">transponder</name>
+      <number type="int">0</number>
+      <mode type="int">2</mode> <!-- 0 = Mode A, 1 = Mode C, 2 = Mode S -->
+      <encoder-path type="string">instrumentation/altimeter[1]</encoder-path>
+      <kt70-compatibility type="bool">0</kt70-compatibility>
+      <auto-ground type="string">controls/electric/maingear-switch</auto-ground>
+      <power-supply>systems/electrical/outputs/main-left-xover/dc-xpdr1</power-supply>
+      <minimum-supply-volts>20.0</minimum-supply-volts>
+    </transponder>
+
+    <transponder>
+      <name type="string">transponder</name>
+      <number type="int">1</number>
+      <mode type="int">2</mode> <!-- 0 = Mode A, 1 = Mode C, 2 = Mode S -->
+      <encoder-path type="string">instrumentation/altimeter[1]</encoder-path>
+      <kt70-compatibility type="bool">0</kt70-compatibility>
+      <auto-ground type="string">controls/electric/maingear-switch</auto-ground>
+      <power-supply>systems/electrical/outputs/main-right/dc-xpdr2</power-supply>
+      <minimum-supply-volts>20.0</minimum-supply-volts>
+    </transponder>
+
+    <mk-viii>
+        <name>mk-viii</name>
+        <number>0</number>
+        <input-feeders>
+            <discretes>
+                <!-- disable the built-in input feeder -->
+                <landing-gear type="bool">false</landing-gear>
+            </discretes>
+        </input-feeders>
+    </mk-viii>
+
+</PropertyList>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>  
+
+<system name="fuel"> 
+<summer>
+
+	<input>-propulsion/tank[0]/external-flow-rate/tank[1]</input>		<!-- to tank 1 -->
+	<input>-propulsion/tank[0]/external-flow-rate/tank[2]</input>		<!-- to tank 2 -->
+
+	<input>propulsion/tank[1]/external-flow-rate/tank[0]</input>		<!-- from tank 1 -->
+	<input>propulsion/tank[2]/external-flow-rate/tank[0]</input>		<!-- from tank 2 -->
+
+	<output>propulsion/tank[0]/external-flow-rate-pps</output>
+</summer>
+	
+
+
+
+
+
+<!-- we will write the system here -->
+</system>

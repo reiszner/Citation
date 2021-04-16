@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+
+<!-- navigation hack to give the props time to sattle -->
+
+    <filter>
+        <name>ADF0: watchdog</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <or>
+                    <and>
+                        <property>instrumentation/adf[0]/in-range</property>
+                        <less-than>
+                            <property>instrumentation/adf[0]/watchdog</property>
+                            <value>1.0</value>
+                        </less-than>
+                    </and>
+                    <and>
+                        <not><property>instrumentation/adf[0]/in-range</property></not>
+                        <greater-than>
+                            <property>instrumentation/adf[0]/watchdog</property>
+                            <value>1.0</value>
+                        </greater-than>
+                    </and>
+                </or>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/in-range</property>
+            </condition>
+            <property>sim/time/elapsed-sec</property>
+            <offset>5.0</offset>
+        </input>
+        <input>0.0</input>
+        <output>instrumentation/adf[0]/watchdog</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: signal valid</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not-equals>
+                    <property>instrumentation/adf[0]/in-range</property>
+                    <property>instrumentation/adf[0]/signal-valid</property>
+                </not-equals>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/in-range</property>
+                <greater-than>
+                    <property>instrumentation/adf[0]/watchdog</property>
+                    <value>1.0</value>
+                </greater-than>
+                <greater-than>
+                    <property>sim/time/elapsed-sec</property>
+                    <property>instrumentation/adf[0]/watchdog</property>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/adf[0]/signal-valid</output>
+        <output>instrumentation/adf[0]/from-flag</output>
+        <output>instrumentation/adf[0]/to-flag</output>
+        <output>instrumentation/adf[0]/radials/radial-deviation</output>
+        <output>instrumentation/adf[0]/radials/reciprocal-deviation</output>
+        <output>instrumentation/adf[0]/heading-needle-deflection</output>
+        <output>instrumentation/adf[0]/heading-needle-deflection-norm</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: bearing-deg</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>instrumentation/adf[0]/indicated-bearing-deg</input>
+        <period>
+            <min>-180.0</min>
+            <max> 180.0</max>
+        </period>
+        <output>instrumentation/adf[0]/bearing-deg</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: radial-deg</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>instrumentation/adf[0]/radials/reciprocal-radial-deg</property>
+                    <value>180.0</value>
+                </sum>
+            </expression>
+        </input>
+        <period>
+            <min>0.0</min>
+            <max>360.0</max>
+        </period>
+        <output>instrumentation/adf[0]/radials/radial-deg</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: reciprocal-radial-deg</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <sum>
+                    <property>instrumentation/heading-indicator[0]/indicated-heading-deg</property>
+                    <property>instrumentation/adf[0]/indicated-bearing-deg</property>
+                </sum>
+            </expression>
+        </input>
+        <period>
+            <min>0.0</min>
+            <max>360.0</max>
+        </period>
+        <output>instrumentation/adf[0]/radials/reciprocal-radial-deg</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: radial-deviation</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <dif>
+                    <property>instrumentation/adf[0]/radials/reciprocal-radial-deg</property>
+                    <property>instrumentation/adf[0]/radials/selected-radial-deg</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0</input>
+        <period>
+            <min>-180.0</min>
+            <max> 180.0</max>
+        </period>
+        <output>instrumentation/adf[0]/radials/radial-deviation</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: reciprocal-deviation</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <dif>
+                    <property>instrumentation/adf[0]/radials/reciprocal-radial-deg</property>
+                    <property>instrumentation/adf[0]/radials/selected-radial-deg</property>
+                </dif>
+            </expression>
+            <offset>180.0</offset>
+            <scale>-1.0</scale>
+        </input>
+        <input>0</input>
+        <period>
+            <min>-180.0</min>
+            <max> 180.0</max>
+        </period>
+        <output>instrumentation/adf[0]/radials/reciprocal-deviation</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: to-flag</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <less-than>
+                    <expression>
+                        <abs>
+                            <property>instrumentation/adf[0]/radials/radial-deviation</property>
+                        </abs>
+                    </expression>
+                    <value>90.0</value>
+                </less-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>instrumentation/adf[0]/to-flag</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: from-flag</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/to-flag</property>
+            </condition>
+            <value>0</value>
+        </input>
+        <input>1</input>
+        <output>instrumentation/adf[0]/from-flag</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: heading-needle-deflection</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/to-flag</property>
+            </condition>
+            <property>instrumentation/adf[0]/radials/radial-deviation</property>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/from-flag</property>
+            </condition>
+            <property>instrumentation/adf[0]/radials/reciprocal-deviation</property>
+        </input>
+        <min>-10.0</min>
+        <max> 10.0</max>
+        <output>instrumentation/adf[0]/heading-needle-deflection</output>
+    </filter>
+
+    <filter>
+        <name>ADF0: heading-needle-deflection</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+            </condition>
+        </enable>
+        <gain>0.1</gain>
+        <input>instrumentation/adf[0]/heading-needle-deflection</input>
+        <output>instrumentation/adf[0]/heading-needle-deflection-norm</output>
+    </filter>
+
+
+
+    <predict-simple>
+        <name>ADF0: deflection-predict</name>
+        <debug>false</debug>
+        <seconds>1</seconds>
+        <filter-gain>1.0</filter-gain>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+                <property>instrumentation/adf[0]/to-flag</property>
+            </condition>
+            <property>instrumentation/adf[0]/radials/radial-deviation</property>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+                <property>instrumentation/adf[0]/from-flag</property>
+            </condition>
+            <property>instrumentation/adf[0]/radials/reciprocal-deviation</property>
+        </input>
+        <input>9999</input>
+        <output>instrumentation/adf[0]/deflection-predict</output>
+    </predict-simple>
+
+    <filter>
+        <name>ADF0: time-to-intercept-sec</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+                <property>instrumentation/adf[0]/to-flag</property>
+            </condition>
+            <expression>
+                <abs>
+                    <div>
+                        <property>instrumentation/adf[0]/radials/radial-deviation</property>
+                        <dif>
+                            <property>instrumentation/adf[0]/radials/radial-deviation</property>
+                            <property>instrumentation/adf[0]/deflection-predict</property>
+                        </dif>
+                    </div>
+                </abs>
+            </expression>
+        </input>
+        <input>
+            <condition>
+                <property>instrumentation/adf[0]/signal-valid</property>
+                <property>instrumentation/adf[0]/from-flag</property>
+            </condition>
+            <expression>
+                <abs>
+                    <div>
+                        <property>instrumentation/adf[0]/radials/reciprocal-deviation</property>
+                        <dif>
+                            <property>instrumentation/adf[0]/radials/reciprocal-deviation</property>
+                            <property>instrumentation/adf[0]/deflection-predict</property>
+                        </dif>
+                    </div>
+                </abs>
+            </expression>
+        </input>
+        <input>9999</input>
+        <output>instrumentation/adf[0]/time-to-intercept-sec</output>
+    </filter>
+
+</PropertyList>

@@ -1,0 +1,310 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<PropertyList>
+
+<!--
+    density relation of Jet A fuel:
+    fuel has 7.275 lbs/gal at -100 °F
+    fuel has 6.950 lbs/gal at 0 °F
+    fuel has 6.625 lbs/gal at 100 °F
+    change 0.00325 lbs/gal per 1 °F
+-->
+    <filter>
+        <name>fuel-density</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <expression>
+                <sum>
+                    <product>
+                        <property>environment/temperature-degf</property>
+                        <value>-0.00325</value>
+                    </product>
+                    <value>6.95</value>
+                </sum>
+            </expression>
+        </input>
+        <output>consumables/fuel/density-ppg</output>
+        <output>consumables/fuel/tank[0]/density-ppg</output>
+        <output>consumables/fuel/tank[1]/density-ppg</output>
+        <output>consumables/fuel/tank[2]/density-ppg</output>
+        <output>consumables/fuel/tank[3]/density-ppg</output>
+    </filter>
+
+<!-- control of fuel boost pumps -->
+
+    <filter>
+        <name>boost-pump-left</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <or>
+                    <and>
+                        <equals>
+                            <property>controls/fuel/tank[0]/boost-pump-switch</property>
+                            <value>1</value>
+                        </equals>
+                        <property>systems/electrical/outputs/main-right-xover/fuel-boost-left</property>
+                    </and>
+                    <and>
+                        <less-than>
+                            <property>controls/fuel/tank[0]/boost-pump-switch</property>
+                            <value>1</value>
+                        </less-than>
+                        <property>controls/fuel/tank[0]/boost-pump-automatic</property>
+                        <property>systems/electrical/outputs/main-left/fuel-boost-left</property>
+                    </and>
+                </or>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/fuel/tank[0]/boost-pump</output>
+    </filter>
+
+    <filter>
+        <name>boost-pump-right</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <input>
+            <condition>
+                <or>
+                    <and>
+                        <equals>
+                            <property>controls/fuel/tank[1]/boost-pump-switch</property>
+                            <value>1</value>
+                        </equals>
+                        <property>systems/electrical/outputs/main-left/fuel-boost-right</property>
+                    </and>
+                    <and>
+                        <less-than>
+                            <property>controls/fuel/tank[1]/boost-pump-switch</property>
+                            <value>1</value>
+                        </less-than>
+                        <property>controls/fuel/tank[1]/boost-pump-automatic</property>
+                        <property>systems/electrical/outputs/main-right/fuel-boost-right</property>
+                    </and>
+                </or>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>controls/fuel/tank[1]/boost-pump</output>
+    </filter>
+
+<!-- fuel consumption -->
+
+  <filter>
+    <name>engine-0-fuel-flow_pph</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+        <expression>
+            <product>
+                <property>engines/engine[0]/fuel-flow-gph</property>
+                <property>consumables/fuel/density-ppg</property>
+            </product>
+        </expression>
+    </input>
+    <output>engines/engine[0]/fuel-flow_pph</output>
+  </filter>
+
+  <filter>
+    <name>engine-0-consumption</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+        <condition>
+            <property>controls/engines/engine[0]/combusting</property>
+        </condition>
+        <expression>
+            <!--product>
+                <div>
+                    <property>engines/engine[0]/fuel-flow_pph</property>
+                    <value>3600</value>
+                </div>
+                <property>sim/time/delta-realtime-sec</property>
+            </product-->
+            <div>
+                <property>engines/engine[0]/fuel-flow_pph</property>
+                <value>432000</value>
+            </div>
+        </expression>
+    </input>
+    <input>0.0</input>
+    <output>controls/engines/engine[0]/consumption</output>
+  </filter>
+
+  <filter>
+    <name>engine-1-fuel-flow_pph</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+        <expression>
+            <product>
+                <property>engines/engine[1]/fuel-flow-gph</property>
+                <property>consumables/fuel/density-ppg</property>
+            </product>
+        </expression>
+    </input>
+    <output>engines/engine[1]/fuel-flow_pph</output>
+  </filter>
+
+  <filter>
+    <name>engine-1-consumption</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+        <condition>
+            <property>controls/engines/engine[1]/combusting</property>
+        </condition>
+        <expression>
+            <!--product>
+                <div>
+                    <property>engines/engine[1]/fuel-flow_pph</property>
+                    <value>3600</value>
+                </div>
+                <property>sim/time/delta-realtime-sec</property>
+            </product-->
+            <div>
+                <property>engines/engine[1]/fuel-flow_pph</property>
+                <value>432000</value>
+            </div>
+        </expression>
+    </input>
+    <input>0.0</input>
+    <output>controls/engines/engine[1]/consumption</output>
+  </filter>
+
+<!-- fuel remaining in tank -->
+
+  <filter>
+    <name>tank-0-level</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+        <condition>
+            <less-than-equals>
+                <property>controls/electric/fuel-sel</property>
+                <value>0</value>
+            </less-than-equals>
+            <not><property>consumables/fuel/tank[0]/empty</property></not>
+        </condition>
+    </enable>
+    <input>
+        <condition>
+            <equals>
+                <property>controls/electric/fuel-sel</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <expression>
+            <dif>
+                <property>consumables/fuel/tank[0]/level-lbs</property>
+                <property>controls/engines/engine[0]/consumption</property>
+            </dif>
+        </expression>
+    </input>
+    <input>
+        <condition>
+            <equals>
+                <property>controls/electric/fuel-sel</property>
+                <value>-1</value>
+            </equals>
+        </condition>
+        <expression>
+            <dif>
+                <property>consumables/fuel/tank[0]/level-lbs</property>
+                <sum>
+                    <property>controls/engines/engine[0]/consumption</property>
+                    <property>controls/engines/engine[1]/consumption</property>
+                </sum>
+            </dif>
+        </expression>
+    </input>
+    <output>consumables/fuel/tank[0]/level-lbs</output>
+  </filter>
+
+  <filter>
+    <name>tank-1-level</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <enable>
+        <condition>
+            <greater-than-equals>
+                <property>controls/electric/fuel-sel</property>
+                <value>0</value>
+            </greater-than-equals>
+            <not><property>consumables/fuel/tank[1]/empty</property></not>
+        </condition>
+    </enable>
+    <input>
+        <condition>
+            <equals>
+                <property>controls/electric/fuel-sel</property>
+                <value>0</value>
+            </equals>
+        </condition>
+        <expression>
+            <dif>
+                <property>consumables/fuel/tank[1]/level-lbs</property>
+                <property>controls/engines/engine[1]/consumption</property>
+            </dif>
+        </expression>
+    </input>
+    <input>
+        <condition>
+            <equals>
+                <property>controls/electric/fuel-sel</property>
+                <value>1</value>
+            </equals>
+        </condition>
+        <expression>
+            <dif>
+                <property>consumables/fuel/tank[1]/level-lbs</property>
+                <sum>
+                    <property>controls/engines/engine[0]/consumption</property>
+                    <property>controls/engines/engine[1]/consumption</property>
+                </sum>
+            </dif>
+        </expression>
+    </input>
+    <output>consumables/fuel/tank[1]/level-lbs</output>
+  </filter>
+
+  <filter>
+    <name>feed-line</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>
+        <expression>
+            <sum>
+                <property>consumables/fuel/tank[2]/level-lbs</property>
+                <property>controls/engines/engine[0]/consumption</property>
+                <property>controls/engines/engine[1]/consumption</property>
+            </sum>
+        </expression>
+    </input>
+    <output>consumables/fuel/tank[2]/level-lbs</output>
+  </filter>
+
+<!-- make sure user can't change selection -->
+
+  <filter>
+    <name>deselect-tanks</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>0</input>
+    <output>consumables/fuel/tank[0]/selected</output>
+    <output>consumables/fuel/tank[1]/selected</output>
+  </filter>
+
+  <filter>
+    <name>select-feed-line</name>
+    <debug>false</debug>
+    <type>gain</type>
+    <input>1</input>
+    <output>consumables/fuel/tank[2]/selected</output>
+  </filter>
+
+</PropertyList>

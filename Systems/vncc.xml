@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<PropertyList>
+
+    <!--
+        Manufacturer: Sperry/Honeywell / Model: VN-212
+        Device: VNCC (vertical navigation computer/controller)
+        Copyright (c) 2020 Sascha Reißner <reiszner@novaplan.at>
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License
+        as published by the Free Software Foundation; either version 2
+        of the License, or (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+    -->
+
+<!-- power and reset -->
+
+    <filter>
+        <name>serviceable</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>systems/electrical/outputs/main-right/dc-nav-vlf</property>
+                    <value>18.0</value>
+                </greater-than>
+            </condition>
+            <value>1</value>
+        </input>
+        <input>0</input>
+        <output>autopilot/vn-212/serviceable</output>
+    </filter>
+
+    <filter>
+        <name>reset altitude</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>autopilot/vn-212/serviceable</property></not>
+            </condition>
+        </enable>
+        <input>10000</input>
+        <output>autopilot/vn-212/altitude-select</output>
+    </filter>
+
+    <filter>
+        <name>reset from-to</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>autopilot/vn-212/serviceable</property></not>
+            </condition>
+        </enable>
+        <input>0</input>
+        <output>autopilot/vn-212/from-to</output>
+    </filter>
+
+    <filter>
+        <name>reset station-elevation and vertical-angle</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <not><property>autopilot/vn-212/serviceable</property></not>
+            </condition>
+        </enable>
+        <input>-100</input>
+        <output>autopilot/vn-212/station-elevation-ft</output>
+    </filter>
+
+    <filter>
+        <name>reset station-elevation and vertical-angle</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <greater-than>
+                    <property>autopilot/vn-212/waypoint-altitude-m</property>
+                    <value>-50</value>
+                </greater-than>
+                <less-than>
+                    <property>autopilot/vn-212/waypoint-altitude-m</property>
+                    <value>50</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>-100</input>
+        <output>autopilot/vn-212/vertical-angle-deg</output>
+        <output>autopilot/vn-212/vertical-angle-display</output>
+    </filter>
+
+<!-- distance aircraft-station -->
+
+    <filter>
+        <name>dme distance to station [nm]</name>
+        <type>gain</type>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/mode/selected-source</property>
+                    <value>0</value>
+                </equals>
+                <property>instrumentation/nav-selector[0]/dme-valid</property>
+            </condition>
+            <property>instrumentation/nav-selector[0]/dme-distance-nm</property>
+        </input>
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/mode/selected-source</property>
+                    <value>1</value>
+                </equals>
+                <property>instrumentation/nav-selector[1]/dme-valid</property>
+            </condition>
+            <property>instrumentation/nav-selector[1]/dme-distance-nm</property>
+        </input>
+        <input>-1</input>
+        <output>autopilot/vn-212/dme-distance-nm</output>
+    </filter>
+
+    <filter>
+        <name>dme distance to station [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>autopilot/vn-212/dme-distance-nm</property>
+                    <value>0</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <product>
+                    <property>autopilot/vn-212/dme-distance-nm</property>
+                    <value>1852.0</value>
+                </product>
+            </expression>
+        </input>
+        <input>-1</input>
+        <output>autopilot/vn-212/dme-distance-m</output>
+    </filter>
+
+    <filter>
+        <name>lateral distance to station [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>autopilot/vn-212/dme-distance-m</property>
+                    <value>0</value>
+                </greater-than>
+                <greater-than>
+                    <property>autopilot/vn-212/indicated-altitude-m</property>
+                    <value>-1000</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <sqrt>
+                    <dif>
+                        <product>
+                            <property>autopilot/vn-212/dme-distance-m</property>
+                            <property>autopilot/vn-212/dme-distance-m</property>
+                        </product>
+                        <product>
+                            <property>autopilot/vn-212/indicated-altitude-m</property>
+                            <property>autopilot/vn-212/indicated-altitude-m</property>
+                        </product>
+                    </dif>
+                </sqrt>
+            </expression>
+        </input>
+        <input>-1</input>
+        <output>autopilot/vn-212/lateral-distance-m</output>
+    </filter>
+
+<!-- altitude related -->
+
+    <filter>
+        <name>indicated altitude [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>autopilot/source/airdata/serviceable</property>
+            </condition>
+            <expression>
+                <product>
+                    <property>autopilot/source/airdata/altitude-ft</property>
+                    <value>0.3048</value>
+                </product>
+            </expression>
+        </input>
+        <input>-1000.0</input>
+        <output>autopilot/vn-212/indicated-altitude-m</output>
+    </filter>
+
+    <filter>
+        <name>station altitude [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>autopilot/vn-212/station-elevation-ft</property>
+                    <value>-1.0</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <product>
+                    <property>autopilot/vn-212/station-elevation-ft</property>
+                    <value>0.3048</value>
+                </product>
+            </expression>
+        </input>
+        <input>-1</input>
+        <output>autopilot/vn-212/station-elevation-m</output>
+    </filter>
+
+    <filter>
+        <name>waypoint altitude [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>autopilot/vn-212/indicated-altitude-m</property>
+                    <value>-1000.0</value>
+                </greater-than>
+                <greater-than>
+                    <property>autopilot/vn-212/station-elevation-m</property>
+                    <value>-1.0</value>
+                </greater-than>
+            </condition>
+            <expression>
+                <dif>
+                    <property>autopilot/vn-212/station-elevation-m</property>
+                    <property>autopilot/vn-212/indicated-altitude-m</property>
+                </dif>
+            </expression>
+        </input>
+        <input>0.0</input>
+        <output>autopilot/vn-212/waypoint-altitude-m</output>
+    </filter>
+
+<!-- distance waypoint-station -->
+
+    <filter>
+        <name>distance to waypoint [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>autopilot/vn-212/from-to</property>
+            </condition>
+            <expression>
+                <product>
+                    <property>autopilot/vn-212/station-distance-nm</property>
+                    <value>1852.0</value>
+                </product>
+            </expression>
+        </input>
+        <input>-1</input>
+        <output>autopilot/vn-212/station-distance-m</output>
+    </filter>
+
+    <filter>
+        <name>distance to waypoint [m]</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+                <greater-than>
+                    <property>autopilot/vn-212/lateral-distance-m</property>
+                    <value>-1</value>
+                </greater-than>
+                <greater-than>
+                    <property>autopilot/vn-212/station-distance-m</property>
+                    <value>-1</value>
+                </greater-than>
+            </condition>
+        </enable>
+<!-- aircraft: TO / waypoint: FROM -->
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/vn-212/from-to</property>
+                    <value>1</value>
+                </equals>
+                <or>
+                    <and>
+                        <equals>
+                            <property>autopilot/mode/selected-source</property>
+                            <value>0</value>
+                        </equals>
+                        <property>instrumentation/nav-selector[0]/to-flag</property>
+                    </and>
+                    <and>
+                        <equals>
+                            <property>autopilot/mode/selected-source</property>
+                            <value>1</value>
+                        </equals>
+                        <property>instrumentation/nav-selector[1]/to-flag</property>
+                    </and>
+                </or>
+            </condition>
+            <expression>
+                <sum>
+                    <property>autopilot/vn-212/lateral-distance-m</property>
+                    <property>autopilot/vn-212/station-distance-m</property>
+                </sum>
+            </expression>
+        </input>
+
+<!-- aircraft: TO / waypoint: TO -->
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/vn-212/from-to</property>
+                    <value>-1</value>
+                </equals>
+                <or>
+                    <and>
+                        <equals>
+                            <property>autopilot/mode/selected-source</property>
+                            <value>0</value>
+                        </equals>
+                        <property>instrumentation/nav-selector[0]/to-flag</property>
+                    </and>
+                    <and>
+                        <equals>
+                            <property>autopilot/mode/selected-source</property>
+                            <value>1</value>
+                        </equals>
+                        <property>instrumentation/nav-selector[1]/to-flag</property>
+                    </and>
+                </or>
+            </condition>
+            <expression>
+                <dif>
+                    <property>autopilot/vn-212/lateral-distance-m</property>
+                    <property>autopilot/vn-212/station-distance-m</property>
+                </dif>
+            </expression>
+        </input>
+
+<!-- aircraft: FROM / waypoint: FROM -->
+        <input>
+            <condition>
+                <equals>
+                    <property>autopilot/vn-212/from-to</property>
+                    <value>1</value>
+                </equals>
+                <or>
+                    <and>
+                        <equals>
+                            <property>autopilot/mode/selected-source</property>
+                            <value>0</value>
+                        </equals>
+                        <property>instrumentation/nav-selector[0]/from-flag</property>
+                    </and>
+                    <and>
+                        <equals>
+                            <property>autopilot/mode/selected-source</property>
+                            <value>1</value>
+                        </equals>
+                        <property>instrumentation/nav-selector[1]/from-flag</property>
+                    </and>
+                </or>
+            </condition>
+            <expression>
+                <dif>
+                    <property>autopilot/vn-212/station-distance-m</property>
+                    <property>autopilot/vn-212/lateral-distance-m</property>
+                </dif>
+            </expression>
+        </input>
+
+        <input>-1</input>
+        <min>-1</min>
+        <max>999999</max>
+        <output>autopilot/vn-212/waypoint-distance-m</output>
+    </filter>
+
+<!-- calculate vertical-angle -->
+
+    <filter>
+        <name>vertical-angle-calc</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+                <not><property>autopilot/vn-212/vertical-angle-set</property></not>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <greater-than>
+                    <property>autopilot/vn-212/waypoint-distance-m</property>
+                    <value>-1</value>
+                </greater-than>
+                <greater-than>
+                    <property>autopilot/vn-212/station-elevation-m</property>
+                    <value>-1.0</value>
+                </greater-than>
+                <or>
+                    <greater-than>
+                        <property>autopilot/vn-212/waypoint-altitude-m</property>
+                        <value>50</value>
+                    </greater-than>
+                    <less-than>
+                        <property>autopilot/vn-212/waypoint-altitude-m</property>
+                        <value>-50</value>
+                    </less-than>
+                </or>
+            </condition>
+            <expression>
+                <rad2deg>
+                    <atan>
+                        <div>
+                            <property>autopilot/vn-212/waypoint-altitude-m</property>
+                            <property>autopilot/vn-212/waypoint-distance-m</property>
+                        </div>
+                    </atan>
+                </rad2deg>
+            </expression>
+        </input>
+        <input>-100</input>
+        <output>autopilot/vn-212/vertical-angle-deg</output>
+    </filter>
+
+<!-- vertical-angle display -->
+
+    <filter>
+        <name>vertical-angle-display</name>
+        <type>gain</type>
+        <gain>1.0</gain>
+        <debug>false</debug>
+        <enable>
+            <condition>
+                <property>autopilot/vn-212/serviceable</property>
+                <greater-than>
+                    <property>autopilot/vn-212/vertical-angle-deg</property>
+                    <value>-10</value>
+                </greater-than>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <abs>
+                    <floor>
+                        <sum>
+                            <product>
+                                <property>autopilot/vn-212/vertical-angle-deg</property>
+                                <value>10.0</value>
+                            </product>
+                            <value>0.5</value>
+                        </sum>
+                    </floor>
+                </abs>
+            </expression>
+        </input>
+        <min>-99</min>
+        <max> 99</max>
+        <output>autopilot/vn-212/vertical-angle-display</output>
+    </filter>
+
+</PropertyList>
