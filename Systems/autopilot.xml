@@ -472,21 +472,26 @@
     </pid-controller>
 -->
 
-    <filter>
-        <name>rudder control</name>
-        <type>gain</type>
-        <gain>0.25</gain>
+    <pid-controller>
+        <name>yaw damper</name>
         <debug>false</debug>
+        <gain>0.2</gain>
         <enable>
             <condition>
                 <property>autopilot/mode/yaw-damper</property>
             </condition>
         </enable>
-        <input>autopilot/servo/aileron-command</input>
+        <input>/instrumentation/slip-skid-ball/indicated-slip-skid</input>
+        <reference>0</reference>
         <output>autopilot/servo/rudder-command</output>
-    </filter>
-
-
+        <config>
+            <Kp>0.05</Kp>
+            <Ti>2</Ti>
+            <Td>0.1</Td>
+            <u_min>-1</u_min>
+            <u_max>1</u_max>
+        </config>
+    </pid-controller>
 
     <filter>
         <name>pitch-rate-diff</name>
