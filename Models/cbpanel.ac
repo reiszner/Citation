@@ -85477,8 +85477,8 @@ crease 45.0
 texture "cbpanel.png"
 texrep 1 1
 numvert 2
-2.729 0.35696 0.64591
 2.729 0.358 0.64
+2.729 0.35696 0.64591
 numsurf 1
 SURF 0X12
 mat 0
@@ -169685,8 +169685,8 @@ crease 45.0
 texture "cbpanel.png"
 texrep 1 1
 numvert 2
-2.729 0.35696 -0.64591
 2.729 0.358 -0.64
+2.729 0.35696 -0.64591
 numsurf 1
 SURF 0X12
 mat 0

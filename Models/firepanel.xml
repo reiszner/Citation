@@ -172,7 +172,7 @@
         <type>rotate</type>
         <object-name>fire.shutoff.left.cover</object-name>
         <property>controls/engines/engine[0]/firecover</property>
-        <factor>125</factor>
+        <factor>110</factor>
         <center>
             <x-m>0.0025</x-m>
             <y-m>-0.0195</y-m>
@@ -189,7 +189,7 @@
         <type>rotate</type>
         <object-name>fire.shutoff.right.cover</object-name>
         <property>controls/engines/engine[1]/firecover</property>
-        <factor>125</factor>
+        <factor>110</factor>
         <center>
             <x-m>0.0025</x-m>
             <y-m>0.0195</y-m>
@@ -438,8 +438,7 @@
 
 <!-- glass effect -->
     <effect>
-        <!--inherits-from>Effects/model-transparent</inherits-from-->
-        <inherits-from>Aircraft/Citation/Models/Effects/reflection-glass</inherits-from>
+        <inherits-from>Effects/model-transparent</inherits-from>
         <object-name>fire.shutoff.left.cover</object-name>
         <object-name>fire.shutoff.right.cover</object-name>
     </effect>

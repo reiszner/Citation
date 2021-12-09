@@ -268,10 +268,9 @@ Sperry PC-500 Autopilot Controller
         <type>translate</type>
         <object-name>engage</object-name>
         <property>autopilot/panel/engaged</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>turn-knob.axis</object-name>
@@ -282,10 +281,9 @@ Sperry PC-500 Autopilot Controller
         <type>translate</type>
         <object-name>yaw-damper</object-name>
         <property>autopilot/panel/yaw-damper</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>turn-knob.axis</object-name>
@@ -296,10 +294,9 @@ Sperry PC-500 Autopilot Controller
         <type>translate</type>
         <object-name>low-bank</object-name>
         <property>autopilot/panel/low-bank</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>turn-knob.axis</object-name>
@@ -310,10 +307,9 @@ Sperry PC-500 Autopilot Controller
         <type>translate</type>
         <object-name>soft-ride</object-name>
         <property>autopilot/panel/soft-ride</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>turn-knob.axis</object-name>
@@ -324,10 +320,9 @@ Sperry PC-500 Autopilot Controller
         <type>translate</type>
         <object-name>test-btn</object-name>
         <property>autopilot/panel/test</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>turn-knob.axis</object-name>

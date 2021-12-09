@@ -1809,6 +1809,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
           <property>autopilot/mode/engaged</property>
           <value>0</value>
         </binding>
+        <mod-shift>
+            <binding>
+              <command>property-assign</command>
+              <property>autopilot/mode/engaged</property>
+              <value>1</value>
+            </binding>
+        </mod-shift>
       </key>
       <key n="12">
         <name>Ctrl-L</name>

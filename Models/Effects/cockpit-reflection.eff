@@ -2,7 +2,7 @@
 <PropertyList>
 
     <name>reflection-glass</name>
-    <inherits-from>Effects/glass</inherits-from>
+    <inherits-from>Effects/model-transparent</inherits-from>
 
     <parameters>
         <texture n="3">

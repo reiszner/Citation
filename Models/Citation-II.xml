@@ -361,10 +361,11 @@
   <!-- glass effect -->
   <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
-    <object-name>door.glass</object-name>
-    <object-name>cockpit.glass</object-name>
-    <object-name>cockpit.window</object-name>
-    <object-name>window.glass</object-name>
+    <object-name>door.glass.inside</object-name>
+    <object-name>cockpit.glass.inside</object-name>
+    <object-name>cockpit.window.inside</object-name>
+    <object-name>window.glass.inside</object-name>
+
     <object-name>wing.left.recog.glass</object-name>
     <object-name>wing.right.recog.glass</object-name>
     <object-name>wing.left.light.glass</object-name>
@@ -403,28 +404,14 @@
   </effect>
 
 
-  <!-- ALS cockpit glass effect (reflection cube, rain, frost, fog) -->
+  <!-- ALS cockpit glass effect (rain, frost, fog) -->
   <effect>
-    <inherits-from>Aircraft/Citation/Models/Effects/reflection-glass</inherits-from>
-    <!--parameters>
-      <texture n="3">
-        <type>cubemap</type>
-        <images>
-          <positive-x>Effects/glass/refl_cube_back.png</positive-x>
-          <negative-x>Effects/glass/refl_cube_front.png</negative-x>
-          <positive-y>Effects/glass/refl_cube_right.png</positive-y>
-          <negative-y>Effects/glass/refl_cube_left.png</negative-y>
-          <positive-z>Effects/glass/refl_cube_up.png</positive-z>
-          <negative-z>Effects/glass/refl_cube_down.png</negative-z>
-        </images>
-      </texture>
-      <use-reflection type="int">1</use-reflection>
-      <reflection-strength type="float">0.5</reflection-strength>
-    </parameters-->
-    <object-name>door.glass.inside</object-name>
-    <object-name>cockpit.glass.inside</object-name>
-    <object-name>cockpit.window.inside</object-name>
-    <object-name>window.glass.inside</object-name>
+    <inherits-from>Effects/glass</inherits-from>
+    <object-name>door.glass</object-name>
+    <object-name>cockpit.glass</object-name>
+    <object-name>cockpit.window</object-name>
+    <object-name>window.glass</object-name>
+
   </effect>
 
   <model>

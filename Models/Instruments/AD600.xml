@@ -336,7 +336,7 @@
 
     <effect>
         <!--inherits-from>Effects/model-transparent</inherits-from-->
-        <inherits-from>Aircraft/Citation/Models/Effects/reflection-glass</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/cockpit-reflection</inherits-from>
         <object-name>AD600.glass</object-name>
         <object-name>AD600.pipe</object-name>
     </effect>

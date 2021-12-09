@@ -6,10 +6,9 @@
         <type>translate</type>
         <object-name>off</object-name>
         <property>autopilot/ms-205[1]/panel/off</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -56,10 +55,9 @@
         <type>translate</type>
         <object-name>hdg</object-name>
         <property>autopilot/ms-205[1]/panel/hdg</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -108,10 +106,9 @@
         <type>translate</type>
         <object-name>nav</object-name>
         <property>autopilot/ms-205[1]/panel/nav</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -224,10 +221,9 @@
         <type>translate</type>
         <object-name>apr</object-name>
         <property>autopilot/ms-205[1]/panel/apr</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -312,10 +308,9 @@
         <type>translate</type>
         <object-name>bc</object-name>
         <property>autopilot/ms-205[1]/panel/bc</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -400,10 +395,9 @@
         <type>translate</type>
         <object-name>hsi</object-name>
         <property>autopilot/ms-205[1]/panel/hsi</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -496,10 +490,9 @@
         <type>translate</type>
         <object-name>alt</object-name>
         <property>autopilot/ms-205[1]/panel/alt</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -548,10 +541,9 @@
         <type>translate</type>
         <object-name>altsel</object-name>
         <property>autopilot/ms-205[1]/panel/altsel</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -644,10 +636,9 @@
         <type>translate</type>
         <object-name>vnav</object-name>
         <property>autopilot/ms-205[1]/panel/vnav</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -731,10 +722,9 @@
         <type>translate</type>
         <object-name>vs</object-name>
         <property>autopilot/ms-205[1]/panel/vs</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -783,10 +773,9 @@
         <type>translate</type>
         <object-name>ias</object-name>
         <property>autopilot/ms-205[1]/panel/ias</property>
-        <factor>1</factor>
         <interpolation>
-            <entry><ind>0.0</ind><dep>0.0</dep></entry>
-            <entry><ind>1.0</ind><dep>1.0</dep></entry>
+            <entry><ind>0.0</ind><dep>1.0</dep></entry>
+            <entry><ind>1.0</ind><dep>0.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
