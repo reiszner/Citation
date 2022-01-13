@@ -510,6 +510,10 @@ TODO:
         <enable>
             <condition>
                 <not><property>sim/model/pushback/enabled</property></not>
+                <less-than>
+                    <property>sim/model/pushback/visible</property>
+                    <value>0.1</value>
+                </less-than>
             </condition>
         </enable>
         <input>

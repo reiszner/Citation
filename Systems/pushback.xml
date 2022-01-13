@@ -5,13 +5,128 @@
 
 <PropertyList>
 
+	<!--filter>
+		<name>view pitch</name>
+		<type>gain</type>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/current-view/view-number-raw</property>
+					<value>107</value>
+				</equals>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<sum>
+					<property>orientation/pitch-deg</property>
+					<property>sim/view[107]/config/pitch-offset-deg</property>
+				</sum>
+			</expression>
+		</input>
+		<output>sim/current-view/goal-pitch-offset-deg</output>
+	</filter>
+
+	<filter>
+		<name>view pitch</name>
+		<type>gain</type>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/current-view/view-number-raw</property>
+					<value>107</value>
+				</equals>
+			</condition>
+		</enable>
+		<input>
+			<expression>
+				<dif>
+					<property>sim/view[107]/config/y-offset-m</property>
+					<product>
+						<property>position/gear-agl-m</property>
+						<value>2.5</value>
+					</product>
+				</dif>
+			</expression>
+		</input>
+		<output>sim/current-view/y-offset-m</output>
+	</filter-->
+
+	<filter>
+		<name>steering degree</name>
+		<type>gain</type>
+		<input>
+			<expression>
+				<div>
+					<product>
+						<property>sim/model/pushback/steering</property>
+						<value>180.0</value>
+					</product>
+					<value>3.14159265359</value>
+				</div>
+			</expression>
+		</input>
+		<output>sim/model/pushback/steering-deg</output>
+	</filter>
+
+	<filter>
+		<name>Pushback requested</name>
+		<type>noise-spike</type>
+		<max-rate-of-change>1.0</max-rate-of-change>
+		<debug type="bool">false</debug>
+		<input>sim/model/pushback/enabled</input>
+		<output>sim/model/pushback/visible</output>
+	</filter>
+
+	<filter>
+		<name>Pushback dis/connect</name>
+		<type>noise-spike</type>
+		<max-rate-of-change>0.2</max-rate-of-change>
+		<debug type="bool">false</debug>
+		<input>sim/model/pushback/connect</input>
+		<output>sim/model/pushback/position-norm</output>
+	</filter>
+
+	<filter>
+		<name>Pushback reset</name>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<less-than>
+					<property>sim/model/pushback/visible</property>
+					<value>0.01</value>
+				</less-than>
+			</condition>
+		</enable>
+		<input>0.0</input>
+		<output>sim/model/pushback/steering</output>
+		<output>sim/model/pushback/target-speed-fps</output>
+		<output>sim/model/pushback/force</output>
+		<output>sim/model/pushback/force-x</output>
+		<output>sim/model/pushback/force-y</output>
+	</filter>
+
+	<filter>
+		<name>Pushback force disconnect</name>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<not><property>sim/model/pushback/enabled</property></not>
+			</condition>
+		</enable>
+		<input>0</input>
+		<output>sim/model/pushback/connect</output>
+	</filter>
+
 	<logic>
 		<name>Pushback engage logic</name>
 		<input>
 			<and>
 				<greater-than>
 					<property>sim/model/pushback/position-norm</property>
-					<value>0.99</value>
+					<value>0.999</value>
 				</greater-than>
 				<greater-than>
 					<property>gear/gear[0]/rollspeed-ms</property>
@@ -26,20 +141,6 @@
 		<output>sim/model/pushback/linked</output>
 	</logic>
 
-	<filter>
-		<name>Pushback cancel force logic</name>
-		<type>gain</type>
-		<gain>1</gain>
-		<debug type="bool">false</debug>
-		<enable>
-			<not><property>sim/model/pushback/linked</property></not>
-		</enable>
-		<input>0</input>
-		<output>sim/model/pushback/force</output>
-		<output>sim/model/pushback/force-x</output>
-		<output>sim/model/pushback/force-y</output>
-	</filter>
-
 	<pid-controller>
 		<name>Pushback force</name>
 		<debug type="bool">false</debug>
@@ -47,22 +148,22 @@
 			<property>sim/model/pushback/linked</property>
 		</enable>
 		<input>
-			<property>sim/model/pushback/target-speed-kts</property>
-		</input>
-		<reference>
 			<property>gear/gear[0]/rollspeed-ms-filtered</property>
 			<scale>1.94384449244</scale>
+		</input>
+		<reference>
+			<property>sim/model/pushback/target-speed-kts</property>
 		</reference>
 		<output>
 			<property>sim/model/pushback/force</property>
 		</output>
 		<config>
+			<alpha>0.1</alpha>
+			<beta>1</beta>
+			<gamma>0</gamma>
 			<Kp>
 				<property>sim/model/pushback/kp</property>
 			</Kp>
-			<beta>1</beta>
-			<alpha>0.1</alpha>
-			<gamma>0</gamma>
 			<Ti>
 				<property>sim/model/pushback/ti</property>
 			</Ti>
@@ -133,14 +234,7 @@
 				</equals>
 			</condition>
 		</enable>
-		<input>
-			<property>sim/model/pushback/force</property>
-<!--
-			<expression>
-				<abs><property>sim/model/pushback/force</property></abs>
-			</expression>
--->
-		</input>
+		<input><property>sim/model/pushback/force</property></input>
 		<output>fdm/jsbsim/external_reactions/pushback/magnitude</output>
 	</filter>
 
@@ -199,7 +293,23 @@
 <!-- reset gear[3] on start-up -->
 
 	<filter>
-		<name>reset fake-gear</name>
+		<name>set fake-gear</name>
+		<type>gain</type>
+		<debug type="bool">false</debug>
+		<enable>
+			<condition>
+				<equals>
+					<property>sim/flight-model</property>
+					<value>yasim</value>
+				</equals>
+			</condition>
+		</enable>
+		<input>sim/model/pushback/linked</input>
+		<output>gear/gear[3]/position-norm</output>
+	</filter>
+
+	<filter>
+		<name>set fake-gear</name>
 		<type>gain</type>
 		<debug type="bool">false</debug>
 		<enable>
@@ -210,13 +320,13 @@
 				</equals>
 				<not><property>sim/model/pushback/enabled</property></not>
 				<greater-than>
-					<property>gear/gear[3]/position-norm</property>
-					<value>0.0</value>
+					<property>sim/model/pushback/visible</property>
+					<value>0.1</value>
 				</greater-than>
 			</condition>
 		</enable>
-		<input>0.0</input>
-		<output>gear/gear[3]/position-norm</output>
+		<input>1.0</input>
+		<output>gear/gear[0]/position-norm</output>
 	</filter>
 
 </PropertyList>

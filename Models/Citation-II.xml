@@ -237,9 +237,60 @@
     <object-name>gear.right.light.dazzle</object-name>
   </animation>
 
-  <!-- Chrome effect -->
+  <animation>
+    <type>shader</type>
+    <shader>chrome</shader>
+    <texture>chrome.png</texture>
+    <object-name>engine.left.intake</object-name>
+    <object-name>engine.left.intake.cone</object-name>
+    <object-name>engine.left.rev.down.door</object-name>
+    <object-name>engine.left.rev.link.cover</object-name>
+    <object-name>engine.left.rev.up.door</object-name>
+    <object-name>engine.left.turbine.cone</object-name>
+    <object-name>engine.right.intake</object-name>
+    <object-name>engine.right.intake.cone</object-name>
+    <object-name>engine.right.rev.down.door</object-name>
+    <object-name>engine.right.rev.link.cover</object-name>
+    <object-name>engine.right.rev.up.door</object-name>
+    <object-name>engine.right.turbine.cone</object-name>
+
+    <object-name>wing.left.heater1</object-name>
+    <object-name>wing.left.heater2</object-name>
+    <object-name>wing.right.heater1</object-name>
+    <object-name>wing.right.heater2</object-name>
+
+    <object-name>wing.left.recog.light</object-name>
+    <object-name>wing.right.recog.light</object-name>
+
+    <object-name>wing.left.light.flasher</object-name>
+    <object-name>wing.right.light.flasher</object-name>
+
+    <object-name>door.handle</object-name>
+    <object-name>pitot.tubes</object-name>
+
+    <object-name>gear.nose.fitting.lock</object-name>
+    <object-name>gear.nose.piston</object-name>
+    <object-name>gear.nose.strut</object-name>
+
+    <object-name>gear.left.light.inside</object-name>
+    <object-name>gear.left.piston</object-name>
+    <object-name>gear.left.strut</object-name>
+    <object-name>gear.left.uplock</object-name>
+
+    <object-name>gear.right.light.inside</object-name>
+    <object-name>gear.right.piston</object-name>
+    <object-name>gear.right.strut</object-name>
+    <object-name>gear.right.uplock</object-name>
+
+    <object-name>wing.left.spdbrk.actu.piston</object-name>
+    <object-name>wing.right.spdbrk.actu.piston</object-name>
+
+  </animation>
+
+  <!-- Chrome effect 
   <effect>
     <inherits-from>Aircraft/Citation/Models/Effects/chrome-exterior</inherits-from>
+
     <object-name>engine.left.intake</object-name>
     <object-name>engine.left.intake.cone</object-name>
     <object-name>engine.left.rev.down.door</object-name>
@@ -284,7 +335,7 @@
     <object-name>wing.left.spdbrk.actu.piston</object-name>
     <object-name>wing.right.spdbrk.actu.piston</object-name>
   </effect>
-
+-->
   <!-- REFLECTION, NormalMap -->
   <effect>
     <inherits-from>Aircraft/Citation/Models/Effects/reflection-exterior</inherits-from>
@@ -329,7 +380,6 @@
     <object-name>wing.left.static.mount2</object-name>
     <object-name>wing.left.static.mount3</object-name>
     <object-name>wing.left.static.mount4</object-name>
-    <!--object-name>wing.left.recog.blend</object-name-->
 
     <object-name>wing.right.area1</object-name>
     <object-name>wing.right.area2</object-name>
@@ -344,7 +394,6 @@
     <object-name>wing.right.static.mount2</object-name>
     <object-name>wing.right.static.mount3</object-name>
     <object-name>wing.right.static.mount4</object-name>
-    <!--object-name>wing.right.recog.blend</object-name-->
 
     <object-name>baggage.door.left</object-name>
     <object-name>baggage.door.right</object-name>
@@ -358,7 +407,7 @@
     <object-name>gear.right.door.blade</object-name>
   </effect>
 
-  <!-- glass effect -->
+  <!-- glass effect 
   <effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>door.glass.inside</object-name>
@@ -368,6 +417,7 @@
 
     <object-name>wing.left.recog.glass</object-name>
     <object-name>wing.right.recog.glass</object-name>
+
     <object-name>wing.left.light.glass</object-name>
     <object-name>wing.right.light.glass</object-name>
     <object-name>wing.left.light.nav.on</object-name>
@@ -402,7 +452,7 @@
     <object-name>gear.right.light.corona</object-name>
     <object-name>gear.right.light.dazzle</object-name>
   </effect>
-
+-->
 
   <!-- ALS cockpit glass effect (rain, frost, fog) -->
   <effect>
@@ -411,8 +461,20 @@
     <object-name>cockpit.glass</object-name>
     <object-name>cockpit.window</object-name>
     <object-name>window.glass</object-name>
-
   </effect>
+
+
+  <!--model>
+    <name>transtest</name>
+    <path>Aircraft/Citation/Models/transtest.xml</path>
+    <offsets>
+      <x-m>-2</x-m>
+      <y-m>0</y-m>
+      <z-m>0</z-m>
+      <pitch-deg>0</pitch-deg>
+    </offsets>
+  </model-->
+
 
   <model>
     <name>cabin</name>
@@ -657,8 +719,8 @@
     <name>als-strobe-left-light</name>
     <path>Aircraft/Citation/Models/Effects/lights/strobe_left_light.xml</path>
     <offsets>
-      <x-m> 7.025</x-m>
-      <y-m>-7.88</y-m>
+      <x-m> 7.05</x-m>
+      <y-m>-7.90</y-m>
       <z-m> 0.38</z-m>
     </offsets>
   </model>
@@ -708,8 +770,8 @@
     <name>als-strobe-right-light</name>
     <path>Aircraft/Citation/Models/Effects/lights/strobe_right_light.xml</path>
     <offsets>
-      <x-m> 7.025</x-m>
-      <y-m> 7.88</y-m>
+      <x-m> 7.050</x-m>
+      <y-m> 7.90</y-m>
       <z-m> 0.38</z-m>
     </offsets>
   </model>
@@ -760,7 +822,7 @@
     <name>als-recog-left-light</name>
     <path>Aircraft/Citation/Models/Effects/lights/recog_left_light.xml</path>
     <offsets>
-      <x-m> 6.670</x-m>
+      <x-m> 6.630</x-m>
       <y-m>-7.536</y-m>
       <z-m> 0.358</z-m>
     </offsets>
@@ -771,7 +833,7 @@
     <type>spot</type>
     <position>
       <x-m> 6.670</x-m>
-      <y-m>-7.536</y-m>
+      <y-m>-7.540</y-m>
       <z-m> 0.358</z-m>
     </position>
     <direction>
@@ -812,7 +874,7 @@
     <name>als-recog-right-light</name>
     <path>Aircraft/Citation/Models/Effects/lights/recog_right_light.xml</path>
     <offsets>
-      <x-m> 6.670</x-m>
+      <x-m> 6.630</x-m>
       <y-m> 7.536</y-m>
       <z-m> 0.358</z-m>
     </offsets>
@@ -823,7 +885,7 @@
     <type>spot</type>
     <position>
       <x-m> 6.670</x-m>
-      <y-m> 7.536</y-m>
+      <y-m> 7.540</y-m>
       <z-m> 0.358</z-m>
     </position>
     <direction>
@@ -864,7 +926,7 @@
     <name>als-landing-left-light</name>
     <path>Aircraft/Citation/Models/Effects/lights/landing_left_light.xml</path>
     <offsets>
-      <x-m> 7.135000</x-m>
+      <x-m> 7.120000</x-m>
       <y-m>-2.466740</y-m>
       <z-m>-0.038423</z-m>
     </offsets>
@@ -916,7 +978,7 @@
     <name>als-landing-right-light</name>
     <path>Aircraft/Citation/Models/Effects/lights/landing_right_light.xml</path>
     <offsets>
-      <x-m> 7.135000</x-m>
+      <x-m> 7.120000</x-m>
       <y-m> 2.466740</y-m>
       <z-m>-0.038423</z-m>
     </offsets>
@@ -1557,7 +1619,6 @@
     <type>translate</type>
     <object-name>wing.left.flap</object-name>
     <property>surface-positions/flap-pos</property>
-    <factor>-1</factor>
     <axis>
         <object-name>wing.left.flap.track.axis</object-name>
     </axis>
@@ -1858,7 +1919,6 @@
     <type>translate</type>
     <object-name>wing.right.flap</object-name>
     <property>surface-positions/flap-pos</property>
-    <factor>-1</factor>
     <axis>
         <object-name>wing.right.flap.track.axis</object-name>
     </axis>
@@ -5458,7 +5518,7 @@
     </offsets>
   </model>
 
-<!-- rain spray 
+<!-- rain spray -->
 
   <model>
     <path>Aircraft/Generic/Effects/rain-nose.xml</path>
@@ -5489,7 +5549,7 @@
       <z-m>-0.925</z-m>
     </offsets>
   </model>
--->
+
 <!-- cockpit window -->
 
   <animation>

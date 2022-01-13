@@ -822,12 +822,18 @@
         </emission>
     </animation>
 
-<!-- glass effect -->
+
+    <!--animation>
+        <type>select</type>
+        <object-name>panel.eng.glass</object-name>
+    </animation-->
+
+<!-- glass effect 
     <effect>
         <inherits-from>Effects/model-transparent</inherits-from>
         <object-name>panel.eng.glass</object-name>
     </effect>
-
+-->
 <!-- cockpit shadows -->
     <!--effect>
         <condition>
