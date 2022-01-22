@@ -8,6 +8,13 @@ var pushback = {
         m.nose_angle        = props.globals.getNode("gear/gear[0]/caster-angle-deg-filtered",0,"DOUBLE");
         m.velocity          = props.globals.getNode("gear/gear[0]/rollspeed-ms-filtered",0,"DOUBLE");
         m.timelaps          = props.globals.getNode("sim/time/delta-realtime-sec",0,"DOUBLE");
+        m.view_angle        = props.globals.getNode("orientation/pitch-deg",0,"DOUBLE");
+        m.cur_view_number   = props.globals.getNode("sim/current-view/view-number-raw",0,"DOUBLE");
+        m.cur_view_x        = props.globals.getNode("sim/current-view/z-offset-m",0,"DOUBLE");
+        m.cur_view_y        = props.globals.getNode("sim/current-view/x-offset-m",0,"DOUBLE");
+        m.cur_view_z        = props.globals.getNode("sim/current-view/y-offset-m",0,"DOUBLE");
+        m.cur_view_pitch    = props.globals.getNode("sim/current-view/goal-pitch-offset-deg",0,"DOUBLE");
+        m.cur_view_heading  = props.globals.getNode("sim/current-view/goal-heading-offset-deg",0,"DOUBLE");
 
         m.enabled           = m.pb.initNode("enabled",0,"BOOL");
         m.connect           = m.pb.initNode("connect",0,"BOOL");
@@ -25,6 +32,14 @@ var pushback = {
         m.axis1_distance    = m.pb.getNode("geometry/tug/axis[1]/distance",0,"DOUBLE");
         m.axis1_circum      = m.pb.getNode("geometry/tug/axis[1]/circumference",0,"BOOL");
         m.axis1_steerable   = m.pb.getNode("geometry/tug/axis[1]/steerable",0,"BOOL");
+
+        m.view_number       = m.pb.getNode("view/number",0,"INT");
+        m.view_init_x       = m.pb.getNode("view/init-x",0,"DOUBLE");
+        m.view_init_y       = m.pb.getNode("view/init-y",0,"DOUBLE");
+        m.view_init_z       = m.pb.getNode("view/init-z",0,"DOUBLE");
+        m.view_tug_x        = m.pb.getNode("view/tug-x",0,"DOUBLE");
+        m.view_tug_z        = m.pb.getNode("view/tug-z",0,"DOUBLE");
+        m.view_look_to      = m.pb.getNode("view/look-to",0,"DOUBLE");
 
         m.aircraft_steering = m.pb.initNode("geometry/aircraft/steering",0,"DOUBLE");
         m.aircraft_turn_x   = m.pb.initNode("geometry/aircraft/turn-center-x",0,"DOUBLE");
@@ -46,6 +61,8 @@ var pushback = {
         m.axis0_spin        = m.pb.initNode("geometry/tug/axis[0]/spin",0,"DOUBLE");
         m.axis1_angle       = m.pb.initNode("geometry/tug/axis[1]/angle",0,"DOUBLE");
         m.axis1_spin        = m.pb.initNode("geometry/tug/axis[1]/spin",0,"DOUBLE");
+
+
 
         var tug_fixing = 0.0;
         var tug_axel = 0.0;
@@ -238,17 +255,26 @@ var pushback = {
                 setprop("sim/model/pushback/geometry/tug/intersect_x", intersect.x);
                 setprop("sim/model/pushback/geometry/tug/intersect_y", intersect.y);
 
-                if (getprop("sim/current-view/view-number-raw") == 107) {
-                    var view_x = hitch_pos_x + math.cos(tug_angle) * getprop("sim/model/pushback/geometry/tug/view/distance") - 1.76;
-                    var view_y = hitch_pos_y + math.sin(tug_angle) * getprop("sim/model/pushback/geometry/tug/view/distance");
-                    setprop("sim/current-view/z-offset-m", view_x * -1.0);
-                    setprop("sim/current-view/x-offset-m", view_y);
-                    setprop("sim/current-view/y-offset-m", getprop("sim/model/pushback/geometry/tug/view/elevation"));
-                    var view_a = angle_pt_pt(view_x, view_y, getprop("sim/model/pushback/geometry/tug/view/look-to"), 0.0) * 180.0 / math.pi;
-                    setprop("sim/current-view/goal-heading-offset-deg", view_a * -1.0);
+### set camera view
+                if (me.view_number.getValue() != nil and me.cur_view_number.getValue() == me.view_number.getValue()) {
+                    var view_rel_x = math.cos(aircraft_steering) * me.hitch_distance.getValue() + math.cos(tug_angle) * me.view_tug_x.getValue();
+                    var view_rel_y = math.sin(aircraft_steering) * me.hitch_distance.getValue() + math.sin(tug_angle) * me.view_tug_x.getValue();
+                    var view_rel_z = me.view_tug_z.getValue();
+
+                    var view_axis = me.view_angle.getValue() * math.pi / 180.0;
+                    var view_x = me.view_init_x.getValue() + math.cos(view_axis) * view_rel_x + math.sin(view_axis) * view_rel_z;
+                    var view_y = me.view_init_y.getValue() + view_rel_y;
+                    var view_z = me.view_init_z.getValue() + math.sin(view_axis) * -view_rel_x + math.cos(view_axis) * view_rel_z;
+                    var view_a = angle_pt_pt(view_x, view_y, me.view_look_to.getValue(), 0.0) * 180.0 / math.pi;
+
+                    me.cur_view_x.setValue(view_x * -1.0);
+                    me.cur_view_y.setValue(view_y);
+                    me.cur_view_z.setValue(view_z);
+                    me.cur_view_pitch.setValue(view_axis);
+                    me.cur_view_heading.setValue(view_a * -1.0);
                 }
 
-### calculate axis
+### calculate axis steering
                 if (me.axis0_steerable.getBoolValue() and !me.axis1_steerable.getBoolValue()) {
                     me.axis0_angle.setValue(tug_steering * -180.0 / math.pi);
                     me.axis1_angle.setValue(0.0);
@@ -261,7 +287,7 @@ var pushback = {
                     me.axis0_angle.setValue(tug_steering * -90.0 / math.pi);
                     me.axis1_angle.setValue(tug_steering *  90.0 / math.pi);
                 }
-# TODO: speed of wheels
+### speed of wheels
                 if (tug_steering != 0.0) {
                     if (me.axis0_steerable.getBoolValue()) {
                         tug_axel0_speed = angle_driven * tug_steering_radius / me.timelaps.getValue();

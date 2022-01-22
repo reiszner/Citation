@@ -64,7 +64,6 @@ var JetEngine = {
 
 #### update ####
     update : func{
-
         if (me.running.getBoolValue() and getprop("systems/electrical/outputs/main-right-xover/inst-flt-hr")) {
             if (!me.timer) {
                 me.hobbs_timer.start ();

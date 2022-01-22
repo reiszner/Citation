@@ -4,7 +4,6 @@
 
     <path>forklift.ac</path>
 
-<!-- show pushback is it active -->
     <animation>
         <type>select</type>
         <condition>
@@ -243,7 +242,7 @@
             <z-m>0</z-m>
         </center>
         <axis>
-            <x>-1</x>
+            <x>1</x>
             <y>0</y>
             <z>0</z>
         </axis>
@@ -257,6 +256,248 @@
                 <value>1.60</value>
             </greater-than>
         </condition>
+        <object-name>tug</object-name>
+        <object-name>wheel.front.left</object-name>
+        <object-name>wheel.front.right</object-name>
+        <object-name>wheel.rear.left</object-name>
+        <object-name>wheel.rear.right</object-name>
+        <emission>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </emission>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <less-than>
+                <property>sim/model/pushback/visible</property>
+                <value>1.0</value>
+            </less-than>
+        </condition>
+        <object-name>tug</object-name>
+        <object-name>wheel.front.left</object-name>
+        <object-name>wheel.front.right</object-name>
+        <object-name>wheel.rear.left</object-name>
+        <object-name>wheel.rear.right</object-name>
+        <transparency>
+            <alpha-prop>sim/model/pushback/visible</alpha-prop>
+        </transparency>
+    </animation>
+
+<!-- front light -->
+    <light>
+        <name>front-light-left</name>
+        <type>spot</type>
+        <position>
+            <x-m>-2.650</x-m>
+            <y-m>-0.440</y-m>
+            <z-m> 0.990</z-m>
+        </position>
+        <direction>
+            <x>-0.965925826289</x>
+            <y> 0.0</y>
+            <z>-0.2588190451</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.05</l>
+            <q>0.00000001</q>
+        </attenuation>
+        <spot-cutoff>45</spot-cutoff>
+        <spot-exponent>35.0</spot-exponent>
+        <range-m>50</range-m>
+    </light>
+
+    <light>
+        <name>front-light-right</name>
+        <type>spot</type>
+        <position>
+            <x-m>-2.650</x-m>
+            <y-m> 0.440</y-m>
+            <z-m> 0.990</z-m>
+        </position>
+        <direction>
+            <x>-0.965925826289</x>
+            <y> 0.0</y>
+            <z>-0.2588190451</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.95</g>
+            <b>0.95</b>
+            <a>0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.05</l>
+            <q>0.00000001</q>
+        </attenuation>
+        <spot-cutoff>45</spot-cutoff>
+        <spot-exponent>35.0</spot-exponent>
+        <range-m>50</range-m>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <condition>
+            <greater-than>
+                <property>sim/model/pushback/visible</property>
+                <value>0.9</value>
+            </greater-than>
+            <greater-than>
+                <property>/sim/time/sun-angle-rad</property>
+                <value>1.60</value>
+            </greater-than>
+        </condition>
+        <object-name>front-light-left</object-name>
+        <object-name>front-light-right</object-name>
+    </animation>
+
+<!-- beacon light -->
+    <model>
+        <name>pb-beacon-light-als</name>
+        <path>Aircraft/Citation/Models/Effects/lights/beacon_light.xml</path>
+        <offsets>
+            <x-m>-1.80</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 2.22</z-m>
+        </offsets>
+    </model>
+
+    <light>
+        <name>pb-beacon-light-comp</name>
+        <type>spot</type>
+        <position>
+            <x-m>-1.73</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 2.22</z-m>
+        </position>
+        <direction>
+            <x>-1.0</x>
+            <y> 0.0</y>
+            <z> 0.0</z>
+        </direction>
+        <ambient>
+            <r>1.0</r>
+            <g>0.3</g>
+            <b>0.2</b>
+            <a>0.0</a>
+        </ambient>
+        <diffuse>
+            <r>1.0</r>
+            <g>0.3</g>
+            <b>0.2</b>
+            <a>0.0</a>
+        </diffuse>
+        <specular>
+            <r>1.0</r>
+            <g>0.3</g>
+            <b>0.2</b>
+            <a>0.0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.45</l>
+            <q>0.75</q>
+        </attenuation>
+        <spot-cutoff>70</spot-cutoff>
+        <spot-exponent>5</spot-exponent>
+        <range-m>10</range-m>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <condition>
+            <greater-than>
+                <property>sim/model/pushback/visible</property>
+                <value>0.9</value>
+            </greater-than>
+            <greater-than>
+                <property>sim/model/pushback/position-norm</property>
+                <value>0.001</value>
+            </greater-than>
+        </condition>
+        <object-name>pb-beacon-light-als</object-name>
+        <object-name>pb-beacon-light-comp</object-name>
+    </animation>
+
+    <animation>
+        <type>rotate</type>
+        <object-name>pb-beacon-light-als</object-name>
+        <object-name>pb-beacon-light-comp</object-name>
+        <expression>
+            <product>
+                <property>/sim/time/elapsed-sec</property>
+                <value>540</value>
+            </product>
+        </expression>
+        <center>
+            <x-m>-1.73</x-m>
+            <y-m> 0.00</y-m>
+            <z-m> 2.22</z-m>
+        </center>
+        <axis>
+            <x>0</x>
+            <y>0</y>
+            <z>1</z>
+        </axis>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <object-name>light.beacon</object-name>
+        <condition>
+            <less-than>
+                <property>sim/model/pushback/visible</property>
+                <value>1.0</value>
+            </less-than>
+        </condition>
+        <transparency>
+            <alpha-prop>sim/model/pushback/visible</alpha-prop>
+        </transparency>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <greater-than>
+                <property>sim/model/pushback/position-norm</property>
+                <value>0.001</value>
+            </greater-than>
+        </condition>
+        <object-name>light.beacon</object-name>
         <emission>
             <red>1</red>
             <green>1</green>
@@ -267,18 +508,152 @@
         </transparency>
     </animation>
 
+<!-- rear light -->
+    <light>
+        <name>rear-light-left</name>
+        <type>spot</type>
+        <position>
+            <x-m>-0.200</x-m>
+            <y-m>-0.440</y-m>
+            <z-m> 0.985</z-m>
+        </position>
+        <direction>
+            <x> 0.866025403784</x>
+            <y> 0.0</y>
+            <z>-0.5</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.20</g>
+            <b>0.20</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.20</g>
+            <b>0.20</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.20</g>
+            <b>0.20</b>
+            <a>0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.5</l>
+            <q>0.25</q>
+        </attenuation>
+        <spot-cutoff>70</spot-cutoff>
+        <spot-exponent>10.0</spot-exponent>
+        <range-m>10</range-m>
+        <dim-factor>
+            <expression>
+                <sum>
+                    <product>
+                        <property>sim/model/pushback/brake</property>
+                        <value>0.5</value>
+                    </product>
+                    <value>0.5</value>
+                </sum>
+            </expression>
+        </dim-factor>
+    </light>
+
+    <light>
+        <name>rear-light-right</name>
+        <type>spot</type>
+        <position>
+            <x-m>-0.200</x-m>
+            <y-m> 0.440</y-m>
+            <z-m> 0.985</z-m>
+        </position>
+        <direction>
+            <x> 0.866025403784</x>
+            <y> 0.0</y>
+            <z>-0.5</z>
+        </direction>
+        <ambient>
+            <r>1.00</r>
+            <g>0.20</g>
+            <b>0.20</b>
+            <a>0</a>
+        </ambient>
+        <diffuse>
+            <r>1.00</r>
+            <g>0.20</g>
+            <b>0.20</b>
+            <a>0</a>
+        </diffuse>
+        <specular>
+            <r>1.00</r>
+            <g>0.20</g>
+            <b>0.20</b>
+            <a>0</a>
+        </specular>
+        <attenuation>
+            <c>1.0</c>
+            <l>0.5</l>
+            <q>0.25</q>
+        </attenuation>
+        <spot-cutoff>70</spot-cutoff>
+        <spot-exponent>10.0</spot-exponent>
+        <range-m>10</range-m>
+        <dim-factor>
+            <expression>
+                <sum>
+                    <product>
+                        <property>sim/model/pushback/brake</property>
+                        <value>0.5</value>
+                    </product>
+                    <value>0.5</value>
+                </sum>
+            </expression>
+        </dim-factor>
+    </light>
+
+    <animation>
+        <type>select</type>
+        <condition>
+            <greater-than>
+                <property>sim/model/pushback/visible</property>
+                <value>0.9</value>
+            </greater-than>
+        </condition>
+        <object-name>rear-light-left</object-name>
+        <object-name>rear-light-right</object-name>
+    </animation>
+
     <animation>
         <type>material</type>
         <condition>
-            <less-than-equals>
-                <property>/sim/time/sun-angle-rad</property>
-                <value>1.60</value>
-            </less-than-equals>
+            <less-than>
+                <property>sim/model/pushback/visible</property>
+                <value>0.999</value>
+            </less-than>
         </condition>
+        <object-name>light.rear</object-name>
+        <transparency>
+            <alpha-prop>sim/model/pushback/visible</alpha-prop>
+        </transparency>
+    </animation>
+
+    <animation>
+        <type>material</type>
+        <condition>
+            <property>sim/model/pushback/brake</property>
+        </condition>
+        <object-name>light.rear</object-name>
+        <diffuse>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
+        </diffuse>
         <emission>
-            <red>0</red>
-            <green>0</green>
-            <blue>0</blue>
+            <red>1</red>
+            <green>1</green>
+            <blue>1</blue>
         </emission>
         <transparency>
             <alpha-prop>sim/model/pushback/visible</alpha-prop>
