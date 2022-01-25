@@ -143,7 +143,7 @@
   <!-- special nose-gear for pushback -->
   <gear x="-1.760" y="0.000" z="-0.925" compression="0.2" retract-time="0"
         sfric="1.0" dfric="1.0" damp="0.55" spring="0.25" ignored-by-solver="1" stiction="0">
-    <control-input axis="/sim/model/pushback/steering" control="STEER" src0="-1" src1="1" dst0="-1.0" dst1="1.0"/>
+    <control-input axis="/sim/model/pushback/aircraft/steering" control="STEER" src0="-1" src1="1" dst0="-1.0471975512" dst1="1.0471975512"/>
     <control-input axis="/gear/gear[3]/position-norm" control="EXTEND"/>
   </gear>
 

@@ -79,30 +79,34 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <variant type="int">1</variant> <!-- transmitted over multiplayer -->
     </model>
   </sim>
-  <autopilot>
-    <limits>      <!-- the number and ordering of these properties is important for the autopilot;
-           see Citation-autopilot.xml, AP vertical stage 1. -->
-      <max-climb-rate-fpm type="double">4000</max-climb-rate-fpm>
-      <indicated-altitude-ft type="double">17000</indicated-altitude-ft>
-      <max-climb-rate-fpm type="double">3250</max-climb-rate-fpm>
-      <indicated-altitude-ft type="double">20000</indicated-altitude-ft>
-      <max-climb-rate-fpm type="double">2500</max-climb-rate-fpm>
-      <indicated-altitude-ft type="double">23000</indicated-altitude-ft>
-      <max-climb-rate-fpm type="double">1750</max-climb-rate-fpm>
-      <indicated-altitude-ft type="double">26000</indicated-altitude-ft>
-      <max-climb-rate-fpm type="double">1000</max-climb-rate-fpm>
-      <indicated-altitude-ft type="double">29000</indicated-altitude-ft>
 
-      <max-climb-rate-fpm type="double">750</max-climb-rate-fpm>
+  <autopilot>
+    <limits>
+      <!-- the number and ordering of these properties is important for the autopilot;
+           see Citation-autopilot.xml, AP vertical stage 1. -->
+      <max-climb-rate-fpm n="0" type="double">4000</max-climb-rate-fpm>
+      <indicated-altitude-ft n="0" type="double">17000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="1" type="double">3250</max-climb-rate-fpm>
+      <indicated-altitude-ft n="1" type="double">20000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="2" type="double">2500</max-climb-rate-fpm>
+      <indicated-altitude-ft n="2" type="double">23000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="3" type="double">1750</max-climb-rate-fpm>
+      <indicated-altitude-ft n="3" type="double">26000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="4" type="double">1000</max-climb-rate-fpm>
+      <indicated-altitude-ft n="4" type="double">29000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="5" type="double">750</max-climb-rate-fpm>
+      <indicated-altitude-ft n="5" type="double">50000</indicated-altitude-ft>
     </limits>
   </autopilot>
+
   <instrumentation>
     <cdu>
-      <display>IDENT</display>
+      <display type="string">IDENT</display>
       <ident>
-        <model>Citation II Sierra</model>
-        <engines>Williams FJ44-3A</engines>
+        <model type="string">Citation II Sierra</model>
+        <engines type="string">Williams FJ44-3A</engines>
       </ident>
     </cdu>
   </instrumentation>
+
 </PropertyList>

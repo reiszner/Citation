@@ -1,0 +1,79 @@
+﻿<?xml version="1.0"?>
+
+<!--
+  Rev. 0.11: Quickfix to have 200lbs at sealevel. to be more defined for descent
+  Rev. 0.12: data derived from ref.7 
+  Rev. 0.2: complete new approach 
+  File:     JT15D-4.xml
+  Author:   AeromatiC++ v 3.3.11
+
+  See: http://wiki.flightgear.org/JSBSim_Engines#FGTurbine
+
+  Inputs:
+    name:                    JT15D-4
+    type:                    Turbine Engine
+    thrust:                  2500.0 lbf
+    bypass ratio:            2.300:1
+    overall pressure ratio:  14.5:1
+    augmented?               no
+    injected?                no
+
+  Outputs
+    tsfc:                    0.7
+    engine weight:           565.8 lbs
+    engine length:           4.2 ft
+    engine diameter:         2.3 ft
+-->
+
+<turbine_engine name="JT15D-4">
+  <milthrust> 2500.0 </milthrust>
+  <bypassratio>     2.700 </bypassratio>
+  <tsfc>            0.592 </tsfc>
+  <bleed>           0.03</bleed>
+  <idlen1>         45.0 </idlen1>
+  <idlen2>         49.0 </idlen2>
+  <maxn1>         104.0 </maxn1>
+  <maxn2>          96.0 </maxn2>
+  <augmented>         0 </augmented>
+  <injected>          0 </injected>
+  <ignitionn1>     10.0 </ignitionn1>
+  <ignitionn2>     20.0 </ignitionn2>
+
+  <n1spinup>         2.0 </n1spinup>
+  <n2spinup>         4.0 </n2spinup>
+  <n1startrate>      4.0 </n1startrate>
+  <n2startrate>      8.0 </n2startrate>
+  <n1spindown>       6.0 </n1spindown>
+  <n2spindown>      12.0 </n2spindown>
+
+  <function name="IdleThrust">
+   <table>
+    <independentVar lookup="row">velocities/mach</independentVar>
+    <independentVar lookup="column">atmosphere/density-altitude</independentVar>
+    <tableData>
+    0	5000	15000	25000	35000  45000  90000
+	0.0	0.034	0.036	0.032	0.038	0.036	0.034	0
+	0.2	0.026	0.028	0.024	0.03	0.028	0.026	0
+	0.4	0.022	0.024	0.02	0.026	0.024	0.022	0
+	0.6	0.018	0.02	0.016	0.022	0.02	0.018	0
+	0.8	0.014	0.016	0.012	0.018	0.016	0.014	0
+    </tableData>
+   </table>
+  </function>
+
+  <function name="MilThrust">
+   <table>
+    <independentVar lookup="row">velocities/mach</independentVar>
+    <independentVar lookup="column">atmosphere/density-altitude</independentVar>
+    <tableData>
+    0  5000  15000  25000  35000  45000 90000
+	0.0	1.034	0.816	0.672	0.486	0.336	0.234	0
+	0.2	0.886	0.668	0.552	0.422	0.3	0.198	0
+	0.4	0.742	0.576	0.488	0.386	0.284	0.182	0
+	0.6	0.598	0.5	0.436	0.37	0.276	0.174	0
+	0.8	0.454	0.444	0.412	0.362	0.288	0.186	0
+   </tableData>
+   </table>
+  </function>
+
+</turbine_engine>

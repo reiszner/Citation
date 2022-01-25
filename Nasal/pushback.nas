@@ -22,16 +22,38 @@ var pushback = {
         m.visible           = m.pb.initNode("visible",0,"DOUBLE");
         m.position          = m.pb.initNode("position-norm",0,"DOUBLE");
         m.steering          = m.pb.initNode("steering",0,"DOUBLE");
+        m.yasim_factor      = m.pb.getNode("yasim-factor",0,"DOUBLE");
 
-        m.mlg_distance      = m.pb.getNode("geometry/aircraft/mlg-distance",0,"DOUBLE");
-        m.yasim_factor      = m.pb.getNode("geometry/aircraft/yasim-factor",0,"DOUBLE");
-        m.hitch_distance    = m.pb.getNode("geometry/hitch/distance",0,"DOUBLE");
-        m.axis0_distance    = m.pb.getNode("geometry/tug/axis[0]/distance",0,"DOUBLE");
-        m.axis0_circum      = m.pb.getNode("geometry/tug/axis[0]/circumference",0,"BOOL");
-        m.axis0_steerable   = m.pb.getNode("geometry/tug/axis[0]/steerable",0,"BOOL");
-        m.axis1_distance    = m.pb.getNode("geometry/tug/axis[1]/distance",0,"DOUBLE");
-        m.axis1_circum      = m.pb.getNode("geometry/tug/axis[1]/circumference",0,"BOOL");
-        m.axis1_steerable   = m.pb.getNode("geometry/tug/axis[1]/steerable",0,"BOOL");
+        m.mlg_distance      = m.pb.getNode("aircraft/mlg-distance",0,"DOUBLE");
+        m.aircraft_steering = m.pb.initNode("aircraft/steering",0,"DOUBLE");
+        m.aircraft_turn_x   = m.pb.initNode("aircraft/turn-center-x",0,"DOUBLE");
+        m.aircraft_turn_y   = m.pb.initNode("aircraft/turn-center-y",0,"DOUBLE");
+        m.aircraft_radius   = m.pb.initNode("aircraft/turn-radius",0,"DOUBLE");
+        m.aircraft_circum   = m.pb.initNode("aircraft/turn-circum",0,"DOUBLE");
+        m.aircraft_arc      = m.pb.initNode("aircraft/arc",0,"DOUBLE");
+        m.aircraft_arc_deg  = m.pb.initNode("aircraft/arc-deg",0,"DOUBLE");
+        m.aircraft_dist     = m.pb.initNode("aircraft/distance",0,"DOUBLE");
+
+        m.hitch_distance    = m.pb.getNode("hitch/distance",0,"DOUBLE");
+
+        m.axis0_distance    = m.pb.getNode("tug/axis[0]/distance",0,"DOUBLE");
+        m.axis0_circum      = m.pb.getNode("tug/axis[0]/circumference",0,"BOOL");
+        m.axis0_steerable   = m.pb.getNode("tug/axis[0]/steerable",0,"BOOL");
+        m.axis1_distance    = m.pb.getNode("tug/axis[1]/distance",0,"DOUBLE");
+        m.axis1_circum      = m.pb.getNode("tug/axis[1]/circumference",0,"BOOL");
+        m.axis1_steerable   = m.pb.getNode("tug/axis[1]/steerable",0,"BOOL");
+
+        m.tug_pos_x         = m.pb.initNode("tug/pos-x",0,"DOUBLE");
+        m.tug_pos_y         = m.pb.initNode("tug/pos-y",0,"DOUBLE");
+        m.tug_fixing        = m.pb.initNode("tug/fixing",0,"DOUBLE");
+        m.tug_axel          = m.pb.initNode("tug/axel-spacing",0,"DOUBLE");
+        m.tug_angle         = m.pb.initNode("tug/angle",0,"DOUBLE");
+        m.tug_steering      = m.pb.initNode("tug/steering",0,"DOUBLE");
+
+        m.axis0_angle       = m.pb.initNode("tug/axis[0]/angle",0,"DOUBLE");
+        m.axis0_spin        = m.pb.initNode("tug/axis[0]/spin",0,"DOUBLE");
+        m.axis1_angle       = m.pb.initNode("tug/axis[1]/angle",0,"DOUBLE");
+        m.axis1_spin        = m.pb.initNode("tug/axis[1]/spin",0,"DOUBLE");
 
         m.view_number       = m.pb.getNode("view/number",0,"INT");
         m.view_init_x       = m.pb.getNode("view/init-x",0,"DOUBLE");
@@ -40,29 +62,6 @@ var pushback = {
         m.view_tug_x        = m.pb.getNode("view/tug-x",0,"DOUBLE");
         m.view_tug_z        = m.pb.getNode("view/tug-z",0,"DOUBLE");
         m.view_look_to      = m.pb.getNode("view/look-to",0,"DOUBLE");
-
-        m.aircraft_steering = m.pb.initNode("geometry/aircraft/steering",0,"DOUBLE");
-        m.aircraft_turn_x   = m.pb.initNode("geometry/aircraft/turn-center-x",0,"DOUBLE");
-        m.aircraft_turn_y   = m.pb.initNode("geometry/aircraft/turn-center-y",0,"DOUBLE");
-        m.aircraft_radius   = m.pb.initNode("geometry/aircraft/turn-radius",0,"DOUBLE");
-        m.aircraft_circum   = m.pb.initNode("geometry/aircraft/turn-circum",0,"DOUBLE");
-        m.aircraft_arc      = m.pb.initNode("geometry/aircraft/arc",0,"DOUBLE");
-        m.aircraft_arc_deg  = m.pb.initNode("geometry/aircraft/arc-deg",0,"DOUBLE");
-        m.aircraft_dist     = m.pb.initNode("geometry/aircraft/distance",0,"DOUBLE");
-
-        m.tug_pos_x         = m.pb.initNode("geometry/tug/pos-x",0,"DOUBLE");
-        m.tug_pos_y         = m.pb.initNode("geometry/tug/pos-y",0,"DOUBLE");
-        m.tug_fixing        = m.pb.initNode("geometry/tug/fixing",0,"DOUBLE");
-        m.tug_axel          = m.pb.initNode("geometry/tug/axel-spacing",0,"DOUBLE");
-        m.tug_angle         = m.pb.initNode("geometry/tug/angle",0,"DOUBLE");
-        m.tug_steering      = m.pb.initNode("geometry/tug/steering",0,"DOUBLE");
-
-        m.axis0_angle       = m.pb.initNode("geometry/tug/axis[0]/angle",0,"DOUBLE");
-        m.axis0_spin        = m.pb.initNode("geometry/tug/axis[0]/spin",0,"DOUBLE");
-        m.axis1_angle       = m.pb.initNode("geometry/tug/axis[1]/angle",0,"DOUBLE");
-        m.axis1_spin        = m.pb.initNode("geometry/tug/axis[1]/spin",0,"DOUBLE");
-
-
 
         var tug_fixing = 0.0;
         var tug_axel = 0.0;
@@ -125,7 +124,7 @@ var pushback = {
                 var aircraft_turn_circum = 0.0;
                 var aircraft_turn_arc = 0.0;
 
-                setprop("sim/model/pushback/geometry/aircraft/steering-deg", aircraft_steering * 180.0 / math.pi);
+                setprop("sim/model/pushback/aircraft/steering-deg", aircraft_steering * 180.0 / math.pi);
 
                 if (aircraft_steering != 0.0) {
                     aircraft_turn_center_y = (-1.0 / math.tan(aircraft_steering)) * aircraft_turn_center_x;
@@ -161,15 +160,15 @@ var pushback = {
                     point_pos_x = hitch_pos_x - aircraft_dist;
                 }
 
-                setprop("sim/model/pushback/geometry/hitch/pos-x", hitch_pos_x);
-                setprop("sim/model/pushback/geometry/hitch/pos-y", hitch_pos_y);
-                setprop("sim/model/pushback/geometry/hitch/turn-x", hitch_turn_x);
-                setprop("sim/model/pushback/geometry/hitch/turn-y", hitch_turn_y);
-                setprop("sim/model/pushback/geometry/hitch/dist", hitch_dist);
-                setprop("sim/model/pushback/geometry/hitch/point-a", point_angle);
-                setprop("sim/model/pushback/geometry/hitch/point-deg", point_angle * 180.0 / math.pi);
-                setprop("sim/model/pushback/geometry/hitch/point-x", point_pos_x);
-                setprop("sim/model/pushback/geometry/hitch/point-y", point_pos_y);
+                setprop("sim/model/pushback/hitch/pos-x", hitch_pos_x);
+                setprop("sim/model/pushback/hitch/pos-y", hitch_pos_y);
+                setprop("sim/model/pushback/hitch/turn-x", hitch_turn_x);
+                setprop("sim/model/pushback/hitch/turn-y", hitch_turn_y);
+                setprop("sim/model/pushback/hitch/dist", hitch_dist);
+                setprop("sim/model/pushback/hitch/point-a", point_angle);
+                setprop("sim/model/pushback/hitch/point-deg", point_angle * 180.0 / math.pi);
+                setprop("sim/model/pushback/hitch/point-x", point_pos_x);
+                setprop("sim/model/pushback/hitch/point-y", point_pos_y);
 
 ### pushback tug
                 var tug_angle = me.tug_angle.getValue() + aircraft_turn_arc;
@@ -199,7 +198,10 @@ var pushback = {
                 var tug_hitch_angle_new = 0.0;
                 var angle_driven = 0.0;
 
-                setprop("sim/model/pushback/geometry/tug/steering-deg", tug_steering * 180.0 / math.pi);
+                var target_tug_angle = 0.0;
+                var target_tug_steering = 0.0;
+
+                setprop("sim/model/pushback/tug/steering-deg", tug_steering * 180.0 / math.pi);
 
 
                 if (tug_steering != 0.0) {
@@ -229,31 +231,50 @@ var pushback = {
                 }
 
 
-
 ### new pos of tug
                 aircraft_steering = angle_pt_pt(0.0, 0.0, intersect.x, intersect.y);
                 hitch_pos_x = math.cos(aircraft_steering) * me.hitch_distance.getValue();
                 hitch_pos_y = math.sin(aircraft_steering) * me.hitch_distance.getValue();
+
+### target
+                if (aircraft_steering != 0.0) {
+                    target_tug_angle = math.asin(tug_fixing / hitch_dist) + math.atan(abs(hitch_turn_x) / abs(hitch_turn_y));
+                    target_tug_steering = math.atan(tug_axel / math.sqrt((hitch_dist * hitch_dist) - (tug_fixing * tug_fixing)));
+                    if (aircraft_steering < 0.0) {
+                        target_tug_angle *= -1.0;
+                        target_tug_steering *= -1.0;
+                    }
+                }
+                var delta_angle = target_tug_angle - tug_angle;
+                var delta_steering = target_tug_steering - tug_steering;
+                var ac_delta_steering = me.steering.getValue() - aircraft_steering;
+
 
                 me.tug_pos_x.setValue(hitch_pos_x);
                 me.tug_pos_y.setValue(hitch_pos_y);
                 me.aircraft_steering.setValue(aircraft_steering / me.yasim_factor.getValue());
 
                 me.tug_angle.setValue(tug_angle);
-                setprop("sim/model/pushback/geometry/tug/turn-center-x", tug_turn_center_x);
-                setprop("sim/model/pushback/geometry/tug/turn-center-y", tug_turn_center_y);
-                setprop("sim/model/pushback/geometry/tug/steering-radius", tug_steering_radius);
-                setprop("sim/model/pushback/geometry/tug/steering-circum", tug_steering_circum);
-                setprop("sim/model/pushback/geometry/tug/fixing-radius", tug_fixing_radius);
-                setprop("sim/model/pushback/geometry/tug/fixing-circum", tug_fixing_circum);
-                setprop("sim/model/pushback/geometry/tug/hitch-radius", tug_hitch_radius);
-                setprop("sim/model/pushback/geometry/tug/hitch-circum", tug_hitch_circum);
-                setprop("sim/model/pushback/geometry/tug/turn-x", tug_turn_x);
-                setprop("sim/model/pushback/geometry/tug/turn-y", tug_turn_y);
-                setprop("sim/model/pushback/geometry/tug/turn-dist", tug_inter_dist);
-                setprop("sim/model/pushback/geometry/tug/turn-angle", tug_inter_angle);
-                setprop("sim/model/pushback/geometry/tug/intersect_x", intersect.x);
-                setprop("sim/model/pushback/geometry/tug/intersect_y", intersect.y);
+                setprop("sim/model/pushback/tug/turn-center-x", tug_turn_center_x);
+                setprop("sim/model/pushback/tug/turn-center-y", tug_turn_center_y);
+                setprop("sim/model/pushback/tug/steering-radius", tug_steering_radius);
+                setprop("sim/model/pushback/tug/steering-circum", tug_steering_circum);
+                setprop("sim/model/pushback/tug/fixing-radius", tug_fixing_radius);
+                setprop("sim/model/pushback/tug/fixing-circum", tug_fixing_circum);
+                setprop("sim/model/pushback/tug/hitch-radius", tug_hitch_radius);
+                setprop("sim/model/pushback/tug/hitch-circum", tug_hitch_circum);
+                setprop("sim/model/pushback/tug/turn-x", tug_turn_x);
+                setprop("sim/model/pushback/tug/turn-y", tug_turn_y);
+                setprop("sim/model/pushback/tug/turn-dist", tug_inter_dist);
+                setprop("sim/model/pushback/tug/turn-angle", tug_inter_angle);
+                setprop("sim/model/pushback/tug/intersect-x", intersect.x);
+                setprop("sim/model/pushback/tug/intersect-y", intersect.y);
+
+                setprop("sim/model/pushback/target/tug-angle", target_tug_angle);
+                setprop("sim/model/pushback/target/tug-steering", target_tug_steering);
+                setprop("sim/model/pushback/target/tug-delta-angle", delta_angle);
+                setprop("sim/model/pushback/target/tug-delta-steering", delta_steering);
+                setprop("sim/model/pushback/target/ac-delta-steering", ac_delta_steering);
 
 ### set camera view
                 if (me.view_number.getValue() != nil and me.cur_view_number.getValue() == me.view_number.getValue()) {
@@ -302,6 +323,10 @@ var pushback = {
                 }
                 me.axis0_spin.setValue(tug_axel0_speed * 60.0 / me.axis0_circum.getValue());
                 me.axis1_spin.setValue(tug_axel1_speed * 60.0 / me.axis1_circum.getValue());
+
+
+
+
             }
             else {
                 setprop("controls/gear/brake-parking", 1.0);

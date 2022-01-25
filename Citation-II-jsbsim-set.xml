@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+************************************************************************
+Cessna Citation II (550) simulation config. This files ties together
+all the components used by FGFS to represent the 550. Components
+include the flight data model, instrument panel, and external 3D model.
+
+November 14 2004  Curtis L. Olson  http://www.flightgear.org/~curt
+************************************************************************
+-->
+<PropertyList include="Citation-II-common.xml">
+  <sim>
+    <variant-of>Citation-II</variant-of>
+    <flight-model>jsb</flight-model>
+    <aero>Citation-II-jsbsim</aero>
+    <description>Cessna 550 Citation II / 551 Citation II/SP [JSBsim]</description>
+    <long-description>
+      The Cessna 550 Citation II is a light corporate jet built
+      between 1978 and 2006. The FlightGear model is a luxury
+      corporate jet for two pilots and seven passengers. The cabin
+      features a lavatory for long flights. At full takeoff weight,
+      typical cruise speed is 330 KTAS at FL370; range is 1900 nmi.
+
+      The Cessna 550 Citation II requires two pilots.
+      The Cessna 551 Citation II/SP is the same aircraft
+      certified for single-pilot use.
+
+      Later variants of this aircraft include:
+      Cessna S550 Citation S/II with supercritical wings (developed
+      for the Citation III), new engines (P&amp;W JT15D-4B),
+      leading edge de-icing with TKS fluid and more fuel capacity.
+      (not currently available in FlightGear)
+
+      Cessna 550B Citation Bravo, which has newer avionics,
+      new engines (P&amp;W PW530A) and a trailing link main undercarriage.
+      (available separately in FlightGear)
+
+      Sierra Industries located in Uvalde/Texas provide upgrade
+      to the Citation II and Citation S/II. The main part are better engines
+      (Williams FJ44-3A) and the corresponding instruments.
+      This models are known as Citation II Sierra and Citation S/II Sierra.
+      The model numbers (550/551/S550) are still the same.
+      (The Citation II Sierra is available together with this aircraft in FlightGear)
+    </long-description>
+    <fr>
+      <long-description>
+        Le Cessna 550/551 Citation II est un jet d'affaires léger
+        construit entre 1978 et 2006.  Dans FlightGear, il est aménagé
+        luxueusement pour deux pilotes et sept passagers.  Il y a des
+        toilettes à l'arrière de la cabine pour les longs vols.  Après
+        un décollage à la masse maximale autorisée, la vitesse de
+        croisière habituelle est de 330 noeuds au FL370; le rayon
+        d'action est de 1900 nautiques.
+
+        Le Cessna 550 requiert deux pilotes; le 551 est le même avion
+        mais certifié pour un seul pilote.
+
+        Certaines variantes de cet appareil sont apparues:
+        le Cessna S550 Citation S/II avec une voilure améliorée (non
+        disponible dans FlightGear), le Cessna 550B Citation Bravo
+        (disponible séparément dans FlightGear), le Citation II Sierra,
+        livré dans FlightGear avec cet avion, et le Citation S/II Sierra,
+        (non disponible dans FlightGear).
+      </long-description>
+    </fr>
+    <de>
+      <long-description>
+        Die Cessna 550 Citation II ist ein leichtes Geschäfts-
+        flugzeug, daß zwischen 1978 und 2006 gebaut wurde. Das
+        FlightGear Modell ist ein Luxusgeschäftsflugzeug für zwei
+        Piloten und sieben Passagiere. Die Kabine hat für lange Flüge
+        eine Toilette. Bei vollem Startgewicht beträgt die typische
+        Reisegschwindigkeit 330 KTAS bei FL370; die Reichweite
+        beträgt 1900 nautische Meilen.
+
+        Die Cessna 550 Citation II benötigt 2 Piloten
+        Die Cessna 551 Citation II/SP ist das selbe
+        Flugzeug, zertifiziert für einen Piloten.
+
+        Spätere Varianten dieses Flugzeugs sind:
+        Cessna S550 Citation S/II mit superkritischem Flügelprofil
+        (entwickelt für die Citation III), neue Triebwerke (P&amp;W JT15D-4B),
+        Enteisung der Flügelvorderkante mit TKS Flüssigkeit und
+        ein größeres Tankvolumen.
+        (aktuell nicht verfügbar in FlightGear)
+
+        Cessna 550B Citation Bravo, welche neuere Fluginstrumente enthält,
+        neue Triebwerke (P&amp;W PW530A) und neue Hauptfahrwerke.
+        (für FlightGear erhältlich)
+
+        Sierra Industries in Uvalde/Texas bieten Verbesserung der
+        Citation II und Citation S/II an. Der Hauptteil sind neuere bessere Triebwerke
+        (Williams FJ44-3A) und die dazugehörigen Anzeigen.
+        Diese Modelle sind bekannt als Citation II Sierra und Citation S/II Sierra.
+        Die Modellnummern (550/551/S550) bleiben dabei unverändert.
+        (Die Citation II Sierra ist verfügbar für FlightGear mit diesem Flugzeug)
+      </long-description>
+    </de>
+
+    <model>
+      <variant type="int">0</variant> <!-- transmitted over multiplayer -->
+    </model>
+  </sim>
+
+  <autopilot>
+    <limits>
+      <!-- the number and ordering of these properties is important for the autopilot;
+           see Citation-autopilot.xml, AP vertical stage 1. -->
+      <max-climb-rate-fpm n="0" type="double">3000</max-climb-rate-fpm>
+      <indicated-altitude-ft n="0" type="double">10000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="1" type="double">2000</max-climb-rate-fpm>
+      <indicated-altitude-ft n="1" type="double">18500</indicated-altitude-ft>
+      <max-climb-rate-fpm n="2" type="double">1500</max-climb-rate-fpm>
+      <indicated-altitude-ft n="2" type="double">25000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="3" type="double">1000</max-climb-rate-fpm>
+      <indicated-altitude-ft n="3" type="double">32000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="4" type="double">750</max-climb-rate-fpm>
+      <indicated-altitude-ft n="4" type="double">36000</indicated-altitude-ft>
+      <max-climb-rate-fpm n="5" type="double">500</max-climb-rate-fpm>
+      <indicated-altitude-ft n="5" type="double">50000</indicated-altitude-ft>
+    </limits>
+  </autopilot>
+
+  <instrumentation>
+    <cdu>
+      <display type="string">IDENT</display>
+      <ident>
+        <model type="string">Citation II</model>
+        <engines type="string">PWC JT15D-4</engines>
+      </ident>
+    </cdu>
+  </instrumentation>
+
+</PropertyList>

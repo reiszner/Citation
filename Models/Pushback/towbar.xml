@@ -62,7 +62,7 @@
     <animation>
         <type>translate</type>
         <object-name>hitch</object-name>
-        <property>sim/model/pushback/geometry/hitch/high-tug</property>
+        <property>sim/model/pushback/hitch/high-tug</property>
         <axis>
             <x>0</x>
             <y>0</y>
@@ -78,7 +78,7 @@
         </condition>
         <object-name>towbar</object-name>
         <object-name>towbar.wheel</object-name>
-        <property>sim/model/pushback/geometry/hitch/high-link</property>
+        <property>sim/model/pushback/hitch/high-link</property>
         <axis>
             <x>0</x>
             <y>0</y>
@@ -124,7 +124,7 @@
     </condition>
     <object-name>towbar</object-name>
     <object-name>towbar.wheel</object-name>
-    <property>sim/model/pushback/geometry/hitch/wheel-y</property>
+    <property>sim/model/pushback/hitch/wheel-y</property>
     <axis>
       <x>0</x>
       <y>0</y>

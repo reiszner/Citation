@@ -14,7 +14,7 @@
 <!-- turn tug -->
     <animation>
         <type>rotate</type>
-        <property>sim/model/pushback/geometry/tug/angle</property>
+        <property>sim/model/pushback/tug/angle</property>
         <factor>57.2957795131</factor>
         <center>
             <x-m>0.00</x-m>
@@ -30,7 +30,7 @@
 
     <animation>
         <type>translate</type>
-        <property>sim/model/pushback/geometry/tug/pos-x</property>
+        <property>sim/model/pushback/tug/pos-x</property>
         <axis>
             <x>-1</x>
             <y>0</y>
@@ -40,7 +40,7 @@
 
     <animation>
         <type>translate</type>
-        <property>sim/model/pushback/geometry/tug/pos-y</property>
+        <property>sim/model/pushback/tug/pos-y</property>
         <axis>
             <x>0</x>
             <y>1</y>
@@ -53,9 +53,9 @@
         <type>rotate</type>
         <object-name>wheel.rear.left</object-name>
         <condition>
-            <property>sim/model/pushback/geometry/tug/axis[0]/steerable</property>
+            <property>sim/model/pushback/tug/axis[0]/steerable</property>
         </condition>
-        <property>sim/model/pushback/geometry/tug/axis[0]/angle</property>
+        <property>sim/model/pushback/tug/axis[0]/angle</property>
         <center>
             <x-m>-0.61</x-m>
             <y-m>-0.35</y-m>
@@ -72,9 +72,9 @@
         <type>rotate</type>
         <object-name>wheel.rear.right</object-name>
         <condition>
-            <property>sim/model/pushback/geometry/tug/axis[0]/steerable</property>
+            <property>sim/model/pushback/tug/axis[0]/steerable</property>
         </condition>
-        <property>sim/model/pushback/geometry/tug/axis[0]/angle</property>
+        <property>sim/model/pushback/tug/axis[0]/angle</property>
         <center>
             <x-m>-0.61</x-m>
             <y-m>0.35</y-m>
@@ -91,9 +91,9 @@
         <type>rotate</type>
         <object-name>wheel.front.left</object-name>
         <condition>
-            <property>sim/model/pushback/geometry/tug/axis[1]/steerable</property>
+            <property>sim/model/pushback/tug/axis[1]/steerable</property>
         </condition>
-        <property>sim/model/pushback/geometry/tug/axis[1]/angle</property>
+        <property>sim/model/pushback/tug/axis[1]/angle</property>
         <center>
             <x-m>-2.46</x-m>
             <y-m>-0.48</y-m>
@@ -110,9 +110,9 @@
         <type>rotate</type>
         <object-name>wheel.front.right</object-name>
         <condition>
-            <property>sim/model/pushback/geometry/tug/axis[1]/steerable</property>
+            <property>sim/model/pushback/tug/axis[1]/steerable</property>
         </condition>
-        <property>sim/model/pushback/geometry/tug/axis[1]/angle</property>
+        <property>sim/model/pushback/tug/axis[1]/angle</property>
         <center>
             <x-m>-2.46</x-m>
             <y-m>0.48</y-m>
@@ -129,7 +129,7 @@
     <animation>
         <type>spin</type>
         <object-name>wheel.rear.left</object-name>
-        <property>sim/model/pushback/geometry/tug/axis[0]/spin</property>
+        <property>sim/model/pushback/tug/axis[0]/spin</property>
         <center>
             <x-m>-0.61</x-m>
             <y-m>-0.35</y-m>
@@ -145,7 +145,7 @@
     <animation>
         <type>spin</type>
         <object-name>wheel.rear.right</object-name>
-        <property>sim/model/pushback/geometry/tug/axis[0]/spin</property>
+        <property>sim/model/pushback/tug/axis[0]/spin</property>
         <center>
             <x-m>-0.61</x-m>
             <y-m>0.35</y-m>
@@ -161,7 +161,7 @@
     <animation>
         <type>spin</type>
         <object-name>wheel.front.left</object-name>
-        <property>sim/model/pushback/geometry/tug/axis[1]/spin</property>
+        <property>sim/model/pushback/tug/axis[1]/spin</property>
         <center>
             <x-m>-2.46</x-m>
             <y-m>-0.48</y-m>
@@ -177,7 +177,7 @@
     <animation>
         <type>spin</type>
         <object-name>wheel.front.right</object-name>
-        <property>sim/model/pushback/geometry/tug/axis[1]/spin</property>
+        <property>sim/model/pushback/tug/axis[1]/spin</property>
         <center>
             <x-m>-2.46</x-m>
             <y-m>0.48</y-m>

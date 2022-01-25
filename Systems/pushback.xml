@@ -10,6 +10,20 @@
 		<type>gain</type>
 		<input>
 			<expression>
+				<product>
+					<property>sim/model/pushback/steering-norm</property>
+					<property>sim/model/pushback/yasim-factor</property>
+				</product>
+			</expression>
+		</input>
+		<output>sim/model/pushback/steering</output>
+	</filter>
+
+	<filter>
+		<name>steering degree</name>
+		<type>gain</type>
+		<input>
+			<expression>
 				<div>
 					<product>
 						<property>sim/model/pushback/steering</property>
@@ -53,8 +67,9 @@
 			</condition>
 		</enable>
 		<input>0.0</input>
+		<output>sim/model/pushback/position-norm</output>
 		<output>sim/model/pushback/steering</output>
-		<output>sim/model/pushback/target-speed-fps</output>
+		<output>sim/model/pushback/target-speed-kts</output>
 		<output>sim/model/pushback/force</output>
 		<output>sim/model/pushback/force-x</output>
 		<output>sim/model/pushback/force-y</output>

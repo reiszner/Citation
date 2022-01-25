@@ -67,9 +67,8 @@
         <col>1</col>
         <min>-1</min>
         <max>1</max>
-        <pref-width>100</pref-width>
-        <!--property>sim/model/pushback/steering</property-->
-        <property>sim/model/pushback/geometry/tug/steering</property>
+        <pref-width>200</pref-width>
+        <property>sim/model/pushback/steering-norm</property>
         <binding>
           <command>dialog-apply</command>
         </binding>
@@ -82,8 +81,7 @@
         <halign>right</halign>
         <label>00.0</label>
         <format>%2.1f</format>
-        <!--property>sim/model/pushback/steering-deg</property-->
-        <property>sim/model/pushback/geometry/tug/steering</property>
+        <property>sim/model/pushback/steering-deg</property>
         <live>true</live>
       </text>
 
@@ -101,8 +99,7 @@
         <legend>Straight</legend>
         <binding>
           <command>property-assign</command>
-          <!--property>sim/model/pushback/steering</property-->
-          <property>sim/model/pushback/geometry/tug/steering</property>
+          <property>sim/model/pushback/steering-norm</property>
           <value>0.0</value>
         </binding>
       </button>
@@ -116,9 +113,9 @@
       <slider>
         <row>1</row>
         <col>1</col>
-        <min>-5</min>
-        <max>5</max>
-        <pref-width>100</pref-width>
+        <min>-10</min>
+        <max>10</max>
+        <pref-width>200</pref-width>
         <property>sim/model/pushback/target-speed-kts</property>
         <binding>
           <command>dialog-apply</command>
