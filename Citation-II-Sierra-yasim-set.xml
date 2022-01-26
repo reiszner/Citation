@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <PropertyList include="Citation-II-common.xml">
   <sim>
-    <variant-of>Citation-II</variant-of>
+    <variant-of>Citation-II-yasim</variant-of>
     <flight-model>yasim</flight-model>
     <aero>Citation-II-Sierra-yasim</aero>
     <description>Cessna 550 Citation II Sierra / 551 Citation II/SP Sierra [YaSim]</description>

@@ -398,7 +398,7 @@
     <rolling_friction> 0.02 </rolling_friction>
     <spring_coeff  unit="LBS/FT">     3990.00 </spring_coeff>
     <damping_coeff unit="LBS/FT/SEC"> 1000.00 </damping_coeff>
-    <max_steer unit="DEG"> 20.00 </max_steer>
+    <max_steer unit="DEG"> 60.00 </max_steer>
     <brake_group> NONE </brake_group>
     <retractable> 1 </retractable>
   </contact>
@@ -526,12 +526,13 @@
                 <function>
                     <table>
                         <independentVar lookup="row">fcs/brake-sum-adjusted</independentVar>
-                        <independentVar lookup="column">/controls/flight/rudder</independentVar>
+                        <!--independentVar lookup="column">/controls/flight/rudder</independentVar-->
+                        <independentVar lookup="column">/sim/model/pushback/aircraft/steering</independentVar>
                         <tableData>
                                 -1  0   1
-                          -1    -90 0   20
-                           0    -20 0   20
-                           1    -20 0   90
+                          -1    -90 0   60
+                           0    -60 0   60
+                           1    -60 0   90
                         </tableData>
                     </table>
                 </function>

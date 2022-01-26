@@ -10,7 +10,7 @@ November 14 2004  Curtis L. Olson  http://www.flightgear.org/~curt
 -->
 <PropertyList include="Citation-II-common.xml">
   <sim>
-    <variant-of>Citation-II</variant-of>
+    <variant-of>Citation-II-yasim</variant-of>
     <flight-model>jsb</flight-model>
     <aero>Citation-II-jsbsim</aero>
     <description>Cessna 550 Citation II / 551 Citation II/SP [JSBsim]</description>

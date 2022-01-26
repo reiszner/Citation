@@ -617,7 +617,7 @@ TODO:
                 </equals>
                 <property>sim/model/pushback/linked</property>
             </condition>
-            <property>sim/model/pushback/steering</property>
+            <property>sim/model/pushback/aircraft/steering</property>
             <scale>60.0</scale>
         </input>
         <input>
@@ -628,7 +628,7 @@ TODO:
                 </equals>
             </condition>
             <property>gear/gear[0]/steering-norm</property>
-            <scale>20.0</scale>
+            <scale>60.0</scale>
         </input>
         <input>
             <condition>

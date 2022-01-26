@@ -16,13 +16,15 @@ var pushback = {
         m.cur_view_pitch    = props.globals.getNode("sim/current-view/goal-pitch-offset-deg",0,"DOUBLE");
         m.cur_view_heading  = props.globals.getNode("sim/current-view/goal-heading-offset-deg",0,"DOUBLE");
 
+        m.max_steering      = m.pb.getNode("max-steering",0,"DOUBLE");
+        m.fdm_system        = m.pb.initNode("fdm-system",0,"INT");
         m.enabled           = m.pb.initNode("enabled",0,"BOOL");
         m.connect           = m.pb.initNode("connect",0,"BOOL");
         m.linked            = m.pb.initNode("linked",0,"BOOL");
         m.visible           = m.pb.initNode("visible",0,"DOUBLE");
         m.position          = m.pb.initNode("position-norm",0,"DOUBLE");
         m.steering          = m.pb.initNode("steering",0,"DOUBLE");
-        m.yasim_factor      = m.pb.getNode("yasim-factor",0,"DOUBLE");
+        m.steering_factor   = m.pb.initNode("steering-factor",0,"DOUBLE");
 
         m.mlg_distance      = m.pb.getNode("aircraft/mlg-distance",0,"DOUBLE");
         m.aircraft_steering = m.pb.initNode("aircraft/steering",0,"DOUBLE");
@@ -62,6 +64,15 @@ var pushback = {
         m.view_tug_x        = m.pb.getNode("view/tug-x",0,"DOUBLE");
         m.view_tug_z        = m.pb.getNode("view/tug-z",0,"DOUBLE");
         m.view_look_to      = m.pb.getNode("view/look-to",0,"DOUBLE");
+
+        if (getprop("/sim/flight-model") == "jsb") {
+            m.fdm_system.setValue(1);
+        }
+        else if (getprop("/sim/flight-model") == "yasim") {
+            m.fdm_system.setValue(2);
+
+        }
+        m.steering_factor.setValue(m.max_steering.getValue() * math.pi / 180.0);
 
         var tug_fixing = 0.0;
         var tug_axel = 0.0;
@@ -115,7 +126,7 @@ var pushback = {
 
 ### calculate how far we are rolled   m.timelaps
                 var aircraft_dist = me.velocity.getValue() * me.timelaps.getValue();
-                var aircraft_steering = me.aircraft_steering.getValue() * me.yasim_factor.getValue();
+                var aircraft_steering = me.aircraft_steering.getValue() * me.steering_factor.getValue();
 
 ### aircraft
                 var aircraft_turn_center_x = me.mlg_distance.getValue();
@@ -252,7 +263,7 @@ var pushback = {
 
                 me.tug_pos_x.setValue(hitch_pos_x);
                 me.tug_pos_y.setValue(hitch_pos_y);
-                me.aircraft_steering.setValue(aircraft_steering / me.yasim_factor.getValue());
+                me.aircraft_steering.setValue(aircraft_steering / me.steering_factor.getValue());
 
                 me.tug_angle.setValue(tug_angle);
                 setprop("sim/model/pushback/tug/turn-center-x", tug_turn_center_x);
