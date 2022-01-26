@@ -12,7 +12,7 @@
 			<expression>
 				<product>
 					<property>sim/model/pushback/steering-norm</property>
-					<property>sim/model/pushback/yasim-factor</property>
+					<property>sim/model/pushback/steering-factor</property>
 				</product>
 			</expression>
 		</input>

@@ -472,10 +472,19 @@
 
 <!-- following code by Jonathan Redpath aka legoboyvdlp-->
 <channel name="NWS">
-            <switch name="fcs/nws-enabled">
+            <switch name="fcs/nws-steering-enabled">
                 <default value="0"/>
-                <test logic="OR" value="1"> <!-- NWS mechanically centered if gear is fully extended -->
+                <test logic="AND" value="1"> <!-- NWS mechanically centered if gear is fully extended -->
                     /gear/gear[0]/compression-norm gt 0.001
+                    /sim/model/pushback/linked eq 0
+                </test>
+            </switch>
+
+            <switch name="fcs/nws-pushback-enabled">
+                <default value="0"/>
+                <test logic="AND" value="1"> <!-- NWS mechanically centered if gear is fully extended -->
+                    /gear/gear[0]/compression-norm gt 0.001
+                    /sim/model/pushback/linked eq 1
                 </test>
             </switch>
 
@@ -522,11 +531,25 @@
                 </function>
             </fcs_function>
 
-            <fcs_function name="fcs/nws-cmd-deg"> <!-- Drive the nose wheel with the rudder and brakes -->
+            <fcs_function name="fcs/nws-steering-deg"> <!-- Drive the nose wheel with the rudder and brakes -->
                 <function>
                     <table>
                         <independentVar lookup="row">fcs/brake-sum-adjusted</independentVar>
-                        <!--independentVar lookup="column">/controls/flight/rudder</independentVar-->
+                        <independentVar lookup="column">/controls/flight/rudder</independentVar>
+                        <tableData>
+                                -1  0   1
+                          -1    -90 0   20
+                           0    -20 0   20
+                           1    -20 0   90
+                        </tableData>
+                    </table>
+                </function>
+            </fcs_function>
+
+            <fcs_function name="fcs/nws-pushback-deg">
+                <function>
+                    <table>
+                        <independentVar lookup="row">fcs/brake-sum-adjusted</independentVar>
                         <independentVar lookup="column">/sim/model/pushback/aircraft/steering</independentVar>
                         <tableData>
                                 -1  0   1
@@ -538,14 +561,28 @@
                 </function>
             </fcs_function>
 
-            <fcs_function name="fcs/nws-cmd-deg-adjusted">
+            <fcs_function name="fcs/nws-steering-deg-adjusted">
                 <function>
                     <product>
-                        <property>fcs/nws-cmd-deg</property>
-                        <property>fcs/nws-enabled</property>
+                        <property>fcs/nws-steering-deg</property>
+                        <property>fcs/nws-steering-enabled</property>
                     </product>
                 </function>
             </fcs_function>
+
+            <fcs_function name="fcs/nws-pushback-deg-adjusted">
+                <function>
+                    <product>
+                        <property>fcs/nws-pushback-deg</property>
+                        <property>fcs/nws-pushback-enabled</property>
+                    </product>
+                </function>
+            </fcs_function>
+
+            <summer name="nws-cmd-deg-adjusted">
+                <input>fcs/nws-steering-deg-adjusted</input>
+                <input>fcs/nws-pushback-deg-adjusted</input>
+            </summer>
 
             <actuator name="fcs/steer-deg">
                 <input>fcs/nws-cmd-deg-adjusted</input>
