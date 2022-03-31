@@ -30,17 +30,7 @@
     <autopilot>
       <heading_overlay type="bool">true</heading_overlay>
       <overlay-name type="string">approach</overlay-name>
-
-      <settings>
-        <target-altitude-ft type="double">3000</target-altitude-ft>
-        <target-speed-kt type="double">160</target-speed-kt>
-      </settings>
-
-      <mode>
-        <engaged type="bool">false</engaged>
-      </mode>
     </autopilot>
-
 
     <consumables>
       <fuel>
@@ -50,7 +40,6 @@
       </fuel>
     </consumables>
 
-
     <controls>
       <electric>
         <avionics-switch type="bool">true</avionics-switch>
@@ -58,7 +47,7 @@
         <voltage-sel type="int">0</voltage-sel>
         <system-test-sw type="int">0</system-test-sw>
         <fuel-sel type="int">0</fuel-sel>
-        <engine>
+        <engine n="0">
           <generator-ready type="bool">true</generator-ready>
           <generator-sw type="int">1</generator-sw>
         </engine>
@@ -70,13 +59,18 @@
 
       <engines>
         <engine n="0">
+          <cutoff type="bool">false</cutoff>
+          <combusting type="bool">true</combusting>
           <ignition-sw type="bool">true</ignition-sw>
-          <throttle-lever type="double">0.3293094756</throttle-lever>
+          <reverser type="bool">false</reverser>
+          <throttle type="double">0.33</throttle>
         </engine>
-
         <engine n="1">
+          <cutoff type="bool">false</cutoff>
+          <combusting type="bool">true</combusting>
           <ignition-sw type="bool">true</ignition-sw>
-          <throttle-lever type="double">0.3293094756</throttle-lever>
+          <reverser type="bool">false</reverser>
+          <throttle type="double">0.33</throttle>
         </engine>
       </engines>
 
@@ -95,19 +89,19 @@
 
       <gear>
         <brake-parking type="double">0</brake-parking>
-        <gear-down type="bool">true</gear-down>
+        <gear-lever-cmd type="bool">true</gear-lever-cmd>
       </gear>
 
       <lighting>
         <beacon-switch type="bool">true</beacon-switch>
-        <landing-light-switch n="0" type="bool">true</landing-light-switch>
-        <landing-light-switch n="1" type="bool">true</landing-light-switch>
         <nav-lights-switch type="bool">true</nav-lights-switch>
         <strobe-switch type="bool">true</strobe-switch>
-        <recog-lights-switch type="bool">true</recog-lights-switch>
+        <landing-light-switch n="0" type="bool">true</landing-light-switch>
+        <landing-light-switch n="1" type="bool">true</landing-light-switch>
+        <recog-lights-switch type="bool">false</recog-lights-switch>
 
         <panel-lights-switch type="bool">true</panel-lights-switch>
-        <instrument-light-norm type="double">0.5</instrument-light-norm>
+        <instrument-light-norm type="double">0.4</instrument-light-norm>
         <left-panel-norm type="double">0.2</left-panel-norm>
         <center-panel-norm type="double">0.2</center-panel-norm>
         <right-panel-norm type="double">0.2</right-panel-norm>
@@ -115,7 +109,7 @@
     </controls>
 
     <engines>
-      <engine>
+      <engine n="0">
         <started type="bool">true</started>
         <running type="bool">true</running>
       </engine>
@@ -127,8 +121,7 @@
     </engines>
 
     <gear>
-      <gear_overlay type="bool">1</gear_overlay>
-      <gear>
+      <gear n="0">
         <position-norm type="float">1</position-norm>
       </gear>
       <gear n="1">
@@ -145,7 +138,7 @@
 
     <sim>
       <presets>
-        <airspeed-kt type="double">180</airspeed-kt>
+        <airspeed-kt type="double">160</airspeed-kt>
       </presets>
     </sim>
 

@@ -69,9 +69,9 @@ GNU General Public License for more details.
       <heading-offset-deg>349.8</heading-offset-deg>
       <pitch-offset-deg>-25.8</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>29.7</field-of-view>
     </view>
 
@@ -113,9 +113,9 @@ GNU General Public License for more details.
       <heading-offset-deg>10.5</heading-offset-deg>
       <pitch-offset-deg>-40.5</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>29.7</field-of-view>
     </view>
 
@@ -143,9 +143,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -173,9 +173,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -203,9 +203,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -239,9 +239,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -269,9 +269,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -299,9 +299,9 @@ GNU General Public License for more details.
       <heading-offset-deg>354.4</heading-offset-deg>
       <pitch-offset-deg>-23.7</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -329,9 +329,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -359,9 +359,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -393,9 +393,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -423,9 +423,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -453,9 +453,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -483,9 +483,9 @@ GNU General Public License for more details.
       <heading-offset-deg>7.4</heading-offset-deg>
       <pitch-offset-deg>-23.9</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>22.8</field-of-view>
     </view>
 
@@ -511,9 +511,9 @@ GNU General Public License for more details.
       <heading-offset-deg>356.1</heading-offset-deg>
       <pitch-offset-deg>-24.1</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>22.8</field-of-view>
     </view>
 
@@ -539,9 +539,9 @@ GNU General Public License for more details.
       <heading-offset-deg>312.5</heading-offset-deg>
       <pitch-offset-deg>-62.8</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>22.8</field-of-view>
     </view>
 
@@ -567,9 +567,9 @@ GNU General Public License for more details.
       <heading-offset-deg>5.3</heading-offset-deg>
       <pitch-offset-deg>-23.2</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>22.8</field-of-view>
     </view>
 
@@ -597,9 +597,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -627,9 +627,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -657,9 +657,9 @@ GNU General Public License for more details.
       <heading-offset-deg>332.9</heading-offset-deg>
       <pitch-offset-deg>-44.3</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>22.8</field-of-view>
     </view>
 
@@ -691,9 +691,9 @@ GNU General Public License for more details.
       <heading-offset-deg>0.0</heading-offset-deg>
       <pitch-offset-deg>-12.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <field-of-view>75.0</field-of-view>
     </view>
 
@@ -734,13 +734,13 @@ GNU General Public License for more details.
   <end>
     <message>Congratulations! You're on your way to FL330. Keep watching your AOA (angle of attack) and airspeed!</message>
     <view>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>0.0</heading-offset-deg>
-      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <pitch-offset-deg>-13.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
-      <field-of-view>75.0</field-of-view>
+      <field-of-view>70.0</field-of-view>
     </view>
   </end>
 </PropertyList>

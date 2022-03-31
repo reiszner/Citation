@@ -87,8 +87,7 @@
             <condition>
                 <property>autopilot/source/airdata/serviceable</property>
             </condition>
-            <property>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm</property>
-            <!--property>velocities/vertical-speed-fps</property-->
+            <property>instrumentation/inst-vertical-speed-indicator[0]/indicated-speed-fpm</property>
         </input>
         <input>0.0</input>
         <output>autopilot/source/airdata/vs-fpm</output>
@@ -352,12 +351,47 @@
 <!-- vertical speed -->
 
     <filter>
-        <name>Vertical Speed Indicator</name>
+        <name>Vertical Speed difference</name>
         <debug>false</debug>
-        <type>exponential</type>
-        <filter-time>0.5</filter-time>
-        <input>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm</input>
-        <output>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm-filtered</output>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[0]/serviceable</property>
+                <not><property>instrumentation/vertical-speed-indicator[0]/indicated-speed-latch</property></not>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <abs>
+                    <dif>
+                        <product>
+                            <property>velocities/speed-down-fps</property>
+                            <value>60.0</value>
+                        </product>
+                        <property>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm</property>
+                    </dif>
+                </abs>
+            </expression>
+        </input>
+        <output>instrumentation/vertical-speed-indicator[0]/indicated-speed-diff</output>
+    </filter>
+
+    <filter>
+        <name>Vertical Speed Latch</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[0]/serviceable</property>
+                <not><property>instrumentation/vertical-speed-indicator[0]/indicated-speed-latch</property></not>
+                <less-than>
+                    <property>instrumentation/vertical-speed-indicator[0]/indicated-speed-diff</property>
+                    <value>100</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>1</input>
+        <output>instrumentation/vertical-speed-indicator[0]/indicated-speed-latch</output>
     </filter>
 
     <filter>
@@ -365,7 +399,96 @@
         <debug>false</debug>
         <type>exponential</type>
         <filter-time>0.5</filter-time>
-        <input>instrumentation/vertical-speed-indicator[1]/indicated-speed-fpm</input>
+        <enable>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[0]/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[0]/indicated-speed-latch</property>
+            </condition>
+            <property>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm</property>
+        </input>
+        <input>
+            <expression>
+                <product>
+                    <property>velocities/speed-down-fps</property>
+                    <value>-60.0</value>
+                </product>
+            </expression>
+        </input>
+        <output>instrumentation/vertical-speed-indicator[0]/indicated-speed-fpm-filtered</output>
+    </filter>
+
+    <filter>
+        <name>Vertical Speed difference</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[1]/serviceable</property>
+                <not><property>instrumentation/vertical-speed-indicator[1]/indicated-speed-latch</property></not>
+            </condition>
+        </enable>
+        <input>
+            <expression>
+                <abs>
+                    <dif>
+                        <product>
+                            <property>velocities/vertical-speed-fps</property>
+                            <value>60.0</value>
+                        </product>
+                        <property>instrumentation/vertical-speed-indicator[1]/indicated-speed-fpm</property>
+                    </dif>
+                </abs>
+            </expression>
+        </input>
+        <output>instrumentation/vertical-speed-indicator[1]/indicated-speed-diff</output>
+    </filter>
+
+    <filter>
+        <name>Vertical Speed Latch</name>
+        <debug>false</debug>
+        <type>gain</type>
+        <enable>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[1]/serviceable</property>
+                <not><property>instrumentation/vertical-speed-indicator[1]/indicated-speed-latch</property></not>
+                <less-than>
+                    <property>instrumentation/vertical-speed-indicator[1]/indicated-speed-diff</property>
+                    <value>100</value>
+                </less-than>
+            </condition>
+        </enable>
+        <input>1</input>
+        <output>instrumentation/vertical-speed-indicator[1]/indicated-speed-latch</output>
+    </filter>
+
+    <filter>
+        <name>Vertical Speed Indicator</name>
+        <debug>false</debug>
+        <type>exponential</type>
+        <filter-time>0.5</filter-time>
+        <enable>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[1]/serviceable</property>
+            </condition>
+        </enable>
+        <input>
+            <condition>
+                <property>instrumentation/vertical-speed-indicator[1]/indicated-speed-latch</property>
+            </condition>
+            <property>instrumentation/vertical-speed-indicator[1]/indicated-speed-fpm</property>
+        </input>
+        <input>
+            <expression>
+                <product>
+                    <property>velocities/vertical-speed-fps</property>
+                    <value>60.0</value>
+                </product>
+            </expression>
+        </input>
         <output>instrumentation/vertical-speed-indicator[1]/indicated-speed-fpm-filtered</output>
     </filter>
 

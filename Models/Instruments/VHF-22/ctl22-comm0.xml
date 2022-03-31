@@ -352,7 +352,7 @@ the centers are:
         <type>rotate</type>
         <object-name>ctl22.toggle</object-name>
         <property>instrumentation/ctl22[0]/toggle</property>
-        <factor>-20</factor>
+        <factor>20</factor>
         <axis>
             <object-name>ctl22.toggle-axis</object-name>
         </axis>

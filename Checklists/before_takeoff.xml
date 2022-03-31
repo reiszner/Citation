@@ -120,8 +120,18 @@ GNU General Public License for more details.
     </condition>
     <binding>
       <command>property-assign</command>
+      <property>controls/flight/flaps-touch</property>
+      <value>1</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
       <property>controls/flight/flaps</property>
       <value>0.375</value>
+    </binding>
+    <binding>
+      <command>property-assign</command>
+      <property>controls/flight/flaps-touch</property>
+      <value>0</value>
     </binding>
   </item>
   <item>

@@ -66,9 +66,9 @@ GNU General Public License for more details.
     <message>switch battery master bus ON</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -109,9 +109,9 @@ GNU General Public License for more details.
     </message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>340.0</heading-offset-deg>
       <pitch-offset-deg>-20.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -139,9 +139,9 @@ GNU General Public License for more details.
     <message>Switch on the beacon light (the beacon should always be active if there is a running engine)</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>355.0</heading-offset-deg>
       <pitch-offset-deg>-43.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -169,9 +169,9 @@ GNU General Public License for more details.
     <message>Set the right engine fuel boost pump to NORM</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -199,9 +199,9 @@ GNU General Public License for more details.
     <message>Press right engine starter</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -229,9 +229,9 @@ GNU General Public License for more details.
     <message>Pull the cutoff-lock handle on right throttle lever</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>330.0</heading-offset-deg>
       <pitch-offset-deg>-50.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -259,9 +259,9 @@ GNU General Public License for more details.
     <message>Push the right throttle forward to idle position</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>330.0</heading-offset-deg>
       <pitch-offset-deg>-50.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -295,9 +295,9 @@ GNU General Public License for more details.
     <message>Monitor the right engine starting.</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>340.0</heading-offset-deg>
       <pitch-offset-deg>-20.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -315,9 +315,9 @@ GNU General Public License for more details.
     <message>After right starter extinguished, set the voltage selector to RH GEN (use mouse-wheel)</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -345,9 +345,9 @@ GNU General Public License for more details.
     <message>If the voltmeter shows about 28V, the generator produce power.</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -375,9 +375,9 @@ GNU General Public License for more details.
     <message>Now activate the right engine generator</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -412,9 +412,9 @@ GNU General Public License for more details.
     <message>Now the left engine. Set the left engine fuel boost pump to NORM</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -442,9 +442,9 @@ GNU General Public License for more details.
     <message>Press left engine starter</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -472,9 +472,9 @@ GNU General Public License for more details.
     <message>Pull the cutoff-lock handle on left throttle lever</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>330.0</heading-offset-deg>
       <pitch-offset-deg>-50.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -502,9 +502,9 @@ GNU General Public License for more details.
     <message>Push the left throttle forward to idle position</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>330.0</heading-offset-deg>
       <pitch-offset-deg>-50.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -538,9 +538,9 @@ GNU General Public License for more details.
     <message>Monitor the left engine starting.</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>340.0</heading-offset-deg>
       <pitch-offset-deg>-20.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -558,9 +558,9 @@ GNU General Public License for more details.
     <message>Set the voltage selector to LH GEN (use mouse-wheel)</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -588,9 +588,9 @@ GNU General Public License for more details.
     <message>If the voltmeter shows about 28V, you can go on with the checklist.</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -618,9 +618,9 @@ GNU General Public License for more details.
     <message>Now activate the left engine generator</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -648,9 +648,9 @@ GNU General Public License for more details.
     <message>Well done! Both engines are running.</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>340.0</heading-offset-deg>
       <pitch-offset-deg>-20.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -662,9 +662,9 @@ GNU General Public License for more details.
     <message>Now let&apos;s activate the avionics</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -707,9 +707,9 @@ GNU General Public License for more details.
     <message-param><property>environment/pressure-sea-level-inhg</property></message-param>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>355</heading-offset-deg>
       <pitch-offset-deg>-25</pitch-offset-deg>
       <roll-offset-deg>0</roll-offset-deg>
@@ -743,9 +743,9 @@ GNU General Public License for more details.
     <message>Check speedbrakes retracted</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>330.0</heading-offset-deg>
       <pitch-offset-deg>-50.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -773,9 +773,9 @@ GNU General Public License for more details.
     <message>Switch on the anticollision light</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -803,9 +803,9 @@ GNU General Public License for more details.
     <message>Switch on the nav lights</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>20.0</heading-offset-deg>
       <pitch-offset-deg>-36.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -833,9 +833,9 @@ GNU General Public License for more details.
     <message>Switch on the left landing light</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>355.0</heading-offset-deg>
       <pitch-offset-deg>-43.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -863,9 +863,9 @@ GNU General Public License for more details.
     <message>Switch on the right landing light</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>355.0</heading-offset-deg>
       <pitch-offset-deg>-43.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -893,9 +893,9 @@ GNU General Public License for more details.
     <message>Set flaps to TO &amp; APP. Use 3 times the ] key. (3 times [ to set flaps up again.)</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>330.0</heading-offset-deg>
       <pitch-offset-deg>-50.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
@@ -911,10 +911,14 @@ GNU General Public License for more details.
 
     <exit>
       <condition>
-        <equals>
+        <greater-than>
           <property>controls/flight/flaps</property>
-          <value>0.375</value>
-        </equals>
+          <value>0.350</value>
+        </greater-than>
+        <less-than>
+          <property>controls/flight/flaps</property>
+          <value>0.400</value>
+        </less-than>
       </condition>
     </exit>
   </step>
@@ -923,9 +927,9 @@ GNU General Public License for more details.
     <message>Set initial cruise altitude to 33000. (43000 on Cittion II Sierra)</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>337</heading-offset-deg>
       <pitch-offset-deg>-27</pitch-offset-deg>
       <roll-offset-deg>0</roll-offset-deg>
@@ -953,13 +957,13 @@ GNU General Public License for more details.
     <message>Both engines are running and you&apos;ve configured the aircraft for takeoff.</message>
 
     <view>
-      <x-offset-m>-0.305</x-offset-m>
-      <y-offset-m>0.990</y-offset-m>
-      <z-offset-m>3.170</z-offset-m>
+      <x-offset-m>-0.31</x-offset-m>
+      <y-offset-m>0.95</y-offset-m>
+      <z-offset-m>3.17</z-offset-m>
       <heading-offset-deg>0.0</heading-offset-deg>
-      <pitch-offset-deg>-12.0</pitch-offset-deg>
+      <pitch-offset-deg>-13.0</pitch-offset-deg>
       <roll-offset-deg>0.0</roll-offset-deg>
-      <field-of-view>75.0</field-of-view>
+      <field-of-view>70.0</field-of-view>
     </view>
   </end>
 </PropertyList>

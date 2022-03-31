@@ -150,6 +150,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <kp type="double">0.25</kp>
         <td type="double">500.0</td>
         <ti type="double">0.05</ti>
+        <steer-kp type="double">0.25</steer-kp>
+        <steer-td type="double">500.0</steer-td>
+        <steer-ti type="double">0.05</steer-ti>
         <view>
           <number type="int">107</number>
           <init-x type="double">-1.760</init-x>
@@ -382,15 +385,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     property-rule[103] = Systems/electrical.xml
     property-rule[104] = Models/Effects/flame-filter.xml
     property-rule[105] = Models/system-filters.xml
-    property-rule[106] = Aircraft/Citation/Models/Instruments/VHF-22/ctl22-comm0-filters.xml
-    property-rule[107] = Aircraft/Citation/Models/Instruments/VHF-22/ctl22-comm1-filters.xml
-    property-rule[108] = Aircraft/Citation/Models/Instruments/VIR-32/ctl32-nav0-filters.xml
-    property-rule[109] = Aircraft/Citation/Models/Instruments/VIR-32/ctl32-nav1-filters.xml
-    property-rule[110] = Aircraft/Citation/Models/Instruments/ADF-462/ctl62-adf0-filters.xml
-    property-rule[111] = Aircraft/Citation/Models/Instruments/rmi-filters.xml
-    property-rule[112] = Aircraft/Citation/Models/Instruments/AD600-filters.xml
-    property-rule[113] = Aircraft/Citation/Systems/icing.xml
-    property-rule[114] = Aircraft/Citation/Models/Instruments/hsi-filters.xml
+    property-rule[106] = Models/Instruments/VHF-22/ctl22-comm0-filters.xml
+    property-rule[107] = Models/Instruments/VHF-22/ctl22-comm1-filters.xml
+    property-rule[108] = Models/Instruments/VIR-32/ctl32-nav0-filters.xml
+    property-rule[109] = Models/Instruments/VIR-32/ctl32-nav1-filters.xml
+    property-rule[110] = Models/Instruments/ADF-462/ctl62-adf0-filters.xml
+    property-rule[111] = Models/Instruments/rmi-filters.xml
+    property-rule[112] = Models/Instruments/AD600-filters.xml
+    property-rule[113] = Systems/icing.xml
+    property-rule[114] = Models/Instruments/hsi-filters.xml
+    property-rule[115] = Systems/annunciator.xml
 
     The configs below, without an index, overwrite existing rules and
     are being indexed, as they come unless they come with an index.
@@ -469,49 +473,52 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <!-- property-rule: running at frame rate -->
 
       <property-rule n="100">
-        <path>Aircraft/Citation/Models/Instruments/instrument-filters.xml</path>
+        <path>Models/Instruments/instrument-filters.xml</path>
       </property-rule>
       <property-rule n="101">
-        <path>Aircraft/Citation/Models/load-factor-filters.xml</path>
+        <path>Models/load-factor-filters.xml</path>
       </property-rule>
       <property-rule n="102">
-        <path>Aircraft/Citation/Models/Lights/average-ambient-light-filters.xml</path>
+        <path>Models/Lights/average-ambient-light-filters.xml</path>
       </property-rule>
       <property-rule n="103">
         <path>Systems/electrical.xml</path>
       </property-rule>
       <property-rule n="104">
-        <path>Aircraft/Citation/Models/Effects/flame-filter.xml</path>
+        <path>Models/Effects/flame-filter.xml</path>
       </property-rule>
       <property-rule n="105">
-        <path>Aircraft/Citation/Models/system-filter.xml</path>
+        <path>Models/system-filter.xml</path>
       </property-rule>
       <property-rule n="106">
-        <path>Aircraft/Citation/Models/Instruments/VHF-22/ctl22-comm0-filters.xml</path>
+        <path>Models/Instruments/VHF-22/ctl22-comm0-filters.xml</path>
       </property-rule>
       <property-rule n="107">
-        <path>Aircraft/Citation/Models/Instruments/VHF-22/ctl22-comm1-filters.xml</path>
+        <path>Models/Instruments/VHF-22/ctl22-comm1-filters.xml</path>
       </property-rule>
       <property-rule n="108">
-        <path>Aircraft/Citation/Models/Instruments/VIR-32/ctl32-nav0-filters.xml</path>
+        <path>Models/Instruments/VIR-32/ctl32-nav0-filters.xml</path>
       </property-rule>
       <property-rule n="109">
-        <path>Aircraft/Citation/Models/Instruments/VIR-32/ctl32-nav1-filters.xml</path>
+        <path>Models/Instruments/VIR-32/ctl32-nav1-filters.xml</path>
       </property-rule>
       <property-rule n="110">
-        <path>Aircraft/Citation/Models/Instruments/ADF-462/ctl62-adf0-filters.xml</path>
+        <path>Models/Instruments/ADF-462/ctl62-adf0-filters.xml</path>
       </property-rule>
       <property-rule n="111">
-        <path>Aircraft/Citation/Models/Instruments/rmi-filters.xml</path>
+        <path>Models/Instruments/rmi-filters.xml</path>
       </property-rule>
       <property-rule n="112">
-        <path>Aircraft/Citation/Models/Instruments/AD600-filters.xml</path>
+        <path>Models/Instruments/AD600-filters.xml</path>
       </property-rule>
       <property-rule n="113">
-        <path>Aircraft/Citation/Systems/icing.xml</path>
+        <path>Systems/icing.xml</path>
       </property-rule>
       <property-rule n="114">
-        <path>Aircraft/Citation/Models/Instruments/hsi-filters.xml</path>
+        <path>Models/Instruments/hsi-filters.xml</path>
+      </property-rule>
+      <property-rule n="115">
+        <path>Systems/annunciator.xml</path>
       </property-rule>
 
     </systems>
@@ -1420,6 +1427,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <time-min type="int">0</time-min>
       <ground-speed-kt type="int">0</ground-speed-kt>
     </dme-339F-12A>
+    <inst-vertical-speed-indicator n="0">
+      <serviceable type="bool">true</serviceable>
+    </inst-vertical-speed-indicator>
+    <inst-vertical-speed-indicator n="1">
+      <serviceable type="bool">true</serviceable>
+    </inst-vertical-speed-indicator>
     <vertical-speed-indicator n="0">
       <serviceable type="bool">1</serviceable>
     </vertical-speed-indicator>
@@ -1728,6 +1741,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
       <rudder-command type="double">0.0</rudder-command>
     </servo>
     <ms-205 n="0">
+        <serviceable type="bool">false</serviceable>
         <panel>
             <off type="double">0.0</off>
             <hdg type="double">0.0</hdg>
@@ -1754,6 +1768,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </mode>
     </ms-205>
     <ms-205 n="1">
+        <serviceable type="bool">false</serviceable>
         <panel>
             <off type="double">0.0</off>
             <hdg type="double">0.0</hdg>

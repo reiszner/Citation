@@ -247,14 +247,6 @@ setlistener("/sim/signals/fdm-initialized", func {
     var fuelL= getprop("/consumables/fuel/fuel_overlay_0");
     var fuelR= getprop("/consumables/fuel/fuel_overlay_1");
     print("Setting fuel levels to ", fuelL, "lbs in left tank and ", fuelR, "lbs in right tank.");
-
-    # set some other properties
-    if(getprop("/gear/gear_overlay") == 1) {
-      print("forcing gear down!");
-      setprop("/controls/gear/gear-lever-cmd", 1);
-      setprop("/controls/gear/gear-lever-pos", 1);
-      setprop("/controls/gear/gear-down", 1);
-    }
   }
   else {
     # Read old fuel levels
@@ -300,57 +292,16 @@ setlistener("/sim/signals/fdm-initialized", func {
   }
 
   # on states "cruise" and "approach" we set a heading from the launcher/CLI (--heading=123)
-  if (getprop("/autopilot/heading_overlay")) {
-
-    # start autopilot late, to avoid turbulent reactions from it
-    var start_autopilot_in_air = maketimer(3, func(){
-      print("Starting A/P ...");
-
-      var overlay_name = getprop("/autopilot/overlay-name");
-      if (overlay_name != nil) {
-        if (overlay_name == "cruise") {
-          var low_bank = 1;
-          var yaw_damper = 1;
-          var soft_ride = 1;
-          var lateral_mode = 1;
-          var vertical_mode = 1;
-          var target_altitude = 36000;
-        }
-        if (overlay_name == "approach") {
-          var low_bank = 0;
-          var yaw_damper = 0;
-          var soft_ride = 0;
-          var lateral_mode = 0;
-          var vertical_mode = 0;
-          var target_altitude = 3000;
-        }
-
-# engage FD and AP
-        setprop("/autopilot/ms-205[0]/mode/state", 1);
-        setprop("/autopilot/mode/engaged", 1);
-        print ("FD1 and AP engaged because /autopilot/heading-overlay is nonzero");
-# setting autopilot
-        setprop("/autopilot/mode/low-bank", low_bank);
-        setprop("/autopilot/mode/yaw-damper", yaw_damper);
-        setprop("/autopilot/mode/soft-ride", soft_ride);
-# setting flight director
-        setprop("/autopilot/ms-205[0]/mode/lateral-mode", lateral_mode);
-        setprop("/autopilot/ms-205[0]/mode/vertical-mode", vertical_mode);
-        setprop("/autopilot/ms-205[1]/mode/lateral-mode", lateral_mode);
-        setprop("/autopilot/ms-205[1]/mode/vertical-mode", vertical_mode);
-# setting heading
+    if (getprop("/autopilot/heading_overlay")) {
         var true_heading = getprop("/sim/presets/heading-deg");
         var magnetic_offset = getprop("/environment/magnetic-variation-deg");
         var magnetic_heading = true_heading + magnetic_offset;
         setprop("/autopilot/source/heading-bug-deg", magnetic_heading);
-        print("HeadingOverlay requested... heading-bug set to ", magnetic_heading, "°");
-      }
-
-      start_autopilot_in_air.stop();
-    });
-    start_autopilot_in_air.singleShot = 1;
-    start_autopilot_in_air.start();
-  }
+        print("Heading-bug set to ", magnetic_heading, "°");
+        apstart();
+        fdstart();
+        vnccstart();
+    }
 
   # override saved aircraft-data. It stores some useless data, and ignores some useful data.
   saveState.update_saveState();
@@ -380,6 +331,82 @@ setlistener("/sim/signals/fdm-initialized", func {
 #                      props.globals.getNode ("/instrumentation/nav[1]"));
 });
 
+
+var apstart = func{
+    if (getprop("/autopilot/mode/serviceable")) {
+        print("Starting AP ...");
+        var overlay_name = getprop("/autopilot/overlay-name");
+        if (overlay_name != nil) {
+            if (overlay_name == "cruise") {
+                var low_bank = 1;
+                var yaw_damper = 1;
+                var soft_ride = 1;
+            }
+            if (overlay_name == "approach") {
+                var low_bank = 0;
+                var yaw_damper = 0;
+                var soft_ride = 0;
+            }
+            setprop("/autopilot/mode/engaged", 1);
+            setprop("/autopilot/mode/low-bank", low_bank);
+            setprop("/autopilot/mode/yaw-damper", yaw_damper);
+            setprop("/autopilot/mode/soft-ride", soft_ride);
+            print("AP engaged");
+        }
+    }
+    else {
+        settimer(apstart,1);
+    }
+}
+
+var fdstart = func{
+    if (getprop("/autopilot/ms-205/serviceable")) {
+        print("Starting FD ...");
+        var overlay_name = getprop("/autopilot/overlay-name");
+        if (overlay_name != nil) {
+            if (overlay_name == "cruise") {
+                var lateral_mode = 0;
+                var vertical_mode = 1;
+                var target_altitude = 36000;
+            }
+            if (overlay_name == "approach") {
+                var lateral_mode = 0;
+                var vertical_mode = 0;
+                var target_altitude = 3000;
+            }
+            setprop("/autopilot/ms-205[0]/mode/state", 1);
+            setprop("/autopilot/ms-205[0]/mode/lateral-mode", lateral_mode);
+            setprop("/autopilot/ms-205[0]/mode/vertical-mode", vertical_mode);
+            setprop("/autopilot/ms-205[0]/target/altitude-ft", target_altitude);
+            print("FD engaged");
+        }
+    }
+    else {
+        settimer(fdstart,1);
+    }
+}
+
+var vnccstart = func{
+    if (getprop("/autopilot/vn-212/serviceable")) {
+        print("Starting VNCC ...");
+        var overlay_name = getprop("/autopilot/overlay-name");
+        if (overlay_name != nil) {
+            if (overlay_name == "cruise") {
+                var target_altitude = 36000;
+            }
+            if (overlay_name == "approach") {
+                var target_altitude = 3000;
+            }
+            setprop("/autopilot/vn-212/select", 4);
+            setprop("/autopilot/vn-212/altitude-select", target_altitude);
+            print("VNCC engaged");
+        }
+    }
+    else {
+        settimer(vnccstart,1);
+    }
+}
+
 setlistener("/sim/current-view/internal", func(vw){
     if(vw.getBoolValue()){
         SndIn.setDoubleValue(0.75);
@@ -398,18 +425,6 @@ setlistener("sim/model/autostart", func(strt) {
     }
 },0,0);
 
-var Startup = func{
-    setprop("controls/electric/avionics-switch",1);
-    setprop("controls/electric/battery-bus-switch",1);
-    setprop("controls/electric/inverter-switch",1);
-    setprop("controls/lighting/panel-lights-switch",1);
-    setprop("controls/lighting/nav-lights-switch",1);
-    setprop("controls/lighting/beacon-switch",1);
-    setprop("controls/lighting/strobe-switch",1);
-    setprop("controls/engines/throttle_idle",1);
-    LHeng.autostart();
-    RHeng.autostart();
-}
 
 var Shutdown = func{
     setprop("controls/electric/avionics-switch",0);
@@ -517,6 +532,18 @@ var update_systems = func() {
 
     settimer(update_systems,0);
 }
+
+var vsi_test = func() {
+    var speed = getprop("/instrumentation/vertical-speed-indicator/indicated-speed-fpm");
+    var latch = getprop("/instrumentation/vertical-speed-indicator/indicated-speed-latch");
+    var filter = getprop("/instrumentation/vertical-speed-indicator/indicated-speed-fpm-filtered");
+    var static = getprop("/systems/static/pressure-inhg");
+    var press = getprop("/environment/pressure-inhg");
+    var fdm   = getprop("/sim/signals/fdm-initialized");
+    printf("Pressure: %f / Static: %f / Speed: %f / Filter: %f / Latch: %d / FDM: %d", press, static, speed, filter, latch, fdm);
+    settimer(vsi_test,0.1);
+}
+#vsi_test();
 
 ### own Fuel and Payload dialog
 gui.menuBind("fuel-and-payload", "gui.showDialog('Citation-II-fuel_and_payload')");

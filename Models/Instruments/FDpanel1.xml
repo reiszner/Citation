@@ -7,8 +7,8 @@
         <object-name>off</object-name>
         <property>autopilot/ms-205[0]/panel/off</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -56,8 +56,8 @@
         <object-name>hdg</object-name>
         <property>autopilot/ms-205[0]/panel/hdg</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -107,8 +107,8 @@
         <object-name>nav</object-name>
         <property>autopilot/ms-205[0]/panel/nav</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -222,8 +222,8 @@
         <object-name>apr</object-name>
         <property>autopilot/ms-205[0]/panel/apr</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -309,8 +309,8 @@
         <object-name>bc</object-name>
         <property>autopilot/ms-205[0]/panel/bc</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -396,8 +396,8 @@
         <object-name>hsi</object-name>
         <property>autopilot/ms-205[0]/panel/hsi</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -491,8 +491,8 @@
         <object-name>alt</object-name>
         <property>autopilot/ms-205[0]/panel/alt</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -542,8 +542,8 @@
         <object-name>altsel</object-name>
         <property>autopilot/ms-205[0]/panel/altsel</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -637,8 +637,8 @@
         <object-name>vnav</object-name>
         <property>autopilot/ms-205[0]/panel/vnav</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -723,8 +723,8 @@
         <object-name>vs</object-name>
         <property>autopilot/ms-205[0]/panel/vs</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>
@@ -774,8 +774,8 @@
         <object-name>ias</object-name>
         <property>autopilot/ms-205[0]/panel/ias</property>
         <interpolation>
-            <entry><ind>0.0</ind><dep>1.0</dep></entry>
-            <entry><ind>1.0</ind><dep>0.0</dep></entry>
+            <entry><ind>0.0</ind><dep>0.0</dep></entry>
+            <entry><ind>1.0</ind><dep>1.0</dep></entry>
         </interpolation>
         <axis>
             <object-name>axis</object-name>

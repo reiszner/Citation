@@ -243,7 +243,7 @@ Sascha Reißner
         <type>rotate</type>
         <object-name>ctl62.toggle</object-name>
         <property>instrumentation/ctl62[0]/toggle</property>
-        <factor>-20</factor>
+        <factor>20</factor>
         <axis>
             <object-name>ctl62.toggle-axis</object-name>
         </axis>

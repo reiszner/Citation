@@ -5,11 +5,8 @@
   <name type="string" n="3">cruise</name>
 
   <description>
-    You will start the sim on cruise level, FL 360 with autopilot
-    engaged, set to
-    "autothrottle"
-    "true heading"
-    "altitude hold"
+    You will start the sim on cruise level, FL360 with autopilot
+    and FD engaged, set to HDG (heading) and ALT (altitude hold)
 
     Start this state with --state=cruise
 
@@ -24,19 +21,7 @@
     <autopilot>
       <heading_overlay type="bool">true</heading_overlay>
       <overlay-name type="string">cruise</overlay-name>
-
-      <settings>
-        <target-altitude-ft type="double">36000</target-altitude-ft>
-        <target-speed-kt type="double">220</target-speed-kt>
-      </settings>
-
-      <mode>
-        <engaged type="bool">true</engaged>
-        <yaw-damper type="bool">true</yaw-damper>
-        <low-bank type="bool">true</low-bank>
-      </mode>
     </autopilot>
-
 
     <consumables>
       <fuel>
@@ -46,7 +31,6 @@
       </fuel>
     </consumables>
 
-
     <controls>
       <electric>
         <avionics-switch type="bool">true</avionics-switch>
@@ -54,7 +38,7 @@
         <voltage-sel type="int">0</voltage-sel>
         <system-test-sw type="int">0</system-test-sw>
         <fuel-sel type="int">0</fuel-sel>
-        <engine>
+        <engine n="0">
           <generator-ready type="bool">true</generator-ready>
           <generator-sw type="int">1</generator-sw>
         </engine>
@@ -66,15 +50,24 @@
 
       <engines>
         <engine n="0">
+          <cutoff type="bool">false</cutoff>
+          <combusting type="bool">true</combusting>
           <ignition-sw type="bool">false</ignition-sw>
-          <throttle-lever type="double">1.0</throttle-lever>
+          <reverser type="bool">false</reverser>
+          <throttle type="double">0.95</throttle>
         </engine>
-
         <engine n="1">
+          <cutoff type="bool">false</cutoff>
+          <combusting type="bool">true</combusting>
           <ignition-sw type="bool">false</ignition-sw>
-          <throttle-lever type="double">1.0</throttle-lever>
+          <reverser type="bool">false</reverser>
+          <throttle type="double">0.95</throttle>
         </engine>
       </engines>
+
+      <flight>
+        <flaps type="double">0.0</flaps>
+      </flight>
 
       <fuel>
         <tank n="0">
@@ -87,26 +80,31 @@
 
       <gear>
         <brake-parking type="double">0</brake-parking>
-        <gear-down type="bool">false</gear-down>
+        <gear-lever-cmd type="bool">false</gear-lever-cmd>
       </gear>
 
       <lighting>
         <beacon-switch type="bool">true</beacon-switch>
         <nav-lights-switch type="bool">true</nav-lights-switch>
         <strobe-switch type="bool">false</strobe-switch>
+        <landing-light-switch n="0" type="bool">false</landing-light-switch>
+        <landing-light-switch n="1" type="bool">false</landing-light-switch>
         <recog-lights-switch type="bool">false</recog-lights-switch>
 
         <panel-lights-switch type="bool">true</panel-lights-switch>
-        <instrument-light-norm type="double">0.5</instrument-light-norm>
+        <instrument-light-norm type="double">0.4</instrument-light-norm>
         <left-panel-norm type="double">0.2</left-panel-norm>
         <center-panel-norm type="double">0.2</center-panel-norm>
         <right-panel-norm type="double">0.2</right-panel-norm>
       </lighting>
+
+      <anti-ice>
+        <window-heat-sw type="int">1</window-heat-sw>
+      </anti-ice>
     </controls>
 
-
     <engines>
-      <engine>
+      <engine n="0">
         <started type="bool">true</started>
         <running type="bool">true</running>
       </engine>
@@ -118,7 +116,7 @@
     </engines>
 
     <gear>
-      <gear>
+      <gear n="0">
         <position-norm type="float">0</position-norm>
       </gear>
       <gear n="1">
@@ -128,6 +126,10 @@
         <position-norm type="float">0</position-norm>
       </gear>
     </gear>
+
+    <environment>
+      <overlay type="bool">false</overlay>
+    </environment>
 
     <sim>
       <presets>

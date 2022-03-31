@@ -14,7 +14,9 @@
 
   <overlay>
 
-
+    <environment>
+      <overlay type="bool">false</overlay>
+    </environment>
 
   </overlay>
 

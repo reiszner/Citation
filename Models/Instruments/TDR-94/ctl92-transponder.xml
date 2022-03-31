@@ -438,8 +438,8 @@ the centers are:
         <type>knob</type>
         <object-name>ctl92.toggle</object-name>
         <property>instrumentation/ctl92[0]/active</property>
-        <factor>40</factor>
-        <offset>-20</offset>
+        <factor>-40</factor>
+        <offset> 20</offset>
         <axis>
             <object-name>ctl92.toggle-axis</object-name>
         </axis>

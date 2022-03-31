@@ -1456,6 +1456,7 @@
     <type>translate</type>
     <object-name>cb.dc.comm2</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-comm2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1485,6 +1486,7 @@
     <type>translate</type>
     <object-name>cb.dc.nav1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-nav1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1514,6 +1516,7 @@
     <type>translate</type>
     <object-name>cb.dc.dme1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-dme1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1543,6 +1546,7 @@
     <type>translate</type>
     <object-name>cb.dc.xpdr1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-xpdr1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1572,6 +1576,7 @@
     <type>translate</type>
     <object-name>cb.dc.adf1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-adf1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1601,6 +1606,7 @@
     <type>translate</type>
     <object-name>cb.dc.audio1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-audio1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1630,6 +1636,7 @@
     <type>translate</type>
     <object-name>cb.dc.phone</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-phone</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1659,6 +1666,7 @@
     <type>translate</type>
     <object-name>cb.dc.ap</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-ap</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1688,6 +1696,7 @@
     <type>translate</type>
     <object-name>cb.dc.efis.disp</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-efis-disp</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1717,6 +1726,7 @@
     <type>translate</type>
     <object-name>cb.dc.efis.efis</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-efis-efis</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1746,6 +1756,7 @@
     <type>translate</type>
     <object-name>cb.dc.efis.adi</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-efis-adi</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1775,6 +1786,7 @@
     <type>translate</type>
     <object-name>cb.dc.efis.hsi</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-efis-hsi</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1804,6 +1816,7 @@
     <type>translate</type>
     <object-name>cb.dc.voice_adv</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-voice-adv</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1833,6 +1846,7 @@
     <type>translate</type>
     <object-name>cb.dc.radalt</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-radalt</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1862,6 +1876,7 @@
     <type>translate</type>
     <object-name>cb.dc.fd1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-fd1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1891,6 +1906,7 @@
     <type>translate</type>
     <object-name>cb.dc.rmi1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-rmi1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1920,6 +1936,7 @@
     <type>translate</type>
     <object-name>cb.dc.dg1</object-name>
     <property>controls/electric/circuit-breakers/main-left-xover/cb-dc-dg1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1955,6 +1972,7 @@
     <type>translate</type>
     <object-name>cb.bus.right.1</object-name>
     <property>controls/electric/circuit-breakers/cb-main-right-1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -1984,6 +2002,7 @@
     <type>translate</type>
     <object-name>cb.bus.right.2</object-name>
     <property>controls/electric/circuit-breakers/cb-main-right-2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2013,6 +2032,7 @@
     <type>translate</type>
     <object-name>cb.bus.right.3</object-name>
     <property>controls/electric/circuit-breakers/cb-main-right-3</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2042,6 +2062,7 @@
     <type>translate</type>
     <object-name>cb.bus.right.starter</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-right-starter</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2071,6 +2092,7 @@
     <type>translate</type>
     <object-name>cb.bus.right.inverter</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-right-inverter</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2100,6 +2122,7 @@
     <type>translate</type>
     <object-name>cb.bus.right.x-over</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-right-xover</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2131,6 +2154,7 @@
     <type>translate</type>
     <object-name>cb.engine.fan.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-fan-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2160,6 +2184,7 @@
     <type>translate</type>
     <object-name>cb.engine.itt.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-itt-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2189,6 +2214,7 @@
     <type>translate</type>
     <object-name>cb.engine.turbine.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-turbine-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2218,6 +2244,7 @@
     <type>translate</type>
     <object-name>cb.engine.fuelflow.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-fuelflow-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2247,6 +2274,7 @@
     <type>translate</type>
     <object-name>cb.engine.qty.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-qty-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2276,6 +2304,7 @@
     <type>translate</type>
     <object-name>cb.engine.oilt.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-oilt-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2305,6 +2334,7 @@
     <type>translate</type>
     <object-name>cb.engine.oilp.right</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-engine-oilp-right</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2336,6 +2366,7 @@
     <type>translate</type>
     <object-name>cb.dc.dme2</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-dme2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2365,6 +2396,7 @@
     <type>translate</type>
     <object-name>cb.dc.xpdr2</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-xpdr2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2394,6 +2426,7 @@
     <type>translate</type>
     <object-name>cb.dc.adf2</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-adf2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2423,6 +2456,7 @@
     <type>translate</type>
     <object-name>cb.dc.comm3</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-comm3</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2452,6 +2486,7 @@
     <type>translate</type>
     <object-name>cb.dc.audio2</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-audio2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2481,6 +2516,7 @@
     <type>translate</type>
     <object-name>cb.dc.warn</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-warn</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2510,6 +2546,7 @@
     <type>translate</type>
     <object-name>cb.dc.nav.area</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-nav-area</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2539,6 +2576,7 @@
     <type>translate</type>
     <object-name>cb.dc.gpws</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-gpws</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2568,6 +2606,7 @@
     <type>translate</type>
     <object-name>cb.dc.tas_htr</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-tas-htr</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2597,6 +2636,7 @@
     <type>translate</type>
     <object-name>cb.dc.nav.vlf</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-nav-vlf</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2626,6 +2666,7 @@
     <type>translate</type>
     <object-name>cb.dc.nav.db</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-nav-db</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2655,6 +2696,7 @@
     <type>translate</type>
     <object-name>cb.dc.fms</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-fms</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2684,6 +2726,7 @@
     <type>translate</type>
     <object-name>cb.dc.radar</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-radar</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2713,6 +2756,7 @@
     <type>translate</type>
     <object-name>cb.dc.fd2</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-fd2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -2742,6 +2786,7 @@
     <type>translate</type>
     <object-name>cb.dc.rmi2</object-name>
     <property>controls/electric/circuit-breakers/main-right/cb-dc-rmi2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3305,6 +3350,7 @@
     <type>translate</type>
     <object-name>cb.ac.ap</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-ap</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3334,6 +3380,7 @@
     <type>translate</type>
     <object-name>cb.ac.fd1</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-fd1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3363,6 +3410,7 @@
     <type>translate</type>
     <object-name>cb.ac.air_data</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-air-data</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3392,6 +3440,7 @@
     <type>translate</type>
     <object-name>cb.ac.vgyro1</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-vgyro1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3421,6 +3470,7 @@
     <type>translate</type>
     <object-name>cb.ac.radar</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-radar</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3450,6 +3500,7 @@
     <type>translate</type>
     <object-name>cb.ac.fd2</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-fd2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3479,6 +3530,7 @@
     <type>translate</type>
     <object-name>cb.ac.vgyro2</object-name>
     <property>controls/electric/circuit-breakers/AC-115V/cb-ac-vgyro2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3514,6 +3566,7 @@
     <type>translate</type>
     <object-name>cb.ac.nav1</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-nav1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3543,6 +3596,7 @@
     <type>translate</type>
     <object-name>cb.ac.rmi_adf1</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-rmi-adf1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3572,6 +3626,7 @@
     <type>translate</type>
     <object-name>cb.ac.hsi1</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-hsi1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3601,6 +3656,7 @@
     <type>translate</type>
     <object-name>cb.ac.adi1</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-adi1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3630,6 +3686,7 @@
     <type>translate</type>
     <object-name>cb.ac.gpws</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-gpws</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3659,6 +3716,7 @@
     <type>translate</type>
     <object-name>cb.ac.nav2</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-nav2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3688,6 +3746,7 @@
     <type>translate</type>
     <object-name>cb.ac.rmi_adf2</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-rmi-adf2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3717,6 +3776,7 @@
     <type>translate</type>
     <object-name>cb.ac.hsi2</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-hsi2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3746,6 +3806,7 @@
     <type>translate</type>
     <object-name>cb.ac.adi2</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-adi2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3775,6 +3836,7 @@
     <type>translate</type>
     <object-name>cb.ac.efis</object-name>
     <property>controls/electric/circuit-breakers/AC-26V/cb-ac-efis</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3810,6 +3872,7 @@
     <type>translate</type>
     <object-name>cb.dc.nav2</object-name>
     <property>controls/electric/circuit-breakers/emer/cb-dc-nav2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3839,6 +3902,7 @@
     <type>translate</type>
     <object-name>cb.dc.comm1</object-name>
     <property>controls/electric/circuit-breakers/emer/cb-dc-comm1</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3868,6 +3932,7 @@
     <type>translate</type>
     <object-name>cb.dc.dg2</object-name>
     <property>controls/electric/circuit-breakers/emer/cb-dc-dg2</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
@@ -3897,6 +3962,7 @@
     <type>translate</type>
     <object-name>cb.light.flood</object-name>
     <property>controls/electric/circuit-breakers/emer/cb-light-flood</property>
+    <factor>-1</factor>
     <axis>
       <object-name>panel.right.axis</object-name>
     </axis>
