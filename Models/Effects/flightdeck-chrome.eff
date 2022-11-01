@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Citation II chrome effect for flightdeck parts. Reflection dynamic is off -->
 <PropertyList>
-    <name>chrome-flightdeck</name>
+    <name>flightdeck-chrome</name>
     <inherits-from>Effects/model-combined-deferred</inherits-from>
     <parameters>
 
@@ -15,12 +15,12 @@
         <texture n="5">
             <type>cubemap</type>
             <images>
-                <positive-x>Aircraft/Citation/Models/Effects/chrome-flightdeck/1.png</positive-x>
-                <negative-x>Aircraft/Citation/Models/Effects/chrome-flightdeck/4.png</negative-x>
-                <positive-y>Aircraft/Citation/Models/Effects/chrome-flightdeck/3.png</positive-y>
-                <negative-y>Aircraft/Citation/Models/Effects/chrome-flightdeck/2.png</negative-y>
-                <positive-z>Aircraft/Citation/Models/Effects/chrome-flightdeck/6.png</positive-z>
-                <negative-z>Aircraft/Citation/Models/Effects/chrome-flightdeck/5.png</negative-z>
+                <positive-x>Aircraft/Citation/Models/Effects/flightdeck-chrome/1.png</positive-x>
+                <negative-x>Aircraft/Citation/Models/Effects/flightdeck-chrome/4.png</negative-x>
+                <positive-y>Aircraft/Citation/Models/Effects/flightdeck-chrome/3.png</positive-y>
+                <negative-y>Aircraft/Citation/Models/Effects/flightdeck-chrome/2.png</negative-y>
+                <positive-z>Aircraft/Citation/Models/Effects/flightdeck-chrome/6.png</positive-z>
+                <negative-z>Aircraft/Citation/Models/Effects/flightdeck-chrome/5.png</negative-z>
             </images>
         </texture>
         <reflection-fresnel type="float">0.0</reflection-fresnel>

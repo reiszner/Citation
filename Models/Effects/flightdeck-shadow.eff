@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <PropertyList>
-    <name>shadow-flightdeck</name>
+    <name>flightdeck-shadow</name>
     <inherits-from>Effects/model-interior</inherits-from>
     <parameters>
         <texture n="4">
             <type>cubemap</type>
             <images>
-                <positive-x>Aircraft/Citation/Models/Effects/shadow-flightdeck/back.png</positive-x>
-                <negative-x>Aircraft/Citation/Models/Effects/shadow-flightdeck/front.png</negative-x>
-                <positive-y>Aircraft/Citation/Models/Effects/shadow-flightdeck/right.png</positive-y>
-                <negative-y>Aircraft/Citation/Models/Effects/shadow-flightdeck/left.png</negative-y>
-                <positive-z>Aircraft/Citation/Models/Effects/shadow-flightdeck/up.png</positive-z>
-                <negative-z>Aircraft/Citation/Models/Effects/shadow-flightdeck/down.png</negative-z>
+                <positive-x>Aircraft/Citation/Models/Effects/flightdeck-shadow/back.png</positive-x>
+                <negative-x>Aircraft/Citation/Models/Effects/flightdeck-shadow/front.png</negative-x>
+                <positive-y>Aircraft/Citation/Models/Effects/flightdeck-shadow/right.png</positive-y>
+                <negative-y>Aircraft/Citation/Models/Effects/flightdeck-shadow/left.png</negative-y>
+                <positive-z>Aircraft/Citation/Models/Effects/flightdeck-shadow/up.png</positive-z>
+                <negative-z>Aircraft/Citation/Models/Effects/flightdeck-shadow/down.png</negative-z>
             </images>
         </texture>
         <opacity-cube-center type="vec3d" n="0">2.923 0.0 0.6</opacity-cube-center>

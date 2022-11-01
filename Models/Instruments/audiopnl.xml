@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
     <path>audiopnl.ac</path>
@@ -662,7 +663,7 @@
     </animation>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>AudioPnl</object-name>
         <object-name>AudioPnl.volume</object-name>
         <object-name>AudioPnl.knob1</object-name>

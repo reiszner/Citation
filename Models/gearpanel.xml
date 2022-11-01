@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>gearpanel.ac</path>
@@ -284,7 +284,7 @@
 
 <!-- Chrome Effect! -->
     <effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-chrome</inherits-from>
         <object-name>panel.gear.antiskid.sw.pivot</object-name>
     </effect>
 
@@ -296,7 +296,7 @@
                 <value>0</value>
             </equals>
         </condition>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>panel.gear</object-name>
         <object-name>panel.gear.lever</object-name>
         <object-name>panel.gear.silence</object-name>

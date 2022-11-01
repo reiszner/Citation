@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version='1.0' encoding='utf-8'?>
 <!--
 Author : Syd Adams
 Citation magnetic compass
@@ -52,12 +52,12 @@ Citation magnetic compass
     </animation>
 
     <effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
+        <inherits-from>/Models/Effects/flightdeck-glass</inherits-from>
         <object-name>magcompass.glass</object-name>
     </effect>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>magcompass.housing</object-name>
         <object-name>magcompass.holding</object-name>
         <object-name>magcompass.rose</object-name>

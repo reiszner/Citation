@@ -1,4 +1,4 @@
-<?xml version = '1.0' encoding = 'UTF-8' ?>
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>cabin.ac</path>
@@ -665,7 +665,7 @@
 
   <!-- Chrome Effect for interior parts -->
   <effect>
-    <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+    <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-chrome</inherits-from>
     <object-name>Ladder.lRope</object-name>
     <object-name>Ladder.rRope</object-name>
     <object-name>RfrshmntCntr.handles</object-name>

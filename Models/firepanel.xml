@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
     <path>firepanel.ac</path>
@@ -438,14 +438,14 @@
 
 <!-- glass effect -->
     <effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-glass</inherits-from>
         <object-name>fire.shutoff.left.cover</object-name>
         <object-name>fire.shutoff.right.cover</object-name>
     </effect>
 
 <!-- Chrome Effect! -->
     <effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-chrome</inherits-from>
         <object-name>rev.left.emer-sw</object-name>
         <object-name>rev.right.emer-sw</object-name>
     </effect>
@@ -458,7 +458,7 @@
                 <value>0</value>
             </equals>
         </condition>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>fire.panel</object-name>
         <object-name>fire.shutoff.left.btn</object-name>
         <object-name>fire.shutoff.right.btn</object-name>

@@ -1325,12 +1325,12 @@ the centers are:
     </animation>
 
     <effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
+        <inherits-from>/Models/Effects/flightdeck-glass</inherits-from>
         <object-name>ctl22.glass</object-name>
     </effect>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>ctl22.bezel</object-name>
         <object-name>ctl22.metal</object-name>
         <object-name>ctl22.pwr</object-name>

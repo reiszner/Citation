@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>rmi.ac</path>
@@ -193,12 +193,12 @@
     </animation>
 
     <effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
+        <inherits-from>/Models/Effects/flightdeck-glass</inherits-from>
         <object-name>RMI.glass</object-name>
     </effect>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>RMI.DoubleArrow.SelectionIndicator.ADF</object-name>
         <object-name>RMI.DoubleArrow.SelectionIndicator.VOR</object-name>
         <object-name>RMI.SingleArrow.SelectionIndicator.ADF</object-name>

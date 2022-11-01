@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>oat.ac</path>
@@ -50,12 +51,12 @@
     </animation>
 
     <effect>
-        <inherits-from>Effects/model-transparent</inherits-from>
+        <inherits-from>/Models/Effects/flightdeck-glass</inherits-from>
         <object-name>oat.glass</object-name>
     </effect>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>oat.bezel</object-name>
         <object-name>oat.face</object-name>
         <object-name>oat.needle</object-name>

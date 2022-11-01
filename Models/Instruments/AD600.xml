@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
     <path>AD600.ac</path>
@@ -335,14 +336,13 @@
     </animation>
 
     <effect>
-        <!--inherits-from>Effects/model-transparent</inherits-from-->
-        <inherits-from>Aircraft/Citation/Models/Effects/cockpit-reflection</inherits-from>
+        <inherits-from>/Models/Effects/flightdeck-glass</inherits-from>
         <object-name>AD600.glass</object-name>
         <object-name>AD600.pipe</object-name>
     </effect>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>AD600.housing</object-name>
         <object-name>AD600.testknob</object-name>
         <object-name>AD600.ball</object-name>

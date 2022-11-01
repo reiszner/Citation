@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version='1.0' encoding='utf-8'?>
 <!--
 Author : Sascha Reißner
 Sperry PC-500 Autopilot Controller
@@ -483,7 +483,7 @@ Sperry PC-500 Autopilot Controller
     </animation>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>bezel</object-name>
         <object-name>pitch-wheel</object-name>
         <object-name>turn-knob</object-name>

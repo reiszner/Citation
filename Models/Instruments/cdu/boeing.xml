@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
     <path>boeing.ac</path>
@@ -1809,7 +1810,7 @@
     </animation>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>CDU</object-name>
         <object-name>CDuscreen</object-name>
         <object-name>Cylinder.038</object-name>

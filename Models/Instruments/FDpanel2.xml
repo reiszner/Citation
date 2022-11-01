@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
     <path>FDpanel.ac</path>
@@ -1634,7 +1635,7 @@
     </animation>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>bezel</object-name>
         <object-name>Circle.001</object-name>
         <object-name>Circle.002</object-name>

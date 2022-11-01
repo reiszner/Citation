@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>Citation-II.ac</path>
@@ -287,194 +288,10 @@
 
   </animation>
 
-  <!-- Chrome effect 
-  <effect>
-    <inherits-from>Aircraft/Citation/Models/Effects/chrome-exterior</inherits-from>
-
-    <object-name>engine.left.intake</object-name>
-    <object-name>engine.left.intake.cone</object-name>
-    <object-name>engine.left.rev.down.door</object-name>
-    <object-name>engine.left.rev.link.cover</object-name>
-    <object-name>engine.left.rev.up.door</object-name>
-    <object-name>engine.left.turbine.cone</object-name>
-    <object-name>engine.right.intake</object-name>
-    <object-name>engine.right.intake.cone</object-name>
-    <object-name>engine.right.rev.down.door</object-name>
-    <object-name>engine.right.rev.link.cover</object-name>
-    <object-name>engine.right.rev.up.door</object-name>
-    <object-name>engine.right.turbine.cone</object-name>
-
-    <object-name>wing.left.heater1</object-name>
-    <object-name>wing.left.heater2</object-name>
-    <object-name>wing.right.heater1</object-name>
-    <object-name>wing.right.heater2</object-name>
-
-    <object-name>wing.left.recog.light</object-name>
-    <object-name>wing.right.recog.light</object-name>
-
-    <object-name>wing.left.light.flasher</object-name>
-    <object-name>wing.right.light.flasher</object-name>
-
-    <object-name>door.handle</object-name>
-    <object-name>pitot.tubes</object-name>
-
-    <object-name>gear.nose.fitting.lock</object-name>
-    <object-name>gear.nose.piston</object-name>
-    <object-name>gear.nose.strut</object-name>
-
-    <object-name>gear.left.light.inside</object-name>
-    <object-name>gear.left.piston</object-name>
-    <object-name>gear.left.strut</object-name>
-    <object-name>gear.left.uplock</object-name>
-
-    <object-name>gear.right.light.inside</object-name>
-    <object-name>gear.right.piston</object-name>
-    <object-name>gear.right.strut</object-name>
-    <object-name>gear.right.uplock</object-name>
-
-    <object-name>wing.left.spdbrk.actu.piston</object-name>
-    <object-name>wing.right.spdbrk.actu.piston</object-name>
-  </effect>
--->
-  <!-- REFLECTION, NormalMap -->
-  <effect>
-    <inherits-from>Aircraft/Citation/Models/Effects/reflection-exterior</inherits-from>
-    <object-name>engine.left.cowling</object-name>
-    <object-name>engine.left.drain.cover</object-name>
-    <object-name>engine.left.intake.cooling</object-name>
-    <object-name>engine.left.nozzle.cover</object-name>
-    <object-name>engine.right.cowling</object-name>
-    <object-name>engine.right.drain.cover</object-name>
-    <object-name>engine.right.intake.cooling</object-name>
-    <object-name>engine.right.nozzle.cover</object-name>
-
-    <object-name>fuselage</object-name>
-    <object-name>pylons</object-name>
-    <object-name>fin</object-name>
-    <object-name>fin.static.mount</object-name>
-    <object-name>rudder</object-name>
-    <object-name>rudder.trim</object-name>
-    <object-name>rudder.static.mount1</object-name>
-    <object-name>rudder.static.mount2</object-name>
-    <object-name>hstab</object-name>
-    <object-name>elevator.left</object-name>
-    <object-name>elevator.left.static.mount1</object-name>
-    <object-name>elevator.left.static.mount2</object-name>
-    <object-name>elevator.right</object-name>
-    <object-name>elevator.right.static.mount1</object-name>
-    <object-name>elevator.right.static.mount2</object-name>
-    <object-name>elevator.trim</object-name>
-    <object-name>door</object-name>
-
-    <object-name>wing.left.area1</object-name>
-    <object-name>wing.left.area2</object-name>
-    <object-name>wing.left.area3</object-name>
-    <object-name>wing.left.tip</object-name>
-    <object-name>wing.left.aileron.tab</object-name>
-    <object-name>wing.trim.tab</object-name>
-    <object-name>wing.left.flap.tab</object-name>
-    <object-name>wing.left.spdbrk.up.surf</object-name>
-    <object-name>wing.left.spdbrk.down.surf</object-name>
-    <object-name>wing.left.spdbrk.down.hinges</object-name>
-    <object-name>wing.left.static.mount1</object-name>
-    <object-name>wing.left.static.mount2</object-name>
-    <object-name>wing.left.static.mount3</object-name>
-    <object-name>wing.left.static.mount4</object-name>
-
-    <object-name>wing.right.area1</object-name>
-    <object-name>wing.right.area2</object-name>
-    <object-name>wing.right.area3</object-name>
-    <object-name>wing.right.tip</object-name>
-    <object-name>wing.right.aileron.tab</object-name>
-    <object-name>wing.right.flap.tab</object-name>
-    <object-name>wing.right.spdbrk.up.surf</object-name>
-    <object-name>wing.right.spdbrk.down.surf</object-name>
-    <object-name>wing.right.spdbrk.down.hinges</object-name>
-    <object-name>wing.right.static.mount1</object-name>
-    <object-name>wing.right.static.mount2</object-name>
-    <object-name>wing.right.static.mount3</object-name>
-    <object-name>wing.right.static.mount4</object-name>
-
-    <object-name>baggage.door.left</object-name>
-    <object-name>baggage.door.right</object-name>
-    <object-name>baggage.door.aft</object-name>
-
-    <object-name>gear.nose.door</object-name>
-    <object-name>gear.nose.left.door</object-name>
-    <object-name>gear.nose.right.door</object-name>
-
-    <object-name>gear.left.door.blade</object-name>
-    <object-name>gear.right.door.blade</object-name>
-  </effect>
-
-  <!-- glass effect 
-  <effect>
-    <inherits-from>Effects/model-transparent</inherits-from>
-    <object-name>door.glass.inside</object-name>
-    <object-name>cockpit.glass.inside</object-name>
-    <object-name>cockpit.window.inside</object-name>
-    <object-name>window.glass.inside</object-name>
-
-    <object-name>wing.left.recog.glass</object-name>
-    <object-name>wing.right.recog.glass</object-name>
-
-    <object-name>wing.left.light.glass</object-name>
-    <object-name>wing.right.light.glass</object-name>
-    <object-name>wing.left.light.nav.on</object-name>
-    <object-name>wing.left.light.nav.off</object-name>
-    <object-name>wing.right.light.nav.on</object-name>
-    <object-name>wing.right.light.nav.off</object-name>
-    <object-name>gear.left.light.glass</object-name>
-    <object-name>gear.right.light.glass</object-name>
-
-    <object-name>nav.red.light</object-name>
-    <object-name>nav.red.light.corona</object-name>
-    <object-name>nav.green.light</object-name>
-    <object-name>nav.green.light.corona</object-name>
-    <object-name>nav.white.light</object-name>
-    <object-name>nav.white.light.corona</object-name>
-
-    <object-name>beacon.on</object-name>
-    <object-name>beacon.off</object-name>
-    <object-name>beacon.light</object-name>
-    <object-name>beacon.light.corona</object-name>
-
-    <object-name>recog.left.corona</object-name>
-    <object-name>recog.left.dazzle</object-name>
-    <object-name>recog.right.corona</object-name>
-    <object-name>recog.right.dazzle</object-name>
-
-    <object-name>strobe.left.light</object-name>
-    <object-name>strobe.right.light</object-name>
-
-    <object-name>gear.left.light.corona</object-name>
-    <object-name>gear.left.light.dazzle</object-name>
-    <object-name>gear.right.light.corona</object-name>
-    <object-name>gear.right.light.dazzle</object-name>
-  </effect>
--->
-
-  <!-- ALS cockpit glass effect (rain, frost, fog) -->
-  <effect>
-    <inherits-from>Effects/glass</inherits-from>
-    <object-name>door.glass</object-name>
-    <object-name>cockpit.glass</object-name>
-    <object-name>cockpit.window</object-name>
-    <object-name>window.glass</object-name>
-  </effect>
-
-
   <!--model>
-    <name>transtest</name>
-    <path>Aircraft/Citation/Models/transtest.xml</path>
-    <offsets>
-      <x-m>-2</x-m>
-      <y-m>0</y-m>
-      <z-m>0</z-m>
-      <pitch-deg>0</pitch-deg>
-    </offsets>
+    <name>cube</name>
+    <path>Aircraft/Citation/Models/cube.xml</path>
   </model-->
-
 
   <model>
     <name>cabin</name>
@@ -5581,5 +5398,181 @@
       <object-name>flightdeck.window.pivot.axis</object-name>
     </axis>
   </animation>
+
+  <!-- Chrome effect
+  <effect>
+    <inherits-from>Aircraft/Citation/Models/Effects/chrome-exterior</inherits-from>
+
+    <object-name>engine.left.intake</object-name>
+    <object-name>engine.left.intake.cone</object-name>
+    <object-name>engine.left.rev.down.door</object-name>
+    <object-name>engine.left.rev.link.cover</object-name>
+    <object-name>engine.left.rev.up.door</object-name>
+    <object-name>engine.left.turbine.cone</object-name>
+    <object-name>engine.right.intake</object-name>
+    <object-name>engine.right.intake.cone</object-name>
+    <object-name>engine.right.rev.down.door</object-name>
+    <object-name>engine.right.rev.link.cover</object-name>
+    <object-name>engine.right.rev.up.door</object-name>
+    <object-name>engine.right.turbine.cone</object-name>
+
+    <object-name>wing.left.heater1</object-name>
+    <object-name>wing.left.heater2</object-name>
+    <object-name>wing.right.heater1</object-name>
+    <object-name>wing.right.heater2</object-name>
+
+    <object-name>wing.left.recog.light</object-name>
+    <object-name>wing.right.recog.light</object-name>
+
+    <object-name>wing.left.light.flasher</object-name>
+    <object-name>wing.right.light.flasher</object-name>
+
+    <object-name>door.handle</object-name>
+    <object-name>pitot.tubes</object-name>
+
+    <object-name>gear.nose.fitting.lock</object-name>
+    <object-name>gear.nose.piston</object-name>
+    <object-name>gear.nose.strut</object-name>
+
+    <object-name>gear.left.light.inside</object-name>
+    <object-name>gear.left.piston</object-name>
+    <object-name>gear.left.strut</object-name>
+    <object-name>gear.left.uplock</object-name>
+
+    <object-name>gear.right.light.inside</object-name>
+    <object-name>gear.right.piston</object-name>
+    <object-name>gear.right.strut</object-name>
+    <object-name>gear.right.uplock</object-name>
+
+    <object-name>wing.left.spdbrk.actu.piston</object-name>
+    <object-name>wing.right.spdbrk.actu.piston</object-name>
+  </effect>
+-->
+  <!-- REFLECTION, NormalMap -->
+  <effect>
+    <inherits-from>Aircraft/Citation/Models/Effects/reflection-exterior</inherits-from>
+    <object-name>engine.left.cowling</object-name>
+    <object-name>engine.left.drain.cover</object-name>
+    <object-name>engine.left.intake.cooling</object-name>
+    <object-name>engine.left.nozzle.cover</object-name>
+    <object-name>engine.right.cowling</object-name>
+    <object-name>engine.right.drain.cover</object-name>
+    <object-name>engine.right.intake.cooling</object-name>
+    <object-name>engine.right.nozzle.cover</object-name>
+
+    <object-name>fuselage</object-name>
+    <object-name>pylons</object-name>
+    <object-name>fin</object-name>
+    <object-name>fin.static.mount</object-name>
+    <object-name>rudder</object-name>
+    <object-name>rudder.trim</object-name>
+    <object-name>rudder.static.mount1</object-name>
+    <object-name>rudder.static.mount2</object-name>
+    <object-name>hstab</object-name>
+    <object-name>elevator.left</object-name>
+    <object-name>elevator.left.static.mount1</object-name>
+    <object-name>elevator.left.static.mount2</object-name>
+    <object-name>elevator.right</object-name>
+    <object-name>elevator.right.static.mount1</object-name>
+    <object-name>elevator.right.static.mount2</object-name>
+    <object-name>elevator.trim</object-name>
+    <object-name>door</object-name>
+
+    <object-name>wing.left.area1</object-name>
+    <object-name>wing.left.area2</object-name>
+    <object-name>wing.left.area3</object-name>
+    <object-name>wing.left.tip</object-name>
+    <object-name>wing.left.aileron.tab</object-name>
+    <object-name>wing.trim.tab</object-name>
+    <object-name>wing.left.flap.tab</object-name>
+    <object-name>wing.left.spdbrk.up.surf</object-name>
+    <object-name>wing.left.spdbrk.down.surf</object-name>
+    <object-name>wing.left.spdbrk.down.hinges</object-name>
+    <object-name>wing.left.static.mount1</object-name>
+    <object-name>wing.left.static.mount2</object-name>
+    <object-name>wing.left.static.mount3</object-name>
+    <object-name>wing.left.static.mount4</object-name>
+
+    <object-name>wing.right.area1</object-name>
+    <object-name>wing.right.area2</object-name>
+    <object-name>wing.right.area3</object-name>
+    <object-name>wing.right.tip</object-name>
+    <object-name>wing.right.aileron.tab</object-name>
+    <object-name>wing.right.flap.tab</object-name>
+    <object-name>wing.right.spdbrk.up.surf</object-name>
+    <object-name>wing.right.spdbrk.down.surf</object-name>
+    <object-name>wing.right.spdbrk.down.hinges</object-name>
+    <object-name>wing.right.static.mount1</object-name>
+    <object-name>wing.right.static.mount2</object-name>
+    <object-name>wing.right.static.mount3</object-name>
+    <object-name>wing.right.static.mount4</object-name>
+
+    <object-name>baggage.door.left</object-name>
+    <object-name>baggage.door.right</object-name>
+    <object-name>baggage.door.aft</object-name>
+
+    <object-name>gear.nose.door</object-name>
+    <object-name>gear.nose.left.door</object-name>
+    <object-name>gear.nose.right.door</object-name>
+
+    <object-name>gear.left.door.blade</object-name>
+    <object-name>gear.right.door.blade</object-name>
+  </effect>
+
+  <!-- glass effect -->
+  <effect>
+    <inherits-from>Effects/glass</inherits-from>
+
+    <object-name>wing.left.recog.glass</object-name>
+    <object-name>wing.right.recog.glass</object-name>
+
+    <object-name>wing.left.light.glass</object-name>
+    <object-name>wing.right.light.glass</object-name>
+    <object-name>wing.left.light.nav.on</object-name>
+    <object-name>wing.left.light.nav.off</object-name>
+    <object-name>wing.right.light.nav.on</object-name>
+    <object-name>wing.right.light.nav.off</object-name>
+    <object-name>gear.left.light.glass</object-name>
+    <object-name>gear.right.light.glass</object-name>
+
+    <object-name>nav.red.light</object-name>
+    <object-name>nav.red.light.corona</object-name>
+    <object-name>nav.green.light</object-name>
+    <object-name>nav.green.light.corona</object-name>
+    <object-name>nav.white.light</object-name>
+    <object-name>nav.white.light.corona</object-name>
+
+    <object-name>beacon.on</object-name>
+    <object-name>beacon.off</object-name>
+    <object-name>beacon.light</object-name>
+    <object-name>beacon.light.corona</object-name>
+
+    <object-name>recog.left.corona</object-name>
+    <object-name>recog.left.dazzle</object-name>
+    <object-name>recog.right.corona</object-name>
+    <object-name>recog.right.dazzle</object-name>
+
+    <object-name>strobe.left.light</object-name>
+    <object-name>strobe.right.light</object-name>
+
+    <object-name>gear.left.light.corona</object-name>
+    <object-name>gear.left.light.dazzle</object-name>
+    <object-name>gear.right.light.corona</object-name>
+    <object-name>gear.right.light.dazzle</object-name>
+  </effect>
+
+
+  <!-- ALS cockpit glass effect (rain, frost, fog) -->
+  <effect>
+    <inherits-from>Effects/glass</inherits-from>
+    <object-name>door.glass</object-name>
+    <object-name>door.glass.inside</object-name>
+    <object-name>cockpit.glass</object-name>
+    <object-name>cockpit.glass.inside</object-name>
+    <object-name>cockpit.window</object-name>
+    <object-name>cockpit.window.inside</object-name>
+    <object-name>window.glass</object-name>
+    <object-name>window.glass.inside</object-name>
+  </effect>
 
 </PropertyList>

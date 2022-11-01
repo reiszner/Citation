@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
 	<path>ralt.ac</path>
@@ -268,12 +269,12 @@
 	</animation>
 
 	<effect>
-		<inherits-from>Effects/model-transparent</inherits-from>
+		<inherits-from>/Models/Effects/flightdeck-glass</inherits-from>
 		<object-name>ralt.glass</object-name>
 	</effect>
 
 	<!--effect>
-		<inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+		<inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
 		<object-name>ralt.bezel</object-name>
 		<object-name>ralt.bug</object-name>
 		<object-name>ralt.dh.off</object-name>

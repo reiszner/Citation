@@ -36,7 +36,7 @@
     </animation>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>ColoRadar</object-name>
         <object-name>ColoRadar.screen</object-name>
         <object-name>Btn1.1</object-name>

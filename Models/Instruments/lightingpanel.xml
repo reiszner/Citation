@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>lightingpanel.ac</path>
@@ -572,7 +572,7 @@
                 <value>1</value>
             </not>
         </condition>
-        <inherits-from>Aircraft/Citation/Models/Effects/chrome-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-chrome</inherits-from>
         <object-name>lighting.light.sw</object-name>
         <object-name>lighting.stdbygyro.sw</object-name>
         <object-name>lighting.passenger.sw</object-name>
@@ -582,7 +582,7 @@
     </effect>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>lighting.panel</object-name>
         <object-name>lighting.flood.knob</object-name>
         <object-name>lighting.left.knob</object-name>

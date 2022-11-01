@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version='1.0' encoding='utf-8'?>
 <PropertyList>
 
   <path>m877.ac</path>
@@ -261,7 +261,7 @@
     </animation>
 
     <!--effect>
-        <inherits-from>Aircraft/Citation/Models/Effects/shadow-flightdeck</inherits-from>
+        <inherits-from>Aircraft/Citation/Models/Effects/flightdeck-shadow</inherits-from>
         <object-name>CTL.btn</object-name>
         <object-name>HR.001</object-name>
         <object-name>HR.002</object-name>
